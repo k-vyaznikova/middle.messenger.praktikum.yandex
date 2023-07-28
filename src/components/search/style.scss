@@ -1,0 +1,23 @@
+@import "../../styles/vars.scss";
+
+.search-form{
+    width: 100%;
+    padding: 20px 0;
+    input[type="text"]{
+       
+        border-radius: 5px;
+        width: 100%;
+        border: none;
+        padding: 10px 5px;
+        box-sizing: border-box;
+        text-align: center;
+        background: $light-grey-bckg2;
+    }
+    input[type="text"].empty-search{
+        background: url("img/search.svg")  center center no-repeat $light-grey-bckg1;
+    }
+    
+    input[type="submit"]{
+        display: none;   
+    }    
+}

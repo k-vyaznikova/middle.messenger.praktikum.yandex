@@ -1,0 +1,12 @@
+@import "../../styles/vars.scss";
+input[type="submit"]{
+    color: $button-text;
+    background-color: $base-color;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 13px;
+
+}

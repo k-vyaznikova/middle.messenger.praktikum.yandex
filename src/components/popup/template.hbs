@@ -1,0 +1,23 @@
+<div class = "popup-block-invis" data-act-selector = "{{popupSelector}}">
+    <div class = "popup-block-container">
+        <div class = "popup-block">
+            <div class = "close-block">
+                <div class = "close">&times;</div>
+            </div>
+            <form class = "set-avatar" action = "#">
+                 <div class = "upload-status">Загрузите файл</div>
+                <input type = "file" class = "upload-file" name = "avatar"/>
+                <a class = "upload-link" href = "#">Выберите файл на <br/>компьютере</a>
+                <div class = "selected-file">
+                    <span class = "selected-file-name"></span>
+                    <span class = "selected-file-cancel">&times;</span>
+                </div>
+                {{> submit-btn buttonText = "Установить аватар"}}
+                <div class = "err"></div>
+            </form>
+            
+            
+        </div>
+    </div>
+    <div class = "background-popup"></div>
+</div>

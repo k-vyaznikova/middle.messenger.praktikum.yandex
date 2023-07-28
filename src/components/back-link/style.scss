@@ -1,0 +1,20 @@
+@import "../../styles/vars.scss";
+
+
+.back-link{
+    height: 100vh;
+    width: 66px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-right: 1px solid $light-grey-border;
+    position: fixed;
+    left:0;
+    top: 0;
+    bottom: 0;
+    background: url(img/back-link.svg) center center no-repeat $light-grey-bckg1;
+    
+    
+}

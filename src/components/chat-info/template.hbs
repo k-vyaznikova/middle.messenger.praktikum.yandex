@@ -1,0 +1,24 @@
+<div class = "fixed-container">
+    <div class = "chat-info-block">
+        <div class = "chat-info">
+            <div class = "chat-info-left">
+                <div class = "chat-img">
+                    <img src = "{{chatImg}}" />
+                </div> 
+                <div class = "chat-name">
+                    {{chatName}}
+                </div> 
+            </div>    
+            {{#if personalChat}} 
+                <div class = "persoanl-settings chat-info-right">
+                    <a href="#" class = "info"></a>
+                    <a href="#" class = "delete"></a>
+                </div>
+            {{else}}     
+                <a href = "#" class = "settings chat-info-right">
+
+                </a>
+            {{/if}}   
+        </div>    
+    </div>
+</div>

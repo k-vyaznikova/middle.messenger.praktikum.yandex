@@ -1,0 +1,20 @@
+.error-page.container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    .error-number{
+        font-weight: 600;
+        font-size: 40px;
+    }
+    .error-text{
+        font-weight: 400;
+        font-size: 20px;
+        padding-top: 10px;
+    }
+    .error-link{
+        font-size: 11px;
+        display: block;
+        padding-top: 30px;
+    }
+}

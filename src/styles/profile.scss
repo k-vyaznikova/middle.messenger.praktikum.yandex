@@ -1,0 +1,87 @@
+
+
+.container{
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .container-inner{
+        width: 50%;
+        max-width: 800px;
+        min-width: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .profile-photo{
+            display: block;
+            border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            padding-bottom: 20px;
+        }
+        .profile-header{
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            padding-bottom: 40px;
+        }
+        .profile-body{
+            width: 100%;
+            .profile-item{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                width: 100%;
+                border-bottom: 1px solid $light-grey-bckg1;
+                padding: 10px 0;
+                font-size: 13px;
+                &:last-child{
+                    border-bottom: none;
+                }
+                label{
+                    width: 30%;
+                }
+                input{
+                    border: none;
+                    color: $grey;
+                    text-align: right;
+                    font-size: 13px;
+                    width: 70%;
+                }
+            }
+    
+        }
+        
+        .profile-footer{
+            padding-top: 40px;
+            width: 100%;
+            .action-link{
+                border-bottom: 1px solid $light-grey-bckg1;
+                padding: 10px 0;
+                width: 100%;
+                &:last-child{
+                    border-bottom: none;
+                }
+                a{
+                    font-size: 13px;
+                }
+                .exit{
+                    color: $err-text;
+                }
+            }
+        }
+
+
+    }     
+}
+
+
+
+

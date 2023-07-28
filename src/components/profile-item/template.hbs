@@ -1,0 +1,8 @@
+<div class = "profile-item">
+    <label class = "profile-name" for = "{{infoName}}">{{infoLabel}}</label>
+    {{#if editMode}} 
+        <input class = "profile-value" value = "{{infoValue}}"  name = "{{infoName}}" id = "{{infoName}}" type="{{infoType}}"/>
+    {{else}}
+        <input class = "profile-value" value = "{{infoValue}}" name = "{{infoName}}" id = "{{infoName}}" disabled type="{{infoType}}"/>
+    {{/if}}   
+</div>

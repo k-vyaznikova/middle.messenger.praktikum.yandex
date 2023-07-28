@@ -1,0 +1,29 @@
+@import "../../styles/vars.scss";
+
+.profile-photo{
+    position: relative;
+    .change-avatar{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        opacity: 0.4;
+        background-color: $black;
+        color: $white;
+        border: none;
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+        text-align: center;
+        box-sizing: border-box;
+        font-size: 13px;
+        padding: 20px;
+        display: none;
+    }
+    .change-avatar.visible{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+   
+
+}

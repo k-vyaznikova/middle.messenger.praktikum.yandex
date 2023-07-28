@@ -1,0 +1,26 @@
+<div class = "container">
+    
+    {{> back-link linkUrl = "/chat"}}
+    <div class = "container-inner">
+        {{> profile-photo src = "{{profilePhoto}}" }}
+        
+        <div class = "profile-header">Иван</div>
+        <div class = "profile-body">
+            {{> profile-item infoLabel = "Почта" infoValue = "pochta@yandex.ru" infoName = "email"}}  
+            {{> profile-item infoLabel = "Логин" infoValue = "ivanivanov" infoName = "login"}}  
+            {{> profile-item infoLabel = "Имя" infoValue = "Иван" infoName = "first_name"}}  
+            {{> profile-item infoLabel = "Фамилия" infoValue = "Иванов" infoName = "second_name"}}  
+            {{> profile-item infoLabel = "Имя в чате" infoValue = "Иван" infoName = "display_name"}}    
+            {{> profile-item infoLabel = "Телефон" infoValue = "+7 (909) 967 30 30" infoName = "phone"}} 
+        </div>
+
+
+
+        <div class = "profile-footer">
+            <div class = "action-link"><a href = "#">Изменить данные</a></div>
+            <div class = "action-link"><a href = "#">Изменить профиль</a></div>
+            <div class = "action-link"><a href = "#" class = "exit">Выйти</a></div>
+        </div>
+        
+    </div>
+</div>
