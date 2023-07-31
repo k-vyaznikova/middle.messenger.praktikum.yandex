@@ -23,21 +23,13 @@ import "./components/profile-item/script";
 import "./components/back-link/script";
 import "./components/profile-photo/script";
 import "./components/popup/script";
-
-import buttonSecondary from "./partials/button-secondary.hbs";
-
-
-
-//Handlebars.registerPartial('input-password', inputPassword);
-//Handlebars.registerPartial('button-cta', buttonCta);
-Handlebars.registerPartial('button-secondary', buttonSecondary);
+import "./components/secondary-btn/script";
+import "./components/edit-photo/script";
 
 document.addEventListener('DOMContentLoaded', () => {
   let root = document.querySelector("#app");
-  const locationArr = window.location.href.split("/");
+  const locationArr = window.location.pathname.split("/");
   const pageAddress = locationArr[locationArr.length - 1];
-  
-  //console.log(pageAddress);
   let result;
   
   switch (pageAddress){
@@ -52,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       break;
     case "chat": 
-      result = chat({});
+      result = chat();
       break;
     case "profile": 
       result = profile({
@@ -93,8 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let event = new Event("appContentLoaded");
     root.dispatchEvent(event);
   }
-  
-
 });
 
 
