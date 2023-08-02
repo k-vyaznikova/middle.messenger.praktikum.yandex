@@ -5,7 +5,7 @@ Handlebars.registerPartial('input', inputText);
 
 document.addEventListener('DOMContentLoaded', function() {
     let container = document.querySelector("#app");
-    container.addEventListener('DOMAttrModified', function(){
+    container.addEventListener('appContentLoaded', function(){
         this.querySelectorAll(".input-container input[type='text'], .input-container input[type='password']").forEach(function(input){
             input.addEventListener('keyup',function (){
                 if(this.value.length > 0){

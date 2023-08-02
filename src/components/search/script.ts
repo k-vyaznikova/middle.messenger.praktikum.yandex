@@ -7,16 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let container = document.querySelector("#app");
     
     container.addEventListener('appContentLoaded', function(){
-       
-        this.querySelector(".search-input").addEventListener('focus',function (){
+        const search = this.querySelector(".search-input");
+        if(search){
+            search.addEventListener('focus',function (){
            
                 this.classList.remove("empty-search");
                 
-        });
-        this.querySelector(".search-input").addEventListener('blur', function(){
-                if(this.value.trim().length <= 0)   
-                    this.classList.add("empty-search");
-        });
+            });
+            search.addEventListener('blur', function(){
+                    if(this.value.trim().length <= 0)   
+                        this.classList.add("empty-search");
+            });
+        }
+        
 
         
         

@@ -3,18 +3,6 @@ import "./style.scss";
 import sendMsgForm from "./template.hbs";
 Handlebars.registerPartial('send-msg-form', sendMsgForm);
 
-/*
-function getParents(elem, finishParent = document) {
-    var parents = [];
-    while(elem.parentNode) {
-      elem = elem.parentNode;
-      parents.push(elem);
-      if(elem.parentNode === document)
-        break;
-    }
-    return parents;
-  }
-*/
 
 document.addEventListener('DOMContentLoaded', function(){
     let container = document.querySelector("#app");

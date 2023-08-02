@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
                 changeAvatar.addEventListener("click", function(event){
                     event.preventDefault();
-                    const changePhotoBlock = container.querySelector(".change-avatar-block-invis");
+                    const changePhotoBlock = container.querySelector(".popup-block-invis");
                     if(changePhotoBlock)
                         changePhotoBlock.classList.add("visible");
                 });
