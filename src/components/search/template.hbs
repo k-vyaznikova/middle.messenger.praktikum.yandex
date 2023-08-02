@@ -1,4 +1,10 @@
 <form url = "#" class = "search-form">
-    <input name = "search" type="text" value="" class = "empty-search search-input"/>
+    <input name = "search" type="text" value="" class = "empty-search search-input {{#if leftAlign}}left-align{{/if}}" {{#if placeholder}} placeholder = "{{placeholder}}"{{/if}}/>
+    {{#if addItems}}
+        <div class = "add-items">
+            <div class = "item">ivanova <div class = "cancel"></div></div>
+            <div class = "item">fiva <div class = "cancel"></div></div>
+        </div>
+    {{/if}}
     <input name = "submit" type = "submit" />
 </form>  

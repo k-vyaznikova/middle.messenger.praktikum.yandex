@@ -81,29 +81,8 @@ document.addEventListener('DOMContentLoaded', function(){
         //Изменение области textarea
         if(msgTextarea){
             msgTextarea.addEventListener("keyup", function(){
-                if(this.nextElementSibling.classList.contains("invisible-text-container")){
-                    
-                    let invisDiv = this.nextElementSibling;
-                    if(invisDiv.querySelector(".dublicate-msg")){
-                        invisDiv.querySelector(".dublicate-msg").innerHTML = this.value;
-                        
-                        /*let testStr = /(\r\n|\n\r)/gm/
-                        let strNum;
-                        strNum = this.value.*/
-
-                        //to do: замена конец-строки/перевод каретки на <br/>
-                        const height = +invisDiv.querySelector(".dublicate-msg").height;
-                        const paddingTop = +getComputedStyle(this, null).paddingTop.replace('px', '');
-                        const paddingBottom = +getComputedStyle(this, null).paddingBottom.replace('px', '');
-                        
-
-                        const fullHeight = height+paddingTop+paddingBottom; 
-                        this.style.height = fullHeight + "px";
-                        
-                    }
-                    
-                }
-                    
+                    if(this.scrollHeight < 200)
+                        this.style.height = this.scrollHeight + 'px';  
             });
         }
         

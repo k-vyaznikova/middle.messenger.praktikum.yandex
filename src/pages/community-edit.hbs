@@ -1,0 +1,31 @@
+<div class = "container">
+    
+    {{> back-link linkUrl = "/chat"}}
+    <div class = "container-inner">
+        <form class = "community-create" action = "">
+            {{> profile-photo profilePhoto = "img/community-photo.svg"  }}
+        
+            <div class = "profile-body">
+                {{> profile-item infoLabel = "Назване чата" infoValue = "чат 1" infoName = "name" editMode = "yes"}}
+                {{> profile-item infoLabel = "Краткое описание чата" infoType = "textarea"  infoName = "description" editMode = "yes" infoPlaceholder = "Коротко расскажите об этом чате..."}}
+            </div>
+         </form>
+
+
+            <div class = "profile-footer">
+                <div class = "subheader">Добавить участника</div>
+                <form class="search-form">
+                    {{> search leftAlign = "yes" placeholder = "Начните вводить логин участника..."}}    
+                    <div class = "member-list">
+                        {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "ivanova" memberName = "Иванова Юлия" memberAdd = "yes"}}
+                        {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "fiva" memberName = "Фива Лев" memberAdd = "yes" }}
+                        {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "pivo" memberName = "Пивоваров Олег" memberAdd = "yes"}}
+                        {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "ivanova" memberName = "Иванова Юлия" memberAdd = "yes"}}
+                        {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "fiva" memberName = "Фива Лев" memberAdd = "yes"}}
+                        {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "pivo" memberName = "Пивоваров Олег" memberAdd = "yes"}}
+                    </div>
+                </form>
+            </div>
+       
+    </div>
+</div>

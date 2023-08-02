@@ -9,6 +9,8 @@ import error from "./pages/error.hbs";
 import profile from "./pages/profile.hbs";
 import profileEdit from "./pages/profile-edit.hbs";
 import pswEdit from "./pages/password-edit.hbs";
+import community from "./pages/community.hbs";
+import communityEdit from "./pages/community-edit.hbs";
 
 import "./components/input/script";
 import "./components/submit-btn/script";
@@ -25,6 +27,18 @@ import "./components/profile-photo/script";
 import "./components/popup/script";
 import "./components/secondary-btn/script";
 import "./components/edit-photo/script";
+import "./components/member-short-info/script";
+
+
+
+/**Хелперы */
+Handlebars.registerHelper('if_eq', function(a, b, opts) {
+  if (a == b) {
+      return opts.fn(this);
+  } else {
+      return opts.inverse(this);
+  }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   let root = document.querySelector("#app");
@@ -46,6 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
     case "chat": 
       result = chat();
       break;
+    case "community": 
+      result = community();
+      break;  
+    case "community-edit": 
+      result = communityEdit();
+      break;   
     case "profile": 
       result = profile({
         profilePhoto: "img/profile-photo.svg"

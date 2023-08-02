@@ -1,0 +1,28 @@
+<div class = "container">
+    
+    {{> back-link linkUrl = "/chat"}}
+    <div class = "container-inner">
+        {{> profile-photo profilePhoto = "img/community-photo.svg"  }}
+    
+        <div class = "profile-header">Иван</div>
+        <div class = "profile-body">
+            {{>profile-item infoType = "textarea" infoValue = "Соо. бщество неравнодушных соседей МКР Цветы. Все ваши соседи общаются здесь. Нас уже 11 000 000. Начать беслатно. Соседи — социальная сеть жильцов для общения и решения бытовых вопросов. Нас топит 16 этаж. Антон К. ... Вы можете написать любому соседу в вашем доме, просто зная его номер квартиры. 2 кв. Артём."}}
+            
+        </div>
+
+
+
+        <div class = "profile-footer">
+            <div div class = "subheader">Участники</div>
+            <div class = "member-list">
+                {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "ivanova" memberName = "Иванова Юлия" }}
+                {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "fiva" memberName = "Фива Лев" }}
+                {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "pivo" memberName = "Пивоваров Олег" }}
+                {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "ivanova" memberName = "Иванова Юлия" }}
+                {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "fiva" memberName = "Фива Лев" }}
+                {{> member-short-info memberLink = "/profile" memberPhoto = "img/noimgprofile.svg" memberLogin = "pivo" memberName = "Пивоваров Олег" }}
+            </div>
+        </div>
+        
+    </div>
+</div>

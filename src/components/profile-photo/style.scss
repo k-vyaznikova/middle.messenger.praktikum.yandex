@@ -2,6 +2,11 @@
 
 .profile-photo{
     position: relative;
+    .profile-img{
+        width: 130px;
+        height: 130px;
+        border: 50%;
+    }
     .change-avatar{
         position: absolute;
         top: 0px;

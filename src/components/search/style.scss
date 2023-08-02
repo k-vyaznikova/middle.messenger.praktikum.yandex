@@ -3,6 +3,7 @@
 .search-form{
     width: 100%;
     padding: 20px 0;
+    position: relative;
     input[type="text"]{
        
         border-radius: 5px;
@@ -16,8 +17,53 @@
     input[type="text"].empty-search{
         background: url("img/search.svg")  center center no-repeat $light-grey-bckg1;
     }
+
+    input[type="text"].left-align{
+        text-align: left;
+        background: url("img/lense.svg")  10px center no-repeat $light-grey-bckg1;
+        padding-left: 40px;
+
+    }
     
+    input[type="text"].invisible{
+        display: none;
+
+    }
+
     input[type="submit"]{
         display: none;   
-    }    
+    }   
+    .add-items{
+        /*position: absolute;
+        top: 20px;
+        left: 20px;*/
+        display: flex;
+        justify-content: flex-start;
+        border-radius: 5px;
+        width: 100%;
+        border: none;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        text-align: center;
+        background: $light-grey-bckg2;
+        .item{
+            
+            border-radius: 15px;
+            padding: 5px 25px 5px 10px;
+            background-color: $white;
+            width: auto;
+            position: relative;
+            margin-right: 10px;
+            .cancel{
+                top: 3px;
+                right: 5px;
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                background: url("img/cross.svg") center center  no-repeat $white;
+                background-size: 10px;
+                cursor: pointer;
+            }
+        }
+    } 
 }

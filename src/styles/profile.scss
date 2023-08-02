@@ -30,32 +30,12 @@
             font-size: 18px;
             padding-bottom: 40px;
         }
+        .profile-header.left{
+            text-align: left;
+        }
         .profile-body{
             width: 100%;
-            .profile-item{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                border: none;
-                width: 100%;
-                border-bottom: 1px solid $light-grey-bckg1;
-                padding: 10px 0;
-                font-size: 13px;
-                &:last-child{
-                    border-bottom: none;
-                }
-                label{
-                    width: 30%;
-                }
-                input{
-                    border: none;
-                    color: $grey;
-                    text-align: right;
-                    font-size: 13px;
-                    width: 70%;
-                }
-            }
+
     
         }
         

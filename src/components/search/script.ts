@@ -5,8 +5,11 @@ Handlebars.registerPartial('search', search);
 
 document.addEventListener('DOMContentLoaded', function() {
     let container = document.querySelector("#app");
-    container.addEventListener('DOMAttrModified', function(){
+    
+    container.addEventListener('appContentLoaded', function(){
+       
         this.querySelector(".search-input").addEventListener('focus',function (){
+           
                 this.classList.remove("empty-search");
                 
         });
