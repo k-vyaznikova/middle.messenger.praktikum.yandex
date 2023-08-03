@@ -27,6 +27,7 @@ import "./components/profile-photo/script";
 import "./components/secondary-btn/script";
 import "./components/edit-photo/script";
 import "./components/member-short-info/script";
+import "./components/caption-input/script";
 
 
 

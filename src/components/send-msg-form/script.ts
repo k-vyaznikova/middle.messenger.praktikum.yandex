@@ -27,24 +27,25 @@ document.addEventListener('DOMContentLoaded', function(){
             /**Вызов выбора файла-картинки */
             const picItem = container.querySelector(".pic");
             const docItem = container.querySelector(".doc");
+            const attachFile = container.querySelector(".attach-file");
 
 
             //Переделать в клик по массиву объектов?
-            if(picItem){
+            if(picItem && attachFile){
                 picItem.addEventListener("click", function(event){
                     event.preventDefault();
-                    const attachFile = container.querySelector(".attach-file");
+                    
                     attachFile.accept = "image/*";
-                    container.querySelector(".attach-file").click();
+                    attachFile.click();
 
                 });
             }
-            if(docItem){
+            if(docItem && attachFile){
                 docItem.addEventListener("click", function(event){
                     event.preventDefault();
                     const attachFile = container.querySelector(".attach-file");
                     attachFile.accept = ".doc, .docx, .pdf";
-                    container.querySelector(".attach-file").click();
+                    attachFile.click();
 
                 });
             }
@@ -56,6 +57,12 @@ document.addEventListener('DOMContentLoaded', function(){
                     if(clickedElem != btnSelect)
                         attachTypeSelect.classList.remove("visible"); 
                 }
+            
+            if(attachFile){
+                attachFile.addEventListener("change", function(event){
+                    container.querySelector(".popup-block-invis").classList.add("visible");
+                });
+            }
 
                 
 

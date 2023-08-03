@@ -19,14 +19,7 @@
                 </div>
             </div>
             <div class = "msg">
-                <div id = "test"></div>
                 <textarea id = "send-msg" class = "send-msg" placeholder="Сообщение" name = "message"></textarea>
-                <div class = "invisible-text-container">
-                    <div class = "dublicate-msg">
-                       
-                    </div>
-                </div>
-                
             </div>
             <div class = "send-btn">
                 <input type="submit" value=""/>
@@ -35,3 +28,20 @@
         </form>    
     </div>  
 </div>
+
+{{#popup}}
+    <!--<div class = "msg-add-block">
+        <div class = "subheader">Отправка изображения</div>
+        <img src ="/../img/test-img.jpg" class = "img"/>
+        {{> caption-input placeholderText = "Подпись к фото"}}
+        {{> submit-btn buttonText = 'Отправить'}}
+    </div>-->
+
+    <div class = "msg-add-block">
+        <div class = "subheader">Отправка файла</div>
+        <img src ="/../img/test-file.svg" class = "file"/>
+        <div class = "file-name">Заявление на отпуск.doc</div>
+        {{> caption-input placeholderText = "Подпись к фото"}}
+        {{> submit-btn buttonText = 'Отправить'}}
+    </div>
+{{/popup}}

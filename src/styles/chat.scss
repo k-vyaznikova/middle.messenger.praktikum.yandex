@@ -49,12 +49,50 @@
                         top: 0px;
                         box-shadow: 0 4px 5px -5px rgba(0, 0 , 0, 0.12);
                         box-sizing: border-box;
-                        .profile-link{
+                        /*.profile-link{
                             color: $grey;
                             display: block;
                             text-align: right;
                             font-size: 12px;
                             padding-bottom: 5px;
+                        }*/
+                        .left-top-block{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            .left-block{
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: flex-start;
+                                align-items: center;
+                                .profile-photo{
+                                    margin-right: 10px;
+                                }
+                                .profile-name{
+                                    color: $black;
+                                    font-weight: 800;
+                                    font-size: 16px;
+                                    .arrow{
+                                        color: $grey;
+                                        font-weight: normal;
+                                        margin-left: 5px;
+                                        font-size: 14px;
+                                    }
+                                }
+                                
+                            }
+                            .right-block{
+                                .chat-add{
+                                    display: block;
+                                    height: 28px;
+                                    width: 30px;
+                                    background: url('../img/chat-add.svg') center center no-repeat;
+                                    background-size: cover;
+                                }
+                                
+
+                            }
                         }
                     }
                 }
@@ -74,7 +112,7 @@
         justify-content: center;
         width: 70%;
         height: 100vh;
-        position: relative;
+        /*position: relative;*/
         overflow: hidden;
         
         .right-side-content{
