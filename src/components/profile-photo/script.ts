@@ -2,7 +2,7 @@ import Handlebars from "handlebars/runtime";
 import "./style.scss";
 import profilePhoto from "./template.hbs";
 Handlebars.registerPartial('profile-photo', profilePhoto);
-
+//console.log("imgUrl" + imgUrl);
 
 document.addEventListener('DOMContentLoaded', function(){
     let container = document.querySelector("#app");
