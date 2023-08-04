@@ -2,21 +2,34 @@ import Handlebars from "handlebars/runtime";
 
 
 import "./styles/index.scss";
+/*
+Handlebars.registerHelper("if_eq", function(a, b, opts) {
+  if (a == b) {
+    return opts.fn(this);
+  } else {
+    return opts.inverse(this);
+  }
+});
+Handlebars.registerHelper("if_eq", function(a, b, opts) {
+  if (a == b) {
+    return opts.fn(this);
+  } else {
+    return opts.inverse(this);
+  }
+});*/
+/*
 const locationArr = window.location.pathname.split("/");
 const pageAddress = locationArr[locationArr.length - 1];
-//const pageSCSSaddress = "./pages/" + pageAddress + "/" + pageAddress + ".scss";
-//console.log(pageSCSSaddress);
-//import pageSCSSaddress;
 
-import auth from "./pages/auth.hbs";
-import register from "./pages/register.hbs";
-import chat from "./pages/chat.hbs";
-import error from "./pages/error.hbs";
-import profile from "./pages/profile/profile.hbs";
-import profileEdit from "./pages/profile-edit.hbs";
-import pswEdit from "./pages/password-edit.hbs";
-import community from "./pages/community.hbs";
-import communityEdit from "./pages/community-edit.hbs";
+import auth from "/pages/auth.hbs";
+import register from "/pages/register.hbs";
+import chat from "/pages/chat.hbs";
+import error from "/pages/error.hbs";
+import profile from "/pages/profile/profile.hbs";
+import profileEdit from "/pages/profile-edit.hbs";
+import pswEdit from "/pages/password-edit.hbs";
+import community from "/pages/community.hbs";
+import communityEdit from "/pages/community-edit.hbs";
 
 import "./components/input/script";
 import "./components/submit-btn/script";
@@ -34,21 +47,15 @@ import "./components/secondary-btn/script";
 import "./components/edit-photo/script";
 import "./components/member-short-info/script";
 import "./components/caption-input/script";
+*/
 
 
 
 
-/**Хелперы - if с проверкой равенства*/
-Handlebars.registerHelper('if_eq', function (a, b, opts) {
-  if (a == b) {
-    return opts.fn(this);
-  } else {
-    return opts.inverse(this);
-  }
-});
 
 
 /**Хелперы - попап */
+/*
 Handlebars.registerHelper("popup", function (options) {
   let strBefore = "<div class = 'popup-block-invis'>" +
     "<div class = 'popup-block-container'>" +
@@ -140,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+*/
 
 
 
