@@ -11,6 +11,7 @@ Messenger - учебный проект Яндекс.Практикума
 
 ### **Страницы проекта**
 [Главная](https://teal-travesseiro-51b42f.netlify.app/)
+
 [Авторизация](https://teal-travesseiro-51b42f.netlify.app/pages/auth/auth)
 ![Регистрация](https://teal-travesseiro-51b42f.netlify.app/pages/register/register)
 ![Чат](https://teal-travesseiro-51b42f.netlify.app/pages/chat/chat)
