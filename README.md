@@ -10,8 +10,8 @@ Messenger - учебный проект Яндекс.Практикума
 ![Дизайн в Figma](https://www.figma.com/file/ALQ7CC5h4Zg3Ciow2FfPew/Untitled?type=design&node-id=0%3A1&mode=design&t=Zwu1RzkfLrN4Prfm-1)
 
 ### **Страницы проекта**
-Главная(https://teal-travesseiro-51b42f.netlify.app/)
-Авторизация(https://teal-travesseiro-51b42f.netlify.app/pages/auth/auth)
+[Главная](https://teal-travesseiro-51b42f.netlify.app/)
+[Авторизация](https://teal-travesseiro-51b42f.netlify.app/pages/auth/auth)
 ![Регистрация](https://teal-travesseiro-51b42f.netlify.app/pages/register/register)
 ![Чат](https://teal-travesseiro-51b42f.netlify.app/pages/chat/chat)
 ![Чат: выбор вложения](https://teal-travesseiro-51b42f.netlify.app/pages/chat/chat-choose-attach)
