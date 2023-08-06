@@ -1,0 +1,13 @@
+{{#cardpage}}
+    <h1>Вход</h1>
+    <form url="{{urlSubmit}}" class = "form-container">
+        <div class = "form-body">
+            {{> input/template inputName="login" inputLabel = "Логин" inputId="loginId" inputType="text" errorText = "Тестовая ошибка"}}
+            {{> input/template inputName="password" inputLabel = "Пароль" inputId="passId" inputType="password" errorText = "Тестовая ошибка"}}
+        </div>
+        <div class = "form-footer">
+            {{> submit-btn/template buttonText="Войти"}}
+            {{> secondary-btn/template hrefLink="/pages/register/register.html" classLink = "reg-link" textLink="Зарегистрироваться"}}
+        </div>
+    </form>
+{{/cardpage}}

@@ -3,21 +3,39 @@
     <div class = "change-avatar"><span>Поменять аватар<span/></div>
 </a>
 
-<!--этот шаблон замениться на html-разметку для всплывающего окна-->
 
-{{#popup}}
-    <form class = 'set-avatar' action = '#'>
-        <div class = 'upload-status'>Загрузите файл</div>
-        <input type = 'file' class = 'upload-file' name = 'avatar'/>
-        <a class = 'upload-link' href = '#'>Выберите файл на <br/>компьютере</a>
-        <div class = 'selected-file'>
-            <span class = 'selected-file-name'></span>
-            <span class = 'selected-file-cancel'>&times;</span>
-        </div>
-        {{> submit-btn buttonText = 'Установить аватар'}}
-        <div class = 'err'></div>
-    </form> 
-{{/popup}}
+<!--Костыль для демо 1 спринта-->
+{{#if showModal}}
+    {{#popup classVisibility = "visible"}}
+        <form class = 'set-avatar' action = '#'>
+            <div class = 'upload-status'>Загрузите файл</div>
+            <input type = 'file' class = 'upload-file' name = 'avatar'/>
+            <a class = 'upload-link' href = '#'>Выберите файл на <br/>компьютере</a>
+            <div class = 'selected-file'>
+                <span class = 'selected-file-name'></span>
+                <span class = 'selected-file-cancel'>&times;</span>
+            </div>
+            {{> submit-btn/template buttonText = 'Установить аватар'}}
+            <div class = 'err'></div>
+        </form> 
+    {{/popup}}
+
+{{else}}
+    {{#popup}}
+        <form class = 'set-avatar' action = '#'>
+            <div class = 'upload-status'>Загрузите файл</div>
+            <input type = 'file' class = 'upload-file' name = 'avatar'/>
+            <a class = 'upload-link' href = '#'>Выберите файл на <br/>компьютере</a>
+            <div class = 'selected-file'>
+                <span class = 'selected-file-name'></span>
+                <span class = 'selected-file-cancel'>&times;</span>
+            </div>
+            {{> submit-btn/template buttonText = 'Установить аватар'}}
+            <div class = 'err'></div>
+        </form> 
+    {{/popup}}
+{{/if}}
+
 
 
 

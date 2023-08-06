@@ -6,7 +6,7 @@
     left:0;
     right: 0;
     width: 100%;
-    color: #ffffff;
+    color: #000000;
     .chat-info-block{
         padding-left: 20px;
         padding-right: 20px;
@@ -37,6 +37,9 @@
                     margin-left: 5px;
                     font-weight: 500;
                     font-size: 13px;
+                    color: $black;
+                    font-weight: 600;
+                    font-size: 13px;
                 }
             }
             .chat-info-right{
@@ -56,7 +59,7 @@
                 display: block;
                 height: 30px;
                 width: 30px;
-                background: url("./img/info.svg") center center no-repeat;
+                background: url("/components/chat-info/img/info.svg") center center no-repeat;
                 padding: 2px;
                 border-radius: 50%;
             }
@@ -64,16 +67,16 @@
                 display: block;
                 width: 30px;
                 height: 30px;
-                background: url("./img/delete.svg") center center no-repeat;
+                background: url("/components/chat-info/img/delete.svg") center center no-repeat;
                 padding: 2px;
                 border-radius: 50%;
             }
     
             .info.selected{
-                background: $light-grey-bckg2 url("./img/info-selected.svg") center center no-repeat;
+                background: $light-grey-bckg2 url("/components/chat-info/img/info-selected.svg") center center no-repeat;
             }
             .delete.selected{
-                background: $light-grey-bckg2 url("./img/delete-selected.svg") center center no-repeat;
+                background: $light-grey-bckg2 url("/components/chat-info/img/delete-selected.svg") center center no-repeat;
                 
             }
         }

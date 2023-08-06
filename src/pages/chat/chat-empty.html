@@ -1,0 +1,27 @@
+{{#defpage}}
+    {{#leftside}}
+            <div class = "fixed-container">
+                <div class = "fixed-block">
+                    <div class = "left-top-block">
+                        <a href = '/pages/profile/profile/profile.html' class = "left-block">
+                            <img class = "profile-photo" src = "/img/noimgprofile.svg"/>
+                            <div class = "profile-name">Вязникова Кристина <span  class = "arrow">&gt;</span></div>
+                        </a>  
+                        <div class = "right-block">
+                            <a href = "/pages/community-edit/community-edit.html" class = "chat-add"></a>
+                        </div>  
+                    </div>
+                    {{> search/template }}
+                </div>
+            </div>
+            <div class = "contact-list">
+                {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3"}}
+                {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Павел Александрович" contactMsg = "Зайдешь сегодня?" contactTimeMsg = "5 апр 2023" yourMsg="1"}}
+                {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Павел Александрович" contactMsg = "Очень длинное сообщение, которое не помещается в одну строку и даже не пмещается в выделенную ему область" contactTimeMsg = "5 апр 2023" yourMsg="1"}}
+            </div>  
+    {{/leftside}}
+
+    {{#rightside}}
+        <div class = "empty-msg">Выберите чат, чтобы отправить сообщение</div>
+    {{/rightside}}
+{{/defpage}}

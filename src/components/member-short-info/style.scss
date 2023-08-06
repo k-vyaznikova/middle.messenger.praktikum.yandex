@@ -1,4 +1,4 @@
-@import "../../styles/vars.scss";
+@import "/styles/vars.scss";
 
 .member-item{
     max-width: 400px;
@@ -36,7 +36,7 @@
     .member-add{
         width: 20px;
         height: 20px;
-        background: url("img/add-member.svg")  center center no-repeat transparent;
+        background: url("/components/member-short-info/img/add-member.svg")  center center no-repeat transparent;
         display: block;
         background-size: cover;
     }

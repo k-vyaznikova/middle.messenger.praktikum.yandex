@@ -1,0 +1,22 @@
+{{#profpage linkUrl = "/pages/chat/chat.html"}}
+    <form class = "container-inner" action = "#">
+        {{> profile-photo/template profilePhoto = "/img/noimgprofile.svg" }}
+            <div class = "profile-header">Иван</div>
+            <div class = "profile-body">
+                {{> profile-item/template infoLabel = "Почта" infoValue = "pochta@yandex.ru" infoName = "email" editMode = "yes"}}  
+                {{> profile-item/template infoLabel = "Логин" infoValue = "ivanivanov" infoName = "login"  editMode = "yes"}}  
+                {{> profile-item/template infoLabel = "Имя" infoValue = "Иван" infoName = "first_name"  editMode = "yes"}}  
+                {{> profile-item/template infoLabel = "Фамилия" infoValue = "Иванов" infoName = "second_name"  editMode = "yes"}}  
+                {{> profile-item/template infoLabel = "Имя в чате" infoValue = "Иван" infoName = "display_name"  editMode = "yes"}}    
+                {{> profile-item/template infoLabel = "Телефон" infoValue = "+7 (909) 967 30 30" infoName = "phone"  editMode = "yes"}} 
+            </div>
+
+
+
+            <div class = "profile-footer form-footer">
+                {{> submit-btn/template buttonText="Сохранить изменения"}}
+            </div>
+
+        
+    </form>
+{{/profpage}}

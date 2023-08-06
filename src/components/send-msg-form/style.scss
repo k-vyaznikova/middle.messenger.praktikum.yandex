@@ -1,4 +1,4 @@
-@import "../../styles/vars.scss";
+@import "/styles/vars.scss";
 
 .fixed-container-bottom{
     position: fixed;
@@ -28,7 +28,7 @@
                 .attach-btn{
                     height: 32px;
                     width: 32px;
-                    background: url("img/attach.svg") center center no-repeat $white;
+                    background: url("/components/send-msg-form/img/attach.svg") center center no-repeat $white;
                     cursor: pointer;
                     border: none;
                 }
@@ -53,17 +53,17 @@
                             cursor: pointer;
                         }
                         .pic{
-                            background: url(img/attach-picture.svg) left center no-repeat;
+                            background: url(/components/send-msg-form/img/attach-picture.svg) left center no-repeat;
                             
                         }
                         
                         .doc{
-                            background: url(img/attach-document.svg) left center no-repeat;
+                            background: url(/components/send-msg-form/img/attach-document.svg) left center no-repeat;
                           
                         }
                         
                         .loc{
-                            background: url(img/attach-location.svg) left center no-repeat;
+                            background: url(/components/send-msg-form/img/attach-location.svg) left center no-repeat;
                    
                         }
                     }
@@ -115,7 +115,7 @@
 
                 margin: 0 0 0 15px;
                 input[type="submit"]{
-                    background: url("img/send.svg") center center no-repeat $white;
+                    background: url("/components/send-msg-form/img/send.svg") center center no-repeat $white;
                     height: 32px;
                     width: 32px;
                     border: none;

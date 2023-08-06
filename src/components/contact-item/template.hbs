@@ -1,20 +1,24 @@
-<a href = "{{contactLinkDialog}}" class = "contact-item">
-    <div class = "contact-img">
-        <img src = "{{contactImg}}" />
-    </div>    
-    <div class = "contact-info">
-        <span class = "contact-name">{{contactName}}</span>
-        <span class = "contact-msg-info">
-            {{#if yourMsg}}
-                <span class = "contact-name-msg">Вы:</span>
-            {{/if}}  
-            <span class = "contact-msg">{{contactMsg}}</span>
-        </span>
-    </div>
-    <div class = "contact-data">
-        <span class = "time-msg">{{contactTimeMsg}}</span>
-        {{#if contactQMsg}}
-            <span class = "q-msg">{{contactQMsg}}</span>
-        {{/if}}    
-    </div>
-</a> 
+<div class = "contact-item-block {{#if contactSelected}} selected{{/if}}">
+    <a href = "{{contactLinkDialog}}" class = "contact-item" >
+        <div class = "contact-img">
+            <img src = "{{contactImg}}" />
+        </div>    
+        <div class = "contact-info">
+            <span class = "contact-name">{{contactName}}</span>
+            <span class = "contact-msg-info">
+                {{#if yourMsg}}
+                    <span class = "contact-name-msg">Вы:</span>
+                {{/if}}  
+                <span class = "contact-msg">{{contactMsg}}</span>
+            </span>
+        </div>
+        <div class = "contact-data">
+            <span class = "time-msg">{{contactTimeMsg}}</span>
+            {{#if contactQMsg}}
+                <span class = "q-msg">{{contactQMsg}}</span>
+            {{/if}}    
+        </div>
+        
+    </a> 
+    <div class = "border-line"></div>
+</div>

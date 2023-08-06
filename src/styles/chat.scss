@@ -1,37 +1,13 @@
-@import "./vars.scss";
+@import "/styles/vars.scss";
 
 .container {
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
-    align-items: stretch;
+
 
     .left-side {
-        width: 30%;
-        /*max-width: 400px;
-            min-width: 350px;*/
-        background-color: $accent-white;
-        border-right: 1px solid $light-grey-border;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
 
-        height: 100vh;
-        position: relative;
-        overflow: hidden;
-
-        @media #{$tablet} {
-            width: 0;
-        }
 
         .left-side-content {
-            width: 100%;
-            /*max-width: 380px;
-                min-width: 330px;*/
-            padding: 0px 3% 20px 3%;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
+
 
             .fixed-container {
                 position: fixed;
@@ -42,7 +18,7 @@
 
                 .fixed-block {
                     position: fixed;
-                    padding: 28px 0.9% 0 0.9%;
+                    padding: 10px 0.9% 0 0.9%;
                     background-color: $white;
                     width: 30%;
                     /*max-width: 400px;
@@ -73,6 +49,7 @@
 
                             .profile-photo {
                                 margin-right: 10px;
+                                margin-top:0px;
                             }
 
                             .profile-name {
@@ -106,7 +83,7 @@
             }
 
             .contact-list {
-                padding-top: 120px;
+                padding-top: 140px;
 
             }
 
@@ -156,6 +133,8 @@
             color: $grey;
             width: 100%;
             text-align: center;
+            margin-top: 250px;
+
         }
     }
 

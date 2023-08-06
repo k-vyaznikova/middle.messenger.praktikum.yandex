@@ -1,0 +1,55 @@
+{{#defpage}}
+    {{#leftside}}
+        <div class = "fixed-container">
+            <div class = "fixed-block">
+                <div class = "left-top-block">
+                    <a href = '/pages/profile/profile/profile.html' class = "left-block">
+                        <img class = "profile-photo" src = "/img/noimgprofile.svg"/>
+                        <div class = "profile-name">Вязникова Кристина <span  class = "arrow">&gt;</span></div>
+                    </a>  
+                    <div class = "right-block">
+                        <a href = "/pages/community-edit/community-edit.html" class = "chat-add"></a>
+                    </div>  
+                </div>
+                {{> search/template }}
+            </div>
+        </div>
+        <div class = "contact-list">
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3" contactSelected = "yes"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Андрей" contactMsg = "Изображение" contactTimeMsg = "10:00" contactQMsg="3"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Павел Александрович" contactMsg = "Зайдешь сегодня?" contactTimeMsg = "5 апр 2023" yourMsg="yes"}}
+            {{> contact-item/template contactImg = "/components/contact-item/img/noimgprofile.svg" contactName = "Павел Александрович" contactMsg = "Очень длинное сообщение, которое не помещается в одну строку и даже не пмещается в выделенную ему область" contactTimeMsg = "5 апр 2023" yourMsg="yes"}}
+        </div>  
+    {{/leftside}}
+    {{#rightside}}
+
+            {{> chat-info/template chatName = "Вадим" chatImg = "/components/chat-info/img/noimgprofile.svg" personalChat = "yes"}}
+            <div class = "dialog-block">
+                <div class = "dialog">
+                    {{> date-msg/template date = "12 июля"}}
+                    {{> incoming-msg/template 
+                            msgText="Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро."
+                            msgTime = "20:00"    
+                            msgImg = "/img/photo.jpg"
+                    }}
+                       
+                    {{> incoming-msg/template 
+                            msgText = "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram."
+                            msgTime = "20:01"
+                    }}
+
+                    {{> outgoing-msg/template 
+                            msgText = "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram."
+                            msgTime = "20:01"
+                    }}
+                    
+                </div>
+            </div>
+            {{> send-msg-form/template}}
+  
+        {{/rightside}}
+{{/defpage}}
