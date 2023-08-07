@@ -9,4 +9,4 @@ export default function if_eq(a, b, opts) {
   } else {
     return opts.inverse(this);
   }
-};
+}
