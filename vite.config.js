@@ -39,6 +39,9 @@ export default defineConfig( {
             }
         }
     },
+    server: {
+        open: 'index.html'
+    },
     plugins: [handlebars({
         helpers: {
             if_eq,
