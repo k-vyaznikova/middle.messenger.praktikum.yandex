@@ -1,0 +1,143 @@
+@import "/styles/vars.scss";
+
+.container {
+
+
+    .left-side {
+
+
+        .left-side-content {
+
+
+            .fixed-container {
+                position: fixed;
+                left: 0;
+                right: 0;
+                width: 100%;
+                color: $white;
+
+                .fixed-block {
+                    position: fixed;
+                    padding: 10px 0.9% 0 0.9%;
+                    background-color: $white;
+                    width: 30%;
+                    /*max-width: 400px;
+                        min-width: 350px;*/
+                    left: 0;
+                    top: 0px;
+                    box-shadow: 0 4px 5px -5px rgba(0, 0, 0, 0.12);
+                    box-sizing: border-box;
+
+                    /*.profile-link{
+                            color: $grey;
+                            display: block;
+                            text-align: right;
+                            font-size: 12px;
+                            padding-bottom: 5px;
+                        }*/
+                    .left-top-block {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .left-block {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: flex-start;
+                            align-items: center;
+
+                            .profile-photo {
+                                margin-right: 10px;
+                                margin-top:0px;
+                            }
+
+                            .profile-name {
+                                color: $black;
+                                font-weight: 800;
+                                font-size: 16px;
+
+                                .arrow {
+                                    color: $grey;
+                                    font-weight: normal;
+                                    margin-left: 5px;
+                                    font-size: 14px;
+                                }
+                            }
+
+                        }
+
+                        .right-block {
+                            .chat-add {
+                                display: block;
+                                height: 28px;
+                                width: 30px;
+                                background: url('../img/chat-add.svg') center center no-repeat;
+                                background-size: cover;
+                            }
+
+
+                        }
+                    }
+                }
+            }
+
+            .contact-list {
+                padding-top: 140px;
+
+            }
+
+
+
+        }
+    }
+
+    .right-side {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 70%;
+        height: 100vh;
+        /*position: relative;*/
+        overflow: hidden;
+
+        .right-side-content {
+            padding: 0px 20px 20px 20px;
+            width: 100%;
+            box-sizing: border-box;
+
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .dialog-block {
+                padding-top: 70px;
+                padding-bottom: 50px;
+
+                .dialog {
+                    padding-top: 25px;
+                }
+
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+        .empty-msg {
+            color: $grey;
+            width: 100%;
+            text-align: center;
+            margin-top: 250px;
+
+        }
+    }
+
+
+
+}

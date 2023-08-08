@@ -1,0 +1,46 @@
+@import "/styles/vars.scss";
+
+.member-item{
+    max-width: 400px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $light-grey-bckg1;
+    padding: 5px 0;
+    .member-info{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 7px;
+        .member-photo{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .member-photo, .member-login, .member-name{
+            margin-right: 15px;
+        }
+        .member-login{
+            color: $black;
+            font-size: 13px;
+        }
+        .member-name{
+            color: $grey;
+            font-size: 14px;
+        }
+        
+    }
+    .member-add{
+        width: 20px;
+        height: 20px;
+        background: url("/components/member-short-info/img/add-member.svg")  center center no-repeat transparent;
+        display: block;
+        background-size: cover;
+    }
+
+}
+
+

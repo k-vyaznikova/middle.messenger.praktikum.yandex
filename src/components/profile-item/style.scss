@@ -1,0 +1,75 @@
+@import "/styles/vars.scss";
+
+
+
+
+.profile-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid $light-grey-bckg1;
+    padding: 10px 0;
+    font-size: 13px;
+    &:last-child{
+        border-bottom: none;
+    }
+    label{
+        width: 30%;
+        font-weight: 500;
+    }
+    input{
+        border: none;
+        color: $grey;
+        text-align: right;
+        font-size: 13px;
+        width: 70%;
+    }
+}
+.profile-item.textarea{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-bottom: 30px;
+    label{
+        width: 100%;
+        text-align: left;
+        font-weight: 500;
+    }
+    .profile-text{
+        color: $grey;
+        line-height: 19px;
+        font-size: 15px;
+    }
+    .profile-value{
+        border: none;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid $light-grey-bckg1;
+        font-size: 13px;
+        text-align: left;
+        padding: 0px 0px; 
+        color: $grey;
+        height: 20px;
+        overflow: hidden;
+    }
+}
+
+.community-create {
+    .profile-item{
+       margin-bottom: 30px; 
+    }
+
+    label{
+        font-weight: 600;
+        margin-bottom: 15px; 
+    }
+    textarea{
+        height: 20px;
+    }
+}
+
+
+

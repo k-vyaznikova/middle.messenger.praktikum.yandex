@@ -1,0 +1,23 @@
+.form-module{
+    .form-container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @media #{$mobile}{
+            height: 60%;
+        }
+    }
+    .form-footer{
+        margin-top: 15px;
+        .reg-link{
+            margin-top: 20px;
+            display: block;
+            font-size: 11px;
+        }
+     }
+}
+
+
+
+
