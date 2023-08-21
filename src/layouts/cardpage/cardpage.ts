@@ -1,5 +1,7 @@
-export default function cardpage(options) {
-    return `
+import type {THelperOptions} from 'handlebars';
+
+export default function cardpage(this: object, options: THelperOptions): string {
+	return `
     <html>
         <head>
             <meta charset="UTF-8" />
@@ -18,4 +20,3 @@ export default function cardpage(options) {
     </html> 
     `;
 }
-

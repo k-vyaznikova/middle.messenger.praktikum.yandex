@@ -1,4 +1,4 @@
-@import "../../styles/vars.scss";
+@import "../../styles/vars";
 
 
 .fixed-container{
@@ -6,7 +6,8 @@
     left:0;
     right: 0;
     width: 100%;
-    color: #000000;
+    color: #000;
+
     .chat-info-block{
         padding-left: 20px;
         padding-right: 20px;
@@ -23,25 +24,27 @@
             padding-bottom: 10px;
             padding-top: 10px;
             background-color: $white;
-            box-shadow: 0 4px 5px -5px rgba(0, 0 , 0, 0.12);
+            box-shadow: 0 4px 5px -5px rgb(0 0 0 / 12%);
+
             .chat-info-left{
                 width: 75%;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
+
                 .chat-img{
                     margin-right: 5px;
                 }
+
                 .chat-name{
                     margin-left: 5px;
-                    font-weight: 500;
-                    font-size: 13px;
                     color: $black;
                     font-weight: 600;
                     font-size: 13px;
                 }
             }
+
             .chat-info-right{
                 width: 20%;
         
@@ -55,6 +58,7 @@
             justify-content: flex-end;
             flex-direction: row;
             align-items: center;
+
             .info{
                 display: block;
                 height: 30px;
@@ -63,6 +67,7 @@
                 padding: 2px;
                 border-radius: 50%;
             }
+
             .delete{
                 display: block;
                 width: 30px;
@@ -75,6 +80,7 @@
             .info.selected{
                 background: $light-grey-bckg2 url("/components/chat-info/img/info-selected.svg") center center no-repeat;
             }
+
             .delete.selected{
                 background: $light-grey-bckg2 url("/components/chat-info/img/delete-selected.svg") center center no-repeat;
                 

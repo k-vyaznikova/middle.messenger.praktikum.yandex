@@ -1,5 +1,6 @@
-export default function popup(options) {
-    return ` 
+import type {THelperOptions} from 'handlebars';
+export default function popup(this: object, options: THelperOptions): string {
+	return ` 
     <div class = 'popup-block-invis ${options.hash.classVisibility}'>
         <div class = 'popup-block-container'>
             <div class = 'popup-block'>
@@ -13,4 +14,3 @@ export default function popup(options) {
     </div>
     `;
 }
-

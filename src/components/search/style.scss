@@ -1,11 +1,11 @@
-@import "/styles/vars.scss";
+@import "/styles/vars";
 
 .search-form{
     width: 100%;
     padding: 20px 0;
     position: relative;
+
     input[type="text"]{
-       
         border-radius: 5px;
         width: 100%;
         border: none;
@@ -14,6 +14,7 @@
         text-align: center;
         background: $light-grey-bckg2;
     }
+
     input[type="text"].empty-search{
         background: url("/components/search/img/search.svg")  center center no-repeat $light-grey-bckg1;
     }
@@ -33,27 +34,29 @@
     input[type="submit"]{
         display: none;   
     }   
+
     .add-items{
-        /*position: absolute;
+        /* position: absolute;
         top: 20px;
-        left: 20px;*/
+        left: 20px; */
         display: flex;
         justify-content: flex-start;
         border-radius: 5px;
         width: 100%;
         border: none;
-        padding: 10px 10px;
+        padding: 10px;
         box-sizing: border-box;
         text-align: center;
         background: $light-grey-bckg2;
+
         .item{
-            
             border-radius: 15px;
             padding: 5px 25px 5px 10px;
             background-color: $white;
             width: auto;
             position: relative;
             margin-right: 10px;
+
             .cancel{
                 top: 3px;
                 right: 5px;

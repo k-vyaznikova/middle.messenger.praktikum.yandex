@@ -3,47 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Messenger</title>    
-        <style>
-            body{
-                width: 100%;
-                height: 100vh;
-            }
-            a{
-                color: #3369F3;
-            }
-            .center{
-                width: 500px;
-                margin: auto;
-                height: 500px;
-            }
-            .center ul li{
-                margin-bottom: 5px;
-            }
-        </style>    
+        <script type="module" src = "/index.ts"></script>
+        <title>Messenger</title>      
     </head>
     <body>
-        <div class = "center">
-            <h3>Страницы проекта</h3>
-            <nav>
-            <ul>
-                <li><a href = "/pages/auth/auth.html">Авторизация</a></li>
-                <li><a href = "/pages/register/register.html">Регистрация</a></li>
-                <li><a href = "/pages/chat/chat.html">Чат</a></li>
-                <li><a href = "/pages/chat/chat-choose-attach.html">Чат: выбор вложения</a></li>
-                <li><a href = "/pages/chat/chat-choose-attach-pic.html">Чат: отправка вложенной картинки</a></li>
-                <li><a href = "/pages/chat/chat-choose-attach-file.html">Чат: отправка вложенного файла</a></li>
-                <li><a href = "/pages/chat/chat-empty.html">Пустой чат</a></li>
-                <li><a href = "/pages/profile/profile.html">Просмотр профиля</a></li>
-                <li><a href = "/pages/profile/profile-edit.html">Редактирование профиля</a></li>
-                <li><a href = "/pages/profile/profile-edit-photo.html">Редактирование аватара</a></li>
-                <li><a href = "/pages/password-edit/password-edit.html">Редактирование пароля</a></li>
-                <li><a href = "/pages/error/404.html">Ошибка 404</a></li>
-                <li><a href = "/pages/error/500.html">Ошибка 500</a></li>
-                <li><a href = "/pages/community/community.html">Профиль чата на несколько человек</a></li>
-                <li><a href = "/pages/community/community-edit.html">Добавление чата на несколько человек</a></li>
-            </ul>
-            </nav>
-        </div>
+        <div id = "app"></div>
     </body>
 </html>

@@ -1,6 +1,6 @@
 import {resolve} from 'path';
 import {defineConfig} from 'vite';
-import handlebars from 'vite-plugin-handlebars';
+import handlebars from './vite-plugin-handlebars-precompile';
 
 import defpage from "./src/layouts/defpage/defpage";
 import leftside from "./src/layouts/chatpage/leftside/leftside";
@@ -11,8 +11,6 @@ import popup from "./src/layouts/popup/popup";
 import if_eq from "./src/utils/ifequal";
 
 
-console.log(resolve(__dirname, "build"));
-console.log(resolve(__dirname, 'src/index.html'));
 
 export default defineConfig( {
     root: resolve(__dirname, 'src'),
@@ -42,19 +40,6 @@ export default defineConfig( {
     server: {
         open: 'index.html'
     },
-    plugins: [handlebars({
-        helpers: {
-            if_eq,
-            defpage,
-            cardpage,
-            profpage,
-            popup,
-            leftside,
-            rightside
-        },
-
-        partialDirectory: resolve(__dirname, "src/components")      
-    })
-    ]
+    plugins: [handlebars()]
 
 });

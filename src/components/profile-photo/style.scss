@@ -1,17 +1,19 @@
-@import "/styles/vars.scss";
+@import "/styles/vars";
 
 .profile-photo{
     position: relative;
     margin-top: 100px;
+
     .profile-img{
         width: 130px;
         height: 130px;
         border: 50%;
     }
+
     .change-avatar{
         position: absolute;
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
         opacity: 0.4;
         background-color: $black;
         color: $white;
@@ -25,6 +27,7 @@
         padding: 20px;
         display: none;
     }
+
     .change-avatar.visible{
         display: flex;
         flex-direction: column;

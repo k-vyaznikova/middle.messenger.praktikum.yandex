@@ -31,7 +31,7 @@
 
 <!--Временно для сдачи спринта 1-->
 
-{{#if_eq showModal "pic"}}
+{{#ifEqual showModal "pic"}}
     {{#popup classVisibility = "visible"}}
         <div class = "msg-add-block">
             <div class = "subheader">Отправка изображения</div>
@@ -40,9 +40,9 @@
             {{> submit-btn/template buttonText = 'Отправить'}}
         </div>
     {{/popup}}
-{{/if_eq}}    
+{{/ifEqual}}    
 
-{{#if_eq showModal "file"}}
+{{#ifEqual showModal "file"}}
     {{#popup classVisibility = "visible"}}
         <div class = "msg-add-block">
             <div class = "subheader">Отправка файла</div>
@@ -52,4 +52,4 @@
             {{> submit-btn/template buttonText = 'Отправить'}}
         </div>
     {{/popup}}
-{{/if_eq}}
+{{/ifEqual}}
