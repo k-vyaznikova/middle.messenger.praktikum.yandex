@@ -18,13 +18,12 @@ export class Block {
 	private children: Record<string, Block>;
 
 
-	constructor(tagName = "div", propsWithChildren = {}) {
+	constructor(propsWithChildren = {}) {
 		this.id = nanoid(6);
 		const eventBus = new EventBus();
 		this.eventBus = () => eventBus;
 		const {props, children} = this._getPropsAndChildren(propsWithChildren);
 		this._meta = {
-			tagName,
 			props,
 		};
 		this.props = this._makePropsProxy(props);
@@ -63,8 +62,7 @@ export class Block {
 	}
 
 	private _createResources() {
-		const {tagName} = this._meta;
-		this._element = this._createDocumentElement(tagName);
+		this._element = this._createDocumentElement();
 	}
 
 	protected init() {
@@ -103,21 +101,21 @@ export class Block {
 		Object.assign(this.props, nextProps);
 	};
 
-	extractAttributes() {
+	/* extractAttributes() {
 		Object.keys(this.props).forEach((propName) => {
 			if (propName.startsWith("__")) {
 				const newPropName = propName.slice(2, propName.length);
 				this._element.setAttribute(newPropName, this.props[propName]);
 			}
 		});
-	}
+	}*/
 
 	get element() {
 		return this._element;
 	}
 
 	private _render() {
-		this.extractAttributes();
+		// this.extractAttributes();
 		const block = this.render();
 		this._element.append(block);
 		this._addEvents();
@@ -133,17 +131,15 @@ export class Block {
 	}
 
 
-	// /stop here!!!!
 	protected compile(template: (props: any)=>string, props: any) {
 		const plugsAndProps = {...props};
 		Object.entries(this.children).forEach(([key, component]) => {
 			plugsAndProps[key] = `<div data-id = '${component.id}'></div>`;
 		});
-		console.log("?????");
-		//console.log(plugsAndProps);
 		const html = template(plugsAndProps);
 		const temp = document.createElement("template");
 		temp.innerHTML = html;
+		console.log(this.children["form"]);
 		Object.entries(this.children).forEach(([key, component]) => {
 			const plug = temp.content.querySelector(`[data-id='${component.id}']`);
 			if (!plug) {
@@ -154,6 +150,7 @@ export class Block {
 		});
 		return temp.content;
 	}
+
 	private _makePropsProxy(props) {
 		// Можно и так передать this
 		// Такой способ больше не применяется с приходом ES6+
@@ -171,9 +168,8 @@ export class Block {
 		});
 	}
 
-	_createDocumentElement(tagName) {
-	// Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-		return document.createElement(tagName);
+	_createDocumentElement(): DocumentFragment {
+		return new DocumentFragment();
 	}
 
 	show() {
