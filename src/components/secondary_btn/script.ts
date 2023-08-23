@@ -2,9 +2,9 @@ import {Block} from "/utils/block.ts";
 import template from "/components/secondary_btn/template.hbs";
 
 interface SecondaryBtnProps {
-    __href: String,
-    __class: String,
-    textLink: String
+    href: String,
+    text: String,
+    events: Record<string, Function>
 }
 
 export class SecondaryBtn extends Block {
@@ -12,7 +12,7 @@ export class SecondaryBtn extends Block {
 		super(props);
 	}
 	render() {
-		return this.compile(template, {href: this.props.href, class: this.props.class, textLink: this.props.textLink});
+		return this.compile(template, {href: this.props.href, text: this.props.text});
 	}
 }
 

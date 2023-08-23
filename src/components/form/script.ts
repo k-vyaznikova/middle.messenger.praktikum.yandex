@@ -1,8 +1,11 @@
 import {Block} from "/utils/block.ts";
-import template from "/components/form/template.hbs";
+import template from "../form/template.hbs";
+import {SecondaryBtn} from "../secondary_btn/script";
 
 interface FormProps {
     title: String,
+    secondary_btn?: SecondaryBtn,
+    type?: String
     // прописать свойства здесь!!!!
 }
 

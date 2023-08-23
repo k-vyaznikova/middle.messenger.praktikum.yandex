@@ -1,9 +1,11 @@
-import Handlebars from "handlebars/runtime";
+import Handlebars from "handlebars";
+import {registerComponent} from "/utils/resgiter_component.js";
 import {AuthPage} from "/pages/auth/script.ts";
 import {Form} from "/components/form/script.ts";
+
 import {Input} from "/components/input/script.ts";
 import {SubmitBtn} from "/components/submit_btn/script.ts";
-import {SecondaryBtn} from "./components/secondary_btn/script";
+import {SecondaryBtn} from "./components/secondary_btn/script.js";
 
 import cardpage from "/layouts/cardpage/cardpage.ts";
 import leftside from "/layouts/chatpage/leftside/leftside.ts";
@@ -13,7 +15,10 @@ import popup from "/layouts/popup/popup.ts";
 import profpage from "/layouts/profpage/profpage.ts";
 
 
-window.addEventListener("DOMContentLoaded", () => {
+    registerComponent('Form', Form);
+    //registerComponent('SecondaryBtn', SecondaryBtn);
+
+
 	// регистрация helpers
 	Handlebars.registerHelper("cardpage", cardpage);
 	Handlebars.registerHelper("leftpage", leftside);
@@ -23,36 +28,14 @@ window.addEventListener("DOMContentLoaded", () => {
 	Handlebars.registerHelper("profpage", profpage);
 	// -------
 
-
-	const root = document.querySelector("#app");
+window.addEventListener("DOMContentLoaded", () => {
+    const root = document.querySelector("#app");
 
 
 	const form = new Form({
-		"title": "Вход",
-		"submit_url": "#",
-		"input_1": new Input({
-			name: "login",
-			label: "Логин",
-			id: "login_auth",
-			type: "text",
-			error: "Тестовая ошибка",
-		}),
-		"input_2": new Input({
-			name: "password",
-			label: "Пароль",
-			id: "password_auth",
-			type: "password",
-			error: "Тестовая ошибка",
-		}),
-		"submit_btn": new SubmitBtn({
-			text: "Войти",
-		}),
-		"secondary_btn": new SecondaryBtn({
-			href: "#",
-			text: "Зарегистироваться",
-		}),
+        "title": "Вход"
 	});
-	const auth = new AuthPage({"form": form});
+	const auth = new AuthPage({form: form});
 	root.append(auth.getContent());
 });
 

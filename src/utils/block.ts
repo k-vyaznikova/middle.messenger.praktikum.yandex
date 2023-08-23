@@ -24,7 +24,7 @@ export class Block {
 		this.eventBus = () => eventBus;
 		const {props, children} = this._getPropsAndChildren(propsWithChildren);
 		this._meta = {
-			props,
+			props
 		};
 		this.props = this._makePropsProxy(props);
 
@@ -61,12 +61,7 @@ export class Block {
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
-	private _createResources() {
-		this._element = this._createDocumentElement();
-	}
-
 	protected init() {
-		this._createResources();
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
@@ -101,23 +96,16 @@ export class Block {
 		Object.assign(this.props, nextProps);
 	};
 
-	/* extractAttributes() {
-		Object.keys(this.props).forEach((propName) => {
-			if (propName.startsWith("__")) {
-				const newPropName = propName.slice(2, propName.length);
-				this._element.setAttribute(newPropName, this.props[propName]);
-			}
-		});
-	}*/
-
 	get element() {
 		return this._element;
 	}
 
 	private _render() {
-		// this.extractAttributes();
-		const block = this.render();
-		this._element.append(block);
+		const docFrag: DocumentFragment = this.render();
+		const newElem = docFrag.firstElementChild as HTMLElement;
+		if (this._element)
+			this._element.replaceWith(newElem);
+		this._element = newElem;
 		this._addEvents();
 	}
 
@@ -139,7 +127,6 @@ export class Block {
 		const html = template(plugsAndProps);
 		const temp = document.createElement("template");
 		temp.innerHTML = html;
-		console.log(this.children["form"]);
 		Object.entries(this.children).forEach(([key, component]) => {
 			const plug = temp.content.querySelector(`[data-id='${component.id}']`);
 			if (!plug) {

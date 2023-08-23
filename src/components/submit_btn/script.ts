@@ -9,9 +9,6 @@ export class SubmitBtn extends Block {
 	constructor(props: SubmitBtnProps) {
 		super(props);
 	}
-	render() {
-		return this.compile(template, {text: this.props.text});
-	}
 }
 
 

@@ -8,7 +8,6 @@ interface AuthPageProps {
 }
 
 export class AuthPage extends Block {
-	props: AuthPageProps;
 	constructor(props: AuthPageProps) {
 		super(props);
 	}
