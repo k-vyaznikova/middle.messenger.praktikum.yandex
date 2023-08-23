@@ -12,7 +12,7 @@ export class Block {
 
 	public id: string;
 	protected props: Record<string, unknown>;
-	private eventBus: () => EventBus; s;
+	private eventBus: () => EventBus;
 	private _element: HTMLElement | null = null;
 	private _meta: any = null;
 	private children: Record<string, Block>;
