@@ -12,7 +12,6 @@ export function registerComponent(name: string, Component: Block) {
 	//console.log("__"+name);
 	Handlebars.registerHelper(name, function(this: unknown, {hash, data, fn}: HelperOptions) {
 		console.log("____"+name);
-		console.log("hwewerwer");
 		const component = new Component(hash);
 		const dataAttribute = `data-id="${component.id}"`;
 
@@ -33,7 +32,6 @@ export function registerComponent(name: string, Component: Block) {
 				stub.replaceWith(component.getContent()!);
 			},
 		});
-		
 		const contents = fn ? fn(this) : "";
 
 		return `<div ${dataAttribute}>${contents}</div>`;
