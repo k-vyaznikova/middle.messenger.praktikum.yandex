@@ -1,8 +1,13 @@
-    <form url="{{url_submit}}" class = "form-container" type="{{type}}">
+    <form url="{{url_submit}}" class = "form-container">
         <h1>{{title}}</h1>
         <div class = "form-body" >
-            test
+            {{#each inputs}}
+                {{{Input name = name label = label id=id type=type error = error }}}
+            {{/each}}
+            
         </div>
         <div class = "form-footer">
+            {{{ SubmitBtn text=submit_btn.text onClick = submit_btn.onClick}}}
+            {{{ SecondaryBtn text=secondary_btn.text href = secondary_btn.href onClick = secondary_btn.onClick}}}
         </div>
     </form>

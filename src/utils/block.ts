@@ -1,4 +1,4 @@
-import {EventBus} from "./event-bus.ts";
+import {EventBus} from "./event_bus.ts";
 import {nanoid} from "nanoid";
 
 
@@ -12,6 +12,7 @@ export class Block {
 
 	public id: string;
 	protected props: Record<string, unknown>;
+	protected refs: Record<string, Block> = {};
 	private eventBus: () => EventBus;
 	private _element: HTMLElement | null = null;
 	private _meta: any = null;
@@ -23,6 +24,8 @@ export class Block {
 		const eventBus = new EventBus();
 		this.eventBus = () => eventBus;
 		const {props, children} = this._getPropsAndChildren(propsWithChildren);
+		//console.log(props);
+		//console.log(children);
 		this._meta = {
 			props
 		};
@@ -75,7 +78,7 @@ export class Block {
 	}
 
 	public dispatchComponentDidMount() {
-		this._eventBus().emit(Block.EVENTS.FLOW_CDM);
+		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
 	private _componentDidUpdate(oldProps, newProps) {
@@ -102,9 +105,11 @@ export class Block {
 
 	private _render() {
 		const docFrag: DocumentFragment = this.render();
+		console.log(docFrag);
 		const newElem = docFrag.firstElementChild as HTMLElement;
 		if (this._element)
 			this._element.replaceWith(newElem);
+		//console.log(newElem);
 		this._element = newElem;
 		this._addEvents();
 	}
@@ -119,24 +124,26 @@ export class Block {
 	}
 
 
-	protected compile(template: (props: any)=>string, props: any) {
-		const plugsAndProps = {...props};
+	protected compile(template: (props: any) => string, props: any) {
+		const plugsAndProps = {...props, __refs: this.refs};
 		Object.entries(this.children).forEach(([key, component]) => {
 			plugsAndProps[key] = `<div data-id = '${component.id}'></div>`;
 		});
+		
 		const html = template(plugsAndProps);
 		const temp = document.createElement("template");
 		temp.innerHTML = html;
-		Object.entries(this.children).forEach(([key, component]) => {
-			const plug = temp.content.querySelector(`[data-id='${component.id}']`);
-			if (!plug) {
-				return;
-			} else {
-				plug.replaceWith(component.getContent());
-			}
-		});
+		//console.log("_-_-_-_-_-_");
+		//console.log(html)
+		//console.log(plugsAndProps);
+		
+		plugsAndProps.__children?.forEach(({embed}: any) => {
+			embed(temp.content);
+		  });
 		return temp.content;
+
 	}
+
 
 	private _makePropsProxy(props) {
 		// Можно и так передать this

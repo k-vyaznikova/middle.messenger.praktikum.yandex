@@ -12,7 +12,7 @@ export default function handlebars(): PluginOption{
             }
 
             const code = `
-                import Handlebars from 'handlebars/runtime';
+                import Handlebars from 'handlebars';
                 export default Handlebars.template(${Handlebars.precompile(src)})
             `;
             console.log(src);

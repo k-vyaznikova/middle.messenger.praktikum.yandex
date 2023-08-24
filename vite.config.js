@@ -2,13 +2,6 @@ import {resolve} from 'path';
 import {defineConfig} from 'vite';
 import handlebars from './vite-plugin-handlebars-precompile';
 
-import defpage from "./src/layouts/defpage/defpage";
-import leftside from "./src/layouts/chatpage/leftside/leftside";
-import rightside from "./src/layouts/chatpage/rightside/rightside";
-import cardpage from "./src/layouts/cardpage/cardpage";
-import profpage from "./src/layouts/profpage/profpage";
-import popup from "./src/layouts/popup/popup";
-import if_eq from "./src/utils/ifequal";
 
 
 
