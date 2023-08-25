@@ -1,6 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/auth/auth.hbs";
 import {renderPage} from "/utils/render_page.ts";
+import {validate} from "/utils/validate.js";
 
 interface AuthPageProps {
     title: String,
@@ -21,12 +22,15 @@ export class AuthPage extends Block {
                         id: "login_auth",
                         type: "text",
                         error: "Тестовая ошибка",
+                        ref: "input_login",
+                        onFocusout: () => {console.log(this);console.log(this.refs)}
                     },
                     {
                         name: "password",
                         label: "Пароль",
                         id: "password_auth",
                         type: "password",
+                        ref: "input_password",
                         error: "Тестовая ошибка",
                     }
                 ],

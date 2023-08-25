@@ -24,8 +24,6 @@ export class Block {
 		const eventBus = new EventBus();
 		this.eventBus = () => eventBus;
 		const {props, children} = this._getPropsAndChildren(propsWithChildren);
-		//console.log(props);
-		//console.log(children);
 		this._meta = {
 			props
 		};
@@ -105,11 +103,9 @@ export class Block {
 
 	private _render() {
 		const docFrag: DocumentFragment = this.render();
-		console.log(docFrag);
 		const newElem = docFrag.firstElementChild as HTMLElement;
 		if (this._element)
 			this._element.replaceWith(newElem);
-		//console.log(newElem);
 		this._element = newElem;
 		this._addEvents();
 	}
@@ -126,6 +122,8 @@ export class Block {
 
 	protected compile(template: (props: any) => string, props: any) {
 		const plugsAndProps = {...props, __refs: this.refs};
+		//console.log("eeeeeee");
+		//console.log(this.refs);
 		Object.entries(this.children).forEach(([key, component]) => {
 			plugsAndProps[key] = `<div data-id = '${component.id}'></div>`;
 		});
@@ -133,9 +131,6 @@ export class Block {
 		const html = template(plugsAndProps);
 		const temp = document.createElement("template");
 		temp.innerHTML = html;
-		//console.log("_-_-_-_-_-_");
-		//console.log(html)
-		//console.log(plugsAndProps);
 		
 		plugsAndProps.__children?.forEach(({embed}: any) => {
 			embed(temp.content);
