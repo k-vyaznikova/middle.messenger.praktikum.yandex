@@ -1,23 +1,23 @@
 import Handlebars from "handlebars";
-import {PluginOption} from 'vite';
+import {PluginOption} from "vite";
 
-export default function handlebars(): PluginOption{
-    const fileRegexp = /\.hbs$|\.handlebars$/;
+export default function handlebars(): PluginOption {
+	const fileRegexp = /\.hbs$|\.handlebars$/;
 
-    return {
-        name: 'vite-plugin-handlebars-precompile',
-        transform(src, id){
-            if(!fileRegexp.test(id)){
-                return;
-            }
+	return {
+		name: "vite-plugin-handlebars-precompile",
+		transform(src, id) {
+			if (!fileRegexp.test(id)) {
+				return;
+			}
 
-            const code = `
+			const code = `
                 import Handlebars from 'handlebars';
                 export default Handlebars.template(${Handlebars.precompile(src)})
             `;
-            console.log(src);
-            return {code};
-        }    
+			console.log(src);
+			return {code};
+		}
 
-    }
+	};
 }
