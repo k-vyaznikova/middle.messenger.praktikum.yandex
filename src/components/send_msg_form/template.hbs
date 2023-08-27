@@ -1,0 +1,55 @@
+<div class = "fixed-container-bottom">
+    <div class = "send-msg-form">
+        <form class = "form">
+            <div class = "attach">
+                <button class = "attach-btn"></button>
+                <div class = "attach-type-container {{#if attachChooseOpen}}visible{{/if}}">
+                    <div class = "attach-type">
+                        <ul>
+                            <li class = "pic">
+                                Фото или видео
+                            </li>
+                            <li class = "doc">
+                                Файл
+                            </li>
+                            <li class = "loc">Локация</li>
+                        </ul>
+                        <input type = "file" name = "attach" class = "attach-file" accept="image/*"/>
+                    </div>
+                </div>
+            </div>
+            <div class = "msg">
+                <textarea id = "send-msg" class = "send-msg" placeholder="Сообщение" name = "message"></textarea>
+            </div>
+            <div class = "send-btn">
+                <input type="submit" value=""/>
+                
+            </div>
+        </form>    
+    </div>  
+</div>
+
+<!--Временно для сдачи спринта 1-->
+
+{{#ifEq showModal "pic"}}
+    {{#popup classVisibility = "visible"}}
+        <div class = "msg-add-block">
+            <div class = "subheader">Отправка изображения</div>
+            <img src ="/img/test-img.jpg" class = "img" alt = "test-img.jpg"/>
+            {{> caption-input/template placeholderText = "Подпись к фото"}}
+            {{> submit-btn/template buttonText = 'Отправить'}}
+        </div>
+    {{/popup}}
+{{/ifEq}}    
+
+{{#ifEq showModal "file"}}
+    {{#popup classVisibility = "visible"}}
+        <div class = "msg-add-block">
+            <div class = "subheader">Отправка файла</div>
+            <img src ="/img/test-file.svg" class = "file" alt = "doc-файл"/>
+            <div class = "file-name">Заявление на отпуск.doc</div>
+            {{> caption-input/template placeholderText = "Подпись к фото"}}
+            {{> submit-btn/template buttonText = 'Отправить'}}
+        </div>
+    {{/popup}}
+{{/ifEq}}

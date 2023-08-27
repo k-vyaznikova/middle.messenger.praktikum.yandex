@@ -1,21 +1,19 @@
 import {EventBus} from "./event_bus.ts";
 import {nanoid} from "nanoid";
 
-
 export class Block {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
 		FLOW_CDU: "flow:component-did-update",
-		FLOW_RENDER: "flow:render",
+		FLOW_RENDER: "flow:render"
 	};
 
 	public id: string;
-	protected props: Record<string, unknown>;
-	protected refs: Record<string, Block> = {};
+	public props: Record<string, unknown>;
+	public refs: Record<string, Block> = {};
 	private eventBus: () => EventBus;
 	private _element: HTMLElement | null = null;
-	private _meta: any = null;
 	private children: Record<string, Block>;
 
 
@@ -24,9 +22,6 @@ export class Block {
 		const eventBus = new EventBus();
 		this.eventBus = () => eventBus;
 		const {props, children} = this._getPropsAndChildren(propsWithChildren);
-		this._meta = {
-			props
-		};
 		this.props = this._makePropsProxy(props);
 
 		this.children = children;
@@ -36,7 +31,7 @@ export class Block {
 	}
 
 
-	private _getPropsAndChildren(propsWithChildren = {}) {
+	private _getPropsAndChildren(propsWithChildren: any = {}) {
 		const props: Record<string, any> = {};
 		const children: Record<string, any> = {};
 		Object.keys(propsWithChildren).forEach((key) => {
@@ -49,13 +44,13 @@ export class Block {
 		return {props, children};
 	}
 	private _addEvents() {
-		const {events = {}} = this.props as {events};
+		const {events = {}} = this.props as {events: Record<string, () => void>};
 		Object.keys(events).forEach((eventName) => {
-			this._element.addEventListener(eventName, events[eventName]);
+			(this._element as HTMLElement).addEventListener(eventName, events[eventName]);
 		});
 	}
 
-	private _registerEvents(eventBus) {
+	private _registerEvents(eventBus: EventBus) {
 		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -71,7 +66,7 @@ export class Block {
 	}
 
 	// Может переопределять пользователь, необязательно трогать
-	protected componentDidMount(oldProps) {
+	protected componentDidMount() {
 		return true;
 	}
 
@@ -79,18 +74,20 @@ export class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	private _componentDidUpdate(oldProps, newProps) {
+	private _componentDidUpdate(oldProps: any, newProps: any) {
 		if (this.componentDidUpdate(oldProps, newProps)) {
-			this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
+			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
 	// Может переопределять пользователь, необязательно трогать
-	componentDidUpdate(oldProps, newProps) {
+	componentDidUpdate(oldProps: any, newProps: any) {
+		console.log(oldProps);
+		console.log(newProps);
 		return true;
 	}
 
-	setProps = (nextProps) => {
+	setProps = (nextProps: any) => {
 		if (!nextProps) {
 			return;
 		}
@@ -104,8 +101,9 @@ export class Block {
 	private _render() {
 		const docFrag: DocumentFragment = this.render();
 		const newElem = docFrag.firstElementChild as HTMLElement;
-		if (this._element)
+		if (this._element) {
 			this._element.replaceWith(newElem);
+		}
 		this._element = newElem;
 		this._addEvents();
 	}
@@ -122,25 +120,22 @@ export class Block {
 
 	protected compile(template: (props: any) => string, props: any) {
 		const plugsAndProps = {...props, __refs: this.refs};
-		//console.log("eeeeeee");
-		//console.log(this.refs);
 		Object.entries(this.children).forEach(([key, component]) => {
 			plugsAndProps[key] = `<div data-id = '${component.id}'></div>`;
 		});
-		
+
 		const html = template(plugsAndProps);
 		const temp = document.createElement("template");
 		temp.innerHTML = html;
-		
+
 		plugsAndProps.__children?.forEach(({embed}: any) => {
 			embed(temp.content);
-		  });
+		});
 		return temp.content;
-
 	}
 
 
-	private _makePropsProxy(props) {
+	private _makePropsProxy(props: any) {
 		// Можно и так передать this
 		// Такой способ больше не применяется с приходом ES6+
 		const self = this;
@@ -148,12 +143,12 @@ export class Block {
 			set(target, prop, val) {
 				const oldProps = {...target};
 				target[prop] = val;
-				self.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, target);
+				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
 				return true;
 			},
 			deleteProperty() {
 				throw new Error("Нет доступа");
-			},
+			}
 		});
 	}
 
@@ -162,11 +157,11 @@ export class Block {
 	}
 
 	show() {
-		this.getContent().style.display = "block";
+		(this.getContent() as HTMLElement).style.display = "block";
 	}
 
 	hide() {
-		this.getContent().style.display = "none";
+		(this.getContent() as HTMLElement).style.display = "none";
 	}
 }
 

@@ -1,5 +1,5 @@
-import type {THelperOptions} from "handlebars";
-export default function popup(this: object, options: THelperOptions): string {
+import type {HelperOptions} from "handlebars";
+export default function popup(this: object, options: HelperOptions): string {
 	return ` 
     <div class = 'popup-block-invis ${options.hash.classVisibility}'>
         <div class = 'popup-block-container'>

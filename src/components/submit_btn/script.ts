@@ -1,18 +1,25 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/submit_btn/template.hbs";
 
-
-
+interface SubmitBtnProps{
+	text: string,
+	onClick: (event: Event) => void,
+	events:{
+		click: (event: Event) => void
+	}
+}
 
 export class SubmitBtn extends Block {
-	constructor(props: Object) {
+	constructor(props: SubmitBtnProps) {
 		super({...props,
-				events: {
-					click: () => {props.onClick()}
+			events: {
+				click: (event: Event) => {
+					props.onClick(event);
 				}
-			});
+			}
+		});
 	}
-	render(){
+	render() {
 		return this.compile(template, this.props);
 	}
 }

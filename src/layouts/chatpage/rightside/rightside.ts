@@ -1,5 +1,5 @@
-import type {THelperOptions} from "handlebars";
-export default function rightside(this: object, options: THelperOptions): string {
+import type {HelperOptions} from "handlebars";
+export default function rightside(this: object, options: HelperOptions): string {
 	return `
     <div class = "right-side">
         <div class = "right-side-content">

@@ -1,0 +1,26 @@
+{{#defpage}}
+    {{#leftside}}
+        <div class = "fixed-container">
+            <div class = "fixed-block">
+                <div class = "left-top-block">
+                    <a href = "#" class = "left-block">
+                        <img class = "profile-photo" src = "{{profile_photo}}" alt = "{{profile_name}}"/>
+                        <div class = "profile-name">{{profile_name}} <span  class = "arrow">&gt;</span></div>
+                    </a>  
+                    <div class = "right-block">
+                        <a href = "/pages/community-edit/community-edit.html" class = "chat-add"></a>
+                    </div>  
+                </div>
+                {{{Search submit_url = search.submit_url}}}
+            </div>
+        </div>
+        {{{ContactList contacts = contact_list}}}
+
+  
+    {{/leftside}}
+    {{#rightside}}
+        {{{ChatInfo chatName = chat_info.chatName chatImg = chat_info.chatImg personalChat = chat_info.personalChat}}}
+        {{{Dialog dialog = dialog}}}
+        {{{SendMsgForm}}}
+    {{/rightside}}
+{{/defpage}}

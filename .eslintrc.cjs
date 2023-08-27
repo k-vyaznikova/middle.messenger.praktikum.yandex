@@ -28,21 +28,25 @@ module.exports = {
 	],
 	"rules": {
 		"require-jsdoc" : 0,
-		"max-len": [
-			"error",
-			{
-				"code": 100
-			}
-		],
+		"max-len": "off",
 		"indent": ["error", "tab"],
 		"no-tabs": [
 			"error",
-			{ 
-				allowIndentationTabs: true 
+			{
+				allowIndentationTabs: true
 			}
 		],
 		"quotes": ["error", "double"],
 		"@typescript-eslint/no-explicit-any": "off",
-		"@typescript-eslint/ban-types": "off"
+		"@typescript-eslint/ban-types": "off",
+		"@typescript-eslint/no-this-alias": "off",
+		"comma-dangle": ["error", {
+			"arrays": "never",
+			"objects": "never",
+			"imports": "never",
+			"exports": "never",
+			"functions": "never"
+		}],
+		"curly": "off"
 	}
 };

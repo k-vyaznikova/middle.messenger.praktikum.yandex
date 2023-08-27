@@ -1,9 +1,28 @@
 import {Block} from "/utils/block.ts";
-import template from "../form/template.hbs";
-import {SecondaryBtn} from "../secondary_btn/script";
+import template from "/components/form/template.hbs";
 
+interface FormProps{
+	url_submit: string,
+	title: string,
+	inputs: Array<Object>,
+	submit_btn: {
+		text: string,
+		onClick?: () => void,
+		events: {
+			click: () => void
+		}
+	},
+	secondary_btn:{
+		text: string,
+		href: string,
+		onClick?: () => void,
+		events: {
+			click: () => void
+		}
+	}
+}
 export class Form extends Block {
-	constructor(props: Object) {
+	constructor(props: FormProps) {
 		super(props);
 	}
 	render() {

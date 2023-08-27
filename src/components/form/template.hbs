@@ -2,7 +2,7 @@
         <h1>{{title}}</h1>
         <div class = "form-body" >
             {{#each inputs}}
-                {{{Input name = name label = label id=id type=type error = error onFocusout = onFocusout ref = ref}}}
+                {{{Input value = value name = name label = label id=id type=type error = error onFocusout = onFocusout onKeyup = onKeyup ref = ref validate_type = validate_type not_empty = not_empty}}}
             {{/each}}
             
         </div>

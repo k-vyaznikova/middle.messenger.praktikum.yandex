@@ -1,5 +1,7 @@
 <div class = "input-container">
-    <label for="{{id}}">{{label}}</label>
-    <input name = "{{name}}" type="{{type}}" id = "{{id}}" placeholder="{{label}}" ref = "{{ref}}"/>
+    {{#ifEq not_empty "yes"}}
+        <label for="{{id}}">{{label}}</label>
+    {{/ifEq}}    
+    <input value = "{{value}}" name = "{{name}}" type="{{type}}" id = "{{id}}" ref = "{{ref}}" data-validate = "{{validate_type}}" />
     <span class = "error">{{error}}</span>
 </div>
