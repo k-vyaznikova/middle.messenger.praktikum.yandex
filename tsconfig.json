@@ -6,7 +6,7 @@
       "dom"
      ],                                      
     "module": "commonjs",                                
-    "rootDir": "./src",             
+    "rootDir": ".",             
     "baseUrl": "./src",
     "paths": { "/*": ["./*"] },  
     "allowImportingTsExtensions": true, 

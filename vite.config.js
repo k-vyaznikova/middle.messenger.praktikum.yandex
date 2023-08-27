@@ -1,11 +1,11 @@
-import * as path from "path";
+import {resolve} from "path";
 import {defineConfig} from "vite";
-import handlebars from "vite-plugin-handlebars-precompile.js";
+import handlebars from "./vite-plugin-handlebars-precompile";
 
 export default defineConfig( {
-	root: path.resolve(path.__dirname, "src"),
+	root: resolve(__dirname, "src"),
 	build: {
-		outDir: path.resolve(path.__dirname, "build")
+		outDir: resolve(__dirname, "build")
 	},
 	server: {
 		open: "index.html"
