@@ -18,16 +18,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_email",
 						validate_type: "email,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_email;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
-
+						not_empty: "yes"
 					},
 					{
 						name: "login",
@@ -37,15 +28,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_login",
 						validate_type: "login,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_login;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					},
 					{
 						name: "first_name",
@@ -55,15 +38,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_first_name",
 						validate_type: "name,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_first_name;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					},
 					{
 						name: "second_name",
@@ -73,15 +48,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_second_name",
 						validate_type: "name,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_second_name;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					},
 					{
 						name: "password",
@@ -91,15 +58,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_password",
 						validate_type: "password,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_password;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					},
 					{
 						name: "password",
@@ -109,15 +68,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_password_conf",
 						validate_type: "password,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_password_conf;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					}
 				],
 				secondary_btn: {

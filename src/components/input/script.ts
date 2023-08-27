@@ -1,5 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/input/template.hbs";
+import {checkError} from "/utils/validate.ts";
 
 interface InputProps{
 	id: string,
@@ -23,7 +24,11 @@ export class Input extends Block {
 			...props,
 			events: {
 				focusout: () => {
-					if (props.onFocusout) props.onFocusout();
+					checkError(
+						this.getContent()?.querySelector("input")?.value,
+						(this.props.validate_type as string),
+						this
+					);
 				},
 				keyup: () => {
 					if (props.onKeyup) props.onKeyup();

@@ -21,30 +21,7 @@ export class AuthPage extends Block {
 						value: "",
 						ref: "input_login",
 						validate_type: "login,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_login;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
-						/* onKeyup: () =>{
-							const inputComponent: Input = this.refs.form.refs.input_login;
-							if (inputComponent?.getContent()?.querySelector("input").value.length === 1) {
-								inputComponent.setProps({
-									"not_empty": "yes",
-									"value": inputComponent?.getContent()?.querySelector("input").value
-								});
-							} else if (inputComponent?.getContent()?.querySelector("input").value.length === 0) {
-								inputComponent.setProps({
-									"not_empty": "",
-									"value": ""
-								});
-							}
-						}*/
-
+						not_empty: "yes"
 					},
 					{
 						name: "password",
@@ -53,16 +30,8 @@ export class AuthPage extends Block {
 						type: "password",
 						error: "",
 						ref: "input_password",
-						validate_type: "login,not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_password;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						validate_type: "password,not-empty",
+						not_empty: "yes"
 					}
 				],
 				secondary_btn: {

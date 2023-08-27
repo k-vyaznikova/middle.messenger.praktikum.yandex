@@ -24,15 +24,7 @@ export class PassEditPage extends Block {
 						editMode: "yes",
 						ref: "input_password_old",
 						validate_type: "not-empty",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_password_old;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					},
 					{
 						infoLabel: "Новый пароль",
@@ -42,15 +34,7 @@ export class PassEditPage extends Block {
 						editMode: "yes",
 						ref: "input_password_1",
 						validate_type: "not-empty,password",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_password_1;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					},
 					{
 						infoLabel: "Повторите новый пароль",
@@ -60,15 +44,7 @@ export class PassEditPage extends Block {
 						editMode: "yes",
 						ref: "input_password_2",
 						validate_type: "not-empty,password",
-						not_empty: "yes",
-						onFocusout: () => {
-							const inputComponent: Input = this.refs.form.refs.input_password_2;
-							checkError(
-								inputComponent?.getContent()?.querySelector("input")?.value,
-								(inputComponent?.props.validate_type as string),
-								inputComponent
-							);
-						}
+						not_empty: "yes"
 					}
 
 				],
