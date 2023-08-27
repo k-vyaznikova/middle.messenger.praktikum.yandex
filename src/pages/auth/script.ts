@@ -1,5 +1,4 @@
 import {Block} from "/utils/block.ts";
-import {Input} from "/components/input/script.ts";
 import template from "/pages/auth/auth.hbs";
 import {renderPage} from "/utils/render_page.ts";
 import {checkError} from "/utils/validate.ts";
