@@ -20,6 +20,7 @@ import {ProfileForm} from "/components/profile_form/script.ts";
 import {CommunityProfile} from "/components/community_profile/script.ts";
 import {MemberShortInfo} from "/components/member_short_info/script.ts";
 import {MemberList} from "/components/member_list/script.ts";
+import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
 
 import {renderPage} from "/utils/render_page.ts";
 
@@ -52,6 +53,7 @@ registerComponent("ProfileForm", ProfileForm);
 registerComponent("CommunityProfile", CommunityProfile);
 registerComponent("MemberList", MemberList);
 registerComponent("MemberShortInfo", MemberShortInfo);
+registerComponent("SendMsgBtn", SendMsgBtn);
 
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);

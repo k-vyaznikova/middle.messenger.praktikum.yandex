@@ -1,5 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/community-edit/community-edit.hbs";
+import img from "/img/noimgprofile.svg";
+
 export class CommunityEditPage extends Block {
 	constructor() {
 		super({
@@ -7,7 +9,7 @@ export class CommunityEditPage extends Block {
 			submit_url: "#",
 			edit_mode: "yes",
 			profile_photo: {
-				profilePhoto: "/img/noimgprofile.svg",
+				profilePhoto: img,
 				profileAlt: "Иван"
 			},
 			profile_items: [
@@ -30,37 +32,37 @@ export class CommunityEditPage extends Block {
 			member_list: [
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Иванова Юлия"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Фива Лев"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Пивоваров Олег"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Иванова Юлия"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Фива Лев"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Пивоваров Олег"
 				}

@@ -1,6 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/incoming_msg/template.hbs";
 
+
 interface IncomingMsgProps{
 	msgText: string,
 	msgTime: string,

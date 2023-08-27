@@ -1,5 +1,8 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
+import chatImg from "/img/noimgprofile.svg";
+import img from "/img/photo.jpg";
+
 export class ChatPage extends Block {
 	constructor() {
 		super({
@@ -13,7 +16,7 @@ export class ChatPage extends Block {
 				{
 					contactSelected: "yes",
 					contactDialogLink: "#",
-					contactImg: "/img/noimgprofile.svg",
+					contactImg: chatImg,
 					contactName: "Иван Иванов",
 					yourMsg: "yes",
 					contactMsg: "Позвони мне в 9",
@@ -22,7 +25,7 @@ export class ChatPage extends Block {
 				},
 				{
 					contactDialogLink: "#",
-					contactImg: "/img/noimgprofile.svg",
+					contactImg: chatImg,
 					contactName: "Петр Петров",
 					yourMsg: "yes",
 					contactMsg: "Позвони мне в 9",
@@ -31,7 +34,7 @@ export class ChatPage extends Block {
 				},
 				{
 					contactDialogLink: "#",
-					contactImg: "/img/noimgprofile.svg",
+					contactImg: chatImg,
 					contactName: "Иван Иванов",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
@@ -39,7 +42,7 @@ export class ChatPage extends Block {
 				},
 				{
 					contactDialogLink: "#",
-					contactImg: "/img/noimgprofile.svg",
+					contactImg: chatImg,
 					contactName: "Иван Иванов",
 					yourMsg: "yes",
 					contactMsg: "Позвони мне в 9",
@@ -48,7 +51,7 @@ export class ChatPage extends Block {
 				},
 				{
 					contactDialogLink: "#",
-					contactImg: "/img/noimgprofile.svg",
+					contactImg: chatImg,
 					contactName: "Иван Иванов",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
@@ -58,7 +61,7 @@ export class ChatPage extends Block {
 			],
 			chat_info: {
 				chatName: "Вадим",
-				chatImg: "/img/noimgprofile.svg",
+				chatImg: chatImg,
 				personalChat: "yes"
 			},
 			dialog: [
@@ -69,7 +72,7 @@ export class ChatPage extends Block {
 							type: "to",
 							msgText: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",
 							msgTime: "20:00",
-							msgImg: "/img/photo.jpg"
+							msgImg: img
 						},
 						{
 							type: "to",

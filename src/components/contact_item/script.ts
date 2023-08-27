@@ -1,6 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/contact_item/template.hbs";
 
+
 interface ContactItemProps{
 	contactSelected?: string,
 	contactLinkDialog: string,

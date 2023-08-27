@@ -3,3 +3,11 @@ declare module "*.hbs"{
     const template: TemplateDelegate;
     export default template;
 }
+declare module "*.svg"{
+    const content: string;
+    export default content;
+}
+declare module "*.jpg"{
+    const content: string;
+    export default content;
+}

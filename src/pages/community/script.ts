@@ -1,12 +1,14 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/community/community.hbs";
+import img from "/img/noimgprofile.svg";
+
 export class CommunityPage extends Block {
 	constructor() {
 		super({
 			title: "Иван",
 			submit_url: "#",
 			profile_photo: {
-				profilePhoto: "/img/noimgprofile.svg",
+				profilePhoto: img,
 				profileAlt: "Иван"
 			},
 			profile_items: [
@@ -18,37 +20,37 @@ export class CommunityPage extends Block {
 			member_list: [
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Иванова Юлия"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Фива Лев"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Пивоваров Олег"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Иванова Юлия"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Фива Лев"
 				},
 				{
 					memberLink: "#",
-					memberPhoto: "/img/noimgprofile.svg",
+					memberPhoto: img,
 					memberLogin: "ivanova",
 					memberName: "Пивоваров Олег"
 				}

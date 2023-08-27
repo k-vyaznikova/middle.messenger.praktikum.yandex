@@ -1,5 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile/profile.hbs";
+import img from "/img/noimgprofile.svg";
 export class ProfilePage extends Block {
 	constructor() {
 		super({
@@ -10,7 +11,7 @@ export class ProfilePage extends Block {
 			edit_password_link: "#",
 			exit_link: "#",
 			profile_photo: {
-				profilePhoto: "/img/noimgprofile.svg",
+				profilePhoto: img,
 				profileAlt: "Иван"
 			},
 			profile_items: [

@@ -28,7 +28,7 @@ module.exports = {
 		"@typescript-eslint"
 	],
 	"rules": {
-		"require-jsdoc" : 0,
+		"require-jsdoc": 0,
 		"max-len": "off",
 		"indent": ["error", "tab"],
 		"no-tabs": [
