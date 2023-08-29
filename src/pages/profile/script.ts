@@ -17,37 +17,37 @@ export class ProfilePage extends Block {
 			profile_items: [
 				{
 					infoLabel: "Почта",
-					infoValue: "pochta@yandex.ru",
+					value: "pochta@yandex.ru",
 					infoName: "email",
 					infoType: "text"
 				},
 				{
 					infoLabel: "Логин",
-					infoValue: "ivanivanov",
+					value: "ivanivanov",
 					infoName: "login",
 					infoType: "text"
 				},
 				{
 					infoLabel: "Имя",
-					infoValue: "Иван",
+					value: "Иван",
 					infoName: "first_name",
 					infoType: "text"
 				},
 				{
 					infoLabel: "Фамилия",
-					infoValue: "Иванов",
+					value: "Иванов",
 					infoName: "second_name",
 					infoType: "text"
 				},
 				{
 					infoLabel: "Имя в чате",
-					infoValue: "ivanivanov",
+					value: "ivanivanov",
 					infoName: "display_name",
 					infoType: "text"
 				},
 				{
 					infoLabel: "Телефон",
-					infoValue: "+7 (909)-606-66-66",
+					value: "+7 (909)-606-66-66",
 					infoName: "phone",
 					infoType: "phone"
 				}
