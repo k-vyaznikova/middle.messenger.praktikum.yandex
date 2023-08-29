@@ -26,7 +26,6 @@ export function renderPage(namePage: string ) {
 		root.innerHTML = "";
 		const page = new PAGES[namePage]();
 		root.append(page.getContent() as HTMLElement);
-		console.log(page.children);
 		page.dispatchComponentDidMount();
 	}
 }

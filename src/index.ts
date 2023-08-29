@@ -26,6 +26,7 @@ import {SendMsgForm} from "/components/send_msg_form/script.ts";
 import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
 import {CommunityAddLink} from "/components/community_add_link/script.ts";
 import {BackLink} from "/components/back_link/script.ts";
+import {Error} from "/components/error/script.ts";
 
 import {renderPage} from "/utils/render_page.ts";
 
@@ -64,18 +65,19 @@ registerComponent("SendMsgText", SendMsgText);
 registerComponent("ProfilePersonalLink", ProfilePersonalLink);
 registerComponent("CommunityAddLink", CommunityAddLink);
 registerComponent("BackLink", BackLink);
-
+registerComponent("Error", Error);
 
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);
 Handlebars.registerHelper("leftside", leftside);
 Handlebars.registerHelper("rightside", rightside);
+
 Handlebars.registerHelper("defpage", defpage);
 Handlebars.registerHelper("popup", popup);
 Handlebars.registerHelper("profpage", profpage);
 Handlebars.registerHelper("ifEq", ifEq);
 
 window.addEventListener("DOMContentLoaded", () => {
-	renderPage("chat");
+	renderPage("auth");
 });
 

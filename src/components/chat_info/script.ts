@@ -16,7 +16,7 @@ export class ChatInfo extends Block {
 	/* componentDidMount(){
 		console.log("123213");
 		return true;
-	}	*/
+	}*/
 }
 
 

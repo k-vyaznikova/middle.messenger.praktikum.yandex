@@ -11,18 +11,18 @@ export class ContactList extends Block {
 	constructor(props: ContactListProps) {
 		super({
 			...props,
-			contacts: props.contacts.map(function(item){
+			contacts: props.contacts.map(function(item) {
 				return {
 					...item,
-					onClick: function(){
-						//console.log(self_);
-					}	
-				}
+					onClick: function() {
+						// console.log(self_);
+					}
+				};
 			})
 		});
-		//console.log(this);
+		// console.log(this);
 	}
-	componentDidUpdate(): boolean{
+	componentDidUpdate(): boolean {
 		console.log("componentDidMount");
 		return true;
 	}

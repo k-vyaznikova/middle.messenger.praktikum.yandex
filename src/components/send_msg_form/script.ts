@@ -34,7 +34,7 @@ export class SendMsgForm extends Block {
 				let res: boolean = true;
 				Object.keys(this.refs).forEach((key) => {
 					const resultValid: ResultValidate = validate(
-						this.refs[key]?.getContent()?.querySelector("input, textarea")?.value,
+						(this.refs[key]?.getContent()?.querySelector("input, textarea") as HTMLInputElement).value,
 						(this.refs[key]?.props.validate_type as string)
 					);
 					if (!resultValid.is_ok && res)

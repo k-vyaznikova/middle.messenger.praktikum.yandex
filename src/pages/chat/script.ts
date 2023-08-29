@@ -1,6 +1,5 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
-import {renderPage} from "/utils/render_page.ts";
 import chatImg from "/img/noimgprofile.svg";
 import img from "/img/photo.jpg";
 

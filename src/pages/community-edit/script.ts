@@ -1,8 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/community-edit/community-edit.hbs";
 import img from "/img/noimgprofile.svg";
-import {checkError} from "/utils/validate";
-import {getFormData} from "/utils/get_form_data";
 
 export class CommunityEditPage extends Block {
 	constructor() {

@@ -61,21 +61,20 @@ export class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	private _componentDidMount(): void{
+	private _componentDidMount(): void {
 		this.componentDidMount();
-		Object.values(this.children).forEach(child => {
-            child.dispatchComponentDidMount();
-        });
+		Object.values(this.children).forEach((child) => {
+			child.dispatchComponentDidMount();
+		});
 	}
 
 	// Может переопределять пользователь, необязательно трогать
-	protected componentDidMount(): boolean{
+	protected componentDidMount(): boolean {
 		return true;
 	}
 
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-		
 	}
 
 	private _componentDidUpdate(oldProps: any, newProps: any) {
@@ -86,8 +85,8 @@ export class Block {
 
 	// Может переопределять пользователь, необязательно трогать
 	componentDidUpdate(oldProps: any, newProps: any) {
-		// console.log(oldProps);
-		// console.log(newProps);
+		console.log(oldProps);
+		console.log(newProps);
 		return true;
 	}
 
@@ -110,6 +109,7 @@ export class Block {
 		}
 		this._element = newElem;
 		this._addEvents();
+		//dispatchComponentDidMount();
 	}
 
 	// Может переопределять пользователь, необязательно трогать
