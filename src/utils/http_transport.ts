@@ -1,13 +1,5 @@
-enum METHOD {
-    GET = "GET",
-    POST = "POST",
-    PUT = "PUT",
-    PATCH = "PATCH",
-    DELETE = "DELETE"
-}
-
 type Options = {
-method: METHOD;
+method: string;
 data?: any;
 };
 
@@ -19,16 +11,16 @@ type OptionsWithoutMethod = Omit<Options, "method">;
 
 export class HTTPTransport {
 	get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, {...options, method: METHOD.GET});
+		return this.request(url, {...options, method: "GET"});
 	}
 	post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, {...options, method: METHOD.POST});
+		return this.request(url, {...options, method: "POST"});
 	}
 	put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, {...options, method: METHOD.PUT});
+		return this.request(url, {...options, method: "PUT"});
 	}
 	delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-		return this.request(url, {...options, method: METHOD.DELETE});
+		return this.request(url, {...options, method: "DELETE"});
 	}
 
 	request(url: string, options: Options = {method: METHOD.GET}): Promise<XMLHttpRequest> {
