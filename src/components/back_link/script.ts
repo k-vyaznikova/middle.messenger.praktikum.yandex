@@ -12,7 +12,7 @@ export class BackLink extends Block {
 	constructor(props: BackLinkProps) {
 		super({
 			...props,
-			events:{
+			events: {
 				click: (event: Event) => {
 					event.preventDefault();
 					renderPage("chat");

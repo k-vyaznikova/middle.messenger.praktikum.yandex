@@ -17,7 +17,7 @@ export class ProfilePersonalLink extends Block {
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
-					renderPage("profile");
+					renderPage("profile-edits");
 				}
 			}
 		});

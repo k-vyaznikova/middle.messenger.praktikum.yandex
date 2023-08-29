@@ -40,6 +40,7 @@
     justify-content: start;
     margin-bottom: 30px;
     border-bottom: none;
+
     label{
         width: 100%;
         text-align: left;
@@ -81,6 +82,7 @@
         }
     }
 }
+
 .error{
     color: $err-text;
     font-size: 9px;

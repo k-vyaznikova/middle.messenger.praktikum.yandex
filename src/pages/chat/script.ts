@@ -9,7 +9,7 @@ export class ChatPage extends Block {
 		super({
 			profile_name: "Вязникова Кристина",
 			profile_photo: "/img/noimgprofile.svg",
-			profile_personal_link:{
+			profile_personal_link: {
 				profile_img: chatImg,
 				profile_name: "Вязникова Кристина"
 			},
@@ -25,7 +25,8 @@ export class ChatPage extends Block {
 					yourMsg: "yes",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
-					contactQMsg: "3"
+					contactQMsg: "3",
+					ref: "contact_1"
 				},
 				{
 					contactDialogLink: "#",
@@ -34,7 +35,8 @@ export class ChatPage extends Block {
 					yourMsg: "yes",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
-					contactQMsg: "5"
+					contactQMsg: "5",
+					ref: "contact_2"
 				},
 				{
 					contactDialogLink: "#",
@@ -42,7 +44,8 @@ export class ChatPage extends Block {
 					contactName: "Иван Иванов",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
-					contactQMsg: "5"
+					contactQMsg: "5",
+					ref: "contact_3"
 				},
 				{
 					contactDialogLink: "#",
@@ -51,7 +54,8 @@ export class ChatPage extends Block {
 					yourMsg: "yes",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
-					contactQMsg: "5"
+					contactQMsg: "5",
+					ref: "contact_4"
 				},
 				{
 					contactDialogLink: "#",
@@ -59,7 +63,8 @@ export class ChatPage extends Block {
 					contactName: "Иван Иванов",
 					contactMsg: "Позвони мне в 9",
 					contactTimeMsg: "23:04",
-					contactQMsg: "5"
+					contactQMsg: "5",
+					ref: "contact_5"
 				}
 
 			],
