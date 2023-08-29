@@ -27,6 +27,7 @@ import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
 import {CommunityAddLink} from "/components/community_add_link/script.ts";
 import {BackLink} from "/components/back_link/script.ts";
 import {Error} from "/components/error/script.ts";
+import {Link} from "/components/link/script.ts";
 
 import {renderPage} from "/utils/render_page.ts";
 
@@ -66,6 +67,7 @@ registerComponent("ProfilePersonalLink", ProfilePersonalLink);
 registerComponent("CommunityAddLink", CommunityAddLink);
 registerComponent("BackLink", BackLink);
 registerComponent("Error", Error);
+registerComponent("Link", Link);
 
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);
@@ -78,6 +80,6 @@ Handlebars.registerHelper("profpage", profpage);
 Handlebars.registerHelper("ifEq", ifEq);
 
 window.addEventListener("DOMContentLoaded", () => {
-	renderPage("auth");
+	renderPage("main");
 });
 

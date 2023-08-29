@@ -8,6 +8,7 @@ import {ProfilePage} from "/pages/profile/script.ts";
 import {ErrorPage} from "/pages/error/script.ts";
 import {PassEditPage} from "/pages/password-edit/script.ts";
 import {ProfileEditPage} from "/pages/profile-edit/script.ts";
+import {MainPage} from "/pages/main/script.ts";
 
 const PAGES: Record<string, typeof Block> = {
 	"auth": AuthPage,
@@ -18,7 +19,8 @@ const PAGES: Record<string, typeof Block> = {
 	"profile": ProfilePage,
 	"error": ErrorPage,
 	"pass_edit": PassEditPage,
-	"profile_edit": ProfileEditPage
+	"profile_edit": ProfileEditPage,
+	"main": MainPage
 };
 export function renderPage(namePage: string ) {
 	const root: HTMLElement | null = document.querySelector("#app");

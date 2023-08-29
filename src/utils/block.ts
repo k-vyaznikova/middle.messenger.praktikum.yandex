@@ -50,6 +50,15 @@ export class Block {
 		});
 	}
 
+	private _removeEvents() {
+		const {events = {}} = this.props as {events: Record<string, () => void>};
+		if (this._element) {
+			Object.keys(events).forEach((eventName) => {
+				(this._element as HTMLElement).removeEventListener(eventName, events[eventName]);
+			});
+		}
+	}
+
 	private _registerEvents(eventBus: EventBus) {
 		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -103,6 +112,7 @@ export class Block {
 
 	private _render() {
 		const docFrag: DocumentFragment = this.render();
+		this._removeEvents();
 		const newElem = docFrag.firstElementChild as HTMLElement;
 		if (this._element) {
 			this._element.replaceWith(newElem);
