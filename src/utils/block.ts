@@ -109,7 +109,6 @@ export class Block {
 		}
 		this._element = newElem;
 		this._addEvents();
-		//dispatchComponentDidMount();
 	}
 
 	// Может переопределять пользователь, необязательно трогать
