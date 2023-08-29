@@ -82,8 +82,8 @@ export class Block {
 
 	// Может переопределять пользователь, необязательно трогать
 	componentDidUpdate(oldProps: any, newProps: any) {
-		console.log(oldProps);
-		console.log(newProps);
+		//console.log(oldProps);
+		//console.log(newProps);
 		return true;
 	}
 

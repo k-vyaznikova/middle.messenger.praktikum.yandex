@@ -13,6 +13,10 @@ export class ChatInfo extends Block {
 	render() {
 		return this.compile(template, this.props);
 	}
+	/*componentDidMount(){
+		console.log("123213");
+		return true;
+	}	*/
 }
 
 

@@ -13,7 +13,6 @@ import {DateMsg} from "/components/date_msg/script.ts";
 import {IncomingMsg} from "/components/incoming_msg/script.ts";
 import {OutgoingMsg} from "/components/outgoing_msg/script.ts";
 import {Dialog} from "/components/dialog/script.ts";
-import {SendMsgForm} from "/components/send_msg_form/script.ts";
 import {ProfilePhoto} from "/components/profile_photo/script.ts";
 import {ProfileItem} from "/components/profile_item/script.ts";
 import {ProfileForm} from "/components/profile_form/script.ts";
@@ -21,6 +20,12 @@ import {CommunityProfile} from "/components/community_profile/script.ts";
 import {MemberShortInfo} from "/components/member_short_info/script.ts";
 import {MemberList} from "/components/member_list/script.ts";
 import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
+import {SendMsgText} from "/components/send_msg_text/script.ts";
+import {SendMsgFile} from "/components/send_msg_file/script.ts";
+import {SendMsgForm} from "/components/send_msg_form/script.ts";
+import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
+import {CommunityAddLink} from "/components/community_add_link/script.ts";
+import {BackLink} from "/components/back_link/script.ts";
 
 import {renderPage} from "/utils/render_page.ts";
 
@@ -54,6 +59,12 @@ registerComponent("CommunityProfile", CommunityProfile);
 registerComponent("MemberList", MemberList);
 registerComponent("MemberShortInfo", MemberShortInfo);
 registerComponent("SendMsgBtn", SendMsgBtn);
+registerComponent("SendMsgFile", SendMsgFile);
+registerComponent("SendMsgText", SendMsgText);
+registerComponent("ProfilePersonalLink", ProfilePersonalLink);
+registerComponent("CommunityAddLink", CommunityAddLink);
+registerComponent("BackLink", BackLink);
+
 
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);

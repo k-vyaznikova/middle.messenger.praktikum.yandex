@@ -7,13 +7,13 @@
         <div class = "profile-header">{{title}}</div>
         <div class = "profile-body password-edit">
             {{#each profile_items}}
-                {{{ProfileItem infoLabel = infoLabel infoValue = infoValue infoName = infoName infoType = infoType editMode = editMode}}}
+                {{{ProfileItem infoLabel = infoLabel value = value infoName = infoName infoType = infoType editMode = editMode ref = ref validate_type = validate_type}}}
             {{/each}}
         </div>
        
             {{#if edit_mode}}
                 <div class = "profile-footer form-footer">
-                {{{SubmitBtn text = submit_btn.text}}}
+                {{{SubmitBtn text = submit_btn.text onClick = submit_btn.onClick}}}
                 </div>
             {{/if}}    
             {{#if footer_links}}

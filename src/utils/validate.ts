@@ -13,10 +13,8 @@ export function validate(value: string, typeString: string) : ResultValidate {
 	if (!typeString) {
 		return resultOk;
 	}
-
 	const types: Array<string> = typeString.split(",").map((type)=> type.trim());
 	if (types.includes("not-empty")) {
-		// format = /^[\s]{0,}$/;
 		if (value === "") {
 			return {
 				is_ok: false,
@@ -80,7 +78,6 @@ export function validate(value: string, typeString: string) : ResultValidate {
 
 export function checkError(value: string | undefined, typeString: string, component: Block): boolean {
 	const result: ResultValidate = validate(value as string, typeString as string);
-	console.log(result);
 	if (!result.is_ok) {
 		component.setProps({
 			error: result.msg_text,

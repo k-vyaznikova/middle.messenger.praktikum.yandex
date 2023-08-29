@@ -10,13 +10,10 @@ interface SendMsgBtnProps{
 
 export class SendMsgBtn extends Block {
 	constructor(props: SendMsgBtnProps) {
-		console.log(props);
 		super({
 			...props,
 			events: {
 				click: (event: Event) => {
-					console.log(213223);
-					console.log(event);
 					props.onClick(event);
 				}
 			}

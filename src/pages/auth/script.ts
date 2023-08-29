@@ -50,7 +50,7 @@ export class AuthPage extends Block {
 								this.refs.form.refs[key]?.getContent()?.querySelector("input")?.value,
 								(this.refs.form.refs[key]?.props.validate_type as string),
 								this.refs.form.refs[key]
-							))
+							) && resultValid)
 								resultValid = false;
 						});
 						if (resultValid) {

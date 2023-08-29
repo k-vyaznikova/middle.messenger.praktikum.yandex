@@ -1,5 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
+import {renderPage} from "/utils/render_page.ts";
 import chatImg from "/img/noimgprofile.svg";
 import img from "/img/photo.jpg";
 
@@ -8,10 +9,13 @@ export class ChatPage extends Block {
 		super({
 			profile_name: "Вязникова Кристина",
 			profile_photo: "/img/noimgprofile.svg",
+			profile_personal_link:{
+				profile_img: chatImg,
+				profile_name: "Вязникова Кристина"
+			},
 			search: {
 				submit_url: "###"
 			},
-			// openProfile: () => {renderPage("profile")}
 			contact_list: [
 				{
 					contactSelected: "yes",
@@ -109,7 +113,21 @@ export class ChatPage extends Block {
 						}
 					]
 				}
-			]
+			],
+			send_msg_form: {
+				ref: "send_message_form",
+				send_msg_text: {
+					name: "send_message_text",
+					ref: "send_message_text",
+					validate_type: "not-empty",
+					value: ""
+				},
+				send_msg_file: {
+					name: "send_message_file",
+					ref: "send_message_file",
+					value: ""
+				}
+			}
 
 		});
 	}

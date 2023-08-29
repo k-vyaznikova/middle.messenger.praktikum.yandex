@@ -30,6 +30,8 @@
         font-size: 13px;
         width: 70%;
     }
+
+    
 }
 
 .profile-item.textarea{
@@ -37,11 +39,12 @@
     flex-direction: column;
     justify-content: start;
     margin-bottom: 30px;
-
+    border-bottom: none;
     label{
         width: 100%;
         text-align: left;
         font-weight: 500;
+        margin-bottom: 10px;
     }
 
     .profile-text{
@@ -59,7 +62,7 @@
         text-align: left;
         padding: 0; 
         color: $grey;
-        height: 20px;
+        height: 100px;
         overflow: hidden;
     }
 }
@@ -77,6 +80,13 @@
             margin-bottom: 15px; 
         }
     }
+}
+.error{
+    color: $err-text;
+    font-size: 9px;
+    display: block;
+    text-align: left;
+    padding: 5px 0;
 }
 
 

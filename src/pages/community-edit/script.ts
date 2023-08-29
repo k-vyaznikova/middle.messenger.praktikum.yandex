@@ -1,6 +1,8 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/community-edit/community-edit.hbs";
 import img from "/img/noimgprofile.svg";
+import {checkError} from "/utils/validate";
+import {getFormData} from "/utils/get_form_data";
 
 export class CommunityEditPage extends Block {
 	constructor() {
@@ -8,6 +10,7 @@ export class CommunityEditPage extends Block {
 			title: "Иван",
 			submit_url: "#",
 			edit_mode: "yes",
+			ref: "form",
 			profile_photo: {
 				profilePhoto: img,
 				profileAlt: "Иван"
@@ -18,7 +21,9 @@ export class CommunityEditPage extends Block {
 					editMode: "yes",
 					infoType: "text",
 					infoName: "name",
-					infoValue: "Соседи"
+					value: "Соседи",
+					validate_type: "not-empty",
+					ref: "input_name"
 				},
 				{
 					infoLabel: "Краткое описание чата",
@@ -26,47 +31,10 @@ export class CommunityEditPage extends Block {
 					infoPlaceholder: "Коротко расскажите об этом чате...",
 					infoType: "textarea",
 					infoName: "description",
-					infoValue: "Соо. бщество неравнодушных соседей МКР Цветы. Все ваши соседи общаются здесь. Нас уже 11 000 000. Начать беслатно. Соседи — социальная сеть жильцов для общения и решения бытовых вопросов. Нас топит 16 этаж. Антон К. ... Вы можете написать любому соседу в вашем доме, просто зная его номер квартиры. 2 кв. Артём."
+					value: "Соо. бщество неравнодушных соседей МКР Цветы. Все ваши соседи общаются здесь. Нас уже 11 000 000. Начать беслатно. Соседи — социальная сеть жильцов для общения и решения бытовых вопросов. Нас топит 16 этаж. Антон К. ... Вы можете написать любому соседу в вашем доме, просто зная его номер квартиры. 2 кв. Артём.",
+					validate_type: "",
+					ref: "textarea_description"
 				}
-			],
-			member_list: [
-				{
-					memberLink: "#",
-					memberPhoto: img,
-					memberLogin: "ivanova",
-					memberName: "Иванова Юлия"
-				},
-				{
-					memberLink: "#",
-					memberPhoto: img,
-					memberLogin: "ivanova",
-					memberName: "Фива Лев"
-				},
-				{
-					memberLink: "#",
-					memberPhoto: img,
-					memberLogin: "ivanova",
-					memberName: "Пивоваров Олег"
-				},
-				{
-					memberLink: "#",
-					memberPhoto: img,
-					memberLogin: "ivanova",
-					memberName: "Иванова Юлия"
-				},
-				{
-					memberLink: "#",
-					memberPhoto: img,
-					memberLogin: "ivanova",
-					memberName: "Фива Лев"
-				},
-				{
-					memberLink: "#",
-					memberPhoto: img,
-					memberLogin: "ivanova",
-					memberName: "Пивоваров Олег"
-				}
-
 			]
 		});
 	}
