@@ -78,6 +78,8 @@ export function validate(value: string, typeString: string) : ResultValidate {
 
 export function checkError(value: string | undefined, typeString: string, component: Block): boolean {
 	const result: ResultValidate = validate(value as string, typeString as string);
+	console.log(value);
+	console.log(typeString);
 	if (!result.is_ok) {
 		component.setProps({
 			error: result.msg_text,

@@ -5,8 +5,8 @@ export function getFormData(form: Block) {
 		const field: HTMLInputElement = form.refs[key]?.getContent()?.querySelector("input, textarea") as HTMLInputElement;
 		const name: string = field?.name;
 		const value: string = field?.value;
+		console.log(name+" --- "+value);
 		formData[name] = value;
 	});
-	console.log(formData);
 	return true;
 }

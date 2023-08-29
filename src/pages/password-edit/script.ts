@@ -3,6 +3,7 @@ import template from "/pages/password-edit/password-edit.hbs";
 import {renderPage} from "/utils/render_page.ts";
 import {checkError} from "/utils/validate.js";
 import {getFormData} from "/utils/get_form_data.js";
+import img from "/img/noimgprofile.svg";
 
 export class PassEditPage extends Block {
 	constructor() {
@@ -10,8 +11,10 @@ export class PassEditPage extends Block {
 			{
 				title: "Изменение пароля",
 				submit_url: "#",
+				edit_mode: "yes",
+				ref: "form",
 				profile_photo: {
-					profilePhoto: "/img/noimgprofile.svg",
+					profilePhoto: img,
 					profileAlt: "Иван"
 				},
 				profile_items: [

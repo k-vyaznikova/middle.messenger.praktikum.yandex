@@ -86,16 +86,16 @@ export class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	private _componentDidUpdate(oldProps: any, newProps: any) {
-		if (this.componentDidUpdate(oldProps, newProps)) {
+	// private _componentDidUpdate(oldProps: any, newProps: any) {
+	private _componentDidUpdate() {
+		if (this.componentDidUpdate()) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
 	// Может переопределять пользователь, необязательно трогать
-	componentDidUpdate(oldProps: any, newProps: any) {
-		console.log(oldProps);
-		console.log(newProps);
+	// componentDidUpdate(oldProps: any, newProps: any) {
+	componentDidUpdate() {
 		return true;
 	}
 

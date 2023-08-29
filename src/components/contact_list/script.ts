@@ -15,15 +15,12 @@ export class ContactList extends Block {
 				return {
 					...item,
 					onClick: function() {
-						// console.log(self_);
 					}
 				};
 			})
 		});
-		// console.log(this);
 	}
 	componentDidUpdate(): boolean {
-		console.log("componentDidMount");
 		return true;
 	}
 

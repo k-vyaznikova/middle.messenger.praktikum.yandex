@@ -26,11 +26,9 @@ export class ContactItem extends Block {
 				click: (event: Event) =>{
 					event.preventDefault();
 					props.onClick(event);
-					// console.log(this.refs);
 				}
 			}
 		});
-		// console.log(this);
 	}
 	render() {
 		return this.compile(template, this.props);
