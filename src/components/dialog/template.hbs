@@ -1,0 +1,14 @@
+<div class = "dialog-block">
+    <div class = "dialog">
+        {{#each dialog}}
+            {{{DateMsg date = date}}}
+             {{#each messages}}
+                {{#ifEq type "to"}}
+                    {{{IncomingMsg msgText=msgText msgTime = msgTime msgImg = msgImg}}}
+                {{else}}
+                    {{{OutgoingMsg msgText=msgText msgTime = msgTime msgImg = msgImg msgStatus = msgStatus}}}
+                {{/ifEq}}
+             {{/each}}
+        {{/each}}
+    </div>
+</div>

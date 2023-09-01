@@ -1,38 +1,45 @@
-@import "/styles/vars.scss";
+@import "/styles/vars";
 
 
 .input-container {
-    padding: 5px 0;
+    padding: 5px 0 20px;
+
+    &:last-child{
+        padding-bottom:5px;
+    }
 
     input[type="text"],
     input[type="password"] {
-        border: 0px;
+        border: 0;
         border-bottom: 1px solid $base-color;
         width: 100%;
-        padding: 3px 0px;
+        padding: 3px 0;
         box-sizing: border-box;
     }
 
     label {
-        opacity: 0;
         font-size: 10px;
         display: block;
         text-align: left;
+
         &.visible{
             opacity: 1;
         }
+
         color: $grey;
     }
+
     .error{
         color: $err-text;
         font-size: 9px;
         display: block;
         text-align: left;
         padding: 5px 0;
-        opacity: 0;
+
         &.visible{
             opacity: 1;
         }
     }
     
 }
+

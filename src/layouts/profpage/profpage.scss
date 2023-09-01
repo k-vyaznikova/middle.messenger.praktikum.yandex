@@ -1,4 +1,5 @@
-@import "/styles/vars.scss";
+@import "/styles/vars";
+
 .container{
     height:auto;
     align-items: center;
@@ -6,6 +7,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+
     .container-inner{
         width: 50%;
         max-width: 800px;
@@ -30,7 +32,7 @@
     left:0;
     top: 0;
     bottom: 0;
-    background: url(/img/back-link.svg) center center no-repeat $light-grey-bckg1;
+    background: url("/img/back-link.svg") center center no-repeat $light-grey-bckg1;
     
     
 }

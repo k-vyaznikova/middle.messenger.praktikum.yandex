@@ -1,5 +1,5 @@
-<form url = "#" class = "search-form">
-    <input name = "search" type="text" value="" class = "empty-search search-input {{#if leftAlign}}left-align{{/if}}" {{#if placeholder}} placeholder = "{{placeholder}}"{{/if}}/>
+<form url = "{{submit_url}}" class = "search-form">
+    <input name = "search" type="text" value="" class = "{{#if not_focused}}empty-search{{/if}} search-input {{#if left_align}}left-align{{/if}}" {{#if placeholder}} placeholder = "{{placeholder}}"{{/if}}/>
     {{#if addItems}}
         <div class = "add-items">
             <div class = "item">ivanova <div class = "cancel"></div></div>

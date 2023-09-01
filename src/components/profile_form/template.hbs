@@ -1,0 +1,30 @@
+    {{#if edit_mode}}
+        <form  action = "{{submit_url}}" class = "profile-form">
+    {{else}}
+        <div  class = "profile-form">
+    {{/if}}    
+        {{{ProfilePhoto profilePhoto = profile_photo.profilePhoto profileAlt = profile_photo.profileAlt}}}
+        <div class = "profile-header">{{title}}</div>
+        <div class = "profile-body password-edit">
+            {{#each profile_items}}
+                {{{ProfileItem infoLabel = infoLabel value = value infoName = infoName infoType = infoType editMode = editMode ref = ref validate_type = validate_type}}}
+            {{/each}}
+        </div>
+       
+            {{#if edit_mode}}
+                <div class = "profile-footer form-footer">
+                {{{SubmitBtn text = submit_btn.text onClick = submit_btn.onClick}}}
+                </div>
+            {{/if}}    
+            {{#if footer_links}}
+                <div class = "profile-footer">
+                    <div class = "action-link"><a href = "{{profile_edit_link}}">Изменить данные</a></div>
+                    <div class = "action-link"><a href = "{{password_edit_link}}">Изменить профиль</a></div>
+                    <div class = "action-link"><a href = "{{exit_link}}" class = "exit">Выйти</a></div>
+                </div>
+            {{/if}}  
+    {{#if edit_mode}}             
+        </form>
+    {{else}}
+        </div>
+    {{/if}}        

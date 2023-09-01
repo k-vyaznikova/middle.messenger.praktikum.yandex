@@ -1,0 +1,14 @@
+@import "/styles/vars";
+
+
+
+input.cta-btn[type="submit"]{
+    width: 100%;
+    padding: 10px;
+    background-color: $base-color;
+    color: $white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+    

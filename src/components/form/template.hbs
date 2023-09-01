@@ -1,0 +1,13 @@
+    <form url="{{url_submit}}" class = "form-container">
+        <h1>{{title}}</h1>
+        <div class = "form-body" >
+            {{#each inputs}}
+                {{{Input value = value name = name label = label id=id type=type error = error onFocusout = onFocusout onKeyup = onKeyup ref = ref validate_type = validate_type not_empty = not_empty}}}
+            {{/each}}
+            
+        </div>
+        <div class = "form-footer">
+            {{{ SubmitBtn text=submit_btn.text onClick = submit_btn.onClick}}}
+            {{{ SecondaryBtn text=secondary_btn.text href = secondary_btn.href onClick = secondary_btn.onClick}}}
+        </div>
+    </form>

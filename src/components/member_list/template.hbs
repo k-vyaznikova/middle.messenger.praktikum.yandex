@@ -1,0 +1,8 @@
+    <div class = "profile-footer">
+        <div class = "subheader">Участники</div>
+        <div class = "member-list">
+            {{#each member_list}}
+                {{{MemberShortInfo memberLink = memberLink memberPhoto = memberPhoto memberLogin = memberLogin memberName = memberName}}}
+            {{/each}}
+        </div>
+    </div>

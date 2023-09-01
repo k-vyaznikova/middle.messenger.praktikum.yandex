@@ -1,34 +1,40 @@
-@import "/styles/normalize.scss";
-@import "/styles/common.scss";
-@import "/styles/auth.scss";
-@import "/styles/chat.scss";
-@import "/styles/error.scss";
-@import "/styles/profile.scss";
-@import "/styles/profile-edit.scss";
-@import "/styles/password-edit.scss";
-@import "/styles/community.scss";
-@import "/styles/community-edit.scss";
+@import "/styles/normalize";
+@import "/styles/common";
+@import "/styles/auth";
+@import "/styles/chat";
+@import "/styles/error";
+@import "/styles/profile";
+@import "/styles/profile-edit";
+@import "/styles/password-edit";
+@import "/styles/community";
+@import "/styles/community-edit";
+@import "/styles/style";
 
 
-/*Стили компонентов*/
-@import "/components/caption-input/style.scss";
-@import "/components/chat-info/style.scss";
-@import "/components/contact-item/style.scss";
-@import "/components/date-msg/style.scss";
-@import "/components/edit-photo/style.scss";
-@import "/components/incoming-msg/style.scss";
-@import "/components/input/style.scss";
-@import "/components/member-short-info/style.scss";
-@import "/components/outgoing-msg/style.scss";
-@import "/components/profile-item/style.scss";
-@import "/components/profile-photo/style.scss";
-@import "/components/search/style.scss";
-@import "/components/secondary-btn/style.scss";
-@import "/components/send-msg-form/style.scss";
-@import "/components/submit-btn/style.scss";
+/* Стили компонентов */
+@import "/components/caption-input/style";
+@import "/components/chat_info/style";
+@import "/components/contact_item/style";
+@import "/components/date_msg/style";
+@import "/components/edit-photo/style";
+@import "/components/incoming_msg/style";
+@import "/components/input/style";
+@import "/components/member_short_info/style";
+@import "/components/outgoing_msg/style";
+@import "/components/profile_item/style";
+@import "/components/profile_photo/style";
+@import "/components/profile_form/style";
+@import "/components/search/style";
+@import "/components/secondary_btn/style";
+@import "/components/send_msg_form/style";
+@import "/components/send_msg_btn/style";
+@import "/components/submit_btn/style";
 
 
-/*Стили для модального окна*/
-@import "/layouts/popup/popup.scss";
-@import "/layouts/chatpage/leftside/leftside.scss";
-@import "/layouts/chatpage/rightside/rightside.scss";
+/* Layouts */
+@import "/layouts/popup/popup";
+@import "/layouts/chatpage/leftside/leftside";
+@import "/layouts/chatpage/rightside/rightside";
+@import "/layouts/cardpage/cardpage";
+@import "/layouts/defpage/defpage";
+@import "/layouts/profpage/profpage";

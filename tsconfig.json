@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                                  
+     "lib": [
+      "ES6",
+      "dom"
+     ],                                      
+    "module": "commonjs",                                
+    "rootDir": ".",             
+    "baseUrl": "./src",
+    "paths": { "/*": ["./*"] },  
+    "allowImportingTsExtensions": true, 
+    "allowJs": true,   
+    "sourceMap": true,  
+    "outDir": "./build",                                   
+    "removeComments": true,                           
+    "noEmit": true,   
+    "esModuleInterop": true,                            
+    "forceConsistentCasingInFileNames": true,  
+    "strict": true,                                    
+    "noImplicitAny": true,                           
+    "strictNullChecks": true, 
+    "noUnusedLocals": true,                          
+    "noUnusedParameters": true ,
+    "skipLibCheck": true    
+  },                      
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true
+  }
+}
