@@ -1,0 +1,9 @@
+@import "/styles/vars";
+
+.msg{
+    display: none;
+    &.error{
+        display: block;
+        color: $err-text;
+    }
+}

@@ -14,7 +14,7 @@ export class Block {
 	public refs: Record<string, Block> = {};
 	private eventBus: () => EventBus;
 	private _element: HTMLElement | null = null;
-	private children: Record<string, Block>;
+	public children: Record<string, Block>;
 
 
 	constructor(propsWithChildren = {}) {
@@ -60,14 +60,18 @@ export class Block {
 	}
 
 	private _registerEvents(eventBus: EventBus) {
-		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+		eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
-	protected init() {
+	private _init() {
+		this.init();
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+	}
+
+	protected init() {
 	}
 
 	private _componentDidMount(): void {
@@ -87,15 +91,14 @@ export class Block {
 	}
 
 	// private _componentDidUpdate(oldProps: any, newProps: any) {
-	private _componentDidUpdate() {
-		if (this.componentDidUpdate()) {
+	private _componentDidUpdate(oldProps: any, newProps: any) {
+		if (this.componentDidUpdate(oldProps, newProps)) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
 	// Может переопределять пользователь, необязательно трогать
-	// componentDidUpdate(oldProps: any, newProps: any) {
-	componentDidUpdate() {
+	componentDidUpdate(oldProps: any, newProps: any) {
 		return true;
 	}
 

@@ -39,6 +39,20 @@ export class Input extends Block {
 	render() {
 		return this.compile(template, this.props);
 	}
+
+	public getName() {
+		return (this.element as HTMLElement).getElementsByTagName("input")[0].name;
+	}
+	public getValue() {
+		return (this.element as HTMLElement).getElementsByTagName("input")[0].value;
+	}
+	public setValue(value: string) {
+		return (this.element as HTMLElement).getElementsByTagName("input")[0].value = value;
+	}
+	public getValidateType() {
+		const validateType: string | undefined = (this.element as HTMLElement).getElementsByTagName("input")[0].getAttribute("data-validate");
+		return validateType? validateType: "";
+	}
 }
 
 

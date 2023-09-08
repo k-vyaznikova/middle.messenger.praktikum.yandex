@@ -5,7 +5,8 @@ export class ErrorPage extends Block {
 	constructor() {
 		super({
 			code: 404,
-			error_message: "Такой страницы не существует"
+			error_message: "Такой страницы не существует",
+			back_href: "/chats"
 		});
 	}
 	render() {

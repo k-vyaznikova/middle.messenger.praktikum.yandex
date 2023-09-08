@@ -2,7 +2,7 @@ import {Block} from "/utils/block.ts";
 import template from "/pages/auth/auth.hbs";
 import {renderPage} from "/utils/render_page.ts";
 import {checkError} from "/utils/validate.ts";
-import {getFormData} from "/utils/get_form_data.ts";
+import {AuthApi} from "/api/auth-api.ts";
 
 
 export class AuthPage extends Block {
@@ -54,8 +54,7 @@ export class AuthPage extends Block {
 								resultValid = false;
 						});
 						if (resultValid) {
-							getFormData(this.refs.form);
-							renderPage("chat");
+							// Auth API here
 						}
 					}
 				}

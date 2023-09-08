@@ -1,7 +1,10 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile/profile.hbs";
+import {withStore} from "/utils/store.ts";
+import store from "/utils/store.ts";
 import img from "/img/noimgprofile.svg";
-export class ProfilePage extends Block {
+
+export class ProfilePageInitial extends Block {
 	constructor() {
 		super({
 			title: "Иван",
@@ -14,47 +17,38 @@ export class ProfilePage extends Block {
 				profilePhoto: img,
 				profileAlt: "Иван"
 			},
-			profile_items: [
-				{
-					infoLabel: "Почта",
-					value: "pochta@yandex.ru",
-					infoName: "email",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Логин",
-					value: "ivanivanov",
-					infoName: "login",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Имя",
-					value: "Иван",
-					infoName: "first_name",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Фамилия",
-					value: "Иванов",
-					infoName: "second_name",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Имя в чате",
-					value: "ivanivanov",
-					infoName: "display_name",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Телефон",
-					value: "+7 (909)-606-66-66",
-					infoName: "phone",
-					infoType: "phone"
-				}
-			]
+			profile_items: []
 		});
+		console.log("jjjjjj");
+		console.log(this.props.user);
 	}
+	init() {/*
+		const fieldDisplayNames:Record<string, string> = {
+			"email": "E-mail",
+			"login": "Логин",
+			"first_name": "Имя",
+			"second_name": "Фамилия",
+			"display_name": "Имя в чате",
+			"phone": "Телефон"
+		};
+		const that: any = this;
+		const profileItems: Array<any> = Object.keys(this.props.user).map(function(key) {
+			console.log(that);
+			return {
+				infoLabel: fieldDisplayNames[key],
+				value: that.props.user[key],
+				infoName: key,
+				infoType: "text"
+			};
+			return 1;
+		});
+		this.setProps({profile_items: profileItems});*/
+	}
+
 	render() {
 		return this.compile(template, this.props);
 	}
 }
+
+const withUser = withStore((state) => ({...state.user}));
+export const ProfilePage = withUser(ProfilePageInitial);

@@ -4,6 +4,21 @@ export interface ResultValidate{
 	is_ok: boolean,
 	msg_text: string | null
 }
+
+function comparePassword(pass: string, passConfirm: string): ResultValidate {
+	let result: ResultValidate = {
+		is_ok: true,
+		msg_text: null
+	};
+	if (pass.trim() !== passConfirm.trim()) {
+		result = {
+			is_ok: false,
+			msg_text: "Неверное подтвержление пароля"
+		};
+	}
+	return result;
+}
+
 export function validate(value: string, typeString: string) : ResultValidate {
 	let format: RegExp;
 	const resultOk: ResultValidate = {
@@ -78,8 +93,6 @@ export function validate(value: string, typeString: string) : ResultValidate {
 
 export function checkError(value: string | undefined, typeString: string, component: Block): boolean {
 	const result: ResultValidate = validate(value as string, typeString as string);
-	console.log(value);
-	console.log(typeString);
 	if (!result.is_ok) {
 		component.setProps({
 			error: result.msg_text,
@@ -94,4 +107,3 @@ export function checkError(value: string | undefined, typeString: string, compon
 		return true;
 	}
 }
-
