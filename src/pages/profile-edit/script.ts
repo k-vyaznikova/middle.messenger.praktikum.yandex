@@ -1,7 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile-edit/profile-edit.hbs";
 import {getFormData} from "/utils/get_form_data";
-import {checkError} from "/utils/validate";
+import {checkError} from "../../utils/form_utils";
 
 import img from "/img/noimgprofile.svg";
 export class ProfileEditPage extends Block {

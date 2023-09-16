@@ -1,6 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/input/template.hbs";
-import {checkError} from "/utils/validate.ts";
+import {checkError} from "../../utils/form_utils";
 
 interface InputProps{
 	id: string,
@@ -8,8 +8,10 @@ interface InputProps{
 	name: string,
 	type: string,
 	ref: string,
-	validate_type: string,
+	validate_type?: string,
 	not_empty?: string,
+	related_field?: string,
+	comparison_value: string,
 	onFocusout?: ()=>void,
 	onKeyup?: ()=>void,
 	events?:{
@@ -24,9 +26,10 @@ export class Input extends Block {
 			...props,
 			events: {
 				focusout: () => {
+					this.setComparisonValue();
 					checkError(
-						this.getContent()?.querySelector("input")?.value,
-						(this.props.validate_type as string),
+						this.value,
+						this.validate_type as string,
 						this
 					);
 				},
@@ -40,18 +43,35 @@ export class Input extends Block {
 		return this.compile(template, this.props);
 	}
 
-	public getName() {
+	public get name() {
 		return (this.element as HTMLElement).getElementsByTagName("input")[0].name;
 	}
-	public getValue() {
+	public get value() {
 		return (this.element as HTMLElement).getElementsByTagName("input")[0].value;
 	}
-	public setValue(value: string) {
-		return (this.element as HTMLElement).getElementsByTagName("input")[0].value = value;
+	public set value(value: string) {
+		(this.element as HTMLElement).getElementsByTagName("input")[0].value = value;
 	}
-	public getValidateType() {
-		const validateType: string | undefined = (this.element as HTMLElement).getElementsByTagName("input")[0].getAttribute("data-validate");
+	public get validate_type() {
+		const validateType: string = (this.element as HTMLElement).getElementsByTagName("input")[0].getAttribute("data-validate") as string;
 		return validateType? validateType: "";
+	}
+	public setComparisonValue() {
+		let id: string | unknown;
+		if (id = this.props.related_field) {
+			const compareElement: HTMLInputElement | null | undefined = this?.element?.parentElement?.querySelector("#"+id);
+			if (compareElement instanceof HTMLInputElement) {
+				this.setProps({
+					value: this.value,
+					comparison_value: compareElement.value
+				});
+			}
+		}
+	}
+
+	public get comparison_value() {
+		const comparisonValue: string | undefined | unknown= this.props.comparison_value;
+		return comparisonValue? comparisonValue: "";
 	}
 }
 

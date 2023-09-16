@@ -7,7 +7,7 @@
 @import "/styles/profile-edit";
 @import "/styles/password-edit";
 @import "/styles/community";
-@import "/styles/community-edit";
+@import "/styles/chat-edit";
 @import "/styles/style";
 
 
@@ -23,12 +23,13 @@
 @import "/components/outgoing_msg/style";
 @import "/components/profile_item/style";
 @import "/components/profile_photo/style";
-@import "/components/profile_form/style";
+@import "/components/chat_profile/style";
 @import "/components/search/style";
-@import "/components/secondary_btn/style";
 @import "/components/send_msg_form/style";
 @import "/components/send_msg_btn/style";
 @import "/components/submit_btn/style";
+@import "/components/error_msg/style";
+@import "/components/user_search/style";
 
 
 /* Layouts */

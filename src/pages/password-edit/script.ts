@@ -1,7 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/password-edit/password-edit.hbs";
 import {renderPage} from "/utils/render_page.ts";
-import {checkError} from "/utils/validate.js";
+import {checkError} from "../../utils/form_utils.js";
 import {getFormData} from "/utils/get_form_data.js";
 import img from "/img/noimgprofile.svg";
 

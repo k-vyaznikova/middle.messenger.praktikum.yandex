@@ -15,6 +15,8 @@ interface FormProps{
 	secondary_btn:{
 		text: string,
 		href: string,
+		ref?: string,
+		class?: string,
 		onClick?: () => void,
 		events: {
 			click: () => void

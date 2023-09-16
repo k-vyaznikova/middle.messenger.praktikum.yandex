@@ -6,6 +6,9 @@
         <div class = "member-name">{{memberName}}</div>
     </a>
     {{#if memberAdd}}
-        <a href = "#" class = "member-add"></a>
+        <a href = "#" class = "member-add" data-id = {{id}}></a>
+    {{/if}}
+    {{#if hiddenInput}}
+        <input type="hidden" value = "{{id}}" name = "chat_members"/>
     {{/if}}
 </div>

@@ -2,7 +2,7 @@
 
 .member-item{
     max-width: 400px;
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -42,7 +42,7 @@
     .member-add{
         width: 20px;
         height: 20px;
-        background: url("/components/member-short-info/img/add-member.svg")  center center no-repeat transparent;
+        background: url("/components/member_short_info/img/add-member.svg")  center center no-repeat transparent;
         display: block;
         background-size: cover;
     }

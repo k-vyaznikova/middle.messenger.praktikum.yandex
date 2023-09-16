@@ -1,11 +1,11 @@
 import {Block} from "/utils/block.ts";
-import {Input} from "/components/input/script.ts";
 import template from "/pages/register/register.hbs";
-import {renderPage} from "/utils/render_page.ts";
-import {checkError} from "/utils/validate.js";
+import {checkAndSendForm} from "/utils/form_utils.js";
 import AuthController from "/controllers/auth-controller.ts";
 import {SignupData} from "/api/auth-api";
-// import {withStore} from "/utils/store.ts";
+import {ResultValidate} from "/types/common_types.ts";
+import router from "/utils/routing/router.ts";
+import {Input} from "/components/input/script.ts";
 
 export class RegisterPage extends Block {
 	constructor() {
@@ -21,8 +21,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_email",
 						validate_type: "email,not-empty",
-						not_empty: "yes",
-						value: "email@email.rt"
+						not_empty: "yes"
 					},
 					{
 						name: "login",
@@ -32,8 +31,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_login",
 						validate_type: "login,not-empty",
-						not_empty: "yes",
-						value: "login"
+						not_empty: "yes"
 					},
 					{
 						name: "first_name",
@@ -43,8 +41,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_first_name",
 						validate_type: "name,not-empty",
-						not_empty: "yes",
-						value: "Kristina"
+						not_empty: "yes"
 					},
 					{
 						name: "second_name",
@@ -54,8 +51,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_second_name",
 						validate_type: "name,not-empty",
-						not_empty: "yes",
-						value: "Kri"
+						not_empty: "yes"
 					},
 					{
 						name: "phone",
@@ -65,8 +61,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_phone",
 						validate_type: "phone,not-empty",
-						not_empty: "yes",
-						value: "1232342334"
+						not_empty: "yes"
 					},
 					{
 						name: "password",
@@ -76,8 +71,7 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_password",
 						validate_type: "password,not-empty",
-						not_empty: "yes",
-						value: "123K23"
+						not_empty: "yes"
 					},
 					{
 						name: "password",
@@ -87,46 +81,50 @@ export class RegisterPage extends Block {
 						error: "",
 						ref: "input_password_conf",
 						validate_type: "password_confirm,not-empty",
+						related_field: "password_reg",
 						not_empty: "yes",
-						value: "123K23"
+						comparison_value: ""
 					}
 				],
-				error: {
-					text: AuthController.getRegistrationError()
-				},
+				error: "",
 				secondary_btn: {
-					text: "Зарегистрироваться",
-					href: "false",
-					onClick: () => {
-						renderPage("auth");
-					}
+					text: "Уже есть аккаунт",
+					href: "/",
+					ref: "secondary_btn",
+					class: "reg-link"
 				},
 				submit_btn: {
-					text: "Войти",
+					text: "Зарегистрироваться",
 					onClick: (event: Event) => {
 						event.preventDefault();
-						let resultValid: boolean = true;
-						const inputs = Object
-							.values(this.refs.form.refs)
-							.filter(function(item) {
-								return item instanceof Input;
-							}) as Array<Input>;
-						inputs.forEach((input) => {
-							if (!checkError(input.getValue(), input.getValidateType(), input) && resultValid)
-								resultValid = false;
-						});
-						if (resultValid) {
-							const dataPair: Array<any> = inputs.map(function(input) {
-								return [input.getName(), input.getValue()];
-							});
-							const data = Object.fromEntries(dataPair);
-							AuthController.signup(data as SignupData);
-						}
+						checkAndSendForm(this.refs.form, this.sendData.bind(this));
 					}
 				}
 
-			});
+			}
+		);
 	}
+
+	private sendData(data: SignupData) {
+		const that: any = this;
+		AuthController.signup(data as SignupData).then(function(result: ResultValidate) {
+			if (result.is_ok)
+				router.go("/chats");
+			else {
+				that.props.inputs = that.props.inputs.map(function(item: any) {
+					return {
+						...item,
+						value: that.refs.form.refs[item.ref].value
+					};
+				});
+				that.setProps({
+					...that.props,
+					error: result.msg_text
+				});
+			}
+		});
+	}
+
 
 	render() {
 		return this.compile(template, this.props);

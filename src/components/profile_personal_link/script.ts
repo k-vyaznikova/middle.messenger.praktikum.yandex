@@ -1,28 +1,27 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/profile_personal_link/template.hbs";
-import {renderPage} from "/utils/render_page";
+import {withStore} from "/utils/store.ts";
 
 interface ProfilePersonalLinkProps{
 	profile_img: string,
-	profile_name: string,
-	events: {
-		click: (event: Event) => void
-	}
+	profile_name: string
 }
 
-export class ProfilePersonalLink extends Block {
+export class ProfilePersonalLinkInitial extends Block {
 	constructor(props: ProfilePersonalLinkProps) {
 		super({
-			...props,
-			events: {
-				click: (event: Event) => {
-					event.preventDefault();
-					renderPage("profile-edits");
-				}
-			}
+			...props
 		});
+		this.setProps({
+			profile_name: this.props["second_name"] + " " + this.props["first_name"]
+		});
+	}
+	protected init(): void {
 	}
 	render() {
 		return this.compile(template, this.props);
 	}
 }
+
+const withUser = withStore((state) => ({...state.user}));
+export const ProfilePersonalLink = withUser(ProfilePersonalLinkInitial);

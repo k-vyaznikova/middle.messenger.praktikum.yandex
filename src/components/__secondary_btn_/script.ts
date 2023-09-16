@@ -3,19 +3,11 @@ import template from "/components/secondary_btn/template.hbs";
 
 interface SecondaryBtnProps{
 	href: String,
-	text: String,
-	onClick: () => void
+	text: String
 }
 export class SecondaryBtn extends Block {
 	constructor(props: SecondaryBtnProps) {
-		super({
-			...props,
-			events: {
-				click: () => {
-					props.onClick();
-				}
-			}
-		});
+		super(props);
 	}
 	render() {
 		return this.compile(template, this.props);

@@ -1,14 +1,14 @@
     <form url="{{url_submit}}" class = "form-container">
         <h1>{{title}}</h1>
-        {{{ErrorMsg text=error.reg_error}}}
+        {{{ErrorMsg text=error}}}
         <div class = "form-body" >
             {{#each inputs}}
-                {{{Input value = value name = name label = label id=id type=type error = error onFocusout = onFocusout onKeyup = onKeyup ref = ref validate_type = validate_type not_empty = not_empty}}}
+                {{{Input value = value name = name label = label id=id type=type error = error onFocusout = onFocusout onKeyup = onKeyup ref = ref validate_type = validate_type not_empty = not_empty related_field = related_field compaison_value = compaison_value}}}
             {{/each}}
             
         </div>
         <div class = "form-footer">
             {{{ SubmitBtn text=submit_btn.text onClick = submit_btn.onClick}}}
-            {{{ SecondaryBtn text=secondary_btn.text href = secondary_btn.href onClick = secondary_btn.onClick}}}
+            {{{Link href = secondary_btn.href name = secondary_btn.text ref = secondary_btn.ref class = secondary_btn.class }}}
         </div>
     </form>

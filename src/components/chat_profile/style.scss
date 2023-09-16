@@ -1,0 +1,23 @@
+@import "/styles/vars";
+
+
+.profile-form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .about-members-block{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        .members-block{
+            width: 40%;
+        }
+        .search-block{
+            width: 40%;
+        }
+    }
+}

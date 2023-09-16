@@ -23,6 +23,8 @@ export class ProfileForm extends Block {
 	constructor(props: ProfileFormProps) {
 		super(props);
 	}
+	protected init(): void {
+	}
 	render() {
 		return this.compile(template, this.props);
 	}

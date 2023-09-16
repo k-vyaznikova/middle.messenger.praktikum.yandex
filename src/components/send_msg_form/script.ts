@@ -1,7 +1,9 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/send_msg_form/template.hbs";
 import {getFormData} from "/utils/get_form_data";
-import {validate, ResultValidate} from "/utils/validate";
+import {validate, ResultValidate} from "../../utils/form_utils";
+import MessagesController from "/controllers/messages-controller.ts";
+import {SendMsgText} from "/components/send_msg_form/script.ts";
 
 interface SendMsgFormProps{
 	send_msg_text: {
@@ -41,11 +43,17 @@ export class SendMsgForm extends Block {
 						res = false;
 				});
 				if (res) {
-					getFormData(this);
+					event.preventDefault();
+					const sendMsgText: SendMsgText = this.refs.send_message_text;
+					const message: string = sendMsgText.getValue();
+					sendMsgText.setValue("");
+					MessagesController.sendMessage(this.props.selectedChat!, message);
 				}
 			}
 		});
 	}
+
+
 	render() {
 		return this.compile(template, this.props);
 	}

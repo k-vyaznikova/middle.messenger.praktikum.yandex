@@ -1,3 +1,6 @@
-{{#profpage linkUrl = "/pages/chat/chat.html" onClick="render('chat');"}}
-    {{{ProfileForm profile_items = profile_items}}}
-{{/profpage}}
+{{#ProfPageLayout}}
+    {{#InnerLayout}}
+        {{{ProfileForm profile_items = profile_items footer_links = "yes" title = title}}}
+    {{/InnerLayout}}
+{{/ProfPageLayout}}
+

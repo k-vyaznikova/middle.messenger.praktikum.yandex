@@ -1,6 +1,5 @@
 import {Block} from "/utils/block.ts";
-import template from "/components/input/template.hbs";
-import {checkError} from "/utils/validate.ts";
+import template from "/components/error_msg/template.hbs";
 
 interface ErrorMsgProps{
 	text: string,

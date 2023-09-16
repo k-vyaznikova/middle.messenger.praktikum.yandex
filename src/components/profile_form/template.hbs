@@ -18,9 +18,9 @@
             {{/if}}    
             {{#if footer_links}}
                 <div class = "profile-footer">
-                    <div class = "action-link"><a href = "{{profile_edit_link}}">Изменить данные</a></div>
-                    <div class = "action-link"><a href = "{{password_edit_link}}">Изменить профиль</a></div>
-                    <div class = "action-link"><a href = "{{exit_link}}" class = "exit">Выйти</a></div>
+                    <div class = "action-link">{{{Link href="/profile-edit" name="Изменить данные"}}}</div>
+                    <div class = "action-link">{{{Link href="/pass-edit" name="Изменить пароль"}}}</div>
+                    <div class = "action-link">{{{LogoutBtn text = "Выйти"}}}</div>
                 </div>
             {{/if}}  
     {{#if edit_mode}}             

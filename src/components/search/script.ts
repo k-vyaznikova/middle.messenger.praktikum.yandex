@@ -6,8 +6,10 @@ interface SearchProps{
 	left_align: string,
 	placeholder: string,
 	not_focused?: string,
+	onKeyup: () => void,
 	events: {
-		click: ()=>void
+		click?: ()=>void,
+		keyup?: ()=>void
 	}
 
 }
@@ -22,6 +24,9 @@ export class Search extends Block {
 						"not_focused": ""
 					});
 					(this.getContent()?.querySelector("input[name=search]") as HTMLInputElement).focus();
+				},
+				keyup: () => {
+					props.onKeyup();
 				}
 			}
 		});

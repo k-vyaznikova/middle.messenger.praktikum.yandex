@@ -1,7 +1,7 @@
 import {EventBus} from "/utils/event_bus.ts";
 import {Block} from "/utils/block.ts";
 import {set, isEqual, PlainObject} from "/utils/store_utils.ts";
-import {User} from "/api/auth-api.ts";
+import {User} from "/types/common_types.ts";
 
 const STORE_EVENTS = {
 	UPDATED: "updated"
@@ -35,24 +35,20 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 		return class WithStore extends Component {
 			private onStoreUpdate: () => void;
 			constructor(props: Omit<P, keyof SP>) {
-				const previousState = mapStateToProps(store.getState());
-				console.log(previousState);
+				let previousState = mapStateToProps(store.getState());
 				super({...props, ...previousState});
 				this.onStoreUpdate = () => {
-					console.log("onStoreUpdate:::::::::::");
-					/* const stateProps = mapStateToProps(store.getState());
-
-					// if (isEqual(stateProps as PlainObject, previousState as PlainObject))
-					// return;
+					const stateProps = mapStateToProps(store.getState());
+					if (isEqual(stateProps as PlainObject, previousState as PlainObject))
+						return;
 					previousState = stateProps;
-					//console.log(previousStates);
-					this.setProps({...stateProps});*/
+					this.setProps({...stateProps});
 				};
 				store.on(STORE_EVENTS.UPDATED, this.onStoreUpdate);
 			}
 
 			componentWillUnmount() {
-				// store.off(STORE_EVENTS.UPDATED, this.onStoreUpdate);
+				store.off(STORE_EVENTS.UPDATED, this.onStoreUpdate);
 			}
 		};
 	};

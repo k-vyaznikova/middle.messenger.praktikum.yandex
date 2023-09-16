@@ -1,16 +1,16 @@
 import {Block} from "/utils/block.ts";
+import {Input} from "/components/input/script.ts";
+import {ProfileItem} from "/components/profile_item/script.ts";
+import {Form} from "/components/form/script.ts";
+import {SendMsgText} from "/components/send_msg_text/script.ts";
+import {ResultValidate} from "/types/common_types.ts";
 
-export interface ResultValidate{
-	is_ok: boolean,
-	msg_text: string | null
-}
-
-function comparePassword(pass: string, passConfirm: string): ResultValidate {
+function comparePassword(pass: string | undefined, passConfirm: string): ResultValidate {
 	let result: ResultValidate = {
 		is_ok: true,
 		msg_text: null
 	};
-	if (pass.trim() !== passConfirm.trim()) {
+	if (pass !== passConfirm) {
 		result = {
 			is_ok: false,
 			msg_text: "Неверное подтвержление пароля"
@@ -84,6 +84,7 @@ export function validate(value: string, typeString: string) : ResultValidate {
 						msg_text: "Должно быть не меньше 8 символов, заглавные буквы и цифры"
 					};
 				}
+				break;
 			}
 		}
 	}
@@ -91,8 +92,11 @@ export function validate(value: string, typeString: string) : ResultValidate {
 }
 
 
-export function checkError(value: string | undefined, typeString: string, component: Block): boolean {
-	const result: ResultValidate = validate(value as string, typeString as string);
+export function checkError(value: string | undefined, typeString: string, component: Input | SendMsgText): boolean {
+	let result: ResultValidate = validate(value as string, typeString as string);
+	if (result.is_ok && component.comparison_value) {
+		result = comparePassword(value, component.comparison_value);
+	}
 	if (!result.is_ok) {
 		component.setProps({
 			error: result.msg_text,
@@ -101,9 +105,30 @@ export function checkError(value: string | undefined, typeString: string, compon
 		return false;
 	} else {
 		component.setProps({
-			error: result.msg_text,
+			error: "",
 			value: value
 		});
 		return true;
+	}
+}
+
+export function checkAndSendForm<T>(form: Form, sendDataFunction: (d: T) => void) {
+	let resultValid: boolean = true;
+	const inputs = Object
+		.values(form.refs)
+		.filter(function(item) {
+			return item instanceof Input;
+		}) as Array<Input>;
+	inputs.forEach((input) => {
+		if (!checkError(input.value, input.validate_type, input) && resultValid)
+			resultValid = false;
+	});
+
+	if (resultValid) {
+		const dataPair: Array<any> = inputs.map(function(input) {
+			return [input.name, input.value];
+		});
+		const data = Object.fromEntries(dataPair);
+		sendDataFunction(data as T);
 	}
 }

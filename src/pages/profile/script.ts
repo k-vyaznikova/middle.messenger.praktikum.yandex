@@ -1,28 +1,29 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile/profile.hbs";
 import {withStore} from "/utils/store.ts";
-import store from "/utils/store.ts";
 import img from "/img/noimgprofile.svg";
 
+interface profilePageProps {
+	title: string,
+	footer_links: string,
+	profile_photo: {
+		profilePhoto: any,
+		profileAlt: string,
+	},
+	profile_items: Array<any>
+}
+
 export class ProfilePageInitial extends Block {
-	constructor() {
+	constructor(props: profilePageProps) {
 		super({
-			title: "Иван",
-			submit_url: "#",
-			footer_links: "yes",
-			edit_profile_link: "#",
-			edit_password_link: "#",
-			exit_link: "#",
+			...props,
 			profile_photo: {
 				profilePhoto: img,
 				profileAlt: "Иван"
-			},
-			profile_items: []
+			}
 		});
-		console.log("jjjjjj");
-		console.log(this.props.user);
 	}
-	init() {/*
+	init() {
 		const fieldDisplayNames:Record<string, string> = {
 			"email": "E-mail",
 			"login": "Логин",
@@ -32,17 +33,18 @@ export class ProfilePageInitial extends Block {
 			"phone": "Телефон"
 		};
 		const that: any = this;
-		const profileItems: Array<any> = Object.keys(this.props.user).map(function(key) {
-			console.log(that);
+		const profileItems: Array<any> = Object.keys(fieldDisplayNames).map(function(key) {
 			return {
 				infoLabel: fieldDisplayNames[key],
-				value: that.props.user[key],
+				value: that.props[key],
 				infoName: key,
 				infoType: "text"
 			};
-			return 1;
 		});
-		this.setProps({profile_items: profileItems});*/
+		this.setProps({
+			title: this.props.first_name + " " + this.props.second_name,
+			profile_items: profileItems
+		});
 	}
 
 	render() {

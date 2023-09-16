@@ -2,7 +2,7 @@ import {Route, renderPage} from "/utils/routing/route.ts";
 import {Block} from "/utils/block.ts";
 import {ErrorPage} from "/pages/error/script.ts";
 
-class Router {
+export class Router {
 	private routes!: Array<Route>;
 	private history: any = window.history;
 	private static __instance: Router = new Router("#app");
@@ -39,7 +39,6 @@ class Router {
 
 	private _onRoute(pathname: string): void {
 		const route = this.getRoute(pathname);
-
 		if (this._currentRoute) {
 			this._currentRoute.leave();
 		}

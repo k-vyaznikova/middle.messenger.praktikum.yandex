@@ -2,6 +2,6 @@
     {{#ifEq not_empty "yes"}}
         <label for="{{id}}">{{label}}</label>
     {{/ifEq}}    
-    <input value = "{{value}}" name = "{{name}}" type="{{type}}" id = "{{id}}" ref = "{{ref}}" data-validate = "{{validate_type}}" />
+    <input value = "{{value}}" name = "{{name}}" type="{{type}}" id = "{{id}}" ref = "{{ref}}" data-validate = "{{validate_type}}" data-comparison-value = "{{comparison_value}}"/>
     <span class = "error">{{error}}</span>
 </div>

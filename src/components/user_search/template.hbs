@@ -1,0 +1,15 @@
+    <div class = "profile-footer">
+        <div class = "subheader">Добавить участника</div>
+        <div class="search-form">
+            {{{Search placeholder = "Начните вводить логин участника..." left_align = "yes" not_focused ="yes" onKeyup = onKeyup value = value}}}
+            <div class = "member-list">
+                {{#if alt_message}}
+                    <div class = "no-result">Нет совпадений</div>
+                {{else}}
+                    {{#each results}}
+                        {{{MemberShortInfo id=id memberName = name memberLogin = login memberAdd = "yes" memberLink = "#" memberPhoto = "/img/noimgprofile.svg" onClick = onClick}}}
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>

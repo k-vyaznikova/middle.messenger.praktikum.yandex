@@ -2,7 +2,7 @@
         <div class = "subheader">Участники</div>
         <div class = "member-list">
             {{#each member_list}}
-                {{{MemberShortInfo memberLink = memberLink memberPhoto = memberPhoto memberLogin = memberLogin memberName = memberName}}}
+                {{{MemberShortInfo id=id memberName = name memberLogin = login memberLink = "#" memberPhoto = "/img/noimgprofile.svg" hiddenInput = "yes"}}}
             {{/each}}
         </div>
     </div>

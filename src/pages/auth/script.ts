@@ -1,8 +1,9 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/auth/auth.hbs";
-import {renderPage} from "/utils/render_page.ts";
-import {checkError} from "/utils/validate.ts";
-import {AuthApi} from "/api/auth-api.ts";
+import {checkAndSendForm} from "/utils/form_utils.js";
+import AuthController from "/controllers/auth-controller.ts";
+import {SigninData} from "/api/auth-api";
+import router from "/utils/routing/router.ts";
 
 
 export class AuthPage extends Block {
@@ -35,34 +36,43 @@ export class AuthPage extends Block {
 				],
 				secondary_btn: {
 					text: "Нет аккаунта?",
-					href: "#",
-					onClick: () => {
-						renderPage("register");
-					}
+					href: "/register",
+					ref: "secondary_btn",
+					class: "reg-link"
 				},
 				submit_btn: {
-					text: "Авторизоваться",
+					text: "Войти",
 					onClick: (event: Event) => {
 						event.preventDefault();
-						let resultValid: boolean = true;
-						Object.keys(this.refs.form.refs).forEach((key) => {
-							if (!checkError(
-								this.refs.form.refs[key]?.getContent()?.querySelector("input")?.value,
-								(this.refs.form.refs[key]?.props.validate_type as string),
-								this.refs.form.refs[key]
-							) && resultValid)
-								resultValid = false;
-						});
-						if (resultValid) {
-							// Auth API here
-						}
+						checkAndSendForm(this.refs.form, this.sendData.bind(this));
 					}
-				}
+				},
+				error: ""
 
 			});
 	}
-
+	private sendData(data: SigninData) {
+		const that: any = this;
+		AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
+			if (result.is_ok)
+				router.go("/chats");
+			else {
+				that.props.inputs = that.props.inputs.map(function(item: any) {
+					return {
+						...item,
+						value: that.refs.form.refs[item.ref].value
+					};
+				});
+				that.setProps({
+					...that.props,
+					error: result.msg_text
+				});
+			}
+		});
+	}
 	render() {
 		return this.compile(template, this.props);
 	}
 }
+
+
