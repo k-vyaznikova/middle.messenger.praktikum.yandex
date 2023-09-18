@@ -12,11 +12,14 @@ export class DialogInitial extends Block {
 	}
 
 	protected init(): void {
-		console.log("MSG in CHAT");
-		console.log(this.props.messages);
+		//this.props.messages;
+		this._prepareOldMessages(this.props.messages);
 	}
 
 
+	_prepareOldMessages(messages: Array<any>){
+		console.log(messages);
+	}
 	render() {
 		return this.compile(template, this.props);
 	}
@@ -24,18 +27,18 @@ export class DialogInitial extends Block {
 
 const withSelectedChatMessages = withStore((state) => {
 	const selectedChatId = state.selectedChat;
+	console.log(selectedChat);
 	if (!selectedChatId) {
 	  return {
 			messages: [],
 			selectedChat: undefined,
-			userId: state.user.id
-		// userId: 1345495
+			userId: state.user?.id
 	  };
 	}
   	return {
-	  messages: (state.messages || {})[selectedChatId] || [],
-	  selectedChat: state.selectedChat,
-	  userId: state.user.id
+	  messages: (state?.messages || {})[selectedChatId] || [],
+	  selectedChat: state?.selectedChat,
+	  userId: state.user?.id
 	};
 });
 

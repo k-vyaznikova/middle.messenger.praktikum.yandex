@@ -150,7 +150,47 @@ export class Block {
 		return temp.content;
 	}
 
+	/*protected compile(template: (context: any) => string, context: any) {
+		const contextAndStubs = {...context};
 
+		Object.entries(this.children).forEach(([name, component]) => {
+		  if (Array.isArray(component)) {
+				contextAndStubs[name] = component.map((child) => `<div data-id="${child.id}"></div>`);
+		  } else {
+				contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+		  }
+		});
+
+		const html = template(contextAndStubs);
+
+		const temp = document.createElement("template");
+
+		temp.innerHTML = html;
+
+		const replaceStub = (component: Block) => {
+		  const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+
+		  if (!stub) {
+				return;
+		  }
+
+		  component.getContent()?.append(...Array.from(stub.childNodes));
+
+		  stub.replaceWith(component.getContent()!);
+		};
+
+		Object.entries(this.children).forEach(([_, component]) => {
+		  if (Array.isArray(component)) {
+				component.forEach(replaceStub);
+		  } else {
+				replaceStub(component);
+		  }
+		});
+
+		return temp.content;
+	  }
+
+*/
 	private _makePropsProxy(props: any) {
 		// Можно и так передать this
 		// Такой способ больше не применяется с приходом ES6+

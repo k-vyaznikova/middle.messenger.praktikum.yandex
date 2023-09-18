@@ -2,13 +2,9 @@ import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
 import chatImg from "/img/noimgprofile.svg";
 import img from "/img/photo.jpg";
-import store, {withStore} from "/utils/store.ts";
+import store from "/utils/store.ts";
 import chatsController from "/controllers/chats-controller.ts";
 import authController from "/controllers/auth-controller";
-import MessagesController from "/controllers/messages-controller.ts";
-import {ContactList} from "/components/contact_list/script.ts";
-import {Dialog} from "/components/dialog/script.ts";
-
 
 interface ChatPageProps {
 	contact_list: Array<any>,
@@ -109,8 +105,11 @@ export class ChatPage extends Block {
 		});
 	}
 	init() {
+		//registerComponent("Dialog", Dialog);
+		//registerComponent("ContactList", ContactList);
 		authController.fetchUser().finally(() => {
 			chatsController.fetchChats().finally(() => {
+				//this.children.Dialog = new Dialog({});
 				this.setProps({
 					is_loaded: "yes"
 				});

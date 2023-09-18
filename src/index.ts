@@ -10,8 +10,9 @@ import popup from "/layouts/popup/popup.ts";
 import ifEq from "/utils/ifequal.ts";
 
 
-// Добавление компонентов
+//регистрация компонентов
 addComponents();
+
 
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);
@@ -72,6 +73,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 	if (isProtectedPage) {
 		try {
 			await AuthController.fetchUser();
+			// Добавление компонентов
+			//addComponents();
 			Router.start();
 		} catch (e: any) {
 			Router.go(Routes.Index);
