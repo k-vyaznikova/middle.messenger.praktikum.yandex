@@ -3,22 +3,22 @@
         <div class = "fixed-container">
             <div class = "fixed-block">
                 <div class = "left-top-block">
-                    {{{ProfilePersonalLink}}} 
+                    {{{profilePersonalLink}}} 
                     <div class = "right-block">
-                        {{{Link href="/chat-edit" class = "chat-add"}}}
+                        {{{linkEditChat}}}
                     </div>  
                 </div>
             </div>
         </div>  
 
   
-        {{{ContactList contacts = contact_list ref = "contact_list" is_loaded = is_loaded}}}
+        {{{contactList}}}
 
   
     {{/leftside}}
     {{#rightside}}
         
-        {{{Dialog dialog = dialog selectedChat=selectedChat send_msg_form = send_msg_form}}}
+        {{{dialog}}}
         
     {{/rightside}}
 {{/defpage}}

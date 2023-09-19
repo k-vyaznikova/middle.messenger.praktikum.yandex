@@ -1,19 +1,12 @@
 {{#if selectedChat}}
 <div class = "dialog-block">
-    {{{ChatInfo chatName = chat_info.chatName chatImg = chat_info.chatImg personalChat = chat_info.personalChat}}}
+    {{{chatInfo}}}
     <div class = "dialog">
-        {{#each dialog}}
-            {{{DateMsg date = date}}}
-             {{#each messages}}
-                {{#ifEq type "to"}}
-                    {{{IncomingMsg msgText=msgText msgTime = msgTime msgImg = msgImg}}}
-                {{else}}
-                    {{{OutgoingMsg msgText=msgText msgTime = msgTime msgImg = msgImg msgStatus = msgStatus}}}
-                {{/ifEq}}
-             {{/each}}
+        {{#each items_dialog}}
+            {{{this}}}
         {{/each}}
     </div>
-    {{{SendMsgForm selectedChat = selectedChat ref = send_msg_form.ref send_msg_btn = send_msg_form.send_msg_btn send_msg_text = send_msg_form.send_msg_text send_msg_file = send_msg_form.send_msg_file}}}
+    {{{sendMsgForm}}}
 </div>
 {{else}}
     <div class = "empty-msg">Выберите чат, чтобы отправить сообщение</div>

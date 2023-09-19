@@ -54,6 +54,7 @@ export default class WSTransport extends EventBus {
 	}
 
 	private subscribe(socket: WebSocket) {
+		
 		socket.addEventListener("open", () => {
 			this.emit(WSTransportEvents.Connected);
 		});
@@ -66,12 +67,13 @@ export default class WSTransport extends EventBus {
 		});
 
 		socket.addEventListener("message", (message) => {
+			
+
 			const data = JSON.parse(message.data);
 
 			if (data.type && data.type === "pong") {
 				return;
 			}
-
 			this.emit(WSTransportEvents.Message, data);
 		});
 	}

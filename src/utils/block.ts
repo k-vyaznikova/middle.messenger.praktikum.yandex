@@ -133,7 +133,7 @@ export class Block {
 		return this.element;
 	}
 
-
+	/*
 	protected compile(template: (props: any) => string, props: any) {
 		const plugsAndProps = {...props, __refs: this.refs};
 		Object.entries(this.children).forEach(([key, component]) => {
@@ -149,8 +149,8 @@ export class Block {
 		});
 		return temp.content;
 	}
-
-	/*protected compile(template: (context: any) => string, context: any) {
+*/
+	protected compile(template: (context: any) => string, context: any) {
 		const contextAndStubs = {...context};
 
 		Object.entries(this.children).forEach(([name, component]) => {
@@ -190,7 +190,7 @@ export class Block {
 		return temp.content;
 	  }
 
-*/
+
 	private _makePropsProxy(props: any) {
 		// Можно и так передать this
 		// Такой способ больше не применяется с приходом ES6+

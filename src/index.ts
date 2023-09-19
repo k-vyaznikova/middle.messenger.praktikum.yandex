@@ -10,7 +10,7 @@ import popup from "/layouts/popup/popup.ts";
 import ifEq from "/utils/ifequal.ts";
 
 
-//регистрация компонентов
+// регистрация компонентов
 addComponents();
 
 
@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 		try {
 			await AuthController.fetchUser();
 			// Добавление компонентов
-			//addComponents();
+			// addComponents();
 			Router.start();
 		} catch (e: any) {
 			Router.go(Routes.Index);

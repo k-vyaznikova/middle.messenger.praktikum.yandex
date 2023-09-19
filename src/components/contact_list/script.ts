@@ -2,19 +2,18 @@ import {Block} from "/utils/block.ts";
 import template from "/components/contact_list/template.hbs";
 import {withStore} from "/utils/store.ts";
 import ChatsController from "/controllers/chats-controller.ts";
-
+import {ContactItem} from "/components/contact_item/script.ts";
 
 interface ContactListProps{
 	is_loaded: string,
-	contacts: Array<Object>,
-	ref: string,
-	onClick: (event: Event) => void,
-	onKeyup: () => void,
+	contacts: ContactItem[]
 }
+
+
 export class ContactListInitial extends Block {
 	constructor(props: ContactListProps) {
 		super({
-			...props,
+			...props/* ,
 			onKeyup: async () => {
 				const newProps: Record<string, any> = await this.searchUsers(this.search_value);
 				this.setProps({
@@ -25,28 +24,31 @@ export class ContactListInitial extends Block {
 					this.searchInput.focus();
 					this.searchInput.selectionStart = this.searchInput.selectionEnd = this.searchInput.value.length;
 				}
-			}
+			}*/
 		});
 	}
 
 	protected init(): void {
-		this._setContactList(this.props.chats as Array<any>);
+		this.children.contacts = this._prepareContactList(this.props.chats);
+	}
+
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		this.children.contacts = this._prepareContactList(newProps.chats);
+
+		return true;
 	}
 
 	_setContactList(chats: Array<any>) {
-		const contactList: Array<any> = this._prepareChatList(chats);
-		this.setProps({
-			contacts: contactList
-		});
+
 	}
 
 
 	_getDialog(chatID: number) {
 	}
 
-	private _prepareChatList(oldChatList: Array<any>) {
-		return oldChatList.map(function(item: any) {
-			return {
+	private _prepareContactList(chats: Array<any>) {
+		return chats.map(function(item: any) {
+			return new ContactItem({
 				id: item["id"],
 				contactName: item["title"],
 				contactImg: item["avatar"],
@@ -58,13 +60,8 @@ export class ContactListInitial extends Block {
 				onClick: () => {
 					ChatsController.selectChat(item["id"]);
 				}
-			};
+			});
 		});
-	}
-
-
-	componentDidUpdate(): boolean {
-		return true;
 	}
 
 
@@ -80,7 +77,7 @@ export class ContactListInitial extends Block {
 	}
 }
 
-const withChats = withStore((state) => ({chats: [...(state.chats || [])]}));
+const withChats = withStore((state) => ({chats: [...(state?.chats || [])]}));
 
 export const ContactList = withChats(ContactListInitial);
 

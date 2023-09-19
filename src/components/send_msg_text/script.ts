@@ -2,13 +2,7 @@ import {Block} from "/utils/block.ts";
 import template from "/components/send_msg_text/template.hbs";
 
 interface SendMsgTextProps{
-	name: string,
-	ref: string,
-	value: string,
 	validate_type: string,
-	comparison_value?: string,
-	related_field?: string,
-	onKeyup: () => void,
 	events:{
 		keyup: () => void
 	}
@@ -16,18 +10,15 @@ interface SendMsgTextProps{
 
 export class SendMsgText extends Block {
 	constructor(props: SendMsgTextProps) {
-		super({
-			...props,
-			events: {
-				keyup: () => {
-					props.onKeyup();
-				}
-			}
-		});
+		super(props);
 	}
 
 	getValue() {
 		return this.element?.querySelector("textarea#send-msg")?.value;
+	}
+
+	getValidateType() {
+		return this.props.validate_type;
 	}
 
 	setValue(value: string) {

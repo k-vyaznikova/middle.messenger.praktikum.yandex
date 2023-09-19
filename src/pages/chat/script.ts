@@ -5,6 +5,11 @@ import img from "/img/photo.jpg";
 import store from "/utils/store.ts";
 import chatsController from "/controllers/chats-controller.ts";
 import authController from "/controllers/auth-controller";
+import {Dialog} from "/components/dialog/script.ts";
+import {ContactList} from "/components/contact_list/script.ts";
+import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
+import {Link} from "/components/link/script.ts";
+import {withStore} from "/utils/store.ts";
 
 interface ChatPageProps {
 	contact_list: Array<any>,
@@ -31,7 +36,7 @@ interface ChatPageProps {
 	}
 }
 
-export class ChatPage extends Block {
+export class ChatPageInitial extends Block {
 	constructor(props: ChatPageProps) {
 		super({
 			...props,
@@ -41,52 +46,7 @@ export class ChatPage extends Block {
 				personalChat: "yes"
 			},
 			contact_list: [],
-			dialog: [
-				/* {
-					date: "12 июля",
-					messages: [
-						{
-							type: "to",
-							msgText: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",
-							msgTime: "20:00",
-							msgImg: img
-						},
-						{
-							type: "to",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02"
-						},
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02",
-							msgStatus: "read"
-						}
-					]
-				},
-				{
-					date: "Вчера",
-					messages: [
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02",
-							msgStatus: "delivered"
-						},
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02"
-
-						},
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02"
-						}
-					]
-				}*/
-			],
+			dialog: [],
 			send_msg_form: {
 				ref: "send_message_form",
 				send_msg_text: {
@@ -105,34 +65,27 @@ export class ChatPage extends Block {
 		});
 	}
 	init() {
-		//registerComponent("Dialog", Dialog);
-		//registerComponent("ContactList", ContactList);
+		this.children.profilePersonalLink = new ProfilePersonalLink({});
+		this.children.linkEditChat = new Link({
+			href: "/chat-edit",
+			class: "chat-add"
+		});
+		this.children.contactList = new ContactList({});
+		this.children.dialog = new Dialog({});
 		authController.fetchUser().finally(() => {
+			this.children.profilePersonalLink.setProps({
+				profile_img: "/img/noimgprofile.svg",
+				profile_name: this.props.first_name + " " + this.props.second_name
+			});
 			chatsController.fetchChats().finally(() => {
-				//this.children.Dialog = new Dialog({});
-				this.setProps({
+				this.children.contactList.setProps({
 					is_loaded: "yes"
 				});
 			});
 		});
 	}
 
-	_getDialog(chatID: number) {
-	}
-
-
-	/* protected componentDidUpdate(oldProps: MessengerProps, newProps: MessengerProps): boolean {
-		this.children.messages = this.createMessages(newProps);
-		return true;
-	}*/
-	/*
-
-	private createMessages(props: MessengerProps) {
-		return props.messages.map((data) => {
-			return new Message({...data, isMine: props.userId === data.user_id});
-		});
-	}*/
-
+	
 
 	async searchChat(title: string) {
 		const state: any = store.getState();
@@ -147,35 +100,6 @@ export class ChatPage extends Block {
 	}
 }
 
+const withUser = withStore((state) => ({...state.user}));
+export const ChatPage = withUser(ChatPageInitial);
 
-/*
-chatsController.fetchChats();
-const withChatsAndDialog = withStore(state => {
-	const selectedChatId = state.selectedChat;
-	if (!selectedChatId) {
-		return {
-			...{
-				chats: state.chats,
-				dialog: {
-					messages: [],
-					selectedChat: undefined,
-					userId: state.user.id
-				}
-			}
-		};
-	}
-
-	return {
-		...{
-			chats: state.chats,
-			dialog: {
-				messages: (state.messages || {})[selectedChatId] || [],
-				selectedChat: state.selectedChat,
-				userId: state.user.id
-			}
-		}
-	};
-});
-
-export const ChatPage = withChatsAndDialog(ChatPageInitial);
-*/
