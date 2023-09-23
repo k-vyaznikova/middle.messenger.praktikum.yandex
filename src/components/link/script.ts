@@ -1,16 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/link/template.hbs";
 import router, {Router} from "/utils/routing/router.ts";
-
-interface LinkProps {
-  href: string;
-  name?: string;
-  ref?: string,
-  class?:string,
-  events?: {
-    click: (event: Event) => void;
-  };
-}
+import {LinkProps} from "/types/common_types";
 
 export class Link extends Block {
 	private router: Router = router;

@@ -4,7 +4,7 @@ import AuthController from "/controllers/auth-controller";
 
 interface LogoutBtnProps{
 	text: String,
-	events: Record<string, (event: Event)=>void>
+	events?: Record<string, (event: Event)=>void>
 }
 export class LogoutBtn extends Block {
 	constructor(props: LogoutBtnProps) {

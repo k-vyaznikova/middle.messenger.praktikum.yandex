@@ -1,5 +1,5 @@
 import {BaseAPI} from "/api/base-api.ts";
-import {User} from "/types/common_types.ts";
+import {ChangePassData, User} from "/types/common_types.ts";
 import {SearchData} from "/types/common_types.ts";
 
 
@@ -15,6 +15,10 @@ export class UserAPI extends BaseAPI {
 
 	public async request(id: number) {
 		return this.http.get(`/${id}`);
+	}
+
+	public async changePass(data: ChangePassData){
+		return this.http.put("/password", data);
 	}
 
 	public create = undefined;

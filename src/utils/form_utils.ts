@@ -4,6 +4,7 @@ import {ProfileItem} from "/components/profile_item/script.ts";
 import {Form} from "/components/form/script.ts";
 import {SendMsgText} from "/components/send_msg_text/script.ts";
 import {ResultValidate} from "/types/common_types.ts";
+import router from "/utils/routing/router.ts";
 
 function comparePassword(pass: string | undefined, passConfirm: string): ResultValidate {
 	let result: ResultValidate = {
@@ -112,13 +113,9 @@ export function checkError(value: string | undefined, typeString: string, compon
 	}
 }
 
-export function checkAndSendForm<T>(form: Form, sendDataFunction: (d: T) => void) {
+export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
+	const inputs: Input[] = form.children.inputs?  form.children.inputs : [];
 	let resultValid: boolean = true;
-	const inputs = Object
-		.values(form.refs)
-		.filter(function(item) {
-			return item instanceof Input;
-		}) as Array<Input>;
 	inputs.forEach((input) => {
 		if (!checkError(input.value, input.validate_type, input) && resultValid)
 			resultValid = false;
@@ -129,6 +126,43 @@ export function checkAndSendForm<T>(form: Form, sendDataFunction: (d: T) => void
 			return [input.name, input.value];
 		});
 		const data = Object.fromEntries(dataPair);
-		sendDataFunction(data as T);
+		
+		send(data).then(function(result: ResultValidate) {
+		//AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
+			if (result.is_ok)
+				router.go("/chats");
+			else {
+				form.props.inputs = form.children.inputs.map(function(input: any) {
+					return {
+						...input.props,
+						value: input.value
+					};
+				});
+				form.children.errorMsg.setProps({
+					text: result.msg_text as string
+				});
+			}
+		});
 	}
+}
+
+
+export function	sendFormData<T>(data: T, send:  (param: T)=>void) {
+	const that: any = this;
+	send(data).then(function(result: ResultValidate) {
+	//AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
+		if (result.is_ok)
+			router.go("/chats");
+		else {
+			that.props.inputs = that.children.inputs.map(function(input: any) {
+				return {
+					...input.props,
+					value: input.value
+				};
+			});
+			that.children.errorMsg.setProps({
+				text: result.msg_text as string
+			});
+		}
+	});
 }

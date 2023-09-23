@@ -5,7 +5,7 @@ import MessagesController from "/controllers/messages-controller.ts";
 import {SendMsgText} from "/components/send_msg_text/script.ts";
 import {SendMsgFile} from "/components/send_msg_file/script.ts";
 import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
-import { withStore } from "/utils/store.ts";
+import {withStore} from "/utils/store.ts";
 
 interface SendMsgFormProps{
 }
@@ -69,6 +69,5 @@ class SendMsgFormInitial extends Block {
 }
 
 
-
-const withSelectedChat = withStore(state => ({selectedChat: state.selectedChat}));
+const withSelectedChat = withStore((state) => ({selectedChat: state.selectedChat}));
 export const SendMsgForm = withSelectedChat(SendMsgFormInitial);

@@ -30,11 +30,11 @@ export class MessagesController {
 			const userId = store.getState().user.id;
 
 			const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`);
-			
+
 			this.sockets.set(id, wsTransport);
-			
+
 			await wsTransport.connect();
-			
+
 			this.subscribe(wsTransport, id);
 			this.fetchOldMessages(id);
 		} catch (e) {

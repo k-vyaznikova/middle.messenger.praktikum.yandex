@@ -1,4 +1,4 @@
-import type {HelperOptions} from "handlebars";
+/*import type {HelperOptions} from "handlebars";
 export default function popup(this: object, options: HelperOptions): string {
 	return ` 
     <div class = 'popup-block-invis ${options.hash.classVisibility}'>
@@ -13,4 +13,23 @@ export default function popup(this: object, options: HelperOptions): string {
         <div class = 'background-popup'></div>
     </div>
     `;
+}
+*/
+import {Block} from "/utils/block.ts";
+import template from "/layouts/popup/popup.hbs";
+
+interface PopupProps {
+    classVisibility: string,
+    content: Block
+}
+
+export default class Popup extends Block {
+    constructor(props: PopupProps){
+        super(props);
+    }
+  render() {
+    console.log("---in render popup---");
+    console.log(this.props)
+    return this.compile(template, this.props);
+  }
 }

@@ -5,125 +5,102 @@ import AuthController from "/controllers/auth-controller.ts";
 import {SignupData} from "/api/auth-api";
 import {ResultValidate} from "/types/common_types.ts";
 import router from "/utils/routing/router.ts";
-import {Input} from "/components/input/script.ts";
+import {Form} from "/components/form/script.ts";
+import {InputProps} from "/types/common_types";
+
 
 export class RegisterPage extends Block {
 	constructor() {
-		super(
-			{
-				title: "Регистрация",
-				inputs: [
-					{
-						name: "email",
-						label: "Почта",
-						id: "email_reg",
-						type: "text",
-						error: "",
-						ref: "input_email",
-						validate_type: "email,not-empty",
-						not_empty: "yes"
-					},
-					{
-						name: "login",
-						label: "Логин",
-						id: "login_reg",
-						type: "text",
-						error: "",
-						ref: "input_login",
-						validate_type: "login,not-empty",
-						not_empty: "yes"
-					},
-					{
-						name: "first_name",
-						label: "Имя",
-						id: "first_name_reg",
-						type: "text",
-						error: "",
-						ref: "input_first_name",
-						validate_type: "name,not-empty",
-						not_empty: "yes"
-					},
-					{
-						name: "second_name",
-						label: "Фамилия",
-						id: "second_name_reg",
-						type: "text",
-						error: "",
-						ref: "input_second_name",
-						validate_type: "name,not-empty",
-						not_empty: "yes"
-					},
-					{
-						name: "phone",
-						label: "Телефон",
-						id: "phone_reg",
-						type: "text",
-						error: "",
-						ref: "input_phone",
-						validate_type: "phone,not-empty",
-						not_empty: "yes"
-					},
-					{
-						name: "password",
-						label: "Пароль",
-						id: "password_reg",
-						type: "password",
-						error: "",
-						ref: "input_password",
-						validate_type: "password,not-empty",
-						not_empty: "yes"
-					},
-					{
-						name: "password",
-						label: "Пароль (ещё раз)",
-						id: "password_conf_reg",
-						type: "password",
-						error: "",
-						ref: "input_password_conf",
-						validate_type: "password_confirm,not-empty",
-						related_field: "password_reg",
-						not_empty: "yes",
-						comparison_value: ""
-					}
-				],
-				error: "",
-				secondary_btn: {
-					text: "Уже есть аккаунт",
-					href: "/",
-					ref: "secondary_btn",
-					class: "reg-link"
-				},
-				submit_btn: {
-					text: "Зарегистрироваться",
-					onClick: (event: Event) => {
-						event.preventDefault();
-						checkAndSendForm(this.refs.form, this.sendData.bind(this));
-					}
-				}
-
-			}
-		);
+		super();
 	}
 
-	private sendData(data: SignupData) {
-		const that: any = this;
-		AuthController.signup(data as SignupData).then(function(result: ResultValidate) {
-			if (result.is_ok)
-				router.go("/chats");
-			else {
-				that.props.inputs = that.props.inputs.map(function(item: any) {
-					return {
-						...item,
-						value: that.refs.form.refs[item.ref].value
-					};
-				});
-				that.setProps({
-					...that.props,
-					error: result.msg_text
-				});
+
+	init(){
+
+
+		const arrProps: Array<any> = [
+			{
+				name: "email",
+				label: "Почта",
+				type: "text",
+				validate_type: "email,not-empty"
+			},
+			{
+				name: "login",
+				label: "Логин",
+				type: "text",
+				validate_type: "login,not-empty"
+			},
+			{
+				name: "first_name",
+				label: "Имя",
+				type: "text",
+				validate_type: "name,not-empty"
+			},
+			{
+				name: "second_name",
+				label: "Фамилия",
+				type: "text",
+				validate_type: "name,not-empty"
+			},
+			{
+				name: "phone",
+				label: "Телефон",
+				type: "text",
+				validate_type: "phone,not-empty"
+			},
+			{
+				name: "password",
+				label: "Пароль",
+				type: "password",
+				validate_type: "password,not-empty",
+				not_empty: "yes"
+			},
+			{
+				name: "password",
+				label: "Пароль (ещё раз)",
+				id: "password_conf_reg",
+				type: "password",
+				ref: "input_password_conf",
+				validate_type: "password_confirm,not-empty",
+				related_field: "password_reg",
+				comparison_value: ""
+			}			
+		]
+
+		const inputsProps: Array<any> = arrProps.map((props) => {
+			let newProps: Record<string, string> = {
+				...props,
+				error: "",
+				not_empty: "yes"
 			}
+			if(!newProps["id"] && !newProps["ref"])
+				newProps = {
+					...newProps,
+					id: props["name"] + "_reg",
+					ref: "input_" + props["name"]
+				}
+			return newProps;	
+		});
+		this.children.form = new Form({
+			title: "Регистрация",
+			ref: "form",
+			send_function: AuthController.signup,
+			error: {text: ""},
+			inputs: (inputsProps as InputProps[]),
+			link: {
+				name: "Есть аккаунт?",
+				href: "/",
+				ref: "secondary_btn",
+				class: "reg-link"
+			},
+			submit_btn: {
+				text: "Зарегистрироваться"
+			},
+
 		});
 	}
+
 
 
 	render() {

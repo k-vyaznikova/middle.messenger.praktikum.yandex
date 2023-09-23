@@ -1,24 +1,8 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/input/template.hbs";
-import {checkError} from "../../utils/form_utils";
+import {checkError} from "/utils/form_utils";
+import {InputProps} from "/types/common_types.ts";
 
-interface InputProps{
-	id: string,
-	label: string,
-	name: string,
-	type: string,
-	ref: string,
-	validate_type?: string,
-	not_empty?: string,
-	related_field?: string,
-	comparison_value: string,
-	onFocusout?: ()=>void,
-	onKeyup?: ()=>void,
-	events?:{
-		focusout: () => void,
-		keyup: () => void
-	}
-}
 
 export class Input extends Block {
 	constructor(props: InputProps) {

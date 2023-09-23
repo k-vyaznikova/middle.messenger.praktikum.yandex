@@ -65,7 +65,11 @@ export class ChatPageInitial extends Block {
 		});
 	}
 	init() {
-		this.children.profilePersonalLink = new ProfilePersonalLink({});
+		this.children.profilePersonalLink = new ProfilePersonalLink({
+			profile_img: "/img/noimgprofile.svg",
+			profile_name: "",
+			href: "/profile"
+		});
 		this.children.linkEditChat = new Link({
 			href: "/chat-edit",
 			class: "chat-add"
@@ -75,7 +79,8 @@ export class ChatPageInitial extends Block {
 		authController.fetchUser().finally(() => {
 			this.children.profilePersonalLink.setProps({
 				profile_img: "/img/noimgprofile.svg",
-				profile_name: this.props.first_name + " " + this.props.second_name
+				profile_name: this.props.first_name + " " + this.props.second_name,
+				href: "/profile"
 			});
 			chatsController.fetchChats().finally(() => {
 				this.children.contactList.setProps({
@@ -85,7 +90,6 @@ export class ChatPageInitial extends Block {
 		});
 	}
 
-	
 
 	async searchChat(title: string) {
 		const state: any = store.getState();

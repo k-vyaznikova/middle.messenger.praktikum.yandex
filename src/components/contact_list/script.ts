@@ -3,6 +3,7 @@ import template from "/components/contact_list/template.hbs";
 import {withStore} from "/utils/store.ts";
 import ChatsController from "/controllers/chats-controller.ts";
 import {ContactItem} from "/components/contact_item/script.ts";
+import {formattedTime} from "/utils/date_utils.ts";
 
 interface ContactListProps{
 	is_loaded: string,
@@ -54,7 +55,7 @@ export class ContactListInitial extends Block {
 				contactImg: item["avatar"],
 				yourMsg: "yes",
 				contactMsg: item["last_message"]? item["last_message"]["content"] : "",
-				contactTimeMsg: item["last_message"]? item["last_message"]["time"] : "",
+				contactTimeMsg: item["last_message"]? formattedTime(item["last_message"]["time"]) : "",
 				contactQMsg: item["unread_count"],
 				ref: "contact_"+item["id"],
 				onClick: () => {

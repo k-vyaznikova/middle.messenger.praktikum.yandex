@@ -19,3 +19,56 @@ export interface SearchData{
     login: string
 }
 
+export interface LinkProps{
+	href: string;
+	name?: string;
+	ref?: string,
+	class?:string,
+	events?: {
+	  click: (event: Event) => void;
+	};
+}
+
+export interface SubmitBtnProps{
+	text: string,
+	onClick?: (event: Event) => void,
+	events?:{
+		click: (event: Event) => void
+	}
+}
+
+export interface InputProps{
+	id: string,
+	label: string,
+	name: string,
+	type: string,
+	ref: string,
+	validate_type?: string,
+	not_empty?: string,
+	related_field?: string,
+	comparison_value?: string,
+	error: string,
+	onFocusout?: ()=>void,
+	onKeyup?: ()=>void,
+	events?:{
+		focusout: () => void,
+		keyup: () => void
+	}
+}
+
+
+export interface ErrorMsgProps{
+	text: string
+}
+
+export interface ProfileItemProps{
+	infoType: string,
+	infoName: string,
+	infoLabel: string,
+	infoValue: string
+}
+
+export interface ChangePassData{
+	oldPassword: string,
+	newPassword: string
+}
