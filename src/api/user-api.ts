@@ -17,8 +17,12 @@ export class UserAPI extends BaseAPI {
 		return this.http.get(`/${id}`);
 	}
 
-	public async changePass(data: ChangePassData){
+	public async changePass(data: ChangePassData) {
 		return this.http.put("/password", data);
+	}
+
+	public async uploadAvatar(file: FormData) {
+		return this.http.put("/profile/avatar", file);
 	}
 
 	public create = undefined;

@@ -40,9 +40,6 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 				super({...props, ...previousState});
 				this.onStoreUpdate = () => {
 					const stateProps = mapStateToProps(store.getState());
-					console.log(stateProps);
-					console.log("between");
-					console.log(previousState);
 					if (isEqual(stateProps as PlainObject, previousState as PlainObject))
 						return;
 

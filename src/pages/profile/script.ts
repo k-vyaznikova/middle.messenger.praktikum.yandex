@@ -1,15 +1,14 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile/profile.hbs";
 import {withStore} from "/utils/store.ts";
-import img from "/img/noimgprofile.svg";
 import {ProfileForm} from "/components/profile_form/script.ts";
-import {ProfileItem} from "/components/profile_item/script.ts";
 import {User} from "/types/common_types.ts";
-import {Link} from "/components/link/script"
+import {Link} from "/components/link/script";
 
 
 export class ProfilePageInitial extends Block {
 	constructor(props: User) {
+		console.log(props);
 		super(props);
 	}
 	init() {
@@ -35,18 +34,18 @@ export class ProfilePageInitial extends Block {
 		this.children.profileForm = new ProfileForm({
 			title: this.props.first_name + " " + this.props.second_name,
 			profile_items: profileItemsProps,
-			footer_links: "yes"
+			footer_links: "yes",
+			profile_avatar: this.props.avatar
 		});
 
 		this.children.link = new Link({
-			href: "/chat", 
-			name: "", 
+			href: "/chat",
+			name: "",
 			class: "back-link"
 		});
 	}
 
 	render() {
-		console.log("in profile_render");
 		return this.compile(template, this.props);
 	}
 }

@@ -7,11 +7,7 @@ import {ProfileItem} from "/components/profile_item/script.ts";
 import ChatsController from "/controllers/chats-controller.ts";
 import UserController from "/controllers/user-controller";
 import {User} from "/types/common_types.ts";
-import { ErrorMsg } from "/components/error_msg/script";
-import { ProfilePhoto } from "/components/profile_photo/script";
-import { BASE_FILE_URL } from "/utils/constants";
 //import {Chat} from "/types/common_types.ts";
-import { withStore } from "/utils/store";
 
 
 
@@ -32,9 +28,9 @@ interface ChatProfileProps{
 }
 
 
-export class ChatProfileInitial extends Block {
+export class ChatProfile extends Block {
 	constructor(props: ChatProfileProps) {
-		super(/*{
+		super({
 			...props,
 			submit_btn: {
 				...props.submit_btn,
@@ -47,7 +43,7 @@ export class ChatProfileInitial extends Block {
 					}
 				}
 			}
-		}*/);
+		});
 	}
 
 	private checkUsers(): Array<number> {
@@ -65,14 +61,6 @@ export class ChatProfileInitial extends Block {
 	}
 
 	async init() {
-		console.log(this.props);
-		this.children.errorMsg = new ErrorMsg({text: ""});
-		this.profilePhoto = new ProfilePhoto({
-			profileImg: this.props.profile_photo.profileImg? BASE_FILE_URL + this.props.profile_photo.profileImg : "/img/noimgprofile.svg",
-			profileAlt: "test"
-		});
-
-
 		let users: Array<User> = [];
 		users = await ChatsController.getUsers(this.props.id);
 		this.setProps({
@@ -114,18 +102,3 @@ export class ChatProfileInitial extends Block {
 		return this.compile(template, this.props);
 	}
 }
-
-const withChatInfo = withStore((state) => {
-	const selectedChatId: number = state?.selectedChat as number;
-
-	if (!selectedChatId) {
-	  return {
-			...{chat: undefined}
-	  };
-	}
-  	return {
-		...{chat: state.chats[selectedChatId]}
-	};
-});
-
-export const ChatProfile = withChatInfo(ChatProfileInitial);

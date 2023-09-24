@@ -18,14 +18,16 @@ export class SendMsgFile extends Block {
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
-					if (!this.props.attachChooseOpen)
-						this.setProps({
-							attachChooseOpen: "yes"
-						});
-					else
-						this.setProps({
-							attachChooseOpen: ""
-						});
+					if (event.target?.classList.contains("attach-btn")) {
+						if (!this.props.attachChooseOpen)
+							this.setProps({
+								attachChooseOpen: "yes"
+							});
+						else
+							this.setProps({
+								attachChooseOpen: ""
+							});
+					}
 				}
 			}
 		});

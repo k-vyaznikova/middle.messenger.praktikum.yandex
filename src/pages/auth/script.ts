@@ -4,7 +4,6 @@ import {Form} from "/components/form/script.ts";
 import AuthController from "/controllers/auth-controller";
 
 
-
 export class AuthPage extends Block {
 	constructor() {
 		super();

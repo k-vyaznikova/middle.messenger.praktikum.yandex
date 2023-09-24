@@ -59,13 +59,12 @@ export class PassEditPage extends Block {
 			},
 			submit_btn: {
 				text: "Сохранить"
-			},
+			}
 
-		});	
+		});
 	}
 
 	render() {
-		//console.log("in password edit render");
 		return this.compile(template, this.props);
 	}
 }

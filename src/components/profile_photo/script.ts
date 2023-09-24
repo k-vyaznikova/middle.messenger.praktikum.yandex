@@ -1,8 +1,8 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/profile_photo/template.hbs";
-import {PhotoView} from "/components/photo_view/script.ts"
+import {PhotoView} from "/components/photo_view/script.ts";
 import Popup from "/layouts/popup/popup.ts";
-import ChangePhotoPopup from "/components/change_photo_popup/script";
+import {ChangePhotoPopup} from "/components/change_photo_popup/script";
 
 interface ProfilePhotoProps{
 	profilePhoto: string,
@@ -16,8 +16,13 @@ interface ProfilePhotoProps{
 
 export class ProfilePhoto extends Block {
 	constructor(props: ProfilePhotoProps) {
-		super({
-			...props,
+		super(props);
+	}
+
+	init() {
+		this.children.photoView = new PhotoView({
+			profilePhoto: this.props.profilePhoto,
+			profileAlt: this.props.profileAlt,
 			events: {
 				mouseover: () => {
 					this.element?.querySelector(".change-avatar")?.classList.remove("invis");
@@ -25,30 +30,41 @@ export class ProfilePhoto extends Block {
 				mouseleave: () => {
 					this.element?.querySelector(".change-avatar")?.classList.add("invis");
 				},
-				click: () => {
-					console.log(this.children.popup);
+				click: (event: Event) => {
+					event.preventDefault();
 					this.children.popup.setProps({
-						classVisibility: ""
+						classVisibility: "visible"
 					});
-					console.log("in click");
 				}
 			}
 		});
-	}
-
-	init(){
-		this.children.photoView = new PhotoView({
-			profilePhoto: this.props.profilePhoto,
-			profileAlt: this.props.profileAlt
-		});
 		this.children.popup = new Popup({
-			classVisibility: "popup-block-invis"
+			classVisibility: "invisible",
+			content: new ChangePhotoPopup({
+				error: "",
+				funcClosePopup: () => {
+					this.children.popup.setProps({
+						classVisibility: "invisible"
+					});
+					/* this.children.photoView.setProps({
+						profilePhoto: this.props.profilePhoto,
+					});*/
+				}
+			}),
+			events: {
+				close: () => {
+					this.children.popup.setProps({
+						classVisibility: "invisible"
+					});
+				}
+			}
+
 		});
-		console.log("in init");
 	}
 
 	render() {
-		console.log("in profile photo render");
 		return this.compile(template, this.props);
 	}
 }
+
+

@@ -50,6 +50,7 @@ export class AuthController {
 
 	async fetchUser() {
 		try {
+			console.log("in fetch");
 			const user: any= await this.api.read();
 			store.set("user", user);
 		} catch (err: any) {

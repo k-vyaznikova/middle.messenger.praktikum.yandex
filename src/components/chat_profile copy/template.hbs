@@ -1,13 +1,10 @@
     {{#if edit_mode}}
         <form  action = "{{submit_url}}" class = "profile-form">
-        {{{errorMsg}}}
+        <div class = "error">{{error}}</div>
     {{else}}
         <div  class = "profile-form">
-    {{/if}}  
-
-        {{{profilePhoto}}}
-
-        <!--
+    {{/if}}    
+        {{{ProfilePhoto profilePhoto = profile_photo.profilePhoto profileAlt = profile_photo.profileAlt}}}
         <div class = "profile-header">{{title}}</div>
         <div class = "profile-body password-edit">
             {{#each profile_items}}
@@ -37,7 +34,7 @@
                 <div class = "action-link"><a href = "/pass-edit">Изменить пароль</a></div>
                 <div class = "action-link">{{{LogoutBtn text = "Выйти"}}}</div>
             </div>
-        {{/if}}  -->
+        {{/if}}  
     {{#if edit_mode}}             
         </form>
     {{else}}

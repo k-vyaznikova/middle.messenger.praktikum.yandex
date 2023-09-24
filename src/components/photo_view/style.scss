@@ -7,14 +7,17 @@
     .profile-img{
         width: 130px;
         height: 130px;
-        border: 50%;
+        border-radius: 50%;
+        background-size: cover;
     }
+
+    
 
     .change-avatar{
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 0.4;
+        opacity: 0.8;
         background-color: $black;
         color: $white;
         border: none;

@@ -114,7 +114,7 @@ export function checkError(value: string | undefined, typeString: string, compon
 }
 
 export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
-	const inputs: Input[] = form.children.inputs?  form.children.inputs : [];
+	const inputs: Input[] = form.children.inputs? form.children.inputs : [];
 	let resultValid: boolean = true;
 	inputs.forEach((input) => {
 		if (!checkError(input.value, input.validate_type, input) && resultValid)
@@ -126,9 +126,9 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
 			return [input.name, input.value];
 		});
 		const data = Object.fromEntries(dataPair);
-		
+
 		send(data).then(function(result: ResultValidate) {
-		//AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
+		// AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
 			if (result.is_ok)
 				router.go("/chats");
 			else {
@@ -147,10 +147,10 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
 }
 
 
-export function	sendFormData<T>(data: T, send:  (param: T)=>void) {
+export function	sendFormData<T>(data: T, send: (param: T)=>void) {
 	const that: any = this;
 	send(data).then(function(result: ResultValidate) {
-	//AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
+	// AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
 		if (result.is_ok)
 			router.go("/chats");
 		else {

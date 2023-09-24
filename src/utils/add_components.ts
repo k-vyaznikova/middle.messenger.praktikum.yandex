@@ -1,7 +1,7 @@
 import {registerComponent} from "/utils/register_component.ts";
-//import {Form} from "/components/form/script.ts";
-//import {Input} from "/components/input/script.js";
-//import {SubmitBtn} from "/components/submit_btn/script.ts";
+// import {Form} from "/components/form/script.ts";
+// import {Input} from "/components/input/script.js";
+// import {SubmitBtn} from "/components/submit_btn/script.ts";
 import {Search} from "/components/search/script.ts";
 // import {ContactItem} from "/components/contact_item/script.ts";
 // import {ContactList} from "/components/contact_list/script.ts";
@@ -33,9 +33,9 @@ import {InnerLayout} from "/layouts/inner/script.ts";
 
 
 export default function addComponents() {
-	//registerComponent("Form", Form);
-	//registerComponent("Input", Input);
-	//registerComponent("SubmitBtn", SubmitBtn);
+	// registerComponent("Form", Form);
+	// registerComponent("Input", Input);
+	// registerComponent("SubmitBtn", SubmitBtn);
 	registerComponent("Search", Search);
 	// registerComponent("ContactItem", ContactItem);
 	// registerComponent("ContactList", ContactList);

@@ -76,6 +76,16 @@
                 padding: 2px;
                 border-radius: 50%;
             }
+
+            .edit{
+                display: block;
+                width: 30px;
+                height: 30px;
+                background: url("/components/chat_info/img/edit.svg") center center no-repeat;
+                padding: 2px;
+                border-radius: 50%;
+                background-size: 47%;
+            }
     
             .info.selected{
                 background: $light-grey-bckg2 url("/components/chat_info/img/info-selected.svg") center center no-repeat;

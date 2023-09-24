@@ -9,14 +9,12 @@
                     {{chatName}}
                 </a> 
             </div>    
-            {{#if personalChat}} 
-                <div class = "persoanl-settings chat-info-right">
-                    <a href="#" class = "info"></a>
-                    <a href="#" class = "delete"></a>
-                </div>
-            {{else}}     
-                <a href = "#" class = "settings chat-info-right"></a>
-            {{/if}}   
+            <div class = "persoanl-settings chat-info-right">
+                {{{link_info}}}
+                {{{link_edit}}}
+                {{{link_delete}}}
+            </div>
+ 
         </div>    
     </div>
 </div>

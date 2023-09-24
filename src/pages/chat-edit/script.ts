@@ -1,11 +1,10 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat-edit/chat-edit.hbs";
-import img from "/img/noimgprofile.svg";
-import ChatController from "/controllers/chats-controller.ts";
+import { ChatProfile } from "/components/chat_profile/script";
 
 export class ChatEditPage extends Block {
 	constructor() {
-		super({
+		super(/*{
 			title: "Иван",
 			submit_url: "#",
 			edit_mode: "yes",
@@ -28,6 +27,12 @@ export class ChatEditPage extends Block {
 			submit_btn: {
 				text: "Создать чат"
 			}
+		}*/);
+	}
+
+	init(){
+		this.children.chatProfile = new ChatProfile({
+			"edit_mode": "yes"
 		});
 	}
 

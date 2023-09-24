@@ -15,9 +15,7 @@ export class RegisterPage extends Block {
 	}
 
 
-	init(){
-
-
+	init() {
 		const arrProps: Array<any> = [
 			{
 				name: "email",
@@ -65,22 +63,22 @@ export class RegisterPage extends Block {
 				validate_type: "password_confirm,not-empty",
 				related_field: "password_reg",
 				comparison_value: ""
-			}			
-		]
+			}
+		];
 
 		const inputsProps: Array<any> = arrProps.map((props) => {
 			let newProps: Record<string, string> = {
 				...props,
 				error: "",
 				not_empty: "yes"
-			}
-			if(!newProps["id"] && !newProps["ref"])
+			};
+			if (!newProps["id"] && !newProps["ref"])
 				newProps = {
 					...newProps,
 					id: props["name"] + "_reg",
 					ref: "input_" + props["name"]
-				}
-			return newProps;	
+				};
+			return newProps;
 		});
 		this.children.form = new Form({
 			title: "Регистрация",
@@ -96,11 +94,10 @@ export class RegisterPage extends Block {
 			},
 			submit_btn: {
 				text: "Зарегистрироваться"
-			},
+			}
 
 		});
 	}
-
 
 
 	render() {

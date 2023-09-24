@@ -40,6 +40,8 @@ enum Routes {
   }
 
 window.addEventListener("DOMContentLoaded", async () => {
+
+
 	Router
 		.use(Routes.Index, AuthPage)
 		.use(Routes.Register, RegisterPage)
@@ -49,16 +51,19 @@ window.addEventListener("DOMContentLoaded", async () => {
 		.use(Routes.PassEdit, PassEditPage)
 		.use(Routes.ProfileEdit, ProfileEditPage);
 
-
 	let isProtectedPage: boolean = true;
 
+
+
+//console.log("window.location.pathname" + window.location.pathname);
+//console.log("window.location.search" + window.location.search);
 	switch (window.location.pathname) {
-		case "/register":
-			isProtectedPage = false;
-			break;
-		case "/auth":
-			isProtectedPage = false;
-			break;
+	case "/register":
+		isProtectedPage = false;
+		break;
+	case "/auth":
+		isProtectedPage = false;
+		break;
 	}
 
 	if (isProtectedPage) {
@@ -66,9 +71,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 			await AuthController.fetchUser();
 			Router.start();
 		} catch (e: any) {
-			//Router.go(Routes.Index);
+			// Router.go(Routes.Index);
 		}
 	} else {
+
+		
 		Router.go(window.location.pathname);
 	}
 });

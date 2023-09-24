@@ -76,9 +76,7 @@ export class Block {
 
 	private _componentDidMount(): void {
 		this.componentDidMount();
-		Object.values(this.children).forEach((child) => {
-			child.dispatchComponentDidMount();
-		});
+		
 	}
 
 	// Может переопределять пользователь, необязательно трогать
@@ -88,12 +86,18 @@ export class Block {
 
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-	}
+	
+		Object.values(this.children).forEach(child => {
+		  if (Array.isArray(child)) {
+			child.forEach(ch => ch.dispatchComponentDidMount());
+		  } else {
+			child.dispatchComponentDidMount();
+		  }
+		});
+	  }
 
 	private _componentDidUpdate(oldProps: any, newProps: any) {
 		if (this.componentDidUpdate(oldProps, newProps)) {
-			//console.log("in compDidUpd");
-			//console.log(this.props);
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
@@ -122,8 +126,8 @@ export class Block {
 			this._element.replaceWith(newElem);
 		}
 		this._element = newElem;
-		//console.log(this._element);
 		this._addEvents();
+		this.dispatchComponentDidMount();
 	}
 
 	// Может переопределять пользователь, необязательно трогать
@@ -201,6 +205,7 @@ export class Block {
 			set(target, prop, val) {
 				const oldProps = {...target};
 				target[prop] = val;
+				console.log("in proxy props");
 				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
 				return true;
 			},

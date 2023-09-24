@@ -29,21 +29,19 @@ export class Form extends Block {
 		super(props);
 	}
 
-	init(){
-
+	init() {
 		this.children.inputs = this.props.inputs.map((inputProps) => {
 			return new Input(inputProps);
 		});
 		this.children.submitBtn = new SubmitBtn({
 			...this.props.submit_btn,
 			onClick: (event: Event) => {
-					event.preventDefault();
-					checkAndSendForm(this, this.props.send_function.bind(this));
-				} 
+				event.preventDefault();
+				checkAndSendForm(this, this.props.send_function.bind(this));
+			}
 		});
 		this.children.link = new Link(this.props.link);
 		this.children.errorMsg = new ErrorMsg(this.props.error);
-
 	}
 
 	render() {
