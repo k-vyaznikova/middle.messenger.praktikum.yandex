@@ -53,10 +53,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 	let isProtectedPage: boolean = true;
 
-
-
-//console.log("window.location.pathname" + window.location.pathname);
-//console.log("window.location.search" + window.location.search);
 	switch (window.location.pathname) {
 	case "/register":
 		isProtectedPage = false;

@@ -8,7 +8,6 @@ import {Link} from "/components/link/script";
 
 export class ProfilePageInitial extends Block {
 	constructor(props: User) {
-		console.log(props);
 		super(props);
 	}
 	init() {

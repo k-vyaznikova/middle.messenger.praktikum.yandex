@@ -26,7 +26,8 @@ export class DialogInitial extends Block {
 	protected init(): void {
 		this.children.chatInfo = new ChatInfo({
 			chatName: "test",
-			chatImg: "/img/noimgprofile.svg"
+			chatImg: "/img/noimgprofile.svg",
+			chatId: this.props.selectedChat
 		});
 		this.children.items_dialog = this._prepareOldMessages(this.props?.messages as Array<any>);
 		this.children.sendMsgForm = new SendMsgForm({});
@@ -34,12 +35,15 @@ export class DialogInitial extends Block {
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
+
+		//console.log(this.props);
 		const selectedChat:any = store.getState().chats.find((chat: any)=>{
 			return chat["id"] == store.getState().selectedChat;
 		});
 		this.children.chatInfo = new ChatInfo({
 			chatName: selectedChat["title"],
-			chatImg: selectedChat["avatar"]? BASE_FILE_URL+selectedChat["avatar"] : "/img/noimgprofile.svg"
+			chatImg: selectedChat["avatar"]? BASE_FILE_URL+selectedChat["avatar"] : "/img/noimgprofile.svg",
+			chatId: this.props.selectedChat
 		});
 
 		this.children.items_dialog = this._prepareOldMessages(newProps["messages"]);
