@@ -2,12 +2,20 @@ import {EventBus} from "./event_bus.ts";
 import {nanoid} from "nanoid";
 
 export class Block {
-	static EVENTS = {
+	static get EVENTS() {
+		return {
+			INIT: "init",
+			FLOW_CDM: "flow:component-did-mount",
+			FLOW_CDU: "flow:component-did-update",
+			FLOW_RENDER: "flow:render"
+		};
+	}
+	/* static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
 		FLOW_CDU: "flow:component-did-update",
 		FLOW_RENDER: "flow:render"
-	};
+	};*/
 
 	public id: string;
 	public props: Record<string, unknown>;
@@ -76,7 +84,6 @@ export class Block {
 
 	private _componentDidMount(): void {
 		this.componentDidMount();
-		
 	}
 
 	// Может переопределять пользователь, необязательно трогать
@@ -86,12 +93,12 @@ export class Block {
 
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-	
-		Object.values(this.children).forEach(child => {
+
+		Object.values(this.children).forEach((child) => {
 		  if (Array.isArray(child)) {
-			child.forEach(ch => ch.dispatchComponentDidMount());
+				child.forEach((ch) => ch.dispatchComponentDidMount());
 		  } else {
-			child.dispatchComponentDidMount();
+				child.dispatchComponentDidMount();
 		  }
 		});
 	  }
@@ -205,7 +212,6 @@ export class Block {
 			set(target, prop, val) {
 				const oldProps = {...target};
 				target[prop] = val;
-				console.log("in proxy props");
 				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
 				return true;
 			},

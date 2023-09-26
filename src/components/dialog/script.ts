@@ -8,8 +8,8 @@ import {IncomingMsg} from "/components/incoming_msg/script.ts";
 import {ChatInfo} from "/components/chat_info/script.ts";
 import {SendMsgForm} from "/components/send_msg_form/script.ts";
 import {Message as MessageInfo} from "/controllers/messages-controller.ts";
-import store from "/utils/store.ts"
-import { BASE_FILE_URL } from "/utils/constants";
+import store from "/utils/store.ts";
+import {BASE_FILE_URL} from "/utils/constants";
 
 
 interface DialogProps{
@@ -31,12 +31,9 @@ export class DialogInitial extends Block {
 		});
 		this.children.items_dialog = this._prepareOldMessages(this.props?.messages as Array<any>);
 		this.children.sendMsgForm = new SendMsgForm({});
-
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
-
-		//console.log(this.props);
 		const selectedChat:any = store.getState().chats.find((chat: any)=>{
 			return chat["id"] == store.getState().selectedChat;
 		});
@@ -52,11 +49,9 @@ export class DialogInitial extends Block {
 
 	protected componentDidMount(): boolean {
 		const rightSide = document.querySelector(".right-side-content") as HTMLElement;
-		if(rightSide)
+		if (rightSide)
 			rightSide.scrollTop = rightSide.scrollHeight;
 		return true;
-
-
 	}
 
 

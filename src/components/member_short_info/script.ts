@@ -3,14 +3,13 @@ import template from "/components/member_short_info/template.hbs";
 
 interface MemberShortInfoProps{
 	id: number,
-	memberLink: string,
 	memberPhoto: string,
 	memberLogin: string,
 	memberName: string,
 	memberAdd?: string,
 	hiddenInput?: string,
-	onClick: (event: Event)=>void,
-	events: {
+	onClick?: (event: Event)=>void,
+	events?: {
 		click: () => void
 	}
 }

@@ -1,20 +1,15 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat-edit/chat-edit.hbs";
-import { ChatProfile } from "/components/chat_profile/script";
-import { getUrlParams } from "/utils/url_utils";
-import { withStore } from "/utils/store";
+import {ChatProfileEdit} from "/components/chat_profile_edit/script";
+import {Link} from "/components/link/script";
+import {getUrlParams} from "/utils/url_utils";
+import authController from "/controllers/auth-controller";
+import chatsController from "/controllers/chats-controller";
 
 
-interface ChatEditPageProps {
-
-}
-export class ChatEditPageInitial extends Block {
-	constructor(props: ChatEditPageProps) {
-		console.log("in construtor");
-		const params: Record<string, string> = getUrlParams();
-		console.log(params);
-		console.log(props)
-		/*super({
+export class ChatEditPage extends Block {
+	constructor() {
+		super(/* {
 			title: "Иван",
 			submit_url: "#",
 			edit_mode: "yes",
@@ -37,18 +32,24 @@ export class ChatEditPageInitial extends Block {
 			submit_btn: {
 				text: "Создать чат"
 			}
-		});*/
+		}*/);
 	}
 
-	init(){
-		console.log("in construtor");
-		const params: Record<string, string> = getUrlParams();
-		
-		console.log(params);
-		console.log(this.props);
-		/*this.children.chatProfile = new ChatProfile({
-			"edit_mode": "yes"
-		});*/
+	init() {
+		console.log("in init chat edit");
+		this.children.link = new Link({
+			href: "/chat",
+			name: "",
+			class: "back-link"
+		});
+		this.children.chatProfileEdit = new ChatProfileEdit({});
+		authController.fetchUser().then(() => {
+			chatsController.fetchChats().then(() => {
+				this.children.chatProfileEdit.setProps({
+					is_loaded: true
+				});
+			});
+		});
 	}
 
 
@@ -56,39 +57,4 @@ export class ChatEditPageInitial extends Block {
 		return this.compile(template, this.props);
 	}
 }
-
-
-
-const withChat = withStore((state) => {
-	console.log("in withStore")
-	const params: Record<string, string> = getUrlParams();
-	const id: number = params["id"] as number;
-	if(id > 0 ){
-		const chat: Record<string, string> = state.chats.find((chat) => {
-			return chat["id"] === params["id"] && chat["user"]["id"] === chat["created_by"];
-		});
-		return {chat: chat}
-	}
-	return {};
-});
-
-export const ChatEditPage = withChat(ChatEditPageInitial);
-/*
-const withSelectedChatMessages = withStore((state) => {
-	const selectedChatId: number = state?.selectedChat as number;
-	if (!selectedChatId) {
-	  return {
-			messages: [],
-			selectedChat: undefined,
-			userId: state.user?.id
-	  };
-	}
-  	return {
-	  messages: [...(state?.messages || {})[selectedChatId] || []],
-	  selectedChat: state?.selectedChat,
-	  userId: state.user?.id
-	};
-});
-
-export const ChatEditPage = withSelectedChatMessages(ChatEditPageInitial);*/
 

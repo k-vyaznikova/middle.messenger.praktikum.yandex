@@ -10,7 +10,6 @@ export class ChatsController {
 
 	constructor() {
 		this.api = API;
-		this.fetchChats();
 	}
 
 	async createChat(title: string): ResultValidate | number {

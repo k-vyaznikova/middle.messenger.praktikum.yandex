@@ -48,6 +48,7 @@ export class PassEditPage extends Block {
 		this.children.form = new Form({
 			title: "Изменение пароля",
 			send_function: UserController.changePass,
+			context_func: UserController,
 			ref: "form",
 			error: {text: ""},
 			inputs: (inputsProps as InputProps[]),

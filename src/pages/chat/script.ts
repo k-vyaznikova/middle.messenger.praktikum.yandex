@@ -10,6 +10,8 @@ import {ContactList} from "/components/contact_list/script.ts";
 import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
 import {Link} from "/components/link/script.ts";
 import {withStore} from "/utils/store.ts";
+import {BASE_FILE_URL} from "/utils/constants";
+import Popup from "/layouts/popup/popup";
 
 interface ChatPageProps {
 	contact_list: Array<any>,
@@ -74,15 +76,19 @@ export class ChatPageInitial extends Block {
 			href: "/chat-edit",
 			class: "chat-add"
 		});
+		this.children.popupCreateChat = new Popup({
+			classVisibility: "invisible",
+    		content: new AddChat()
+		});
 		this.children.contactList = new ContactList({});
 		this.children.dialog = new Dialog({});
-		authController.fetchUser().finally(() => {
+		authController.fetchUser().then(() => {
 			this.children.profilePersonalLink.setProps({
-				profile_img: "/img/noimgprofile.svg",
+				profile_img: this.props.avatar? BASE_FILE_URL+this.props.avatar : "/img/noimgprofile.svg",
 				profile_name: this.props.first_name + " " + this.props.second_name,
 				href: "/profile"
 			});
-			chatsController.fetchChats().finally(() => {
+			chatsController.fetchChats().then(() => {
 				this.children.contactList.setProps({
 					is_loaded: "yes"
 				});

@@ -5,7 +5,7 @@ import {ErrorPage} from "/pages/error/script.ts";
 export class Router {
 	private routes!: Array<Route>;
 	private history: any = window.history;
-	private static __instance: Router = new Router("#app");
+	private static __instance: Router;
 	private _currentRoute!: Route | null;
 	private _rootQuery!: string;
 
@@ -40,19 +40,20 @@ export class Router {
 	private _onRoute(pathname: string): void {
 		const route = this.getRoute(pathname);
 		if (this._currentRoute) {
-			this._currentRoute.leave();
+			this._currentRoute?.leave();
 		}
-
 		this._currentRoute = route as Route;
 		if (route)
 			route.render();
 		else {
-			renderPage(this._rootQuery, new ErrorPage());
+			renderPage(this._rootQuery, new ErrorPage({}));
 		}
 	}
 
 	go(pathname: string): void {
 		this.history.pushState({}, "", pathname);
+		if (pathname.indexOf("?") > -1)
+			pathname = pathname.substring(0, pathname.indexOf("?") - 1);
 		this._onRoute(pathname);
 	}
 

@@ -13,7 +13,7 @@ import {OutgoingMsg} from "/components/outgoing_msg/script.ts";
 import {ProfilePhoto} from "/components/profile_photo/script.ts";
 import {ProfileItem} from "/components/profile_item/script.ts";
 import {ProfileForm} from "/components/profile_form/script.ts";
-import {ChatProfile} from "../components/chat_profile/script";
+import {ChatProfile} from "../components/chat_profile_edit/script";
 import {MemberShortInfo} from "/components/member_short_info/script.ts";
 import {MemberList} from "/components/member_list/script.ts";
 import {SendMsgBtn} from "/components/send_msg_btn/script.ts";

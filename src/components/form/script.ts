@@ -22,7 +22,8 @@ interface FormProps{
 	inputs: InputProps[],
 	submit_btn: SubmitBtnProps,
 	link: LinkProps,
-	send_function: (data: any) => Promise<ResultValidate>
+	send_function: (data: any) => Promise<ResultValidate>,
+	context_func: any
 }
 export class Form extends Block {
 	constructor(props: FormProps) {
@@ -37,7 +38,7 @@ export class Form extends Block {
 			...this.props.submit_btn,
 			onClick: (event: Event) => {
 				event.preventDefault();
-				checkAndSendForm(this, this.props.send_function.bind(this));
+				checkAndSendForm(this, this.props.send_function.bind(this.props.context_func), "/chat");
 			}
 		});
 		this.children.link = new Link(this.props.link);

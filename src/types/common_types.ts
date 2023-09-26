@@ -74,7 +74,6 @@ export interface ChangePassData{
 }
 
 
-
 export interface Chat {
 		"id": number,
 		"title": string,

@@ -4,7 +4,7 @@ import {UploadLink} from "/components/upload_link/script";
 import {UploadFile} from "/components/upload_file/script";
 import {SubmitBtn} from "/components/submit_btn/script";
 import UserController from "/controllers/user-controller";
-import {DeleteFile} from "../delete_file/script";
+import {DeleteFile} from "/components/delete_file/script";
 import {ResultValidate} from "/types/common_types";
 import {ErrorMsg} from "/components/error_msg/script";
 

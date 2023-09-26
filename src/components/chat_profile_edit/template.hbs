@@ -1,11 +1,26 @@
-    {{#if edit_mode}}
-        <form  action = "{{submit_url}}" class = "profile-form">
-        {{{errorMsg}}}
-    {{else}}
-        <div  class = "profile-form">
-    {{/if}}  
 
-        {{{profilePhoto}}}
+<form  class = "profile-form">
+{{{errorMsg}}}
+ 
+
+{{#if is_loaded}}
+    {{{profilePhoto}}}
+    <div class = "profile-header">{{title}}</div>
+    <div class = "profile-body password-edit">
+            {{{profileItem}}}
+    </div>
+     <div class = "about-members-block">
+        <div class = "members-block">
+            {{{memberList}}}
+        </div> 
+        <div class = "search-block">
+            {{{userSearch}}}
+        </div>
+            
+    </div> 
+{{else}}
+    <div class = "access-denied">Идет загрузка...
+{{/if}}
 
         <!--
         <div class = "profile-header">{{title}}</div>
@@ -37,9 +52,5 @@
                 <div class = "action-link"><a href = "/pass-edit">Изменить пароль</a></div>
                 <div class = "action-link">{{{LogoutBtn text = "Выйти"}}}</div>
             </div>
-        {{/if}}  -->
-    {{#if edit_mode}}             
-        </form>
-    {{else}}
-        </div>
-    {{/if}}  
+        {{/if}}  -->           
+</form>

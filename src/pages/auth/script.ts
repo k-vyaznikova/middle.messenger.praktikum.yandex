@@ -14,6 +14,7 @@ export class AuthPage extends Block {
 			title: "Вход",
 			ref: "form",
 			send_function: AuthController.signin,
+			context_func: AuthController,
 			inputs: [
 				{
 					name: "login",

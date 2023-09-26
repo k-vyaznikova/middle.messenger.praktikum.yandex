@@ -15,8 +15,6 @@ interface PhotoViewProps{
 
 export class PhotoViewInitial extends Block {
 	constructor(props: PhotoViewProps) {
-		console.log("photo_view");
-		console.log(props);
 		super(props);
 	}
 

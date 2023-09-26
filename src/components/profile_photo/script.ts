@@ -7,7 +7,7 @@ import {ChangePhotoPopup} from "/components/change_photo_popup/script";
 interface ProfilePhotoProps{
 	profilePhoto: string,
 	profileAlt: string,
-	events:{
+	events?:{
 		click?: () => void,
 		mouseover: () => void,
 		mouseleave: () => void
@@ -46,9 +46,6 @@ export class ProfilePhoto extends Block {
 					this.children.popup.setProps({
 						classVisibility: "invisible"
 					});
-					/* this.children.photoView.setProps({
-						profilePhoto: this.props.profilePhoto,
-					});*/
 				}
 			}),
 			events: {

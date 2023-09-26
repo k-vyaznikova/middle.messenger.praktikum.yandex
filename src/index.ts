@@ -25,8 +25,8 @@ import {ChatEditPage} from "./pages/chat-edit/script";
 import {PassEditPage} from "/pages/password-edit/script.ts";
 import {ProfilePage} from "/pages/profile/script.ts";
 import {ProfileEditPage} from "/pages/profile-edit/script.ts";
-
-import AuthController from "/controllers/auth-controller.ts";
+import AuthController from "/controllers/auth-controller";
+import store from "/utils/store.ts";
 
 
 enum Routes {
@@ -40,8 +40,6 @@ enum Routes {
   }
 
 window.addEventListener("DOMContentLoaded", async () => {
-
-
 	Router
 		.use(Routes.Index, AuthPage)
 		.use(Routes.Register, RegisterPage)
@@ -54,25 +52,33 @@ window.addEventListener("DOMContentLoaded", async () => {
 	let isProtectedPage: boolean = true;
 
 	switch (window.location.pathname) {
-	case "/register":
+	case Router.Register:
 		isProtectedPage = false;
 		break;
-	case "/auth":
+	case Routes.Index:
 		isProtectedPage = false;
 		break;
 	}
 
 	if (isProtectedPage) {
+		console.log("защищ")
 		try {
 			await AuthController.fetchUser();
 			Router.start();
 		} catch (e: any) {
-			// Router.go(Routes.Index);
+			Router.go(Routes.Index);
 		}
-	} else {
-
-		
-		Router.go(window.location.pathname);
+	}
+	else {
+		console.log("не защищ");
+		try {
+			await AuthController.fetchUser();
+			Router.go(Routes.Chat);
+			console.log("не зaщищ  и зареган");
+		} catch (e) {
+			Router.go(window.location.pathname);
+			console.log("не зaщищ  не зареган");
+		}
 	}
 });
 

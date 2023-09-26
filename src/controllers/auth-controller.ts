@@ -10,7 +10,6 @@ export class AuthController {
 
 	constructor() {
 		this.api = API;
-		this.fetchUser();
 	}
 	async signin(data: SigninData) {
 		let result: ResultValidate;
@@ -48,13 +47,13 @@ export class AuthController {
 		return result;
 	}
 
+
+
 	async fetchUser() {
 		try {
 			const user: any= await this.api.read();
 			store.set("user", user);
-		} catch (err: any) {
-			console.error(err);
-		}
+		} catch (err: any) {}
 	}
 
 	public getRegistrationError() {

@@ -113,7 +113,7 @@ export function checkError(value: string | undefined, typeString: string, compon
 	}
 }
 
-export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
+export function checkAndSendForm<T>(form: Form, send: (d: T) => Promise<any>, successUrl: string = "/chats") {
 	const inputs: Input[] = form.children.inputs? form.children.inputs : [];
 	let resultValid: boolean = true;
 	inputs.forEach((input) => {
@@ -125,21 +125,14 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
 		const dataPair: Array<any> = inputs.map(function(input) {
 			return [input.name, input.value];
 		});
-		const data = Object.fromEntries(dataPair);
+		const data = Object.fromEntries(dataPair) as T;
 
 		send(data).then(function(result: ResultValidate) {
-		// AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
 			if (result.is_ok)
-				router.go("/chats");
+				router.go(successUrl);
 			else {
-				form.props.inputs = form.children.inputs.map(function(input: any) {
-					return {
-						...input.props,
-						value: input.value
-					};
-				});
 				form.children.errorMsg.setProps({
-					text: result.msg_text as string
+					text: result.msg_text ? (result.msg_text as string) : "Ошибка сервера"
 				});
 			}
 		});
@@ -150,9 +143,8 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => void) {
 export function	sendFormData<T>(data: T, send: (param: T)=>void) {
 	const that: any = this;
 	send(data).then(function(result: ResultValidate) {
-	// AuthController.signin(data as SigninData).then(function(result: ResultValidate) {
 		if (result.is_ok)
-			router.go("/chats");
+			router.go(successUrl);
 		else {
 			that.props.inputs = that.children.inputs.map(function(input: any) {
 				return {

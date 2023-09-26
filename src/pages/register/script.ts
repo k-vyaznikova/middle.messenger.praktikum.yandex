@@ -1,10 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/register/register.hbs";
-import {checkAndSendForm} from "/utils/form_utils.js";
 import AuthController from "/controllers/auth-controller.ts";
-import {SignupData} from "/api/auth-api";
-import {ResultValidate} from "/types/common_types.ts";
-import router from "/utils/routing/router.ts";
 import {Form} from "/components/form/script.ts";
 import {InputProps} from "/types/common_types";
 
@@ -84,6 +80,7 @@ export class RegisterPage extends Block {
 			title: "Регистрация",
 			ref: "form",
 			send_function: AuthController.signup,
+			context_func: AuthController,
 			error: {text: ""},
 			inputs: (inputsProps as InputProps[]),
 			link: {
