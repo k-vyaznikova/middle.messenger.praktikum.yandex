@@ -12,10 +12,11 @@ export class ChatsController {
 		this.api = API;
 	}
 
-	async createChat(title: string): ResultValidate | number {
+	async createChat(title: string): Promise<ResultValidate | number> {
 		let result: ResultValidate;
 		try {
 			const id: number = await this.api.create(title);
+			this.fetchChats();
 			return id;
 		} catch (e: any) {
 			result = {
@@ -45,9 +46,24 @@ export class ChatsController {
 		}
 	}
 
-	async deleteChat(id: number) {
-		await this.api.delete(id);
-		this.fetchChats();
+	async deleteChat(id: number): Promise<ResultValidate> {
+		let result: ResultValidate;
+		try {
+			await this.api.delete(id);
+			this.fetchChats();
+			this.selectChat(0);
+			result = {
+				is_ok: true,
+				msg_text: ""
+			};
+		} catch (e: any) {
+			console.log(e);
+			result = {
+				is_ok: false,
+				msg_text: e.reason
+			};
+		}
+		return result;
 	}
 
 	async fetchChats() {
@@ -80,8 +96,11 @@ export class ChatsController {
 		return this.api.getToken(id);
 	}
 
-	selectChat(id: number) {
-		store.set("selectedChat", id);
+	selectChat(id: number = 0) {
+		if (id > 0)
+			store.set("selectedChat", id);
+		else
+			store.set("selectedChat", undefined);
 	}
 }
 

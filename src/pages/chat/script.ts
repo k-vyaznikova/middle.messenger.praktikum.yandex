@@ -12,6 +12,8 @@ import {Link} from "/components/link/script.ts";
 import {withStore} from "/utils/store.ts";
 import {BASE_FILE_URL} from "/utils/constants";
 import Popup from "/layouts/popup/popup";
+import {AddChat} from "/components/add_chat/script";
+import {PopupOpen} from "/components/popup_open/script";
 
 interface ChatPageProps {
 	contact_list: Array<any>,
@@ -72,14 +74,35 @@ export class ChatPageInitial extends Block {
 			profile_name: "",
 			href: "/profile"
 		});
-		this.children.linkEditChat = new Link({
-			href: "/chat-edit",
-			class: "chat-add"
-		});
 		this.children.popupCreateChat = new Popup({
 			classVisibility: "invisible",
-    		content: new AddChat()
+    		content: new AddChat({
+				error: "",
+				funcClosePopup: () => {
+					this.children.popupCreateChat.setProps({
+						classVisibility: "invisible"
+					});
+				}
+			}),
+			events: {
+				close: () => {
+					this.children.popupCreateChat.setProps({
+						classVisibility: "invisible"
+					});
+				}
+			}
 		});
+		this.children.popupOpen = new PopupOpen({
+			class: "chat-add",
+			href: "#",
+			onClick: () => {
+				this.children.popupCreateChat.setProps({
+					classVisibility: "visible"
+				});
+			}
+		});
+
+
 		this.children.contactList = new ContactList({});
 		this.children.dialog = new Dialog({});
 		authController.fetchUser().then(() => {

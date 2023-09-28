@@ -61,23 +61,18 @@ window.addEventListener("DOMContentLoaded", async () => {
 	}
 
 	if (isProtectedPage) {
-		console.log("защищ")
 		try {
 			await AuthController.fetchUser();
 			Router.start();
 		} catch (e: any) {
 			Router.go(Routes.Index);
 		}
-	}
-	else {
-		console.log("не защищ");
+	} else {
 		try {
 			await AuthController.fetchUser();
 			Router.go(Routes.Chat);
-			console.log("не зaщищ  и зареган");
 		} catch (e) {
 			Router.go(window.location.pathname);
-			console.log("не зaщищ  не зареган");
 		}
 	}
 });

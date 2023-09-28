@@ -34,15 +34,16 @@ export class DialogInitial extends Block {
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
-		const selectedChat:any = store.getState().chats.find((chat: any)=>{
-			return chat["id"] == store.getState().selectedChat;
-		});
-		this.children.chatInfo = new ChatInfo({
-			chatName: selectedChat["title"],
-			chatImg: selectedChat["avatar"]? BASE_FILE_URL+selectedChat["avatar"] : "/img/noimgprofile.svg",
-			chatId: this.props.selectedChat
-		});
-
+		if (store.getState().selectedChat) {
+			const selectedChat:any = store.getState().chats.find((chat: any)=>{
+				return chat["id"] == store.getState().selectedChat;
+			});
+			this.children.chatInfo = new ChatInfo({
+				chatName: selectedChat["title"],
+				chatImg: selectedChat["avatar"]? BASE_FILE_URL+selectedChat["avatar"] : "/img/noimgprofile.svg",
+				chatId: this.props.selectedChat
+			});
+		}
 		this.children.items_dialog = this._prepareOldMessages(newProps["messages"]);
 		return true;
 	}

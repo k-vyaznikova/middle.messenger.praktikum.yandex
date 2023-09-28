@@ -31,6 +31,7 @@ export interface LinkProps{
 
 export interface SubmitBtnProps{
 	text: string,
+	add_class?: string,
 	onClick?: (event: Event) => void,
 	events?:{
 		click: (event: Event) => void

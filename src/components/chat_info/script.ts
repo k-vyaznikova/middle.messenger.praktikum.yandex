@@ -1,6 +1,9 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/chat_info/template.hbs";
 import {Link} from "/components/link/script";
+import {PopupOpen} from "/components/popup_open/script";
+import {DeleteChat} from "/components/delete_chat/script";
+import Popup from "/layouts/popup/popup";
 
 interface ChatInfoProps{
 	chatImg: string,
@@ -14,10 +17,36 @@ export class ChatInfo extends Block {
 	}
 	init() {
 		if (this.props.chatId as number > 0) {
-			this.children.link_delete = new Link({
-				href: "/delete-chat?id="+this.props.chatId,
+			this.children.popupDeleteChat = new Popup({
+				classVisibility: "invisible",
+				content: new DeleteChat({
+					chat_id: (this.props.chatId as string),
+					title: (this.props.chatName as string),
+					error: "",
+					funcClosePopup: () => {
+						this.children.popupDeleteChat.setProps({
+							classVisibility: "invisible"
+						});
+					}
+				}),
+				events: {
+					close: () => {
+						this.children.popupDeleteChat.setProps({
+							classVisibility: "invisible"
+						});
+					}
+				}
+			});
+
+
+			this.children.link_delete = new PopupOpen({
+				href: "#",
 				class: "delete",
-				ref: "link_delete",
+				onClick: () => {
+					this.children.popupDeleteChat.setProps({
+						classVisibility: "visible"
+					});
+				},
 				name: ""
 			});
 			this.children.link_edit = new Link({

@@ -6,7 +6,7 @@ interface ProfilePersonalLinkProps{
 	profile_img: string,
 	profile_name: string,
 	href: string,
-	events: {
+	events?: {
 		click: (event: Event) => void
 	}
 }

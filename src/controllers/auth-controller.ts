@@ -48,7 +48,6 @@ export class AuthController {
 	}
 
 
-
 	async fetchUser() {
 		try {
 			const user: any= await this.api.read();

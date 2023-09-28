@@ -26,8 +26,6 @@ export class UserAPI extends BaseAPI {
 		console.log(data);
 		return this.http.put("/password", data);
 	}
-	
-	
 
 
 	public create = undefined;

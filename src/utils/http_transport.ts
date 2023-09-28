@@ -80,7 +80,7 @@ export default class HTTPTransport {
 			xhr.withCredentials = true;
 			xhr.responseType = "json";
 
-		
+
 			if (method === Method.Get || !data) {
 				xhr.send();
 			} else {
@@ -90,7 +90,6 @@ export default class HTTPTransport {
 					xhr.send(JSON.stringify(data));
 				}
 			}
-			
 		});
 	}
 }

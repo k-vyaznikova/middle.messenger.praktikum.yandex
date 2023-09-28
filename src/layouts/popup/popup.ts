@@ -5,7 +5,10 @@ import {ClosePopup} from "/components/close_popup/script";
 
 interface PopupProps {
     classVisibility: string,
-    content: Block
+    content: Block,
+	events: {
+		close: () => void
+	}
 }
 
 export default class Popup extends Block {
@@ -15,7 +18,7 @@ export default class Popup extends Block {
 	init() {
 		this.children.closePopup = new ClosePopup({
 			events: {
-				click: (event: Event) => {
+				click: () => {
 					const closeEvent = new Event("close");
 					this.element?.dispatchEvent(closeEvent);
 				}
