@@ -24,6 +24,7 @@ export interface LinkProps{
 	name?: string;
 	ref?: string,
 	class?:string,
+	func_before?: () => void,
 	events?: {
 	  click: (event: Event) => void;
 	};
@@ -93,4 +94,9 @@ export interface Chat {
 		  "time": Date,
 		  "content": string
 		}
+}
+
+export interface ChatIdAndUsers{
+	chatId: number,
+	users: number[]
 }

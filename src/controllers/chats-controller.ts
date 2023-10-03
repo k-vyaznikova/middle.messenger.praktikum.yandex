@@ -1,7 +1,8 @@
 import {API, ChatsAPI} from "/api/chats-api.ts";
+import {API as APIAuth} from "/api/auth-api.ts";
 import store from "/utils/store.ts";
 import {ResultValidate} from "/types/common_types.ts";
-import {User} from "/types/common_types.ts";
+import {User, ChatIdAndUsers, Chat} from "/types/common_types.ts";
 import MessagesController from "/controllers/messages-controller.ts";
 
 
@@ -27,8 +28,55 @@ export class ChatsController {
 		return result;
 	}
 
-	private addUsersToChat(id: number, userIds: number[]) {
-		this.api.addUsers(id, userIds);
+	public async addUsersToChat(id: number, userIds: number[]) {
+		let result: ResultValidate;
+		try {
+			const chatIdAndUsers: ChatIdAndUsers = {
+				chatId: id,
+				users: userIds
+			};
+			console.log(chatIdAndUsers);
+			await this.api.addUsers(chatIdAndUsers);
+			await this.fetchChatAndUser(id);
+			result = {
+				is_ok: true,
+				msg_text: "Список участников успешно обновлен"
+			};
+		} catch (e) {
+			console.log("in_errror!");
+			result = {
+				is_ok: false,
+				msg_text: e.reason
+			};
+		}
+
+		return result;
+	}
+
+
+	public async deleteUsersFromChat(id: number, userIds: number[]) {
+		let result: ResultValidate;
+		try {
+			const chatIdAndUsers: ChatIdAndUsers = {
+				chatId: id,
+				users: userIds
+			};
+			console.log(chatIdAndUsers);
+			await this.api.deleteUsers(chatIdAndUsers);
+			await this.fetchChatAndUser(id);
+			result = {
+				is_ok: true,
+				msg_text: "Список участников успешно обновлен"
+			};
+		} catch (e) {
+			console.log("in_errror!");
+			result = {
+				is_ok: false,
+				msg_text: e.reason
+			};
+		}
+
+		return result;
 	}
 
 	createChatWithUsers(title: string, users: number[]) {
@@ -77,6 +125,44 @@ export class ChatsController {
 		store.set("chats", chats);
 	}
 
+	async fetchChatAndUser(chatId: number): ResultValidate {
+		try {
+			const chats: Array<any> = await this.api.read();
+			let users: Array<any> = await this.api.getUsers(chatId);
+			const currentUser: User = await APIAuth.read();
+			const index: number = chats.findIndex((chat)=>{
+				return chat["id"] == chatId;
+			});
+			if (index > -1) {
+				users = users.map((user) => {
+					user.delete_allow = true;
+					if (user["id"] == currentUser["id"])
+						user.delete_allow = false;
+					return user;
+				});
+				chats[index]["users"] = users;
+				chats[index]["edit_allow"] = false;
+				if (currentUser["id"] == chats[index]["created_by"])
+					chats[index]["edit_allow"] = true;
+				store.set("current_chat", chats[index]);
+				return {
+					is_ok: true,
+					msg_text: "Данные чата загружены"
+				};
+			}
+		} catch (e: any) {
+			store.set("current_chat", undefined);
+			return {
+				is_ok: false,
+				msg_text: e.reason
+			};
+		}
+		return {
+			is_ok: false,
+			msg_text: "Ошибка выгрузки"
+		};
+	}
+
 
 	async getUsers(id: number) {
 		let users: Array<User> = [];
@@ -88,9 +174,6 @@ export class ChatsController {
 		return users;
 	}
 
-	addUserToChat(id: number, userId: number) {
-		this.api.addUsers(id, [userId]);
-	}
 
 	getToken(id: number) {
 		return this.api.getToken(id);
@@ -101,6 +184,24 @@ export class ChatsController {
 			store.set("selectedChat", id);
 		else
 			store.set("selectedChat", undefined);
+	}
+
+	async uploadChatAvatar(chatIdAndFile: FormData) {
+		let result: ResultValidate;
+		try {
+			await this.api.uploadChatAvatar(chatIdAndFile);
+			await this.fetchChatAndUser(chatIdAndFile.get("chatId") as number);
+			result = {
+				is_ok: true,
+				msg_text: "Аватар успешно изменен."
+			};
+		} catch (e: any) {
+			result = {
+				is_ok: false,
+				msg_text: e? e.reason : "Ошибка загрузки"
+			};
+		}
+		return result;
 	}
 }
 

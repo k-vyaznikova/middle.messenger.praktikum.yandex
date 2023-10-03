@@ -7,8 +7,9 @@ interface MemberShortInfoProps{
 	memberLogin: string,
 	memberName: string,
 	memberAdd?: string,
+	memberDelete?: string,
 	hiddenInput?: string,
-	onClick?: (event: Event)=>void,
+	onClick?: (event: Event)=>void | undefined,
 	events?: {
 		click: () => void
 	}
@@ -21,7 +22,8 @@ export class MemberShortInfo extends Block {
 			events: {
 				click: function(event: Event) {
 					event.preventDefault();
-					props.onClick(event);
+					if (props.onClick)
+						props.onClick(event);
 				}
 			}
 

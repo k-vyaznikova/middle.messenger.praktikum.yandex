@@ -8,6 +8,9 @@ import {Link} from "/components/link/script";
 import {LogoutBtn} from "/components/logout_btn/script";
 import {ProfilePhoto} from "/components/profile_photo/script.ts";
 import {BASE_FILE_URL} from "/utils/constants.ts";
+import {ResultValidate} from "/types/common_types.ts";
+import UserController from "/controllers/user-controller.ts";
+import {withStore} from "/utils/store";
 
 interface ProfileFormProps{
 	submit_url?: string,
@@ -24,7 +27,7 @@ interface ProfileFormProps{
 	profile_avatar?: string
 }
 
-export class ProfileForm extends Block {
+export class ProfileFormInitial extends Block {
 	constructor(props: ProfileFormProps) {
 		super(props);
 	}
@@ -33,8 +36,9 @@ export class ProfileForm extends Block {
 			return new ProfileItem(props);
 		});
 		this.children.profilePhoto = new ProfilePhoto({
-			profilePhoto: this.props.profile_avatar? BASE_FILE_URL + this.props.profile_avatar : "/img/noimgprofile.svg",
-			profileAlt: "Фото профиля"
+			profilePhoto: this.props.profilePhoto.profileImg,
+			profileAlt: "Фото профиля",
+			uploadFunc: this.uploadAvatar
 		});
 
 		this.children.submitBtn = new SubmitBtn({
@@ -54,7 +58,26 @@ export class ProfileForm extends Block {
 			});
 		}
 	}
+
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		this.children.profilePhoto = new ProfilePhoto({
+			profilePhoto: newProps.profilePhoto.profileImg,
+			profileAlt: "Фото профиля",
+			uploadFunc: this.uploadAvatar,
+			allowEdit: "yes"
+		});
+		return true;
+	}
+
+	async uploadAvatar(form: HTMLFormElement) {
+		const result: ResultValidate = await UserController.uploadAvatar(new FormData(form as HTMLFormElement));
+		return result;
+	}
+
 	render() {
 		return this.compile(template, this.props);
 	}
 }
+
+const withAvatar = withStore((state) => ({...{profilePhoto: {profileImg: state.user.avatar? BASE_FILE_URL + state.user.avatar : "/img/noimgprofile.svg"}}}));
+export const ProfileForm = withAvatar(ProfileFormInitial);

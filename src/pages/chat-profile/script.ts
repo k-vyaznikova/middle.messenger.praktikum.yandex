@@ -1,18 +1,17 @@
 import {Block} from "/utils/block.ts";
-import template from "/pages/chat-edit/chat-edit.hbs";
-import {ChatProfileEdit} from "/components/chat_profile_edit/script";
+import template from "/pages/chat-profile/chat-profile.hbs";
 import {Link} from "/components/link/script";
+import ChatsController from "/controllers/chats-controller";
 import {getUrlParams} from "/utils/url_utils";
-import chatsController from "/controllers/chats-controller";
-import ChatsController from "/controllers/chats-controller.ts";
+import {ChatProfile} from "/components/chat_profile/script";
 
 
-export class ChatEditPage extends Block {
+export class ChatProfilePage extends Block {
 	constructor() {
 		super();
 	}
 
-	init() {
+	async init() {
 		this.children.link = new Link({
 			href: "/chat",
 			name: "",
@@ -25,10 +24,10 @@ export class ChatEditPage extends Block {
 		const params: Record<string, string> = getUrlParams();
 		const id: number = params["id"] as number;
 
-		this.children.chatProfileEdit = new ChatProfileEdit({});
+		this.children.chatProfile = new ChatProfile({});
 		if (id > 0) {
 			ChatsController.fetchChatAndUser(id).then((response) => {
-				this.children.chatProfileEdit = this.children.chatProfileEdit.setProps({
+				this.children.chatProfile = this.children.chatProfile.setProps({
 					is_loaded: true,
 					error: response.is_ok? "" : response.msg_text
 				});

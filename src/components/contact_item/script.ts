@@ -1,8 +1,10 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/contact_item/template.hbs";
+import {BASE_FILE_URL} from "/utils/constants";
 
 
 interface ContactItemProps{
+	id: string,
 	contactSelected?: string,
 	contactLinkDialog: string,
 	contactImg: string,
@@ -29,6 +31,10 @@ export class ContactItem extends Block {
 				}
 			}
 		});
+	}
+
+	init() {
+		this.props.contactImg = this.props.contactImg? BASE_FILE_URL + this.props.contactImg : "/img/noimgprofile.svg";
 	}
 	render() {
 		return this.compile(template, this.props);

@@ -2,7 +2,6 @@ import {EventBus} from "/utils/event_bus.ts";
 import {Block} from "/utils/block.ts";
 import {set, isEqual, PlainObject} from "/utils/store_utils.ts";
 import {User} from "/types/common_types.ts";
-import {DialogInitial} from "/components/dialog/script";
 
 const STORE_EVENTS = {
 	UPDATED: "updated"
@@ -40,9 +39,8 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 				super({...props, ...previousState});
 				this.onStoreUpdate = () => {
 					const stateProps = mapStateToProps(store.getState());
-					if (isEqual(stateProps as PlainObject, previousState as PlainObject))
-						return;
-
+					//if (isEqual(stateProps as PlainObject, previousState as PlainObject))
+						//return;
 
 					previousState = stateProps;
 

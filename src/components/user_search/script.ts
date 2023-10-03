@@ -2,84 +2,68 @@ import {Block} from "/utils/block.ts";
 import template from "/components/user_search/template.hbs";
 import UserController from "/controllers/user-controller";
 import {Search} from "/components/search/script";
-import {MemberShortInfo} from "../member_short_info/script";
+import {MemberShortInfo} from "/components/member_short_info/script";
+import {withStore} from "/utils/store";
+import {BASE_FILE_URL} from "/utils/constants";
 
 interface UserSearchProps{
     value?: string,
-	results?: Array<any>,
+	search_results?: Array<any>,
     alt_message?: string,
     onKeyup?: () => void,
-	onClick?: () => void
+	addUser?: () => void
 }
 
-export class UserSearch extends Block {
+export class UserSearchInitial extends Block {
 	constructor(props: UserSearchProps) {
 		super({
 			...props,
 			onKeyup: async () => {
-				await this.searchUsers(this.search_value);
-				this._componentsInit("TEST");
-
-				/* console.log(this.search_value);
-				this.setProps({
-					...newProps,
-					value: this.search_value
-				});*/
-				if (this.searchInput) {
-					this.searchInput.focus();
-					this.searchInput.selectionStart = this.searchInput.selectionEnd = this.searchInput.value.length;
-				}
+				await UserController.search(this.search_value);
 			}
 
 		});
 	}
 	async init() {
-		this._componentsInit("");
-	}
-
-	/* async componentDidUpdate(oldProps: any, newProps: any): boolean {
-		this._componentsInit(newProps["value"]);
-	}*/
-
-
-	private async _componentsInit(value: string): void {
-		console.log("in _componentInit" + value);
 		this.children.search = new Search({
 			placeholder: "Начните вводить логин участника...",
 			left_align: "yes",
 			not_focused: "yes",
-			value: value,
-			onKeyup: this.props["onKeyup"]
+			value: this.props?.search_results?.search_word,
+			onKeyup: this.props.onKeyup
 		});
+		this.children.results = this._formResults(this.props?.search_results?.users);
+	}
 
-		if (value) {
-			const users = await this.searchUsers(value);
-			if (users.length > 0) {
-				this.children.results = users.map((user_props) => {
-					new MemberShortInfo({
-						id: user_props["id"],
-						memberPhoto: user_props["avatar"],
-						memberLogin: user_props["login"],
-						memberName: user_props["first_name"]+ " " + user_props["second_name"],
-						memberAdd: "yes"
-					});
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		this.children.search = new Search({
+			placeholder: "Начните вводить логин участника...",
+			left_align: "yes",
+			not_focused: "yes",
+			value: newProps?.search_results?.search_word,
+			onKeyup: this.props.onKeyup
+		});
+		this.children.results = this._formResults(newProps.search_results?.users);
+		return true;
+	}
+
+
+	private _formResults(props_members: Array<any>): MemberShortInfo[] {
+		if (props_members.length > 0) {
+			return props_members.map((user_props) => {
+				return new MemberShortInfo({
+					id: user_props["id"],
+					memberPhoto: user_props["avatar"]? BASE_FILE_URL+user_props["avatar"] : "/img/noimgprofile.svg",
+					memberLogin: user_props["login"],
+					memberName: user_props["first_name"]+ " " + user_props["second_name"],
+					memberAdd: "yes",
+					onClick: this.props.addUser
 				});
-			} else {
-				this.setProps({
-					alt_message: "Начните вводить логин пользователя."
-				 });
-			}
-		} else {
-			 this.setProps({
-				alt_message: "Не найдено ни одного участника."
-			 });
+			});
 		}
+		return [];
 	}
 
-	private async searchUsers(login: string) {
-		const users: Array<any> = await UserController.search(login);
-		return users;
-	}
 
 	private addUserEvents(users: Array<Record<string, any>>) {
 		const that: any = this;
@@ -101,3 +85,20 @@ export class UserSearch extends Block {
 		return this.compile(template, this.props);
 	}
 }
+
+
+const withSearchResult = withStore((state) => {
+	if (state?.search_results)
+		return {...{search_results: state?.search_results}
+		};
+	else
+		return {
+			...{search_results: {
+				users: [],
+				search_word: ""
+			}}
+		};
+});
+export const UserSearch = withSearchResult(UserSearchInitial);
+
+

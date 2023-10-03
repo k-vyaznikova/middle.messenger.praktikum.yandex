@@ -26,7 +26,8 @@ import {PassEditPage} from "/pages/password-edit/script.ts";
 import {ProfilePage} from "/pages/profile/script.ts";
 import {ProfileEditPage} from "/pages/profile-edit/script.ts";
 import AuthController from "/controllers/auth-controller";
-import store from "/utils/store.ts";
+import {ChatProfilePage} from "/pages/chat-profile/script";
+import store from "/utils/store";
 
 
 enum Routes {
@@ -36,7 +37,8 @@ enum Routes {
 	Chat = "/chat",
 	ChatEdit = "/chat-edit",
 	PassEdit = "/pass-edit",
-	ProfileEdit = "/profile-edit"
+	ProfileEdit = "/profile-edit",
+	ChatProfile = "/chat-profile"
   }
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -47,7 +49,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 		.use(Routes.Chat, ChatPage)
 		.use(Routes.ChatEdit, ChatEditPage)
 		.use(Routes.PassEdit, PassEditPage)
-		.use(Routes.ProfileEdit, ProfileEditPage);
+		.use(Routes.ProfileEdit, ProfileEditPage)
+		.use(Routes.ChatProfile, ChatProfilePage);
 
 	let isProtectedPage: boolean = true;
 
@@ -63,14 +66,16 @@ window.addEventListener("DOMContentLoaded", async () => {
 	if (isProtectedPage) {
 		try {
 			await AuthController.fetchUser();
-			Router.start();
+			if (store.getState().user.id > 0 )
+				Router.start();
 		} catch (e: any) {
 			Router.go(Routes.Index);
 		}
 	} else {
 		try {
 			await AuthController.fetchUser();
-			Router.go(Routes.Chat);
+			if (store.getState().user.id > 0)
+				Router.go(Routes.Chat);
 		} catch (e) {
 			Router.go(window.location.pathname);
 		}

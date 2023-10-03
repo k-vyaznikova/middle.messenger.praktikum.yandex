@@ -103,8 +103,9 @@ export class Block {
 		});
 	  }
 
-	private _componentDidUpdate(oldProps: any, newProps: any) {
-		if (this.componentDidUpdate(oldProps, newProps)) {
+	private async _componentDidUpdate(oldProps: any, newProps: any) {
+		const res: boolean = this.componentDidUpdate(oldProps, newProps);
+		if (res) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}

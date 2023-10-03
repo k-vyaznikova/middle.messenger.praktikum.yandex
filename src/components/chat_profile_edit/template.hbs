@@ -1,15 +1,10 @@
 
-<form  class = "profile-form">
-{{{errorMsg}}}
- 
-
+<div  class = "profile-form">
 {{#if is_loaded}}
+    {{{errorMsg}}}
     {{{profilePhoto}}}
     <div class = "profile-header">{{title}}</div>
-    <div class = "profile-body password-edit">
-            {{{profileItem}}}
-    </div>
-     <div class = "about-members-block">
+    <div class = "about-members-block">
         <div class = "members-block">
             {{{memberList}}}
         </div> 
@@ -53,4 +48,4 @@
                 <div class = "action-link">{{{LogoutBtn text = "Выйти"}}}</div>
             </div>
         {{/if}}  -->           
-</form>
+</div>

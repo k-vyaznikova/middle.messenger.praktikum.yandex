@@ -1,11 +1,12 @@
 <div>
 <div class = "profile-item {{#ifEq infoType "textarea"}} textarea {{/ifEq}}">
-    <label class = "profile-name" for = "{{infoName}}">{{infoLabel}}</label>
+    
     {{#if editMode}} 
+        <label class = "profile-name" for = "{{infoName}}">{{infoLabel}}</label>
         <input class = "profile-value" value = "{{value}}"  name = "{{infoName}}" id = "{{infoName}}" type="{{infoType}}" ref = {{ref}}/>
     {{else}}
-        <input class = "profile-value" value = "{{value}}" name = "{{infoName}}" id = "{{infoName}}" disabled type="{{infoType}}"/>
-
+        <div class = "profile-name">{{infoLabel}}</div>
+        <div class = "profile-value">{{value}}</div>    
     {{/if}}  
 </div>
 <div class = "error">{{error}}</div> 

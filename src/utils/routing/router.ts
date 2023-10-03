@@ -53,7 +53,7 @@ export class Router {
 	go(pathname: string): void {
 		this.history.pushState({}, "", pathname);
 		if (pathname.indexOf("?") > -1)
-			pathname = pathname.substring(0, pathname.indexOf("?") - 1);
+			pathname = pathname.substring(0, pathname.indexOf("?"));
 		this._onRoute(pathname);
 	}
 

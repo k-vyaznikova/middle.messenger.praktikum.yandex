@@ -11,6 +11,8 @@ export class Link extends Block {
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
+					if (this.props.func_before)
+						this.props?.func_before();
 					this.navigate();
 				}
 			}

@@ -23,7 +23,6 @@ export class UserAPI extends BaseAPI {
 	}
 
 	public async changePass(data: ChangePassData) {
-		console.log(data);
 		return this.http.put("/password", data);
 	}
 

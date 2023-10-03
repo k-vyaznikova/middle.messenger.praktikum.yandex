@@ -1,23 +1,15 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/chat_profile_edit/template.hbs";
-import {checkError} from "/utils/form_utils.ts";
-import {getFormData} from "/utils/get_form_data";
-import {checkAndSendForm} from "/utils/form_utils.ts";
-import {ProfileItem} from "/components/profile_item/script.ts";
 import ChatsController from "/controllers/chats-controller.ts";
-import UserController from "/controllers/user-controller";
 import {User} from "/types/common_types.ts";
-import {ErrorMsg} from "/components/error_msg/script";
 import {ProfilePhoto} from "/components/profile_photo/script";
 import {BASE_FILE_URL} from "/utils/constants";
-// import {Chat} from "/types/common_types.ts";
 import {withStore} from "/utils/store";
-import {getUrlParams} from "/utils/url_utils.ts";
 import {MemberList} from "/components/member_list/script";
-import {UserSearch} from "../user_search/script";
+import {ResultValidate} from "/types/common_types.ts";
+import templateForMemberList from "/components/member_list/template_2.hbs";
 
-
-interface chatProfileEditProps{
+interface chatProfileProps{
 	id: number,
 	title: string,
 	profile_photo: {
@@ -34,91 +26,36 @@ interface chatProfileEditProps{
 }
 
 
-export class chatProfileEditInitial extends Block {
-	constructor(props: chatProfileEditProps) {
-		super({...props}/* {
-			...props,
-			submit_btn: {
-				...props.submit_btn,
-				onClick: (event: Event) => {
-					event.preventDefault();
-					const chatName: string = (this.refs["input_name"] as ProfileItem).element?.querySelector("input")?.value;
-					const userIDs: Array<number> = this.checkUsers();
-					if (checkError(chatName, "not-empty", this.refs["input_name"]) && userIDs.length > 0) {
-						ChatsController.createChatWithUsers(chatName, userIDs);
-					}
-				}
-			}
-		}*/);
-	}
-
-	async init() {
-		/* this.setProps({
-			addUser: this.addUsers.bind(this)
-		});*/
-
-		this.children.errorMsg = new ErrorMsg({text: ""});
-		this.children.profilePhoto = new ProfilePhoto({
-			profilePhoto: "/img/noimgprofile.svg",
-			profileAlt: ""
-		});
-		/*
-		let users: Array<User> = [];
-		users = await ChatsController.getUsers(this.props.id);
-		this.setProps({
-			member_list: users,
-			addUser: this.addUsers.bind(this)
-		});*/
+export class chatProfileInitial extends Block {
+	constructor(props: chatProfileProps) {
+		super(props);
 	}
 
 
-	async componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
 		this.children.profilePhoto = new ProfilePhoto({
-			profilePhoto: newProps["chat"]["avatar"] ? BASE_FILE_URL + newProps["chat"]["avatar"] : "/img/noimgprofile.svg",
-			profileAlt: newProps["chat"]["title"]
+			profilePhoto: newProps?.chat?.avatar ? (BASE_FILE_URL + newProps?.chat?.avatar) : "/img/noimgprofile.svg",
+			profileAlt: newProps?.chat?.title,
+			chatId: newProps?.id,
+			uploadFunc: this.uploadChatAvatar
 		});
 
-		this.children.profileItem = new ProfileItem({
-			infoLabel: "Название чата",
-			value: newProps["chat"]["title"],
-			infoName: "title",
-			infoType: "text",
-			ref: "title_chat",
-			validate_type: "not-empty",
-			editMode: "yes"
-		});
 
-		let users: Array<any> = [];
-		users = await ChatsController.getUsers(newProps["chat"]["id"]);
-		this.children.memberList = new MemberList({
-			member_list: users,
-			alt_message: "Нет ни одного участника",
-			hideInput: "yes"
-		});
-		/** addUser = addUser */
-		this.children.userSearch = new UserSearch({});
+		if (newProps.chat?.users) {
+			this.children.memberList = this._formMemberList(newProps.chat?.users);
+		}
 
 		return true;
 	}
 
-	private checkUsers(): Array<number> {
-		const arrId: Array<number> = [];
 
-		this.element?.querySelectorAll("input[name = 'chat_members']").forEach(function(item) {
-			arrId.push((item as HTMLInputElement).value as number);
+	_formMemberList(users: User[]) {
+		return new MemberList({
+			member_list: users,
+			hideInput: "yes",
+			editMode: false, 
+			template: templateForMemberList
 		});
-		if (arrId.length <= 0) {
-			this.setProps({
-				error: "Добавьте хотя бы одного участника в чат"
-			});
-		}
-		return arrId;
-	}
-
-
-	private addChat() {
-		const title: string = this.chat_name;
-		ChatsController.create(title);
 	}
 
 	public get name() {
@@ -130,19 +67,9 @@ export class chatProfileEditInitial extends Block {
 		return chatName? chatName : "";
 	}
 
-	async addUsers(event: Event) {
-		const element: HTMLElement = event.target as HTMLElement;
-		const memberList: Array<User> = this.props.member_list as Array<User>;
-		if (element.classList.contains("member-add")) {
-			const id: string = element.getAttribute("data-id") as number;
-			if (id > 0) {
-				const user: User = await UserController.getUser(id);
-				memberList.push(user);
-				this.setProps({
-					member_list: memberList
-				});
-			}
-		}
+	async uploadChatAvatar(form: HTMLFormElement) {
+		const result: ResultValidate = await ChatsController.uploadChatAvatar(new FormData(form as HTMLFormElement));
+		return result;
 	}
 
 	render() {
@@ -151,6 +78,8 @@ export class chatProfileEditInitial extends Block {
 }
 
 
+
+/*
 const withChat = withStore((state) => {
 	const params: Record<string, string> = getUrlParams();
 	const id: number = params["id"] as number;
@@ -160,11 +89,21 @@ const withChat = withStore((state) => {
 				return (chat["id"] == id && state.user.id === chat["created_by"]);
 			});
 			if (chat) {
-				return {chat: chat};
+				return {chat: chat, id: chat.id, title: chat.title};
 			}
 		}
 	}
 	return {chat: undefined};
 });
 
-export const ChatProfileEdit = withChat(chatProfileEditInitial);
+export const ChatProfile = withChat(chatProfileInitial);
+*/
+const withChat = withStore((state) => {
+	return {
+		chat: state?.current_chat,
+		id: state?.current_chat?.id,
+		title: state?.current_chat?.title
+	};
+});
+
+export const ChatProfile = withChat(chatProfileInitial);

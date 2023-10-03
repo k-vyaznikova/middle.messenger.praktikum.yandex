@@ -6,7 +6,11 @@ import {BASE_FILE_URL} from "/utils/constants";
 interface MemberListProps{
 	member_list: Array<Object>,
 	alt_message?: string,
-	hideInput: string
+	hideInput: string,
+	deleteUsers?: ()=>void,
+	addUsers?: () => void,
+	editMode?: boolean,
+	template?: string
 }
 
 export class MemberList extends Block {
@@ -14,18 +18,32 @@ export class MemberList extends Block {
 		super(props);
 	}
 	// {{{memberShortInfo id=id memberName = name memberLogin = login memberLink = "#" memberPhoto = "/img/noimgprofile.svg" hiddenInput = "yes"}}}
+
 	protected init(): void {
-		this.children.member_list = this.props.member_list.map((member_props) => {
+		this.children.members = this._prepareMemberList(this.props.member_list);
+	}
+
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		this.children.members = this._prepareMemberList(newProps.member_list);
+		return true;
+	}
+
+	_prepareMemberList(membersProps: Array<any>) {
+		const members: MemberShortInfo[] = membersProps.map((props) => {
 			return new MemberShortInfo({
-				id: member_props["id"],
-				memberName: member_props["first_name"]+" "+member_props["second_name"],
-				memberLogin: member_props["login"],
-				memberPhoto: member_props["avatar"]? BASE_FILE_URL + member_props["avatar"] : "/img/noimgprofile.svg",
-				hiddenInput: "yes"
+				id: props["id"],
+				memberName: props["first_name"]+" "+props["second_name"],
+				memberLogin: props["login"],
+				memberPhoto: props["avatar"]? BASE_FILE_URL + props["avatar"] : "/img/noimgprofile.svg",
+				hiddenInput: "yes",
+				memberDelete: (props["delete_allow"] && this.props.editMode)? "yes" : "",
+				onClick: this.props.deleteUser ? this.props.deleteUser : undefined
 			});
 		});
+		return members;
 	}
+
 	render() {
-		return this.compile(template, this.props);
+		return this.compile(this.props.template? this.props.template : template, this.props);
 	}
 }

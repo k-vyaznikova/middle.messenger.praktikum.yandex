@@ -1,4 +1,3 @@
-
 <div class = "member-item">
     <div class = "member-info">
         <img src = "{{memberPhoto}}" class = "member-photo" alt = "{{memberLogin}}"/>
@@ -7,6 +6,9 @@
     </div>
     {{#if memberAdd}}
         <a href = "#" class = "member-add" data-id = {{id}}></a>
+    {{/if}}
+    {{#if memberDelete}}
+        <a href = "#" class = "member-delete" data-id = {{id}}></a>
     {{/if}}
     {{#if hiddenInput}}
         <input type="hidden" value = "{{id}}" name = "chat_members"/>

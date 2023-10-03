@@ -56,7 +56,7 @@ export class ChatInfo extends Block {
 				name: ""
 			});
 			this.children.link_info = new Link({
-				href: "/chat-info?id="+this.props.chatId,
+				href: "/chat-profile?id="+this.props.chatId,
 				class: "info",
 				ref: "link_info",
 				name: ""

@@ -10,7 +10,9 @@ import {ErrorMsg} from "/components/error_msg/script";
 
 interface ChangePhotoPopupProps{
 	funcClosePopup: () => void,
-	error: string
+	error: string,
+	uploadFunc: (form: HTMLFormElement) => Promise<ResultValidate>,
+	chatId: string
 }
 
 export class ChangePhotoPopup extends Block {
@@ -92,8 +94,9 @@ export class ChangePhotoPopup extends Block {
 				is_ok: false,
 				msg_text: "Вы забыли загрузить файл с изображением"
 			};
-		else
-			result = await UserController.uploadAvatar(new FormData(this.element as HTMLFormElement));
+		else {
+			result = await this.props.uploadFunc(this.element);
+		}
 		if (result.is_ok === true) {
 			this.props.funcClosePopup();
 			this.children.errorMsg.setProps({

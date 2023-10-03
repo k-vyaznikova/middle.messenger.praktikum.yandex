@@ -3,6 +3,7 @@ import template from "/components/profile_photo/template.hbs";
 import {PhotoView} from "/components/photo_view/script.ts";
 import Popup from "/layouts/popup/popup.ts";
 import {ChangePhotoPopup} from "/components/change_photo_popup/script";
+import {ResultValidate} from "/types/common_types.ts";
 
 interface ProfilePhotoProps{
 	profilePhoto: string,
@@ -11,7 +12,10 @@ interface ProfilePhotoProps{
 		click?: () => void,
 		mouseover: () => void,
 		mouseleave: () => void
-	}
+	},
+	uploadFunc?: (form: HTMLFormElement) => Promise<ResultValidate>,
+	chatId?: string,
+	allowEdit? : string
 }
 
 export class ProfilePhoto extends Block {
@@ -25,38 +29,44 @@ export class ProfilePhoto extends Block {
 			profileAlt: this.props.profileAlt,
 			events: {
 				mouseover: () => {
-					this.element?.querySelector(".change-avatar")?.classList.remove("invis");
+					if (this.props.allowEdit)
+						this.element?.querySelector(".change-avatar")?.classList.remove("invis");
 				},
 				mouseleave: () => {
-					this.element?.querySelector(".change-avatar")?.classList.add("invis");
+					if (this.props.allowEdit)
+						this.element?.querySelector(".change-avatar")?.classList.add("invis");
 				},
 				click: (event: Event) => {
 					event.preventDefault();
-					this.children.popup.setProps({
-						classVisibility: "visible"
-					});
+					if (this.props.allowEdit)
+						this.children.popup.setProps({
+							classVisibility: "visible"
+						});
 				}
 			}
 		});
-		this.children.popup = new Popup({
-			classVisibility: "invisible",
-			content: new ChangePhotoPopup({
-				error: "",
-				funcClosePopup: () => {
-					this.children.popup.setProps({
-						classVisibility: "invisible"
-					});
+		if (this.props.allowEdit)
+			this.children.popup = new Popup({
+				classVisibility: "invisible",
+				content: new ChangePhotoPopup({
+					error: "",
+					funcClosePopup: () => {
+						this.children.popup.setProps({
+							classVisibility: "invisible"
+						});
+					},
+					uploadFunc: this.props.uploadFunc as ((form: HTMLFormElement) => Promise<ResultValidate>),
+					chatId: this.props.chatId
+				}),
+				events: {
+					close: () => {
+						this.children.popup.setProps({
+							classVisibility: "invisible"
+						});
+					}
 				}
-			}),
-			events: {
-				close: () => {
-					this.children.popup.setProps({
-						classVisibility: "invisible"
-					});
-				}
-			}
 
-		});
+			});
 	}
 
 	render() {

@@ -17,11 +17,17 @@ export class UserController {
 		const data: SearchData = {
 			login: login
 		};
+		let users: User[] = [];
 		try {
-			return await this.api.search(data);
+			users = await this.api.search(data);
 		} catch (e) {
-			return [];
+			users = [];
 		}
+		const res: Record<string, any> = {
+			users: users,
+			search_word: login
+		};
+		store.set("search_results", res);
 	}
 
 	async getUser(id: number): Promise<User | null> {

@@ -3,13 +3,9 @@
         <div class="search-form">
             {{{search}}}
             <div class = "member-list">
-                {{#if alt_message}}
-                    <div class = "no-result">Нет совпадений</div>
-                {{else}}
-                    {{#each results}}
-                        {{{memberShortInfo}}}
-                    {{/each}}
-                {{/if}}
+                {{#each results}}
+                    {{{this}}}
+                {{/each}}
             </div>
         </div>
     </div>

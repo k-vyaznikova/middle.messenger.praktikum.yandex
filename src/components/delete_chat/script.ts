@@ -54,7 +54,6 @@ export class DeleteChat extends Block {
 			this.children.errorMsg.setProps({
 				"text": ""
 			});
-			// console.log(store.getState());
 			Router.go("/chat");
 		}
 	}

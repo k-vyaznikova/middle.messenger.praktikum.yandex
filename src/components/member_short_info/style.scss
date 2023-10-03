@@ -45,6 +45,16 @@
         background: url("/components/member_short_info/img/add-member.svg")  center center no-repeat transparent;
         display: block;
         background-size: cover;
+        min-width: 20px;
+    }
+
+    .member-delete{
+        width: 20px;
+        height: 20px;
+        background: url("/components/member_short_info/img/delete-member.svg")  center center no-repeat transparent;
+        display: block;
+        background-size: cover;
+        min-width: 20px;
     }
 
 }

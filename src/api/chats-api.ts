@@ -1,9 +1,8 @@
-import HTTP from "/utils/http_transport.ts";
 import {BaseAPI} from "/api/base-api.ts";
-import {User} from "/types/common_types.ts";
+import {User, ChatIdAndUsers, Chat} from "/types/common_types.ts";
 
 
-export interface ChatInfo {
+/* export interface ChatInfo {
 	id: number;
 	title: string;
 	avatar: string;
@@ -14,6 +13,7 @@ export interface ChatInfo {
 		content: string;
 	}
 }
+*/
 
 export class ChatsAPI extends BaseAPI {
 	constructor() {
@@ -30,7 +30,7 @@ export class ChatsAPI extends BaseAPI {
 	}
 
 
-	read(): Promise<ChatInfo[]> {
+	read(): Promise<Chat[]> {
 		return this.http.get("/");
 	}
 
@@ -38,13 +38,21 @@ export class ChatsAPI extends BaseAPI {
 		return this.http.get(`/${id}/users`);
 	}
 
-	addUsers(id: number, users: number[]): Promise<unknown> {
-		return this.http.put("/users", {users, chatId: id});
+	addUsers(chatIdAndUsers: ChatIdAndUsers): Promise<unknown> {
+		return this.http.put("/users", chatIdAndUsers);
+	}
+
+	deleteUsers(chatIdAndUsers: ChatIdAndUsers): Promise<unknown> {
+		return this.http.delete("/users", chatIdAndUsers);
 	}
 
 	async getToken(id: number): Promise<string> {
 		const response = await this.http.post<{ token: string }>(`/token/${id}`);
 		return response.token;
+	}
+
+	public async uploadChatAvatar(chatIdAndFile: FormData) {
+		return this.http.put("/avatar", chatIdAndFile);
 	}
 
 
