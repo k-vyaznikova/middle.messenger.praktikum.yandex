@@ -1,8 +1,6 @@
 <div class = "contact-item-block {{#if contactSelected}} selected{{/if}}">
     <a href = "{{contactLinkDialog}}" class = "contact-item" >
-        <div class = "contact-img">
-            <img src = "{{contactImg}}" alt = "{{contactName}} - аватар"/>
-        </div>    
+        <div class = "contact-img" style="background: url('{{contactImg}}') 50% 50% no-repeat; background-size: cover;"></div>    
         <div class = "contact-info">
             <span class = "contact-name">{{contactName}}</span>
             <span class = "contact-msg-info">

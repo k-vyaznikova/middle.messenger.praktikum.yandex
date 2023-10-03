@@ -11,6 +11,8 @@ import {BASE_FILE_URL} from "/utils/constants.ts";
 import {ResultValidate} from "/types/common_types.ts";
 import UserController from "/controllers/user-controller.ts";
 import {withStore} from "/utils/store";
+import {checkError} from "/utils/form_utils";
+import {ErrorMsg} from "/components/error_msg/script";
 
 interface ProfileFormProps{
 	submit_url?: string,
@@ -24,7 +26,9 @@ interface ProfileFormProps{
 	edit_mode?: string,
 	submit_btn: SubmitBtnProps,
 	footer_links?: string,
-	profile_avatar?: string
+	profile_avatar?: string,
+	success_msg?: string
+
 }
 
 export class ProfileFormInitial extends Block {
@@ -38,11 +42,44 @@ export class ProfileFormInitial extends Block {
 		this.children.profilePhoto = new ProfilePhoto({
 			profilePhoto: this.props.profilePhoto.profileImg,
 			profileAlt: "Фото профиля",
-			uploadFunc: this.uploadAvatar
+			uploadFunc: this.uploadAvatar,
+			allowEdit: this.props.allowEdit
+		});
+
+		this.children.errorMsg = new ErrorMsg({
+			text: ""
 		});
 
 		this.children.submitBtn = new SubmitBtn({
-			text: "Сохранить изменения"
+			text: "Сохранить изменения",
+			onClick: async (event: Event) => {
+				event.preventDefault();
+				let resultValid: boolean = true;
+				this.children.profile_items.forEach((item) => {
+					if (!checkError(
+						item.value,
+						item.props.validate_type,
+						item
+					) && resultValid)
+						resultValid = false;
+				});
+				if (resultValid) {
+					const dataPair: Array<any> = this.children.profile_items.map(function(input) {
+						return [input.name, input.value];
+					});
+					const data = Object.fromEntries(dataPair);
+					console.log(data);
+					const res: ResultValidate = await UserController.updateProfile(data);
+					if (!res.is_ok)
+						this.children.errorMsg.setProps({
+							text: res.msg_text
+						});
+					else
+						this.setProps({
+							success_msg: "Изменения успешно сохранены"
+						});
+				}
+			}
 		});
 		if (this.props.footer_links) {
 			this.children.link_1 = new Link({

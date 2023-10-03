@@ -29,6 +29,8 @@ export class DialogInitial extends Block {
 			chatImg: "/img/noimgprofile.svg",
 			chatId: this.props.selectedChat
 		});
+
+
 		this.children.items_dialog = this._prepareOldMessages(this.props?.messages as Array<any>);
 		this.children.sendMsgForm = new SendMsgForm({});
 	}

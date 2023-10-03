@@ -26,6 +26,10 @@ export class UserAPI extends BaseAPI {
 		return this.http.put("/password", data);
 	}
 
+	public async updateProfile(data: Record<string, string>) {
+		return this.http.put("/profile", data);
+	}
+
 
 	public create = undefined;
 	public update = undefined;

@@ -93,7 +93,7 @@ export function validate(value: string, typeString: string) : ResultValidate {
 }
 
 
-export function checkError(value: string | undefined, typeString: string, component: Input | SendMsgText): boolean {
+export function checkError(value: string | undefined, typeString: string, component: Input | SendMsgText | ProfileItem): boolean {
 	let result: ResultValidate = validate(value as string, typeString as string);
 	if (result.is_ok && component.comparison_value) {
 		result = comparePassword(value, component.comparison_value);

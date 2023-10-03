@@ -13,8 +13,8 @@ interface ContactItemProps{
 	contactMsg: string,
 	contactTimeMsg: string,
 	contactQMsg?: string,
-	ref: string,
-	onClick: (event: Event) => void,
+	// ref?: string,
+	onClick: (item: ContactItem) => void,
 	events: {
 		click: (event: Event) => void
 	}
@@ -27,14 +27,20 @@ export class ContactItem extends Block {
 			events: {
 				click: (event: Event) =>{
 					event.preventDefault();
-					props.onClick(event);
+					props.onClick(this);
 				}
 			}
 		});
 	}
 
+
 	init() {
 		this.props.contactImg = this.props.contactImg? BASE_FILE_URL + this.props.contactImg : "/img/noimgprofile.svg";
+	}
+
+	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		// console.log(newProps);
+		return true;
 	}
 	render() {
 		return this.compile(template, this.props);

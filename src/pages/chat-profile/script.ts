@@ -4,7 +4,7 @@ import {Link} from "/components/link/script";
 import ChatsController from "/controllers/chats-controller";
 import {getUrlParams} from "/utils/url_utils";
 import {ChatProfile} from "/components/chat_profile/script";
-
+import chatsController from "/controllers/chats-controller";
 
 export class ChatProfilePage extends Block {
 	constructor() {

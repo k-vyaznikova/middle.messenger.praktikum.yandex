@@ -34,8 +34,9 @@ export class ContactListInitial extends Block {
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
+		// console.log("IN componentDidUpdate");
+		// console.log(newProps);
 		this.children.contacts = this._prepareContactList(newProps.chats);
-
 		return true;
 	}
 
@@ -43,25 +44,31 @@ export class ContactListInitial extends Block {
 
 	}
 
-
-	_getDialog(chatID: number) {
-	}
-
 	private _prepareContactList(chats: Array<any>) {
+		const that: any = this;
 		return chats.map(function(item: any) {
-			return new ContactItem({
+			const props: Record<string, any> = {
 				id: item["id"],
 				contactName: item["title"],
 				contactImg: item["avatar"],
 				yourMsg: "yes",
 				contactMsg: item["last_message"]? item["last_message"]["content"] : "",
 				contactTimeMsg: item["last_message"]? formattedTime(item["last_message"]["time"]) : "",
-				contactQMsg: item["unread_count"],
-				ref: "contact_"+item["id"],
-				onClick: () => {
+				// ref: "chat_"+item["id"],
+				// contactSelected: item[]
+				onClick: (contact: ContactItem) => {
 					ChatsController.selectChat(item["id"]);
+					that.children.contacts.forEach((element) => {
+						console.log(element.props.id + " = "+ contact.props.id);
+						element.setProps({
+							contactSelected: element.props.id == contact.props.id? "yes" : ""
+						});
+					});
 				}
-			});
+			};
+			if (item["unread_count"] > 0)
+				props.contactQMsg = item["unread_count"];
+			return new ContactItem(props);
 		});
 	}
 

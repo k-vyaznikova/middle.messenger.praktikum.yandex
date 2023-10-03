@@ -53,8 +53,8 @@ export class chatProfileInitial extends Block {
 		return new MemberList({
 			member_list: users,
 			hideInput: "yes",
-			editMode: false, 
-			template: templateForMemberList
+			editMode: false
+			// template: templateForMemberList
 		});
 	}
 
@@ -77,27 +77,6 @@ export class chatProfileInitial extends Block {
 	}
 }
 
-
-
-/*
-const withChat = withStore((state) => {
-	const params: Record<string, string> = getUrlParams();
-	const id: number = params["id"] as number;
-	if (id > 0 ) {
-		if (state.chats && (state.chats instanceof Array)) {
-			const chat: Record<string, string> = state.chats.find((chat) => {
-				return (chat["id"] == id && state.user.id === chat["created_by"]);
-			});
-			if (chat) {
-				return {chat: chat, id: chat.id, title: chat.title};
-			}
-		}
-	}
-	return {chat: undefined};
-});
-
-export const ChatProfile = withChat(chatProfileInitial);
-*/
 const withChat = withStore((state) => {
 	return {
 		chat: state?.current_chat,

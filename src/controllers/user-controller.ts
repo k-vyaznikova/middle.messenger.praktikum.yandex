@@ -3,7 +3,7 @@ import store from "/utils/store.ts";
 import {User} from "/types/common_types.ts";
 import {SearchData} from "/types/common_types.ts";
 import {ChangePassData, ResultValidate} from "/types/common_types.ts";
-import AuthController from "./auth-controller";
+import AuthController from "/controllers/auth-controller";
 
 
 export class UserController {
@@ -66,6 +66,24 @@ export class UserController {
 		let result: ResultValidate;
 		try {
 			await this.api.changePass(data);
+			result = {
+				is_ok: true,
+				msg_text: "Пароль успешно изменен."
+			};
+		} catch (e: any) {
+			result = {
+				is_ok: false,
+				msg_text: e.reason
+			};
+		}
+		return result;
+	}
+
+	async updateProfile(data: Record<string, string>) {
+		let result: ResultValidate;
+		try {
+			await this.api.updateProfile(data);
+			await AuthController.fetchUser();
 			result = {
 				is_ok: true,
 				msg_text: "Пароль успешно изменен."

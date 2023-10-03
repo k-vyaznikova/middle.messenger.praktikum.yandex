@@ -1,11 +1,14 @@
     {{#if edit_mode}}
         <form class = "profile-form">
+        {{{errorMsg}}} 
+        
     {{else}}
         <div  class = "profile-form">
     {{/if}}    
         {{{profilePhoto}}}
         <div class = "profile-header">{{title}}</div>
         <div class = "profile-body password-edit">
+            <div class="success-msg">{{success_msg}}</div>
             {{#each profile_items}}
                 {{{this}}}
             {{/each}}
@@ -13,7 +16,7 @@
        
             {{#if edit_mode}}
                 <div class = "profile-footer form-footer">
-                {{{submitBtn text = submit_btn.text onClick = submit_btn.onClick}}}
+                {{{submitBtn}}}
                 </div>
             {{/if}}    
             {{#if footer_links}}

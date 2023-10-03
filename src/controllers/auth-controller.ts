@@ -47,11 +47,22 @@ export class AuthController {
 		return result;
 	}
 
+	async signupAndSignin(data: SignupData) {
+		let result: ResultValidate = await this.signup(data);
+		if (result.is_ok)
+			result = await this.signin({
+				login: data.login,
+				password: data.password
+			});
+		return result;
+	}
+
 
 	async fetchUser() {
 		try {
 			const user: any= await this.api.read();
 			store.set("user", user);
+			console.log(user);
 		} catch (err: any) {}
 	}
 

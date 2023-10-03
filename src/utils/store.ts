@@ -39,8 +39,8 @@ export function withStore<SP>(mapStateToProps: (state: State) => SP) {
 				super({...props, ...previousState});
 				this.onStoreUpdate = () => {
 					const stateProps = mapStateToProps(store.getState());
-					//if (isEqual(stateProps as PlainObject, previousState as PlainObject))
-						//return;
+					// if (isEqual(stateProps as PlainObject, previousState as PlainObject))
+					// return;
 
 					previousState = stateProps;
 

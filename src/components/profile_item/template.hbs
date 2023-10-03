@@ -3,7 +3,7 @@
     
     {{#if editMode}} 
         <label class = "profile-name" for = "{{infoName}}">{{infoLabel}}</label>
-        <input class = "profile-value" value = "{{value}}"  name = "{{infoName}}" id = "{{infoName}}" type="{{infoType}}" ref = {{ref}}/>
+        <input class = "profile-value" value = "{{value}}"  name = "{{infoName}}" id = "{{infoName}}" type="{{infoType}}" data-validate = "{{validate_type}}"/>
     {{else}}
         <div class = "profile-name">{{infoLabel}}</div>
         <div class = "profile-value">{{value}}</div>    
