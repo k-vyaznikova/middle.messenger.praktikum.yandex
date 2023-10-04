@@ -40,6 +40,25 @@ export class UserController {
 		}
 	}
 
+	async fetchUserById(userId: number) {
+		let userInfo: User;
+		try {
+			userInfo = await UserAPI.request(userId);
+		} catch (e) {
+			userInfo = {
+				id: userId,
+				first_name: "Noname",
+				second_name: "Noname",
+				login: "Noname",
+				email: "",
+				password: "",
+				phone: "",
+				avatar: ""
+			};
+		}
+		return userInfo;
+	}
+
 
 	async uploadAvatar(file: FormData) {
 		let result: ResultValidate;

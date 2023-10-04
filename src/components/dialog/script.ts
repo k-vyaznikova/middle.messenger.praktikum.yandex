@@ -10,6 +10,8 @@ import {SendMsgForm} from "/components/send_msg_form/script.ts";
 import {Message as MessageInfo} from "/controllers/messages-controller.ts";
 import store from "/utils/store.ts";
 import {BASE_FILE_URL} from "/utils/constants";
+import {UserController} from "/controllers/user-controller";
+import {User} from "/types/common_types";
 
 
 interface DialogProps{
@@ -61,12 +63,16 @@ export class DialogInitial extends Block {
 	_prepareOldMessages(messages: Array<any>): any {
 		const self: any = this;
 		const newMess = messages.map(function(item) {
+			console.log(item);
+			// const userInfo: User = UserController.fetchUserById(item["user_id"]);
 			return {
 				type: self.props.userId === item["user_id"]? "from" : "to",
 				msgText: item["content"],
 				msgTime: formattedTime(item["time"]),
 				msgDate: formattedDate(item["time"]),
-				msgImg: ""
+				msgImg: ""/* ,
+				user: userInfo*/
+
 			};
 		});
 		const sortMessages: Array<any>= [];

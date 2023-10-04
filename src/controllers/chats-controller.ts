@@ -21,7 +21,7 @@ export class ChatsController {
 			result = {
 				is_ok: true,
 				msg_text: ""
-			}
+			};
 		} catch (e: any) {
 			result = {
 				is_ok: false,
