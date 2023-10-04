@@ -74,7 +74,7 @@ export class ChatPageInitial extends Block {
 		});
 		this.children.popupCreateChat = new Popup({
 			classVisibility: "invisible",
-    		content: new AddChat({
+			content: new AddChat({
 				error: "",
 				funcClosePopup: () => {
 					this.children.popupCreateChat.setProps({

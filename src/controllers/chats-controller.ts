@@ -119,7 +119,7 @@ export class ChatsController {
 		const chats = await this.api.read();
 
 		chats.map(async (chat) => {
-		  	const token = await this.getToken(chat.id);
+			const token = await this.getToken(chat.id);
 			await MessagesController.connect(chat.id, token);
 		});
 

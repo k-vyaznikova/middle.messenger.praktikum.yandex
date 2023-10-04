@@ -62,8 +62,9 @@ export class AuthController {
 		try {
 			const user: any= await this.api.read();
 			store.set("user", user);
-			console.log(user);
-		} catch (err: any) {}
+		} catch (err: any) {
+			console.log(err);
+		}
 	}
 
 	public getRegistrationError() {
