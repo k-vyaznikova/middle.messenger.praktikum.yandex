@@ -103,16 +103,17 @@ export class Block {
 		});
 	}
 
-	private async _componentDidUpdate(oldProps: any, newProps: any) {
-		const res: boolean = this.componentDidUpdate(oldProps, newProps);
+	private async _componentDidUpdate(newProps: any) {
+		const res: boolean = this.componentDidUpdate(newProps);
 		if (res) {
 			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 		}
 	}
 
 	// Может переопределять пользователь, необязательно трогать
-	componentDidUpdate(oldProps: any, newProps: any) {
-		return true;
+	componentDidUpdate(newProps: any) {
+		const t: any= newProps;
+		return true || (t && false);
 	}
 
 	setProps = (nextProps: any) => {
@@ -194,9 +195,9 @@ export class Block {
 		const self = this;
 		return new Proxy(props, {
 			set(target, prop, val) {
-				const oldProps = {...target};
+				// const oldProps = {...target};
 				target[prop] = val;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
+				self.eventBus().emit(Block.EVENTS.FLOW_CDU, target);
 				return true;
 			},
 			deleteProperty() {

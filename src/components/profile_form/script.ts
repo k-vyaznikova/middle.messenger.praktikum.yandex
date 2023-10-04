@@ -95,7 +95,7 @@ export class ProfileFormInitial extends Block {
 		}
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(newProps: any): boolean {
 		this.children.profilePhoto = new ProfilePhoto({
 			profilePhoto: newProps.profilePhoto.profileImg,
 			profileAlt: "Фото профиля",

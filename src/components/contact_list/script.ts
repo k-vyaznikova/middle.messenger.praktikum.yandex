@@ -20,7 +20,7 @@ export class ContactListInitial extends Block {
 		this.children.contacts = this._prepareContactList(this.props.chats as any);
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(newProps: any): boolean {
 		this.children.contacts = this._prepareContactList(newProps.chats);
 		return true;
 	}

@@ -10,8 +10,6 @@ import {SendMsgForm} from "/components/send_msg_form/script.ts";
 import {Message as MessageInfo} from "/controllers/messages-controller.ts";
 import store from "/utils/store.ts";
 import {BASE_FILE_URL} from "/utils/constants";
-import {UserController} from "/controllers/user-controller";
-import {User} from "/types/common_types";
 
 
 interface DialogProps{
@@ -37,7 +35,7 @@ export class DialogInitial extends Block {
 		this.children.sendMsgForm = new SendMsgForm({});
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(newProps: any): boolean {
 		if (store.getState().selectedChat) {
 			const selectedChat:any = store.getState().chats.find((chat: any)=>{
 				return chat["id"] == store.getState().selectedChat;

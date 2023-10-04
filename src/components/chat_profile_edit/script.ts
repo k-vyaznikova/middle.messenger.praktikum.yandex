@@ -25,7 +25,7 @@ export class chatProfileEditInitial extends Block {
 	}
 
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(newProps: any): boolean {
 		this.children.profilePhoto = new ProfilePhoto({
 			profilePhoto: newProps?.chat?.avatar ? (BASE_FILE_URL + newProps?.chat?.avatar) : "/img/noimgprofile.svg",
 			profileAlt: newProps?.chat?.title,

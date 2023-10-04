@@ -38,7 +38,7 @@ export class UserSearchInitial extends Block {
 		this.children.results = this._formResults((this.props.search_results as Record<string, any>).users);
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(newProps: any): boolean {
 		this.children.search = new Search({
 			placeholder: "Начните вводить логин участника...",
 			left_align: "yes",

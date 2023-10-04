@@ -22,7 +22,7 @@ export class MemberList extends Block {
 		this.children.members = this._prepareMemberList(this.props.member_list as Array<any>);
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
+	componentDidUpdate(newProps: any): boolean {
 		this.children.members = this._prepareMemberList(newProps.member_list);
 		return true;
 	}

@@ -43,7 +43,7 @@ export class UserController {
 	async fetchUserById(userId: number) {
 		let userInfo: User;
 		try {
-			userInfo = await UserAPI.request(userId);
+			userInfo = await this.api.request(userId);
 		} catch (e) {
 			userInfo = {
 				id: userId,
