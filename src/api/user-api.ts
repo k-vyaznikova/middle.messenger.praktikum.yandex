@@ -1,5 +1,5 @@
 import {BaseAPI} from "/api/base-api.ts";
-import {SearchData} from "/types/common_types.ts";
+import {SearchData, User} from "/types/common_types.ts";
 import {ChangePassData} from "/types/common_types.ts";
 
 
@@ -13,7 +13,7 @@ export class UserAPI extends BaseAPI {
 	}
 
 
-	public async request(id: number) {
+	public async request(id: number): Promise<any> {
 		return this.http.get(`/${id}`);
 	}
 
@@ -29,11 +29,6 @@ export class UserAPI extends BaseAPI {
 	public async updateProfile(data: Record<string, string>) {
 		return this.http.put("/profile", data);
 	}
-
-
-	public create = undefined;
-	public update = undefined;
-	public delete = undefined;
 }
 
 export const API = new UserAPI();

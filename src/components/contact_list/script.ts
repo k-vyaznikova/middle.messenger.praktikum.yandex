@@ -54,12 +54,9 @@ export class ContactListInitial extends Block {
 				yourMsg: "yes",
 				contactMsg: item["last_message"]? item["last_message"]["content"] : "",
 				contactTimeMsg: item["last_message"]? formattedTime(item["last_message"]["time"]) : "",
-				// ref: "chat_"+item["id"],
-				// contactSelected: item[]
 				onClick: (contact: ContactItem) => {
 					ChatsController.selectChat(item["id"]);
 					that.children.contacts.forEach((element) => {
-						console.log(element.props.id + " = "+ contact.props.id);
 						element.setProps({
 							contactSelected: element.props.id == contact.props.id? "yes" : ""
 						});

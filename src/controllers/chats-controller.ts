@@ -61,7 +61,6 @@ export class ChatsController {
 				chatId: id,
 				users: userIds
 			};
-			console.log(chatIdAndUsers);
 			await this.api.deleteUsers(chatIdAndUsers);
 			await this.fetchChatAndUser(id);
 			result = {
@@ -69,7 +68,6 @@ export class ChatsController {
 				msg_text: "Список участников успешно обновлен"
 			};
 		} catch (e) {
-			console.log("in_errror!");
 			result = {
 				is_ok: false,
 				msg_text: e.reason

@@ -33,11 +33,6 @@ export class AuthAPI extends BaseAPI {
 	public logout() {
 		return this.http.post("/logout");
 	}
-
-
-	public create = undefined;
-	public update = undefined;
-	public delete = undefined;
 }
 
 export const API = new AuthAPI();

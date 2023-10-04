@@ -11,15 +11,15 @@ export abstract class BaseAPI {
 		throw new Error("Not implemented");
 	}
 
-	public request() {
-		throw new Error("Not implemented");
+	public request(id: number): Promise<any> {
+		throw new Error("Not implemented ["+id+"]");
 	}
 
 	public update() {
 		throw new Error("Not implemented");
 	}
 
-	public delete() {
-		throw new Error("Not implemented");
+	public delete(id: number): Promise<any> {
+		throw new Error("Not implemented ["+id+"]");
 	}
 }

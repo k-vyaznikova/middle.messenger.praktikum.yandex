@@ -71,12 +71,14 @@ export class DialogInitial extends Block {
 		});
 		const sortMessages: Array<any>= [];
 		const dates: Array<any> = [];
+
 		newMess.forEach(function(item) {
 			if (!dates.includes(item["msgDate"])) {
 				sortMessages.push(new DateMsg({date: item["msgDate"]}));
 				dates.push(item["msgDate"]);
 			}
-			const mess: OutgoingMsg | IncomingMsg = newMess["type"] === "from"? new OutgoingMsg(item) : new IncomingMsg(item);
+			// console.log()
+			const mess: OutgoingMsg | IncomingMsg = item["type"] === "from"? new OutgoingMsg(item) : new IncomingMsg(item);
 			sortMessages.push(mess);
 		});
 		return sortMessages;

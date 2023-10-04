@@ -66,7 +66,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 	if (isProtectedPage) {
 		try {
 			await AuthController.fetchUser();
-			//console.log(store.getState());
 			if (store.getState().user.id > 0 )
 				Router.start();
 		} catch (e: any) {

@@ -79,7 +79,7 @@ export class RegisterPage extends Block {
 		this.children.form = new Form({
 			title: "Регистрация",
 			ref: "form",
-			//send_function: AuthController.signup,
+			// send_function: AuthController.signup,
 			send_function: AuthController.signupAndSignin,
 			context_func: AuthController,
 			error: {text: ""},

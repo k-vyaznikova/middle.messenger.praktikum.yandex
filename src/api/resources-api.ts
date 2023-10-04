@@ -8,10 +8,6 @@ export class ResourcesAPI extends BaseAPI {
 
 	public read = undefined;
 
-
-	public create = undefined;
-	public update = undefined;
-	public delete = undefined;
 }
 
-export const API = new AuthAPI();
+export const API = new ResourcesAPI();

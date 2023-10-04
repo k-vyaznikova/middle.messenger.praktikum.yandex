@@ -25,7 +25,7 @@ export class ChatsAPI extends BaseAPI {
 		return await this.http.post("/", {title});
 	}
 
-	delete(id: number): Promise<unknown> {
+	delete(id: number): Promise<any> {
 		return this.http.delete("/", {chatId: id});
 	}
 
@@ -54,9 +54,6 @@ export class ChatsAPI extends BaseAPI {
 	public async uploadChatAvatar(chatIdAndFile: FormData) {
 		return this.http.put("/avatar", chatIdAndFile);
 	}
-
-
-	update = undefined;
 }
 
 export const API = new ChatsAPI();
