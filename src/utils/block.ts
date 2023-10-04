@@ -177,13 +177,13 @@ export class Block {
 			stub.replaceWith(component.getContent()!);
 		};
 
-		// Object.entries(this.children).forEach(([_, component]) => {
-		Object.entries(this.children).forEach((component) => {
+		Object.entries(this.children).forEach(([_, component]) => {
 			if (Array.isArray(component)) {
-				(component as Array<Block>).forEach(replaceStub);
+				component.forEach(replaceStub);
 			} else {
 				replaceStub(component);
 			}
+			return _;
 		});
 
 		return temp.content;
