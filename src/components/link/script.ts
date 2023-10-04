@@ -12,7 +12,7 @@ export class Link extends Block {
 				click: (event: Event) => {
 					event.preventDefault();
 					if (this.props.func_before)
-						this.props?.func_before();
+						(this.props?.func_before as ()=>void)();
 					this.navigate();
 				}
 			}
@@ -20,7 +20,7 @@ export class Link extends Block {
 	}
 
 	navigate() {
-		this.router.go(this.props.href);
+		this.router.go(this.props.href as string);
 	}
 
 	render() {

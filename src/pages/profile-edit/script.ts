@@ -1,7 +1,5 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile-edit/profile-edit.hbs";
-import {getFormData} from "/utils/get_form_data";
-import {checkError} from "../../utils/form_utils";
 import {User} from "/types/common_types";
 import {ProfileForm} from "/components/profile_form/script";
 import {Link} from "/components/link/script";

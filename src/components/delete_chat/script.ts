@@ -5,7 +5,6 @@ import ChatsController from "/controllers/chats-controller";
 import {ResultValidate} from "/types/common_types";
 import {ErrorMsg} from "../error_msg/script";
 import Router from "/utils/routing/router";
-import store from "/utils/store.ts";
 
 
 interface DeleteChatProps{
@@ -34,7 +33,7 @@ export class DeleteChat extends Block {
 			text: "Не удалять",
 			onClick: (event: Event) => {
 				event.preventDefault();
-				this.props.funcClosePopup();
+				(this.props.funcClosePopup as ()=>void)();
 			}
 		});
 
@@ -44,13 +43,13 @@ export class DeleteChat extends Block {
 	}
 
 	async deleteChat() {
-		const result: ResultValidate | number = await ChatsController.deleteChat(this.props.chat_id);
+		const result: ResultValidate | number = await ChatsController.deleteChat(this.props.chat_id as number);
 		if (result.is_ok === false) {
 			this.children.errorMsg.setProps({
 				text: result.msg_text? result.msg_text : "Ошибка при удалении чата"
 			});
 		} else {
-			this.props.funcClosePopup();
+			(this.props.funcClosePopup as ()=> void)();
 			this.children.errorMsg.setProps({
 				"text": ""
 			});

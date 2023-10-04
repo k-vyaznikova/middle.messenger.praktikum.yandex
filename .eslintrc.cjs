@@ -50,6 +50,7 @@ module.exports = {
 			"functions": "never"
 		}],
 		"curly": "off",
-		"no-unused-vars": "off"
+		"no-unused-vars": "off",
+		"prefer-promise-reject-errors": "off"
 	}
 };

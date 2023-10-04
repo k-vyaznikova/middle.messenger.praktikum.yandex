@@ -2,7 +2,7 @@ import {Block} from "/utils/block.ts";
 import template from "/components/send_msg_btn/template.hbs";
 
 interface SendMsgBtnProps{
-	onClick: (event: Event) => void,
+	onClick?: (event: Event) => void,
 	events:{
 		click: (event: Event) => void
 	}
@@ -14,7 +14,7 @@ export class SendMsgBtn extends Block {
 			...props,
 			events: {
 				click: (event: Event) => {
-					props.onClick(event);
+					(props.onClick as (event:Event)=>void)(event);
 				}
 			}
 		});

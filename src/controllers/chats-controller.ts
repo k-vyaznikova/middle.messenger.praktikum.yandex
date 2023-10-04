@@ -2,7 +2,7 @@ import {API, ChatsAPI} from "/api/chats-api.ts";
 import {API as APIAuth} from "/api/auth-api.ts";
 import store from "/utils/store.ts";
 import {ResultValidate} from "/types/common_types.ts";
-import {User, ChatIdAndUsers, Chat} from "/types/common_types.ts";
+import {User, ChatIdAndUsers} from "/types/common_types.ts";
 import MessagesController from "/controllers/messages-controller.ts";
 
 
@@ -13,12 +13,15 @@ export class ChatsController {
 		this.api = API;
 	}
 
-	async createChat(title: string): Promise<ResultValidate | number> {
+	async createChat(title: string): Promise<ResultValidate> {
 		let result: ResultValidate;
 		try {
-			const id: number = await this.api.create(title);
+			await this.api.create(title);
 			this.fetchChats();
-			return id;
+			result = {
+				is_ok: true,
+				msg_text: ""
+			}
 		} catch (e: any) {
 			result = {
 				is_ok: false,
@@ -42,7 +45,7 @@ export class ChatsController {
 				is_ok: true,
 				msg_text: "Список участников успешно обновлен"
 			};
-		} catch (e) {
+		} catch (e: any) {
 			console.log("in_errror!");
 			result = {
 				is_ok: false,
@@ -67,7 +70,7 @@ export class ChatsController {
 				is_ok: true,
 				msg_text: "Список участников успешно обновлен"
 			};
-		} catch (e) {
+		} catch (e: any) {
 			result = {
 				is_ok: false,
 				msg_text: e.reason
@@ -123,7 +126,7 @@ export class ChatsController {
 		store.set("chats", chats);
 	}
 
-	async fetchChatAndUser(chatId: number): ResultValidate {
+	async fetchChatAndUser(chatId: number): Promise<ResultValidate> {
 		try {
 			const chats: Array<any> = await this.api.read();
 			let users: Array<any> = await this.api.getUsers(chatId);
@@ -188,7 +191,7 @@ export class ChatsController {
 		let result: ResultValidate;
 		try {
 			await this.api.uploadChatAvatar(chatIdAndFile);
-			await this.fetchChatAndUser(chatIdAndFile.get("chatId") as number);
+			await this.fetchChatAndUser(chatIdAndFile.get("chatId") as unknown as number);
 			result = {
 				is_ok: true,
 				msg_text: "Аватар успешно изменен."

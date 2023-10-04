@@ -18,15 +18,12 @@ export class PopupOpen extends Block {
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
-					this.props.onClick();
+					(this.props.onClick as ()=>void)();
 				}
 			}
 		});
 	}
 
-	openPopup(popu_id: string) {
-
-	}
 
 	render() {
 		return this.compile(template, this.props);

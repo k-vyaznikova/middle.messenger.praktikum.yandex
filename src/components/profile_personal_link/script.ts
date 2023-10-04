@@ -25,12 +25,9 @@ export class ProfilePersonalLink extends Block {
 	}
 
 	navigate() {
-		this.router.go(this.props.href);
+		this.router.go(this.props.href as string);
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
-		return true;
-	}
 	render() {
 		return this.compile(template, this.props);
 	}

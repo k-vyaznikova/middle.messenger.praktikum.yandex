@@ -3,8 +3,9 @@ import template from "/components/send_msg_text/template.hbs";
 
 interface SendMsgTextProps{
 	validate_type: string,
+	comparison_value?: string,
 	events:{
-		keyup: () => void
+		keyup: (event: Event) => void
 	}
 }
 
@@ -14,7 +15,7 @@ export class SendMsgText extends Block {
 	}
 
 	getValue() {
-		return this.element?.querySelector("textarea#send-msg")?.value;
+		return (this.element?.querySelector("textarea#send-msg") as HTMLTextAreaElement).value;
 	}
 
 	getValidateType() {

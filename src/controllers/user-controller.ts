@@ -1,4 +1,4 @@
-import {API, UsersAPI} from "../api/user-api";
+import {API, UserAPI} from "../api/user-api";
 import store from "/utils/store.ts";
 import {User} from "/types/common_types.ts";
 import {SearchData} from "/types/common_types.ts";
@@ -7,13 +7,13 @@ import AuthController from "/controllers/auth-controller";
 
 
 export class UserController {
-	private api: UsersAPI;
+	private api: UserAPI;
 
 	constructor() {
 		this.api = API;
 	}
 
-	async search(login: string): Promise<User[]> {
+	async search(login: string): Promise<any> {
 		const data: SearchData = {
 			login: login
 		};
@@ -23,6 +23,8 @@ export class UserController {
 		} catch (e) {
 			users = [];
 		}
+
+		console.log(users);
 		const res: Record<string, any> = {
 			users: users,
 			search_word: login

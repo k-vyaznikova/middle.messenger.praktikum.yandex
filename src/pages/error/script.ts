@@ -3,13 +3,8 @@ import template from "/pages/error/error.hbs";
 import {Link} from "/components/link/script";
 
 
-interface ErrorPageProps {
-	code?: string,
-	error_message?: string,
-	back_href?: string
-}
 export class ErrorPage extends Block {
-	constructor(props: ErrorPageProps) {
+	constructor() {
 		super({
 			code: "404",
 			error_message: "Такой страницы нет",
@@ -20,7 +15,7 @@ export class ErrorPage extends Block {
 
 	init() {
 		this.children.link = new Link({
-			href: this.props["back_href"],
+			href: this.props["back_href"] as string,
 			class: "error-link",
 			name: "Назад к чатам"
 		});

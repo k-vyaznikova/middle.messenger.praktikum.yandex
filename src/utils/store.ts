@@ -1,6 +1,6 @@
 import {EventBus} from "/utils/event_bus.ts";
 import {Block} from "/utils/block.ts";
-import {set, isEqual, PlainObject} from "/utils/store_utils.ts";
+import {set} from "/utils/store_utils.ts";
 import {User} from "/types/common_types.ts";
 
 const STORE_EVENTS = {

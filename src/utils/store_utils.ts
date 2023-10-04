@@ -24,7 +24,7 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
 }
 
 
-function strToObj(str: string, value: unknown = ""): Indexed {
+export function strToObj(str: string, value: unknown = ""): Indexed {
 	let res: Indexed = {};
 	let tmp: Indexed = {};
 	for (let i = (str.length - 1); i >=0; i--) {

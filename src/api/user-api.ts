@@ -8,7 +8,7 @@ export class UserAPI extends BaseAPI {
 		super("/user");
 	}
 
-	public search(data: SearchData): Promise<User> {
+	public search(data: SearchData): Promise<User[]> {
 		return this.http.post("/search", data);
 	}
 

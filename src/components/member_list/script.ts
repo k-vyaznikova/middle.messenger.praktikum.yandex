@@ -7,7 +7,7 @@ interface MemberListProps{
 	member_list: Array<Object>,
 	alt_message?: string,
 	hideInput: string,
-	deleteUsers?: ()=>void,
+	deleteUser?: ()=>void,
 	addUsers?: () => void,
 	editMode?: boolean,
 	template?: string
@@ -17,10 +17,9 @@ export class MemberList extends Block {
 	constructor(props: MemberListProps) {
 		super(props);
 	}
-	// {{{memberShortInfo id=id memberName = name memberLogin = login memberLink = "#" memberPhoto = "/img/noimgprofile.svg" hiddenInput = "yes"}}}
 
 	protected init(): void {
-		this.children.members = this._prepareMemberList(this.props.member_list);
+		this.children.members = this._prepareMemberList(this.props.member_list as Array<any>);
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
@@ -28,7 +27,7 @@ export class MemberList extends Block {
 		return true;
 	}
 
-	_prepareMemberList(membersProps: Array<any>) {
+	_prepareMemberList(membersProps: Array<any>): any {
 		const members: MemberShortInfo[] = membersProps.map((props) => {
 			return new MemberShortInfo({
 				id: props["id"],
@@ -37,13 +36,13 @@ export class MemberList extends Block {
 				memberPhoto: props["avatar"]? BASE_FILE_URL + props["avatar"] : "/img/noimgprofile.svg",
 				hiddenInput: "yes",
 				memberDelete: (props["delete_allow"] && this.props.editMode)? "yes" : "",
-				onClick: this.props.deleteUser ? this.props.deleteUser : undefined
+				onClick: this.props.deleteUser ? (this.props.deleteUser as ()=>void) : undefined
 			});
 		});
 		return members;
 	}
 
 	render() {
-		return this.compile(this.props.template? this.props.template : template, this.props);
+		return this.compile(template, this.props);
 	}
 }

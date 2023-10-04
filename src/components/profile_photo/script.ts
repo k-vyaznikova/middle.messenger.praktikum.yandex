@@ -25,8 +25,8 @@ export class ProfilePhoto extends Block {
 
 	init() {
 		this.children.photoView = new PhotoView({
-			profilePhoto: this.props.profilePhoto,
-			profileAlt: this.props.profileAlt,
+			profilePhoto: this.props.profilePhoto as string,
+			profileAlt: this.props.profileAlt as string,
 			events: {
 				mouseover: () => {
 					if (this.props.allowEdit)
@@ -56,7 +56,7 @@ export class ProfilePhoto extends Block {
 						});
 					},
 					uploadFunc: this.props.uploadFunc as ((form: HTMLFormElement) => Promise<ResultValidate>),
-					chatId: this.props.chatId
+					chatId: this.props.chatId as string
 				}),
 				events: {
 					close: () => {

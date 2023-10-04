@@ -23,12 +23,12 @@ export class ChatEditPage extends Block {
 		});
 
 		const params: Record<string, string> = getUrlParams();
-		const id: number = params["id"] as number;
+		const id: number = params["id"] as unknown as number;
 
 		this.children.chatProfileEdit = new ChatProfileEdit({});
 		if (id > 0) {
 			ChatsController.fetchChatAndUser(id).then((response) => {
-				this.children.chatProfileEdit = this.children.chatProfileEdit.setProps({
+				this.children.chatProfileEdit.setProps({
 					is_loaded: true,
 					error: response.is_ok? "" : response.msg_text
 				});

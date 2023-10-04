@@ -1,5 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/error/template.hbs";
+import {Link} from "/components/link/script";
 
 interface ErrorProps{
 	code: string,
@@ -14,9 +15,9 @@ export class Error extends Block {
 
 	init() {
 		this.children.link = new Link({
-			href: this.props["back_href"],
-			class: this.props["error-link"],
-			text: "Назад к чатам"
+			href: this.props["back_href"] as string,
+			class: this.props["error-link"] as string,
+			name: "Назад к чатам"
 		});
 	}
 	render() {

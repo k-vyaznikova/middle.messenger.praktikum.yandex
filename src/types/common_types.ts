@@ -26,7 +26,7 @@ export interface LinkProps{
 	class?:string,
 	func_before?: () => void,
 	events?: {
-	  click: (event: Event) => void;
+		click: (event: Event) => void;
 	};
 }
 
@@ -64,10 +64,15 @@ export interface ErrorMsgProps{
 }
 
 export interface ProfileItemProps{
-	infoType: string,
-	infoName: string,
 	infoLabel: string,
-	infoValue: string
+	value: string,
+	infoName: string,
+	infoType?: string,
+	editMode?: string,
+	validate_type: string,
+	events:{
+		focusout: () => void
+	}
 }
 
 export interface ChangePassData{

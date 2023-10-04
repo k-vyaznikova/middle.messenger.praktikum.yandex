@@ -95,13 +95,13 @@ export class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
 		Object.values(this.children).forEach((child) => {
-		  if (Array.isArray(child)) {
+			if (Array.isArray(child)) {
 				child.forEach((ch) => ch.dispatchComponentDidMount());
-		  } else {
+			} else {
 				child.dispatchComponentDidMount();
-		  }
+			}
 		});
-	  }
+	}
 
 	private async _componentDidUpdate(oldProps: any, newProps: any) {
 		const res: boolean = this.componentDidUpdate(oldProps, newProps);
@@ -147,32 +147,15 @@ export class Block {
 		return this.element;
 	}
 
-	/*
-	protected compile(template: (props: any) => string, props: any) {
-		const plugsAndProps = {...props, __refs: this.refs};
-		Object.entries(this.children).forEach(([key, component]) => {
-			plugsAndProps[key] = `<div data-id = '${component.id}'></div>`;
-		});
-
-		const html = template(plugsAndProps);
-		const temp = document.createElement("template");
-		temp.innerHTML = html;
-
-		plugsAndProps.__children?.forEach(({embed}: any) => {
-			embed(temp.content);
-		});
-		return temp.content;
-	}
-*/
 	protected compile(template: (context: any) => string, context: any) {
 		const contextAndStubs = {...context};
 
 		Object.entries(this.children).forEach(([name, component]) => {
-		  if (Array.isArray(component)) {
+			if (Array.isArray(component)) {
 				contextAndStubs[name] = component.map((child) => `<div data-id="${child.id}"></div>`);
-		  } else {
+			} else {
 				contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-		  }
+			}
 		});
 
 		const html = template(contextAndStubs);
@@ -182,27 +165,27 @@ export class Block {
 		temp.innerHTML = html;
 
 		const replaceStub = (component: Block) => {
-		  const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+			const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
 
-		  if (!stub) {
+			if (!stub) {
 				return;
-		  }
+			}
 
-		  component.getContent()?.append(...Array.from(stub.childNodes));
+			component.getContent()?.append(...Array.from(stub.childNodes));
 
-		  stub.replaceWith(component.getContent()!);
+			stub.replaceWith(component.getContent()!);
 		};
 
 		Object.entries(this.children).forEach(([_, component]) => {
-		  if (Array.isArray(component)) {
+			if (Array.isArray(component)) {
 				component.forEach(replaceStub);
-		  } else {
+			} else {
 				replaceStub(component);
-		  }
+			}
 		});
 
 		return temp.content;
-	  }
+	}
 
 
 	private _makePropsProxy(props: any) {

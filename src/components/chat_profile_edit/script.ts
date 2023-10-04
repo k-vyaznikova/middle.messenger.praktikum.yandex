@@ -3,7 +3,6 @@ import template from "/components/chat_profile_edit/template.hbs";
 import ChatsController from "/controllers/chats-controller.ts";
 import UserController from "/controllers/user-controller";
 import {User} from "/types/common_types.ts";
-import {ErrorMsg} from "/components/error_msg/script";
 import {ProfilePhoto} from "/components/profile_photo/script";
 import {BASE_FILE_URL} from "/utils/constants";
 import {withStore} from "/utils/store";
@@ -57,7 +56,7 @@ export class chatProfileEditInitial extends Block {
 			member_list: users,
 			hideInput: "yes",
 			editMode: true,
-			deleteUser: this.deleteUser.bind(this)
+			deleteUser: (this.deleteUser as () => void).bind(this)
 		});
 	}
 
@@ -73,15 +72,13 @@ export class chatProfileEditInitial extends Block {
 
 	async addUsers(event: Event) {
 		const element: HTMLElement = event.target as HTMLElement;
-		// const memberList: Array<User> = this.children.memberList as Array<User>;
-
 		if (element.classList.contains("member-add")) {
-			const id: string = element.getAttribute("data-id") as number;
+			const id: number = element.getAttribute("data-id") as unknown as number;
 			if (id > 0) {
-				const user: User = await UserController.getUser(id);
-				if ((user.id as number) > 0) {
+				const user: User | null = await UserController.getUser(id);
+				if (user!=null && (user.id as number) > 0) {
 					this.usersIdArr.push(user.id);
-					ChatsController.addUsersToChat(this.props.id, this.usersIdArr);
+					ChatsController.addUsersToChat(this.props.id as number, this.usersIdArr);
 				}
 			}
 		}
@@ -90,9 +87,9 @@ export class chatProfileEditInitial extends Block {
 	deleteUser(event: Event) {
 		const element: HTMLElement = event.target as HTMLElement;
 		if (element.classList.contains("member-delete")) {
-			const id: number = element.getAttribute("data-id") as number;
+			const id: number = element.getAttribute("data-id") as unknown as number;
 			if (id > 0) {
-				ChatsController.deleteUsersFromChat(this.props.id, [id]);
+				ChatsController.deleteUsersFromChat(this.props.id as number, [id]);
 			}
 		}
 	}
@@ -108,7 +105,7 @@ export class chatProfileEditInitial extends Block {
 }
 
 
-const withChat = withStore((state) => {
+const withChat = withStore((state: Record<string, any>) => {
 	return {
 		chat: state?.current_chat,
 		id: state?.current_chat?.id,

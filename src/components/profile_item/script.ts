@@ -1,19 +1,8 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/profile_item/template.hbs";
 import {checkError} from "/utils/form_utils";
+import {ProfileItemProps} from "/types/common_types";
 
-
-interface ProfileItemProps{
-	infoLabel: string,
-	value: string,
-	infoName: string,
-	infoType?: string,
-	editMode?: string,
-	validate_type: string,
-	events:{
-		focusout: () => void
-	}
-}
 
 export class ProfileItem extends Block {
 	constructor(props: ProfileItemProps) {
@@ -34,7 +23,7 @@ export class ProfileItem extends Block {
 	}
 
 	public get name(): string {
-		return (this.element as HTMLElement).getElementsByTagName("input")[0].getAttribute("name");
+		return (this.element as HTMLElement).getElementsByTagName("input")[0].getAttribute("name") as string;
 	}
 	render() {
 		return this.compile(template, this.props);

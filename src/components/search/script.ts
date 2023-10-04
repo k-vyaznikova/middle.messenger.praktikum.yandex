@@ -3,7 +3,6 @@ import template from "/components/search/template.hbs";
 
 interface SearchProps{
 	value: string,
-	submit_url: string,
 	left_align: string,
 	placeholder: string,
 	not_focused?: string,
@@ -29,14 +28,14 @@ export class Search extends Block {
 				},
 				keyup: () => {
 					clearTimeout(timerId);
-					timerId = setTimeout(props.onKeyup, 500);
+					timerId = setTimeout((props.onKeyup as ()=>void), 500);
 				}
 			}
 		});
 	}
 
 	protected componentDidMount(): boolean {
-		const inputSearch: HTMLElement = this.element?.querySelector("input[name='search']") as HTMLElement;
+		const inputSearch: HTMLInputElement = this.element?.querySelector("input[name='search']") as HTMLInputElement;
 		if (inputSearch) {
 			inputSearch.focus();
 			inputSearch.selectionStart = inputSearch.selectionEnd = inputSearch.value.length;

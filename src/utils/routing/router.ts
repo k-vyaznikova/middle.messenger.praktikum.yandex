@@ -31,7 +31,7 @@ export class Router {
 	public start(): void {
 		// Реагируем на изменения в адресной строке и вызываем перерисовку
 		window.onpopstate = (event) => {
-			this._onRoute(event.currentTarget?.location.pathname);
+			this._onRoute((event.currentTarget as any).location.pathname);
 		};
 
 		this._onRoute(window.location.pathname);
@@ -46,7 +46,7 @@ export class Router {
 		if (route)
 			route.render();
 		else {
-			renderPage(this._rootQuery, new ErrorPage({}));
+			renderPage(this._rootQuery, new ErrorPage());
 		}
 	}
 

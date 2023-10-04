@@ -3,7 +3,6 @@ import template from "/components/change_photo_popup/template.hbs";
 import {UploadLink} from "/components/upload_link/script";
 import {UploadFile} from "/components/upload_file/script";
 import {SubmitBtn} from "/components/submit_btn/script";
-import UserController from "/controllers/user-controller";
 import {DeleteFile} from "/components/delete_file/script";
 import {ResultValidate} from "/types/common_types";
 import {ErrorMsg} from "/components/error_msg/script";
@@ -46,8 +45,8 @@ export class ChangePhotoPopup extends Block {
 					event.preventDefault();
 
 					const evt: Event = document.createEvent("MouseEvents");
-      				evt.initEvent("click", true, false);
-      				this.element?.querySelector("input.upload-file")?.dispatchEvent(evt);
+					evt.initEvent("click", true, false);
+					this.element?.querySelector("input.upload-file")?.dispatchEvent(evt);
 				}
 			}
 
@@ -95,10 +94,10 @@ export class ChangePhotoPopup extends Block {
 				msg_text: "Вы забыли загрузить файл с изображением"
 			};
 		else {
-			result = await this.props.uploadFunc(this.element);
+			result = await (this.props.uploadFunc as (arg: any)=>Promise<ResultValidate>)(this.element);
 		}
 		if (result.is_ok === true) {
-			this.props.funcClosePopup();
+			(this.props.funcClosePopup as ()=>void)();
 			this.children.errorMsg.setProps({
 				"text": ""
 			});

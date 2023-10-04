@@ -27,7 +27,7 @@ export class DialogInitial extends Block {
 		this.children.chatInfo = new ChatInfo({
 			chatName: "test",
 			chatImg: "/img/noimgprofile.svg",
-			chatId: this.props.selectedChat
+			chatId: this.props.selectedChat as string
 		});
 
 
@@ -43,7 +43,7 @@ export class DialogInitial extends Block {
 			this.children.chatInfo = new ChatInfo({
 				chatName: selectedChat["title"],
 				chatImg: selectedChat["avatar"]? BASE_FILE_URL+selectedChat["avatar"] : "/img/noimgprofile.svg",
-				chatId: this.props.selectedChat
+				chatId: this.props.selectedChat as string
 			});
 		}
 		this.children.items_dialog = this._prepareOldMessages(newProps["messages"]);
@@ -58,7 +58,7 @@ export class DialogInitial extends Block {
 	}
 
 
-	_prepareOldMessages(messages: Array<any>): Array<any> {
+	_prepareOldMessages(messages: Array<any>): any {
 		const self: any = this;
 		const newMess = messages.map(function(item) {
 			return {
@@ -89,19 +89,19 @@ export class DialogInitial extends Block {
 	}
 }
 
-const withSelectedChatMessages = withStore((state) => {
+const withSelectedChatMessages = withStore((state: Record<string, any>) => {
 	const selectedChatId: number = state?.selectedChat as number;
 	if (!selectedChatId) {
-	  return {
+		return {
 			messages: [],
 			selectedChat: undefined,
 			userId: state.user?.id
-	  };
+		};
 	}
-  	return {
-	  messages: [...(state?.messages || {})[selectedChatId] || []],
-	  selectedChat: state?.selectedChat,
-	  userId: state.user?.id
+	return {
+		messages: [...(state?.messages || {})[selectedChatId] || []],
+		selectedChat: state?.selectedChat,
+		userId: state.user?.id
 	};
 });
 

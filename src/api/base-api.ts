@@ -7,8 +7,8 @@ export abstract class BaseAPI {
 		this.http = new HTTPTransport(endpoint);
 	}
 
-	public create() {
-		throw new Error("Not implemented");
+	public create(props: any): Promise<any> {
+		throw new Error("Not implemented [props"+ props +"]");
 	}
 
 	public request(id: number): Promise<any> {

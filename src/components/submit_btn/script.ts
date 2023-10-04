@@ -9,7 +9,7 @@ export class SubmitBtn extends Block {
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
-					props.onClick(event);
+					(props.onClick as (event: Event)=>void)(event);
 				}
 			}
 		});

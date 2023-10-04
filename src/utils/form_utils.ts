@@ -1,4 +1,3 @@
-import {Block} from "/utils/block.ts";
 import {Input} from "/components/input/script.ts";
 import {ProfileItem} from "/components/profile_item/script.ts";
 import {Form} from "/components/form/script.ts";
@@ -95,9 +94,12 @@ export function validate(value: string, typeString: string) : ResultValidate {
 
 export function checkError(value: string | undefined, typeString: string, component: Input | SendMsgText | ProfileItem): boolean {
 	let result: ResultValidate = validate(value as string, typeString as string);
-	if (result.is_ok && component.comparison_value) {
-		result = comparePassword(value, component.comparison_value);
+	if (component.constructor === Input) {
+		if (result.is_ok && component?.comparison_value) {
+			result = comparePassword(value, component?.comparison_value as string);
+		}
 	}
+
 	if (!result.is_ok) {
 		component.setProps({
 			error: result.msg_text,
@@ -114,7 +116,7 @@ export function checkError(value: string | undefined, typeString: string, compon
 }
 
 export function checkAndSendForm<T>(form: Form, send: (d: T) => Promise<any>, successUrl: string = "/chats") {
-	const inputs: Input[] = form.children.inputs? form.children.inputs : [];
+	const inputs: Input[] = (form.children.inputs? form.children.inputs : []) as Input[];
 	let resultValid: boolean = true;
 	inputs.forEach((input) => {
 		if (!checkError(input.value, input.validate_type, input) && resultValid)
@@ -137,24 +139,4 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => Promise<any>, su
 			}
 		});
 	}
-}
-
-
-export function	sendFormData<T>(data: T, send: (param: T)=>void) {
-	const that: any = this;
-	send(data).then(function(result: ResultValidate) {
-		if (result.is_ok)
-			router.go(successUrl);
-		else {
-			that.props.inputs = that.children.inputs.map(function(input: any) {
-				return {
-					...input.props,
-					value: input.value
-				};
-			});
-			that.children.errorMsg.setProps({
-				text: result.msg_text as string
-			});
-		}
-	});
 }

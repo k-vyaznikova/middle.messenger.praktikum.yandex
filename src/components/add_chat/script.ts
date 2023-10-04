@@ -34,29 +34,32 @@ export class AddChat extends Block {
 		});
 		this.children.submitBtn = new SubmitBtn({
 			text: "Создать чат",
-			onClick: (event: Event) => {
+			onClick: async (event: Event) => {
 				event.preventDefault();
-				this.addChat();
+				console.log("in onClick");
+				await this.addChat();
 			}
 		});
 	}
 
 	async addChat() {
 		if (checkError(this.chat_name, this.children.input.props.validate_type as string, this.children.input as Input)) {
-			const result: ResultValidate | number = await ChatsController.createChat(this.chat_name);
-			if (result.is_ok === false) {
+			const result: ResultValidate = await ChatsController.createChat(this.chat_name);
+			if (result.is_ok) {
 				this.children.errorMsg.setProps({
-					text: result.msg_text? result.msg_text : "Ошибка при создании чата"
-				});
-			} else {
-				this.children.errorMsg.setProps({
-					"text": ""
+					"text": result.msg_text
 				});
 				this.children.input.setProps({
 					"value": ""
 				});
-				this.props.funcClosePopup();
+				const func: ()=>void = this.props.funcClosePopup as ()=>void;
+				func();
+			} else {
+				this.children.errorMsg.setProps({
+					text: (result.msg_text)? result.msg_text : "Ошибка при создании чата"
+				});
 			}
+			return result;
 		}
 	}
 

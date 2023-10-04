@@ -27,7 +27,7 @@ class SendMsgFormInitial extends Block {
 			validate_type: "not-empty",
 			events: {
 				keyup: (event: Event) => {
-					if ((event.keyCode == 13) && !event.ctrlKey) {
+					if (((event as KeyboardEvent).keyCode == 13) && !(event as KeyboardEvent).ctrlKey) {
 						event.preventDefault();
 						this.submitMessage();
 					} else {
@@ -50,18 +50,14 @@ class SendMsgFormInitial extends Block {
 
 	getTextarea() {
 		return this.children.sendMsgText.element?.querySelector("textarea") as HTMLElement;
- 	}
-
-	submitMessage() {
-		if (validate(this.getTextarea().value, this.children.sendMsgText.getValidateType() as string)) {
-			const message: string = this.children.sendMsgText.getValue();
-			this.children.sendMsgText.setValue("");
-			MessagesController.sendMessage(this.props.selectedChat!, message);
-		}
 	}
 
-	componentDidUpdate(oldProps: any, newProps: any): boolean {
-
+	submitMessage() {
+		if (validate((this.getTextarea() as HTMLTextAreaElement).value, (this.children.sendMsgText as SendMsgText).getValidateType() as string)) {
+			const message: string = (this.children.sendMsgText as SendMsgText).getValue();
+			(this.children.sendMsgText as SendMsgText).setValue("");
+			MessagesController.sendMessage(this.props.selectedChat as number, message);
+		}
 	}
 	render() {
 		return this.compile(template, this.props);
@@ -69,5 +65,5 @@ class SendMsgFormInitial extends Block {
 }
 
 
-const withSelectedChat = withStore((state) => ({selectedChat: state.selectedChat}));
+const withSelectedChat = withStore((state: Record<string, any>) => ({selectedChat: state.selectedChat}));
 export const SendMsgForm = withSelectedChat(SendMsgFormInitial);

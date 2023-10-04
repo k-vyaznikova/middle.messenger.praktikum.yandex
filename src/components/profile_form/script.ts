@@ -15,7 +15,6 @@ import {checkError} from "/utils/form_utils";
 import {ErrorMsg} from "/components/error_msg/script";
 
 interface ProfileFormProps{
-	submit_url?: string,
 	title: string,
 	profilePhoto?: {
 		profileImg: string,
@@ -36,14 +35,14 @@ export class ProfileFormInitial extends Block {
 		super(props);
 	}
 	protected init(): void {
-		this.children.profile_items = this.props.profile_items.map((props: ProfileItemProps) => {
+		this.children.profile_items = ((this.props.profile_items as ProfileItemProps[]).map((props: ProfileItemProps): ProfileItem => {
 			return new ProfileItem(props);
-		});
+		})) as any;
 		this.children.profilePhoto = new ProfilePhoto({
-			profilePhoto: this.props.profilePhoto.profileImg,
+			profilePhoto: (this.props.profilePhoto as Record<string, string>).profileImg as string,
 			profileAlt: "Фото профиля",
 			uploadFunc: this.uploadAvatar,
-			allowEdit: this.props.allowEdit
+			allowEdit: this.props.allowEdit as string
 		});
 
 		this.children.errorMsg = new ErrorMsg({
@@ -55,16 +54,16 @@ export class ProfileFormInitial extends Block {
 			onClick: async (event: Event) => {
 				event.preventDefault();
 				let resultValid: boolean = true;
-				this.children.profile_items.forEach((item) => {
+				(this.children.profile_items as unknown as Array<any>).forEach((item: ProfileItem) => {
 					if (!checkError(
 						item.value,
-						item.props.validate_type,
+						item.props.validate_type as string,
 						item
 					) && resultValid)
 						resultValid = false;
 				});
 				if (resultValid) {
-					const dataPair: Array<any> = this.children.profile_items.map(function(input) {
+					const dataPair: Array<any> = (this.children.profile_items as unknown as Array<any>).map(function(input: Record<string, string>) {
 						return [input.name, input.value];
 					});
 					const data = Object.fromEntries(dataPair);

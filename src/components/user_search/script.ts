@@ -8,8 +8,11 @@ import {BASE_FILE_URL} from "/utils/constants";
 
 interface UserSearchProps{
     value?: string,
-	search_results?: Array<any>,
     alt_message?: string,
+	search_results?:{
+		search_word: string,
+		users: Array<any>
+	}
     onKeyup?: () => void,
 	addUser?: () => void
 }
@@ -29,10 +32,10 @@ export class UserSearchInitial extends Block {
 			placeholder: "Начните вводить логин участника...",
 			left_align: "yes",
 			not_focused: "yes",
-			value: this.props?.search_results?.search_word,
-			onKeyup: this.props.onKeyup
+			value: (this.props.search_results as Record<string, any>).search_word,
+			onKeyup: this.props.onKeyup as () => void
 		});
-		this.children.results = this._formResults(this.props?.search_results?.users);
+		this.children.results = this._formResults((this.props.search_results as Record<string, any>).users);
 	}
 
 	componentDidUpdate(oldProps: any, newProps: any): boolean {
@@ -41,38 +44,27 @@ export class UserSearchInitial extends Block {
 			left_align: "yes",
 			not_focused: "yes",
 			value: newProps?.search_results?.search_word,
-			onKeyup: this.props.onKeyup
+			onKeyup: this.props.onKeyup as () => void
 		});
 		this.children.results = this._formResults(newProps.search_results?.users);
 		return true;
 	}
 
 
-	private _formResults(props_members: Array<any>): MemberShortInfo[] {
-		if (props_members.length > 0) {
-			return props_members.map((user_props) => {
+	private _formResults(propsMembers: Array<any>): any {
+		if (propsMembers.length > 0) {
+			return propsMembers.map((userProps: Record<string, any>) => {
 				return new MemberShortInfo({
-					id: user_props["id"],
-					memberPhoto: user_props["avatar"]? BASE_FILE_URL+user_props["avatar"] : "/img/noimgprofile.svg",
-					memberLogin: user_props["login"],
-					memberName: user_props["first_name"]+ " " + user_props["second_name"],
+					id: userProps["id"],
+					memberPhoto: userProps["avatar"]? BASE_FILE_URL+userProps["avatar"] : "/img/noimgprofile.svg",
+					memberLogin: userProps["login"],
+					memberName: userProps["first_name"]+ " " + userProps["second_name"],
 					memberAdd: "yes",
-					onClick: this.props.addUser
+					onClick: this.props.addUser as () => void
 				});
 			});
 		}
 		return [];
-	}
-
-
-	private addUserEvents(users: Array<Record<string, any>>) {
-		const that: any = this;
-		return users.map(function(item: Record<string, any>) {
-			return {
-				...item,
-				onClick: that.props.addUser
-			};
-		});
 	}
 
 	private get searchInput(): HTMLInputElement | null {
@@ -87,7 +79,7 @@ export class UserSearchInitial extends Block {
 }
 
 
-const withSearchResult = withStore((state) => {
+const withSearchResult = withStore((state: Record<string, any>) => {
 	if (state?.search_results)
 		return {...{search_results: state?.search_results}
 		};

@@ -1,14 +1,12 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
 import chatImg from "/img/noimgprofile.svg";
-import img from "/img/photo.jpg";
 import store from "/utils/store.ts";
 import chatsController from "/controllers/chats-controller.ts";
 import authController from "/controllers/auth-controller";
 import {Dialog} from "/components/dialog/script.ts";
 import {ContactList} from "/components/contact_list/script.ts";
 import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
-import {Link} from "/components/link/script.ts";
 import {withStore} from "/utils/store.ts";
 import {BASE_FILE_URL} from "/utils/constants";
 import Popup from "/layouts/popup/popup";
@@ -122,7 +120,7 @@ export class ChatPageInitial extends Block {
 
 	async searchChat(title: string) {
 		const state: any = store.getState();
-		const newChatList: Array<any> = state["chats"].filter(function(item) {
+		const newChatList: Array<any> = state["chats"].filter(function(item: Record<string, any>) {
 			return item["title"].indexOf(title) >= 0;
 		});
 		return newChatList;

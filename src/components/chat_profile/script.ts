@@ -7,7 +7,6 @@ import {BASE_FILE_URL} from "/utils/constants";
 import {withStore} from "/utils/store";
 import {MemberList} from "/components/member_list/script";
 import {ResultValidate} from "/types/common_types.ts";
-import templateForMemberList from "/components/member_list/template_2.hbs";
 
 interface chatProfileProps{
 	id: number,
@@ -77,7 +76,7 @@ export class chatProfileInitial extends Block {
 	}
 }
 
-const withChat = withStore((state) => {
+const withChat = withStore((state: Record<string, any>) => {
 	return {
 		chat: state?.current_chat,
 		id: state?.current_chat?.id,

@@ -22,12 +22,12 @@ export class ChatProfilePage extends Block {
 		});
 
 		const params: Record<string, string> = getUrlParams();
-		const id: number = params["id"] as number;
+		const id: number = params["id"] as unknown as number;
 
 		this.children.chatProfile = new ChatProfile({});
 		if (id > 0) {
 			ChatsController.fetchChatAndUser(id).then((response) => {
-				this.children.chatProfile = this.children.chatProfile.setProps({
+				this.children.chatProfile.setProps({
 					is_loaded: true,
 					error: response.is_ok? "" : response.msg_text
 				});

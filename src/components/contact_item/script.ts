@@ -3,7 +3,7 @@ import template from "/components/contact_item/template.hbs";
 import {BASE_FILE_URL} from "/utils/constants";
 
 
-interface ContactItemProps{
+export interface ContactItemProps{
 	id: string,
 	contactSelected?: string,
 	contactLinkDialog: string,
