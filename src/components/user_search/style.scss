@@ -1,9 +1,11 @@
 @import "/styles/vars";
+
 .profile-footer{
     margin-top: 50px;
+
     .search-form{
         width: 100%;
-        padding: 0px 0px 20px 0px;
+        padding: 0 0 20px;
         position: relative;
     
         input[type="text"]{
@@ -43,7 +45,9 @@
                 font-size: 13px;
                 text-align: center;
             }
+
             margin-top: 30px;
+
             .add-items{
                 /* position: absolute;
                 top: 20px;
