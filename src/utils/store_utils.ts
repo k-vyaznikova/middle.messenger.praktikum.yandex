@@ -10,7 +10,8 @@ export type PlainObject<T = any> = {
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
 	for (const key in rhs) {
-		if (lhs.hasOwnProperty(key)) {
+		// if (lhs.hasOwnProperty(key)) {
+		if (Object.prototype.hasOwnProperty.call(lhs, key)) {
 			if (typeof rhs[key] === "object" && rhs[key] !== null &&
           typeof lhs[key] === "object" && lhs[key] !== null) {
 				lhs[key] = merge(lhs[key] as Indexed, rhs[key] as Indexed);
