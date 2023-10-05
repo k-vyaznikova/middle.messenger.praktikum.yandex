@@ -1,9 +1,8 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/send_msg_form/template.hbs";
-import {validate} from "../../utils/form_utils";
+import {validate} from "/utils/form_utils";
 import MessagesController from "/controllers/messages-controller.ts";
 import {SendMsgText} from "/components/send_msg_text/script.ts";
-import {SendMsgFile} from "/components/send_msg_file/script.ts";
 import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
 import {withStore} from "/utils/store.ts";
 
@@ -22,7 +21,6 @@ class SendMsgFormInitial extends Block {
 	}
 
 	init() {
-		this.children.sendMsgFile = new SendMsgFile({});
 		this.children.sendMsgText = new SendMsgText({
 			validate_type: "not-empty",
 			events: {
@@ -39,11 +37,9 @@ class SendMsgFormInitial extends Block {
 			}
 		});
 		this.children.sendMsgBtn = new SendMsgBtn({
-			events: {
-				click: (event: Event) => {
-					event.preventDefault();
-					this.submitMessage();
-				}
+			onClick: (event: Event) => {
+				event.preventDefault();
+				this.submitMessage();
 			}
 		});
 	}

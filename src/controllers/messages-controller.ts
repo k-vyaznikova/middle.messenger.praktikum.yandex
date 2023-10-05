@@ -1,5 +1,8 @@
 import WSTransport, {WSTransportEvents} from "/utils/ws_transport.ts";
 import store from "/utils/store.ts";
+import UserController from "./user-controller";
+import {BASE_FILE_URL} from "/utils/constants";
+import img from "/img/noimgprofile.svg";
 
 export interface Message {
   chat_id: number;
@@ -69,8 +72,8 @@ export class MessagesController {
 		Array.from(this.sockets.values()).forEach((socket) => socket.close());
 	}
 
-	private onMessage(id: number, messages: Message | Message[]) {
-		let messagesToAdd: Message[] = [];
+	private async onMessage(id: number, messages: Message | Message[]) {
+		let messagesToAdd: Array<any> = [];
 
 		if (Array.isArray(messages)) {
 			messagesToAdd = messages.reverse();
@@ -81,6 +84,13 @@ export class MessagesController {
 		const currentMessages = (store.getState().messages || {})[id] || [];
 
 		messagesToAdd = [...currentMessages, ...messagesToAdd];
+
+		messagesToAdd.forEach(async (message, index) => {
+			UserController.fetchUserById(message["user_id"]).then((responseUser)=>{
+				responseUser["avatar"] = responseUser["avatar"]? BASE_FILE_URL + responseUser["avatar"] : img;
+				messagesToAdd[index]["user"] = responseUser;
+			});
+		});
 
 		store.set(`messages.${id}`, messagesToAdd);
 	}

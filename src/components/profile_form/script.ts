@@ -13,6 +13,7 @@ import UserController from "/controllers/user-controller.ts";
 import {withStore} from "/utils/store";
 import {checkError} from "/utils/form_utils";
 import {ErrorMsg} from "/components/error_msg/script";
+import img from "/img/noimgprofile.svg";
 
 interface ProfileFormProps{
 	title: string,
@@ -115,5 +116,5 @@ export class ProfileFormInitial extends Block {
 	}
 }
 
-const withAvatar = withStore((state) => ({...{profilePhoto: {profileImg: state.user.avatar? BASE_FILE_URL + state.user.avatar : "/img/noimgprofile.svg"}}}));
+const withAvatar = withStore((state) => ({...{profilePhoto: {profileImg: state.user.avatar? BASE_FILE_URL + state.user.avatar : img}}}));
 export const ProfileForm = withAvatar(ProfileFormInitial);

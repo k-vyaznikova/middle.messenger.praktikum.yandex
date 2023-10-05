@@ -7,6 +7,7 @@ import {BASE_FILE_URL} from "/utils/constants";
 import {withStore} from "/utils/store";
 import {MemberList} from "/components/member_list/script";
 import {ResultValidate} from "/types/common_types.ts";
+import img from "/img/noimgprofile.svg";
 
 interface chatProfileProps{
 	id: number,
@@ -33,7 +34,7 @@ export class chatProfileInitial extends Block {
 
 	componentDidUpdate(newProps: any): boolean {
 		this.children.profilePhoto = new ProfilePhoto({
-			profilePhoto: newProps?.chat?.avatar ? (BASE_FILE_URL + newProps?.chat?.avatar) : "/img/noimgprofile.svg",
+			profilePhoto: newProps?.chat?.avatar ? (BASE_FILE_URL + newProps?.chat?.avatar) : img,
 			profileAlt: newProps?.chat?.title,
 			chatId: newProps?.id,
 			uploadFunc: this.uploadChatAvatar

@@ -1,0 +1,23 @@
+.set-avatar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .upload-link{
+        width: 120px;
+    }
+
+    .caption-img{
+        background-color: #efefef;
+        border-radius: 30px;
+        border: none;
+        width: 100%;
+        padding: 5px 20px;
+        height: 32px;
+        box-sizing: border-box;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+    
+}

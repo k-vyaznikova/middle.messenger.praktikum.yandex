@@ -1,6 +1,7 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/contact_item/template.hbs";
 import {BASE_FILE_URL} from "/utils/constants";
+import img from "/img/noimgprofile.svg";
 
 
 export interface ContactItemProps{
@@ -35,7 +36,7 @@ export class ContactItem extends Block {
 
 
 	init() {
-		this.props.contactImg = this.props.contactImg? BASE_FILE_URL + this.props.contactImg : "/img/noimgprofile.svg";
+		this.props.contactImg = this.props.contactImg? BASE_FILE_URL + this.props.contactImg : img;
 	}
 
 	render() {

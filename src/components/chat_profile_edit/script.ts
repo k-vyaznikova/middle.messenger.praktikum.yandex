@@ -9,6 +9,7 @@ import {withStore} from "/utils/store";
 import {MemberList} from "/components/member_list/script";
 import {UserSearch} from "../user_search/script";
 import {ResultValidate} from "/types/common_types.ts";
+import img from "/img/noimgprofile.svg";
 
 
 interface chatProfileEditProps{
@@ -27,7 +28,7 @@ export class chatProfileEditInitial extends Block {
 
 	componentDidUpdate(newProps: any): boolean {
 		this.children.profilePhoto = new ProfilePhoto({
-			profilePhoto: newProps?.chat?.avatar ? (BASE_FILE_URL + newProps?.chat?.avatar) : "/img/noimgprofile.svg",
+			profilePhoto: newProps?.chat?.avatar ? (BASE_FILE_URL + newProps?.chat?.avatar) : img,
 			profileAlt: newProps?.chat?.title,
 			chatId: newProps?.id,
 			allowEdit: "yes",

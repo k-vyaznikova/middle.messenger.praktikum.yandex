@@ -1,6 +1,5 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
-import chatImg from "/img/noimgprofile.svg";
 import store from "/utils/store.ts";
 import chatsController from "/controllers/chats-controller.ts";
 import authController from "/controllers/auth-controller";
@@ -12,6 +11,7 @@ import {BASE_FILE_URL} from "/utils/constants";
 import Popup from "/layouts/popup/popup";
 import {AddChat} from "/components/add_chat/script";
 import {PopupOpen} from "/components/popup_open/script";
+import img from "/img/noimgprofile.svg";
 
 interface ChatPageProps {
 	contact_list: Array<any>,
@@ -40,35 +40,11 @@ interface ChatPageProps {
 
 export class ChatPageInitial extends Block {
 	constructor(props: ChatPageProps) {
-		super({
-			...props,
-			chat_info: {
-				chatName: "Вадим",
-				chatImg: chatImg,
-				personalChat: "yes"
-			},
-			contact_list: [],
-			dialog: [],
-			send_msg_form: {
-				ref: "send_message_form",
-				send_msg_text: {
-					name: "send_message_text",
-					ref: "send_message_text",
-					validate_type: "not-empty",
-					value: ""
-				},
-				send_msg_file: {
-					name: "send_message_file",
-					ref: "send_message_file",
-					value: ""
-				}
-			}
-
-		});
+		super(props);
 	}
 	init() {
 		this.children.profilePersonalLink = new ProfilePersonalLink({
-			profile_img: "/img/noimgprofile.svg",
+			profile_img: img,
 			profile_name: "",
 			href: "/profile"
 		});
@@ -105,7 +81,7 @@ export class ChatPageInitial extends Block {
 		this.children.dialog = new Dialog({});
 		authController.fetchUser().then(() => {
 			this.children.profilePersonalLink.setProps({
-				profile_img: this.props.avatar? BASE_FILE_URL+this.props.avatar : "/img/noimgprofile.svg",
+				profile_img: this.props.avatar? BASE_FILE_URL+this.props.avatar : img,
 				profile_name: this.props.first_name + " " + this.props.second_name,
 				href: "/profile"
 			});

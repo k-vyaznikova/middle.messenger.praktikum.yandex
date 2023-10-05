@@ -2,6 +2,7 @@ import {Block} from "/utils/block.ts";
 import template from "/components/member_list/template.hbs";
 import {MemberShortInfo} from "/components/member_short_info/script";
 import {BASE_FILE_URL} from "/utils/constants";
+import img from "/img/noimgprofile.svg";
 
 interface MemberListProps{
 	member_list: Array<Object>,
@@ -33,7 +34,7 @@ export class MemberList extends Block {
 				id: props["id"],
 				memberName: props["first_name"]+" "+props["second_name"],
 				memberLogin: props["login"],
-				memberPhoto: props["avatar"]? BASE_FILE_URL + props["avatar"] : "/img/noimgprofile.svg",
+				memberPhoto: props["avatar"]? BASE_FILE_URL + props["avatar"] : img,
 				hiddenInput: "yes",
 				memberDelete: (props["delete_allow"] && this.props.editMode)? "yes" : "",
 				onClick: this.props.deleteUser ? (this.props.deleteUser as ()=>void) : undefined
