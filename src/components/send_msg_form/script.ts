@@ -5,7 +5,7 @@ import MessagesController from "/controllers/messages-controller.ts";
 import {SendMsgText} from "/components/send_msg_text/script.ts";
 import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
 import {withStore} from "/utils/store.ts";
-import { ResultValidate } from "/types/common_types";
+import {ResultValidate} from "/types/common_types";
 
 interface SendMsgFormProps{
 }
