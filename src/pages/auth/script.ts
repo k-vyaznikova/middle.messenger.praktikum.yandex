@@ -39,7 +39,7 @@ export class AuthPage extends Block {
 			],
 			link: {
 				name: "Нет аккаунта?",
-				href: "/register",
+				href: "/sign-up",
 				ref: "secondary_btn",
 				class: "reg-link"
 			},

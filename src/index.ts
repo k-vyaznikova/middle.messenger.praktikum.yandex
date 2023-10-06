@@ -32,12 +32,12 @@ import store from "/utils/store";
 
 enum Routes {
 	Index = "/",
-	Register = "/register",
+	Register = "/sign-up",
 	Profile = "/profile",
-	Chat = "/chat",
+	Chat = "/messenger",
 	ChatEdit = "/chat-edit",
 	PassEdit = "/pass-edit",
-	ProfileEdit = "/profile-edit",
+	ProfileEdit = "/settings",
 	ChatProfile = "/chat-profile"
   }
 

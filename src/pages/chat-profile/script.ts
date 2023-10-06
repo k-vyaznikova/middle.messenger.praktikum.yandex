@@ -13,7 +13,7 @@ export class ChatProfilePage extends Block {
 
 	async init() {
 		this.children.link = new Link({
-			href: "/chat",
+			href: "/messenger",
 			name: "",
 			class: "back-link",
 			func_before: () => {

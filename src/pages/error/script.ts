@@ -8,7 +8,7 @@ export class ErrorPage extends Block {
 		super({
 			code: "404",
 			error_message: "Такой страницы нет",
-			back_href: "/chat"
+			back_href: "/messenger"
 		});
 	}
 

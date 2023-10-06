@@ -14,7 +14,7 @@ export class ChatEditPage extends Block {
 
 	init() {
 		this.children.link = new Link({
-			href: "/chat",
+			href: "/messenger",
 			name: "",
 			class: "back-link",
 			func_before: () => {

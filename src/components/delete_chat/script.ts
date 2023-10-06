@@ -53,7 +53,7 @@ export class DeleteChat extends Block {
 			this.children.errorMsg.setProps({
 				"text": ""
 			});
-			Router.go("/chat");
+			Router.go("/messenger");
 		}
 	}
 

@@ -34,7 +34,7 @@ export class Form extends Block {
 			...(this.props.submit_btn as SubmitBtnProps),
 			onClick: (event: Event) => {
 				event.preventDefault();
-				checkAndSendForm(this, (this.props.send_function as (arg:any)=>Promise<any>).bind(this.props.context_func), "/chat");
+				checkAndSendForm(this, (this.props.send_function as (arg:any)=>Promise<any>).bind(this.props.context_func), "/messenger");
 			}
 		});
 		this.children.link = new Link(this.props.link as LinkProps);

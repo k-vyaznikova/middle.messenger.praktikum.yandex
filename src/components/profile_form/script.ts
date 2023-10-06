@@ -83,7 +83,7 @@ export class ProfileFormInitial extends Block {
 		});
 		if (this.props.footer_links) {
 			this.children.link_1 = new Link({
-				href: "/profile-edit",
+				href: "/settings",
 				name: "Изменить данные"
 			});
 			this.children.link_2 = new Link({

@@ -5,6 +5,7 @@ import MessagesController from "/controllers/messages-controller.ts";
 import {SendMsgText} from "/components/send_msg_text/script.ts";
 import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
 import {withStore} from "/utils/store.ts";
+import { ResultValidate } from "/types/common_types";
 
 interface SendMsgFormProps{
 }
@@ -49,7 +50,8 @@ class SendMsgFormInitial extends Block {
 	}
 
 	submitMessage() {
-		if (validate((this.getTextarea() as HTMLTextAreaElement).value, (this.children.sendMsgText as SendMsgText).getValidateType() as string)) {
+		const result: ResultValidate = validate((this.getTextarea() as HTMLTextAreaElement).value, (this.children.sendMsgText as SendMsgText).getValidateType() as string);
+		if (result.is_ok) {
 			const message: string = (this.children.sendMsgText as SendMsgText).getValue();
 			(this.children.sendMsgText as SendMsgText).setValue("");
 			MessagesController.sendMessage(this.props.selectedChat as number, message);

@@ -30,7 +30,7 @@ export function validate(value: string, typeString: string) : ResultValidate {
 	}
 	const types: Array<string> = typeString.split(",").map((type)=> type.trim());
 	if (types.includes("not-empty")) {
-		if (value === "") {
+		if (value.trim() === "") {
 			return {
 				is_ok: false,
 				msg_text: "Поле не может быть пустым"

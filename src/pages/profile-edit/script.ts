@@ -41,7 +41,7 @@ export class ProfileEditPageInitial extends Block {
 		});
 
 		this.children.link = new Link({
-			href: "/chat",
+			href: "/messenger",
 			name: "",
 			class: "back-link"
 		});
