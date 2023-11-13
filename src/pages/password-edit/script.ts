@@ -1,75 +1,68 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/password-edit/password-edit.hbs";
-import {renderPage} from "/utils/render_page.ts";
-import {checkError} from "/utils/validate.js";
-import {getFormData} from "/utils/get_form_data.js";
-import img from "/img/noimgprofile.svg";
+import {InputProps} from "/types/common_types.js";
+import {Form} from "/components/form/script.ts";
+import UserController from "/controllers/user-controller";
 
 export class PassEditPage extends Block {
 	constructor() {
-		super(
-			{
-				title: "Изменение пароля",
-				submit_url: "#",
-				edit_mode: "yes",
-				ref: "form",
-				profile_photo: {
-					profilePhoto: img,
-					profileAlt: "Иван"
-				},
-				profile_items: [
-					{
-						infoLabel: "Старый пароль",
-						infoValue: "111111",
-						infoName: "oldPassword",
-						infoType: "password",
-						editMode: "yes",
-						ref: "input_password_old",
-						validate_type: "not-empty",
-						not_empty: "yes"
-					},
-					{
-						infoLabel: "Новый пароль",
-						infoValue: "111111",
-						infoName: "newPassword",
-						infoType: "password",
-						editMode: "yes",
-						ref: "input_password_1",
-						validate_type: "not-empty,password",
-						not_empty: "yes"
-					},
-					{
-						infoLabel: "Повторите новый пароль",
-						infoValue: "111111",
-						infoName: "newPassword",
-						infoType: "password",
-						editMode: "yes",
-						ref: "input_password_2",
-						validate_type: "not-empty,password",
-						not_empty: "yes"
-					}
+		super();
+	}
 
-				],
-				submit_btn: {
-					text: "Сохранить",
-					onClick: (event: Event) => {
-						event.preventDefault();
-						let resultValid: boolean = true;
-						Object.keys(this.refs.form.refs).forEach((key) => {
-							if (!checkError(
-								this.refs.form.refs[key]?.getContent()?.querySelector("input")?.value,
-								(this.refs.form.refs[key]?.props.validate_type as string),
-								this.refs.form.refs[key]
-							) && resultValid)
-								resultValid = false;
-						});
-						if (resultValid) {
-							getFormData(this.refs.form);
-							renderPage("chat");
-						}
-					}
-				}
-			});
+
+	protected init(): void {
+		const inputsProps: Array<any> = [
+			{
+				id: "oldPassword_pass",
+				name: "oldPassword",
+				label: "Старый пароль",
+				type: "password",
+				validate_type: "not-empty",
+				not_empty: "yes",
+				error: "",
+				ref: "input_login"
+			},
+			{
+				id: "newPassword_pass",
+				name: "newPassword",
+				label: "Новый пароль",
+				type: "password",
+				validate_type: "not-empty",
+				not_empty: "yes",
+				error: "",
+				ref: "input_login"
+			},
+			{
+				id: "newPassword_pass_conf",
+				name: "newPassword",
+				label: "Повторите новый пароль",
+				type: "password",
+				validate_type: "not-empty,password",
+				not_empty: "yes",
+				related_field: "password_reg",
+				comparison_value: "",
+				error: "",
+				ref: "input_login"
+			}
+		];
+		this.children.form = new Form({
+			title: "Изменение пароля",
+			send_function: UserController.changePass,
+			context_func: UserController,
+			ref: "form",
+			error: {text: ""},
+			inputs: (inputsProps as InputProps[]),
+			link: {
+				name: "Вернуться в профиль",
+				href: "/profile",
+				ref: "secondary_btn",
+				class: "reg-link"
+			},
+			submit_btn: {
+				text: "Сохранить"
+			}
+
+		});
 	}
 
 	render() {

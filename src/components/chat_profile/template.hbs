@@ -1,0 +1,16 @@
+
+<div  class = "profile-form">
+
+{{#if is_loaded}}
+    {{{photoProfile}}}
+    <div class = "profile-header">{{title}}</div>
+    <div class = "about-members-block">
+        <div class = "members-block">
+            {{{memberList}}}
+        </div> 
+            
+    </div> 
+{{else}}
+    <div class = "access-denied">Идет загрузка...
+{{/if}}       
+</div>

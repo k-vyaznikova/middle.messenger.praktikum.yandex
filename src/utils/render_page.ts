@@ -3,7 +3,7 @@ import {AuthPage} from "/pages/auth/script.ts";
 import {RegisterPage} from "/pages/register/script.ts";
 import {ChatPage} from "/pages/chat/script.ts";
 import {CommunityPage} from "/pages/community/script.ts";
-import {CommunityEditPage} from "/pages/community-edit/script.ts";
+import {ChatEditPage} from "../pages/chat-edit/script";
 import {ProfilePage} from "/pages/profile/script.ts";
 import {ErrorPage} from "/pages/error/script.ts";
 import {PassEditPage} from "/pages/password-edit/script.ts";
@@ -15,7 +15,7 @@ const PAGES: Record<string, typeof Block> = {
 	"register": RegisterPage,
 	"chat": ChatPage,
 	"community": CommunityPage,
-	"community_edit": CommunityEditPage,
+	"chat_edit": ChatEditPage,
 	"profile": ProfilePage,
 	"error": ErrorPage,
 	"pass_edit": PassEditPage,

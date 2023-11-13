@@ -1,0 +1,41 @@
+@import "/styles/vars";
+
+.profile-photo{
+    position: relative;
+    margin-top: 40px;
+
+    .profile-img{
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background-size: cover;
+    }
+
+    
+
+    .change-avatar{
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.8;
+        background-color: $black;
+        color: $white;
+        border: none;
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+        text-align: center;
+        box-sizing: border-box;
+        font-size: 13px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .change-avatar.invis{
+        display: none;
+    }
+   
+
+}

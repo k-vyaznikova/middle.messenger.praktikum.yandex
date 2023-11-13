@@ -34,6 +34,7 @@
                     background: url("/components/send_msg_form/img/attach.svg") center center no-repeat $white;
                     cursor: pointer;
                     border: none;
+                    display: block;
                 }
 
                 .attach-type-container{
@@ -84,7 +85,7 @@
             }
 
             .msg{
-                width: calc(100% - 94px);
+                width: 100%;
                 position: relative;
                 
                 textarea{

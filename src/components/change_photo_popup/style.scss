@@ -1,0 +1,10 @@
+.set-avatar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .upload-link{
+        width: 120px;
+    }
+}

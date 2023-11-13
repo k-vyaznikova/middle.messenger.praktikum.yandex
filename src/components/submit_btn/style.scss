@@ -11,4 +11,10 @@ input.cta-btn[type="submit"]{
     border-radius: 8px;
     cursor: pointer;
 }
+
+input.cta-btn.only-border{
+    border: 2px solid $base-color;
+    color: $base-color;
+    background-color: $white;
+}
     

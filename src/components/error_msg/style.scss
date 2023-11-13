@@ -1,0 +1,15 @@
+@import "/styles/vars";
+
+form.form-container{
+    .msg{
+        display: none;
+        
+        &.error{
+            display: block;
+            color: $err-text;
+            background-color: $err-text-back;
+            padding: 5px;
+        }
+    }
+}
+

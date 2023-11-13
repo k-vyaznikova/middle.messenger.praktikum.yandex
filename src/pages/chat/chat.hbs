@@ -3,19 +3,23 @@
         <div class = "fixed-container">
             <div class = "fixed-block">
                 <div class = "left-top-block">
-                    {{{ProfilePersonalLink profile_img = profile_personal_link.profile_img profile_name = profile_personal_link.profile_name}}} 
-                    {{{CommunityAddLink}}}
+                    {{{profilePersonalLink}}} 
+                    <div class = "right-block">
+                        {{{popupOpen}}}
+                        {{{popupCreateChat}}}
+                    </div>  
                 </div>
-                {{{Search submit_url = search.submit_url not_focused="yes"}}}
             </div>
-        </div>
-        {{{ContactList contacts = contact_list ref = "contact_list"}}}
+        </div>  
+
+  
+        {{{contactList}}}
 
   
     {{/leftside}}
     {{#rightside}}
-        {{{ChatInfo chatName = chat_info.chatName chatImg = chat_info.chatImg personalChat = chat_info.personalChat}}}
-        {{{Dialog dialog = dialog}}}
-        {{{SendMsgForm ref = send_msg_form.ref send_msg_btn = send_msg_form.send_msg_btn send_msg_text = send_msg_form.send_msg_text send_msg_file = send_msg_form.send_msg_file}}}
+        
+        {{{dialog}}}
+        
     {{/rightside}}
 {{/defpage}}

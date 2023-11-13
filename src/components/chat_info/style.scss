@@ -35,6 +35,9 @@
 
                 .chat-img{
                     margin-right: 5px;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
                 }
 
                 .chat-name{
@@ -75,6 +78,16 @@
                 background: url("/components/chat_info/img/delete.svg") center center no-repeat;
                 padding: 2px;
                 border-radius: 50%;
+            }
+
+            .edit{
+                display: block;
+                width: 30px;
+                height: 30px;
+                background: url("/components/chat_info/img/edit.svg") center center no-repeat;
+                padding: 2px;
+                border-radius: 50%;
+                background-size: 47%;
             }
     
             .info.selected{

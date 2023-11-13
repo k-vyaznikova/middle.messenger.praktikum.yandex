@@ -1,0 +1,18 @@
+<form class = 'set-avatar' action = '#'>
+    <div class = 'upload-status'>Загрузите файл</div>
+    {{{errorMsg}}}
+    {{{uploadFile}}}
+    {{{uploadLink}}}
+    {{#if chatId}}
+        <input type = "hidden" name = "chatId" value = "{{chatId}}"/>
+    {{/if}}    
+    <div class = 'selected-file'>
+        <span class = 'selected-file-name'></span>
+        {{{deleteFile}}}
+    </div>
+    <input class = "caption-img" type="text" placeholder="Подпись к файлу...">
+    {{{submitBtn}}}
+   
+    <div class = 'err'></div>
+</form>
+

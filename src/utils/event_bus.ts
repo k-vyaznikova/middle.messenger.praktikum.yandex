@@ -10,7 +10,6 @@ export class EventBus {
 		if (!this.listeners[event]) {
 			this.listeners[event] = [];
 		}
-
 		this.listeners[event].push(callback);
 	}
 
@@ -26,10 +25,9 @@ export class EventBus {
 
 	public emit(event: string, ...args: any) {
 		if (!this.listeners[event]) {
-			throw new Error(`Нет события: ${event}`);
+			return;
 		}
-
-		this.listeners[event].forEach(function(listener) {
+		this.listeners[event]!.forEach(function(listener) {
 			listener(...args);
 		});
 	}

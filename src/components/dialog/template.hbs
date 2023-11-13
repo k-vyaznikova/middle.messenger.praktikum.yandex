@@ -1,14 +1,14 @@
+{{#if selectedChat}}
 <div class = "dialog-block">
+    {{{chatInfo}}}
     <div class = "dialog">
-        {{#each dialog}}
-            {{{DateMsg date = date}}}
-             {{#each messages}}
-                {{#ifEq type "to"}}
-                    {{{IncomingMsg msgText=msgText msgTime = msgTime msgImg = msgImg}}}
-                {{else}}
-                    {{{OutgoingMsg msgText=msgText msgTime = msgTime msgImg = msgImg msgStatus = msgStatus}}}
-                {{/ifEq}}
-             {{/each}}
+        {{#each items_dialog}}
+            {{{this}}}
         {{/each}}
+        <div id = "end-dialog"></div>
     </div>
+    {{{sendMsgForm}}}
 </div>
+{{else}}
+    <div class = "empty-msg">Выберите чат, чтобы отправить сообщение</div>
+{{/if}}

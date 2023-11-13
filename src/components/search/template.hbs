@@ -1,10 +1,4 @@
 <form url = "{{submit_url}}" class = "search-form">
-    <input name = "search" type="text" value="" class = "{{#if not_focused}}empty-search{{/if}} search-input {{#if left_align}}left-align{{/if}}" {{#if placeholder}} placeholder = "{{placeholder}}"{{/if}}/>
-    {{#if addItems}}
-        <div class = "add-items">
-            <div class = "item">ivanova <div class = "cancel"></div></div>
-            <div class = "item">fiva <div class = "cancel"></div></div>
-        </div>
-    {{/if}}
+    <input name = "search" type="text" value="{{value}}" class = "{{#if not_focused}}empty-search{{/if}} search-input {{#if left_align}}left-align{{/if}}" {{#if placeholder}} placeholder = "{{placeholder}}"{{/if}}/>
     <input name = "submit" type = "submit" />
 </form>  

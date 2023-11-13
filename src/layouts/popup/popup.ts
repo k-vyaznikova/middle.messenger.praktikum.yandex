@@ -1,16 +1,32 @@
-import type {HelperOptions} from "handlebars";
-export default function popup(this: object, options: HelperOptions): string {
-	return ` 
-    <div class = 'popup-block-invis ${options.hash.classVisibility}'>
-        <div class = 'popup-block-container'>
-            <div class = 'popup-block'>
-                <div class = 'close-block'>
-                    <div class = 'close'>&times;</div>
-                </div>
-                ${options.fn(this)}
-            </div> 
-        </div>
-        <div class = 'background-popup'></div>
-    </div>
-    `;
+
+import {Block} from "/utils/block.ts";
+import template from "/layouts/popup/popup.hbs";
+import {ClosePopup} from "/components/close_popup/script";
+
+interface PopupProps {
+    classVisibility: string,
+    content: Block,
+	events: {
+		close: () => void
+	}
+}
+
+export default class Popup extends Block {
+	constructor(props: PopupProps) {
+		super(props);
+	}
+	init() {
+		this.children.closePopup = new ClosePopup({
+			events: {
+				click: () => {
+					const closeEvent = new Event("close");
+					this.element?.dispatchEvent(closeEvent);
+				}
+			}
+
+		});
+	}
+	render() {
+		return this.compile(template, this.props);
+	}
 }

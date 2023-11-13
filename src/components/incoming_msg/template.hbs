@@ -1,9 +1,15 @@
 <div class = "incoming-msg-container">
     <div class = "incoming-msg">
-        {{#if msgImg}}
-            <img src = "{{msgImg}}" class = "img" alt = "{{msgText}}"/>
-        {{/if}}
-        <div class = "text">{{msgText}}</div>
-        <div class = "time">{{msgTime}}</div>
+        <div class = "left">
+            <div class = "autor-photo" style="background: url('{{user.avatar}}') 50% 50% no-repeat; background-size: cover;"></div>
+        </div>
+        <div class = "right">
+            <div class = "autor-name">{{user.first_name}} {{user.second_name}}</div>
+            {{#if msgImg}}
+                <img src = "{{msgImg}}" class = "img" alt = "{{msgText}}"/>
+            {{/if}}
+            <div class = "text">{{msgText}}</div>
+            <div class = "time">{{msgTime}}</div>
+        </div>    
     </div>    
 </div>    

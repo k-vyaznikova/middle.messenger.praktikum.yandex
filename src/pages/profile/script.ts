@@ -1,60 +1,54 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/profile/profile.hbs";
-import img from "/img/noimgprofile.svg";
-export class ProfilePage extends Block {
-	constructor() {
-		super({
-			title: "Иван",
-			submit_url: "#",
+import {withStore} from "/utils/store.ts";
+import {ProfileForm} from "/components/profile_form/script.ts";
+import {User} from "/types/common_types.ts";
+import {Link} from "/components/link/script";
+
+
+export class ProfilePageInitial extends Block {
+	constructor(props: User) {
+		super(props);
+	}
+	init() {
+		const fieldDisplayNames:Record<string, string> = {
+			"email": "E-mail",
+			"login": "Логин",
+			"first_name": "Имя",
+			"second_name": "Фамилия",
+			"display_name": "Имя в чате",
+			"phone": "Телефон"
+		};
+		const that: any = this;
+		const profileItemsProps: Array<any> = Object.keys(fieldDisplayNames).map(function(key) {
+			return {
+				infoLabel: fieldDisplayNames[key],
+				value: that.props[key],
+				infoName: key,
+				infoType: "text"
+			};
+		});
+
+
+		this.children.profileForm = new ProfileForm({
+			title: this.props.first_name + " " + this.props.second_name,
+			profile_items: profileItemsProps,
 			footer_links: "yes",
-			edit_profile_link: "#",
-			edit_password_link: "#",
-			exit_link: "#",
-			profile_photo: {
-				profilePhoto: img,
-				profileAlt: "Иван"
-			},
-			profile_items: [
-				{
-					infoLabel: "Почта",
-					value: "pochta@yandex.ru",
-					infoName: "email",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Логин",
-					value: "ivanivanov",
-					infoName: "login",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Имя",
-					value: "Иван",
-					infoName: "first_name",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Фамилия",
-					value: "Иванов",
-					infoName: "second_name",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Имя в чате",
-					value: "ivanivanov",
-					infoName: "display_name",
-					infoType: "text"
-				},
-				{
-					infoLabel: "Телефон",
-					value: "+7 (909)-606-66-66",
-					infoName: "phone",
-					infoType: "phone"
-				}
-			]
+			profile_avatar: this.props.avatar
+		});
+
+		this.children.link = new Link({
+			href: "/messenger",
+			name: "",
+			class: "back-link"
 		});
 	}
+
 	render() {
 		return this.compile(template, this.props);
 	}
 }
+
+
+const withUser = withStore((state) => ({...state.user}));
+export const ProfilePage = withUser(ProfilePageInitial);

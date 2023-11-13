@@ -1,11 +1,13 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/incoming_msg/template.hbs";
+import {User} from "/types/common_types";
 
 
 interface IncomingMsgProps{
 	msgText: string,
 	msgTime: string,
-	msgImg?: string
+	msgImg?: string,
+	user: User
 }
 
 export class IncomingMsg extends Block {

@@ -1,27 +1,33 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/profile_personal_link/template.hbs";
-import {renderPage} from "/utils/render_page";
+import router, {Router} from "/utils/routing/router.ts";
 
 interface ProfilePersonalLinkProps{
 	profile_img: string,
 	profile_name: string,
-	events: {
+	href: string,
+	events?: {
 		click: (event: Event) => void
 	}
 }
 
 export class ProfilePersonalLink extends Block {
+	private router: Router = router;
 	constructor(props: ProfilePersonalLinkProps) {
-		super({
-			...props,
+		super({...props,
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
-					renderPage("profile-edits");
+					this.navigate();
 				}
 			}
 		});
 	}
+
+	navigate() {
+		this.router.go(this.props.href as string);
+	}
+
 	render() {
 		return this.compile(template, this.props);
 	}

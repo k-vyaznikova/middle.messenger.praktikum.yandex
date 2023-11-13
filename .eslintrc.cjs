@@ -41,6 +41,7 @@ module.exports = {
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/ban-types": "off",
 		"@typescript-eslint/no-this-alias": "off",
+		"@typescript-eslint/no-unused-vars": ["error"],
 		"comma-dangle": ["error", {
 			"arrays": "never",
 			"objects": "never",
@@ -48,6 +49,8 @@ module.exports = {
 			"exports": "never",
 			"functions": "never"
 		}],
-		"curly": "off"
+		"curly": "off",
+		"no-unused-vars": "off",
+		"prefer-promise-reject-errors": "off"
 	}
 };

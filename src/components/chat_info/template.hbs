@@ -2,21 +2,19 @@
     <div class = "chat-info-block">
         <div class = "chat-info">
             <div class = "chat-info-left">
-                <a href = "/pages/profile/profile.html" class = "chat-img">
-                    <img src = "{{chatImg}}" alt = "{{chatName}} - аватар"/>
-                </a> 
-                <a href = "/pages/profile/profile.html" class = "chat-name">
+                <div class = "chat-img" style="background: url('{{chatImg}}') 50% 50% no-repeat; background-size: cover;"></div> 
+                <div class = "chat-name">
                     {{chatName}}
-                </a> 
+                </div> 
             </div>    
-            {{#if personalChat}} 
-                <div class = "persoanl-settings chat-info-right">
-                    <a href="#" class = "info"></a>
-                    <a href="#" class = "delete"></a>
-                </div>
-            {{else}}     
-                <a href = "#" class = "settings chat-info-right"></a>
-            {{/if}}   
+            <div class = "persoanl-settings chat-info-right">
+                {{{link_info}}}
+                {{{link_edit}}}
+                {{{link_delete}}}
+                
+            </div>
+ 
         </div>    
     </div>
+    {{{popupDeleteChat}}}
 </div>

@@ -1,73 +1,12 @@
 import Handlebars from "handlebars";
-import {registerComponent} from "./utils/register_component.ts";
-
-import {Form} from "/components/form/script.ts";
-import {SecondaryBtn} from "/components/secondary_btn/script.js";
-import {Input} from "/components/input/script.js";
-import {SubmitBtn} from "/components/submit_btn/script.ts";
-import {Search} from "/components/search/script.ts";
-import {ContactItem} from "/components/contact_item/script.ts";
-import {ContactList} from "/components/contact_list/script.ts";
-import {ChatInfo} from "/components/chat_info/script.ts";
-import {DateMsg} from "/components/date_msg/script.ts";
-import {IncomingMsg} from "/components/incoming_msg/script.ts";
-import {OutgoingMsg} from "/components/outgoing_msg/script.ts";
-import {Dialog} from "/components/dialog/script.ts";
-import {ProfilePhoto} from "/components/profile_photo/script.ts";
-import {ProfileItem} from "/components/profile_item/script.ts";
-import {ProfileForm} from "/components/profile_form/script.ts";
-import {CommunityProfile} from "/components/community_profile/script.ts";
-import {MemberShortInfo} from "/components/member_short_info/script.ts";
-import {MemberList} from "/components/member_list/script.ts";
-import {SendMsgBtn} from "/components/send_msg_btn/script.ts";
-import {SendMsgText} from "/components/send_msg_text/script.ts";
-import {SendMsgFile} from "/components/send_msg_file/script.ts";
-import {SendMsgForm} from "/components/send_msg_form/script.ts";
-import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
-import {CommunityAddLink} from "/components/community_add_link/script.ts";
-import {BackLink} from "/components/back_link/script.ts";
-import {Error} from "/components/error/script.ts";
-import {Link} from "/components/link/script.ts";
-
-import {renderPage} from "/utils/render_page.ts";
 
 
 import cardpage from "/layouts/cardpage/cardpage.ts";
 import leftside from "/layouts/chatpage/leftside/leftside.ts";
 import rightside from "/layouts/chatpage/rightside/rightside.ts";
 import defpage from "/layouts/defpage/defpage.ts";
-import popup from "/layouts/popup/popup.ts";
-import profpage from "/layouts/profpage/profpage.ts";
 import ifEq from "/utils/ifequal.ts";
 
-
-registerComponent("Form", Form);
-registerComponent("SecondaryBtn", SecondaryBtn);
-registerComponent("Input", Input);
-registerComponent("SubmitBtn", SubmitBtn);
-registerComponent("Search", Search);
-registerComponent("ContactItem", ContactItem);
-registerComponent("ContactList", ContactList);
-registerComponent("ChatInfo", ChatInfo);
-registerComponent("DateMsg", DateMsg);
-registerComponent("IncomingMsg", IncomingMsg);
-registerComponent("OutgoingMsg", OutgoingMsg);
-registerComponent("Dialog", Dialog);
-registerComponent("SendMsgForm", SendMsgForm);
-registerComponent("ProfilePhoto", ProfilePhoto);
-registerComponent("ProfileItem", ProfileItem);
-registerComponent("ProfileForm", ProfileForm);
-registerComponent("CommunityProfile", CommunityProfile);
-registerComponent("MemberList", MemberList);
-registerComponent("MemberShortInfo", MemberShortInfo);
-registerComponent("SendMsgBtn", SendMsgBtn);
-registerComponent("SendMsgFile", SendMsgFile);
-registerComponent("SendMsgText", SendMsgText);
-registerComponent("ProfilePersonalLink", ProfilePersonalLink);
-registerComponent("CommunityAddLink", CommunityAddLink);
-registerComponent("BackLink", BackLink);
-registerComponent("Error", Error);
-registerComponent("Link", Link);
 
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);
@@ -75,11 +14,71 @@ Handlebars.registerHelper("leftside", leftside);
 Handlebars.registerHelper("rightside", rightside);
 
 Handlebars.registerHelper("defpage", defpage);
-Handlebars.registerHelper("popup", popup);
-Handlebars.registerHelper("profpage", profpage);
 Handlebars.registerHelper("ifEq", ifEq);
 
-window.addEventListener("DOMContentLoaded", () => {
-	renderPage("main");
+
+import Router from "/utils/routing/router.ts";
+import {AuthPage} from "/pages/auth/script.ts";
+import {RegisterPage} from "/pages/register/script.ts";
+import {ChatPage} from "/pages/chat/script.ts";
+import {ChatEditPage} from "./pages/chat-edit/script";
+import {PassEditPage} from "/pages/password-edit/script.ts";
+import {ProfilePage} from "/pages/profile/script.ts";
+import {ProfileEditPage} from "/pages/profile-edit/script.ts";
+import AuthController from "/controllers/auth-controller";
+import {ChatProfilePage} from "/pages/chat-profile/script";
+import store from "/utils/store";
+
+
+enum Routes {
+	Index = "/",
+	Register = "/sign-up",
+	Profile = "/profile",
+	Chat = "/messenger",
+	ChatEdit = "/chat-edit",
+	PassEdit = "/pass-edit",
+	ProfileEdit = "/settings",
+	ChatProfile = "/chat-profile"
+  }
+
+window.addEventListener("DOMContentLoaded", async () => {
+	Router
+		.use(Routes.Index, AuthPage)
+		.use(Routes.Register, RegisterPage)
+		.use(Routes.Profile, ProfilePage)
+		.use(Routes.Chat, ChatPage)
+		.use(Routes.ChatEdit, ChatEditPage)
+		.use(Routes.PassEdit, PassEditPage)
+		.use(Routes.ProfileEdit, ProfileEditPage)
+		.use(Routes.ChatProfile, ChatProfilePage);
+
+	let isProtectedPage: boolean = true;
+
+	switch (window.location.pathname) {
+	case Routes.Register:
+		isProtectedPage = false;
+		break;
+	case Routes.Index:
+		isProtectedPage = false;
+		break;
+	}
+
+	if (isProtectedPage) {
+		try {
+			await AuthController.fetchUser();
+			if (store.getState().user.id > 0 )
+				Router.start();
+		} catch (e: any) {
+			Router.go(Routes.Index);
+		}
+	} else {
+		try {
+			await AuthController.fetchUser();
+			if (store.getState().user.id > 0)
+				Router.go(Routes.Chat);
+		} catch (e) {
+			Router.go(window.location.pathname);
+		}
+	}
 });
 

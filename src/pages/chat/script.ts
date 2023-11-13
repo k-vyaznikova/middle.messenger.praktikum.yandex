@@ -1,141 +1,112 @@
 import {Block} from "/utils/block.ts";
 import template from "/pages/chat/chat.hbs";
-import chatImg from "/img/noimgprofile.svg";
-import img from "/img/photo.jpg";
+import store from "/utils/store.ts";
+import chatsController from "/controllers/chats-controller.ts";
+import authController from "/controllers/auth-controller";
+import {Dialog} from "/components/dialog/script.ts";
+import {ContactList} from "/components/contact_list/script.ts";
+import {ProfilePersonalLink} from "/components/profile_personal_link/script.ts";
+import {withStore} from "/utils/store.ts";
+import {BASE_FILE_URL} from "/utils/constants";
+import Popup from "/layouts/popup/popup";
+import {AddChat} from "/components/add_chat/script";
+import {PopupOpen} from "/components/popup_open/script";
+import img from "/img/noimgprofile.svg";
 
-export class ChatPage extends Block {
-	constructor() {
-		super({
-			profile_name: "Вязникова Кристина",
-			profile_photo: "/img/noimgprofile.svg",
-			profile_personal_link: {
-				profile_img: chatImg,
-				profile_name: "Вязникова Кристина"
-			},
-			search: {
-				submit_url: "###"
-			},
-			contact_list: [
-				{
-					contactSelected: "yes",
-					contactDialogLink: "#",
-					contactImg: chatImg,
-					contactName: "Иван Иванов",
-					yourMsg: "yes",
-					contactMsg: "Позвони мне в 9",
-					contactTimeMsg: "23:04",
-					contactQMsg: "3",
-					ref: "contact_1"
-				},
-				{
-					contactDialogLink: "#",
-					contactImg: chatImg,
-					contactName: "Петр Петров",
-					yourMsg: "yes",
-					contactMsg: "Позвони мне в 9",
-					contactTimeMsg: "23:04",
-					contactQMsg: "5",
-					ref: "contact_2"
-				},
-				{
-					contactDialogLink: "#",
-					contactImg: chatImg,
-					contactName: "Иван Иванов",
-					contactMsg: "Позвони мне в 9",
-					contactTimeMsg: "23:04",
-					contactQMsg: "5",
-					ref: "contact_3"
-				},
-				{
-					contactDialogLink: "#",
-					contactImg: chatImg,
-					contactName: "Иван Иванов",
-					yourMsg: "yes",
-					contactMsg: "Позвони мне в 9",
-					contactTimeMsg: "23:04",
-					contactQMsg: "5",
-					ref: "contact_4"
-				},
-				{
-					contactDialogLink: "#",
-					contactImg: chatImg,
-					contactName: "Иван Иванов",
-					contactMsg: "Позвони мне в 9",
-					contactTimeMsg: "23:04",
-					contactQMsg: "5",
-					ref: "contact_5"
+interface ChatPageProps {
+	contact_list: Array<any>,
+	is_loaded?: string,
+	chat_info: {
+		chatName: string,
+		chatImg: string,
+		personalChat: string
+	},
+	dialog: Array<any>,
+	send_msg_form: {
+		ref: string,
+		send_msg_text: {
+			name: string,
+			ref: string,
+			validate_type: string,
+			value: string,
+		},
+		send_msg_file: {
+			name: string,
+			ref: string,
+			value: string,
+		}
+	}
+}
+
+export class ChatPageInitial extends Block {
+	constructor(props: ChatPageProps) {
+		super(props);
+	}
+	init() {
+		this.children.profilePersonalLink = new ProfilePersonalLink({
+			profile_img: img,
+			profile_name: "",
+			href: "/profile"
+		});
+		this.children.popupCreateChat = new Popup({
+			classVisibility: "invisible",
+			content: new AddChat({
+				error: "",
+				funcClosePopup: () => {
+					this.children.popupCreateChat.setProps({
+						classVisibility: "invisible"
+					});
 				}
-
-			],
-			chat_info: {
-				chatName: "Вадим",
-				chatImg: chatImg,
-				personalChat: "yes"
-			},
-			dialog: [
-				{
-					date: "12 июля",
-					messages: [
-						{
-							type: "to",
-							msgText: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",
-							msgTime: "20:00",
-							msgImg: img
-						},
-						{
-							type: "to",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02"
-						},
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02",
-							msgStatus: "read"
-						}
-					]
-				},
-				{
-					date: "Вчера",
-					messages: [
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02",
-							msgStatus: "delivered"
-						},
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02"
-
-						},
-						{
-							type: "from",
-							msgText: "В Джубгском, Тенгинском, Новомихайловском и Небугском поселениях Туапсинского района ввели режим ЧС из-за сильных осадков, сообщил оперативный штаб Краснодарского края в своем Telegram.",
-							msgTime: "20:02"
-						}
-					]
-				}
-			],
-			send_msg_form: {
-				ref: "send_message_form",
-				send_msg_text: {
-					name: "send_message_text",
-					ref: "send_message_text",
-					validate_type: "not-empty",
-					value: ""
-				},
-				send_msg_file: {
-					name: "send_message_file",
-					ref: "send_message_file",
-					value: ""
+			}),
+			events: {
+				close: () => {
+					this.children.popupCreateChat.setProps({
+						classVisibility: "invisible"
+					});
 				}
 			}
+		});
+		this.children.popupOpen = new PopupOpen({
+			class: "chat-add",
+			href: "#",
+			onClick: () => {
+				this.children.popupCreateChat.setProps({
+					classVisibility: "visible"
+				});
+			}
+		});
 
+
+		this.children.contactList = new ContactList({});
+		this.children.dialog = new Dialog({});
+		authController.fetchUser().then(() => {
+			this.children.profilePersonalLink.setProps({
+				profile_img: this.props.avatar? BASE_FILE_URL+this.props.avatar : img,
+				profile_name: this.props.first_name + " " + this.props.second_name,
+				href: "/profile"
+			});
+			chatsController.fetchChats().then(() => {
+				this.children.contactList.setProps({
+					is_loaded: "yes"
+				});
+			});
 		});
 	}
+
+
+	async searchChat(title: string) {
+		const state: any = store.getState();
+		const newChatList: Array<any> = state["chats"].filter(function(item: Record<string, any>) {
+			return item["title"].indexOf(title) >= 0;
+		});
+		return newChatList;
+	}
+
 	render() {
 		return this.compile(template, this.props);
 	}
 }
+
+const withUser = withStore((state) => ({...state.user}));
+export const ChatPage = withUser(ChatPageInitial);
+

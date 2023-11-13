@@ -1,11 +1,16 @@
-
 <div class = "member-item">
-    <a href = "{{memberLink}}" class = "member-info">
+    <div class = "member-info">
         <img src = "{{memberPhoto}}" class = "member-photo" alt = "{{memberLogin}}"/>
         <div class = "member-login">{{memberLogin}}</div>
         <div class = "member-name">{{memberName}}</div>
-    </a>
+    </div>
     {{#if memberAdd}}
-        <a href = "#" class = "member-add"></a>
+        <a href = "#" class = "member-add" data-id = {{id}}></a>
+    {{/if}}
+    {{#if memberDelete}}
+        <a href = "#" class = "member-delete" data-id = {{id}}></a>
+    {{/if}}
+    {{#if hiddenInput}}
+        <input type="hidden" value = "{{id}}" name = "chat_members"/>
     {{/if}}
 </div>
