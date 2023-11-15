@@ -3,7 +3,7 @@ import {AuthPage} from "/pages/auth/script.ts";
 import {RegisterPage} from "/pages/register/script.ts";
 import {ChatPage} from "/pages/chat/script.ts";
 import {CommunityPage} from "/pages/community/script.ts";
-import {ChatEditPage} from "../pages/chat-edit/script";
+import {ChatEditPage} from "/pages/chat-edit/script.ts";
 import {ProfilePage} from "/pages/profile/script.ts";
 import {ErrorPage} from "/pages/error/script.ts";
 import {PassEditPage} from "/pages/password-edit/script.ts";
