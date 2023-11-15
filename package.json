@@ -2,7 +2,6 @@
   "name": "messenger",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "start": "npm run build && node server.js",
@@ -12,7 +11,7 @@
     "eslint-fix": "npx eslint 'src/**/*.{js,jsx,ts,tsx}' --fix",
     "stylelint": "npx stylelint 'src/**/*.scss'",
     "stylelint-fix": "npx stylelint --fix 'src/**/*.scss'",
-    "test": "mocha"
+    "test": "mocha --require ts-node/register --require ./mochaSetup.cjs './src/**/*.test.ts'"
   },
   "devDependencies": {
     "@types/chai": "^4.3.10",
@@ -45,6 +44,7 @@
     "jsdom": "^22.1.0",
     "mocha": "^10.2.0",
     "nanoid": "^4.0.2",
+    "node-config": "^0.0.2",
     "node-esm-loader": "^0.2.5",
     "path": "^0.12.7",
     "sinon": "^17.0.1",

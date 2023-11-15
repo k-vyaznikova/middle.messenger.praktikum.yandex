@@ -3,7 +3,7 @@ import {Block} from "/utils/block.ts";
 import {ErrorPage} from "/pages/error/script.ts";
 
 export class Router {
-	private routes!: Array<Route>;
+	private _routes!: Array<Route>;
 	private history: any = window.history;
 	private static __instance?: Router;
 	private _currentRoute!: Route | null;
@@ -15,7 +15,7 @@ export class Router {
 			return Router.__instance;
 		}
 
-		this.routes = [];
+		this._routes = [];
 		this._currentRoute = null;
 		this._rootQuery = rootQuery;
 
@@ -24,7 +24,7 @@ export class Router {
 
 	public use(pathname: string, block: typeof Block): Router {
 		const route = new Route(pathname, block, {rootQuery: this._rootQuery});
-		this.routes.push(route);
+		this._routes.push(route);
 		return this;
 	}
 
@@ -68,13 +68,19 @@ export class Router {
 	}
 
 	getRoute(pathname: string): Route | undefined {
-		return this.routes.find((route) => route.match(pathname));
+		return this._routes.find((route) => route.match(pathname));
 	}
 
+
+	/**For testing */
 	public reset() {
 		if (!Router.__instance)
 			delete Router.__instance;
 		new Router(this._rootQuery);
+	}
+
+	public routeLength(){
+		return this._routes.length;
 	}
 }
 

@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es6",
-    "moduleResolution": "nodenext",                                  
+    "target": "es2016",
+    "module": "commonjs",
+    //"moduleResolution": "Classic",                                  
      "lib": [
-      "ES6",
-      "dom"
-     ], 
-    "rootDir": ".",             
+      "es2016",
+      "dom",
+      "DOM.Iterable"
+     ],             
     "baseUrl": "./src",
+    "rootDir": "./src",
+    //"root": ["./src"],
     "paths": { "/*": ["./*"] },  
     "allowImportingTsExtensions": true, 
     "allowJs": true,   
@@ -28,5 +30,6 @@
   "exclude": ["node_modules"],
   "ts-node": {
     "esm": true
-  }
+  },
+  "include": ["src"]
 }
