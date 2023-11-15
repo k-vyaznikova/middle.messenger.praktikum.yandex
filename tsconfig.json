@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2020",                                  
+    "target": "es2020",
+    "module": "es6",
+    "moduleResolution": "nodenext",                                  
      "lib": [
       "ES6",
       "dom"
-     ],                                      
-    "module": "commonjs",                                
+     ], 
     "rootDir": ".",             
     "baseUrl": "./src",
     "paths": { "/*": ["./*"] },  

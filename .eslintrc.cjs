@@ -42,6 +42,7 @@ module.exports = {
 		"@typescript-eslint/ban-types": "off",
 		"@typescript-eslint/no-this-alias": "off",
 		"@typescript-eslint/no-unused-vars": ["error"],
+		"@typescript-eslint/no-var-requires": "off",
 		"comma-dangle": ["error", {
 			"arrays": "never",
 			"objects": "never",

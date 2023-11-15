@@ -5,12 +5,12 @@ import {ErrorPage} from "/pages/error/script.ts";
 export class Router {
 	private routes!: Array<Route>;
 	private history: any = window.history;
-	private static __instance: Router;
+	private static __instance?: Router;
 	private _currentRoute!: Route | null;
 	private _rootQuery!: string;
 
 
-	constructor(rootQuery: string) {
+	constructor(rootQuery: string = "body") {
 		if (Router.__instance) {
 			return Router.__instance;
 		}
@@ -69,6 +69,12 @@ export class Router {
 
 	getRoute(pathname: string): Route | undefined {
 		return this.routes.find((route) => route.match(pathname));
+	}
+
+	public reset() {
+		if (!Router.__instance)
+			delete Router.__instance;
+		new Router(this._rootQuery);
 	}
 }
 
