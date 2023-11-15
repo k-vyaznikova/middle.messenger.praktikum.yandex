@@ -43,12 +43,13 @@
     "handlebars": "^4.7.8",
     "jsdom": "^22.1.0",
     "mocha": "^10.2.0",
-    "nanoid": "^4.0.2",
+    "nanoid": "^3.0.0",
     "node-config": "^0.0.2",
     "node-esm-loader": "^0.2.5",
     "path": "^0.12.7",
     "sinon": "^17.0.1",
     "stylelint-scss": "^5.1.0",
+    "ts-mocha": "^10.0.0",
     "vite-plugin-handlebars": "^1.6.0"
   },
   "engines": {
