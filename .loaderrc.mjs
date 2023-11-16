@@ -1,12 +1,12 @@
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 
 const hbsLoader = {
   resolve: (specifier, options) => {
     const { href, pathname } = new URL(specifier, options.parentURL)
 
-    if (pathname.endsWith(".hbs")) {
+    if (pathname.endsWith('.hbs')) {
       return {
-        format: "module",
+        format: 'module',
         url: href,
       }
     }
@@ -15,9 +15,9 @@ const hbsLoader = {
   format: (url, options) => {
     const { pathname } = new URL(url, options.parentURL)
 
-    if (pathname.endsWith(".hbs")) {
+    if (pathname.endsWith('.hbs')) {
       return {
-        format: "module"
+        format: 'module'
       }
     }
   },
@@ -25,7 +25,7 @@ const hbsLoader = {
     const { url } = options;
     const { pathname } = new URL(url)
 
-    if (!pathname.endsWith(".hbs")) {
+    if (!pathname.endsWith('.hbs')) {
       return;
     }
 
@@ -42,7 +42,7 @@ const hbsLoader = {
 export default {
   loaders: [
     hbsLoader,
-    "esm-loader-typescript",
-    "esm-loader-css"
+    'esm-loader-typescript',
+    'esm-loader-css'
   ],
 };

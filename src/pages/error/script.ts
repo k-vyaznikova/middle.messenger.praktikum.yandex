@@ -1,6 +1,10 @@
-import {Block} from "./../../utils/block.ts";
-const template = require("./error.hbs");
-// import {Link} from "./../../components/link/script";
+/*console.log("========");
+console.log(process.env.NODE_PATH);
+console.log("========");*/
+
+import {Block} from "/utils/block.ts";
+import template from "./error.hbs";
+import {Link} from "/components/link/script.ts";
 
 
 export class ErrorPage extends Block {
@@ -13,13 +17,13 @@ export class ErrorPage extends Block {
 	}
 
 
-	/*init() {
+	init() {
 		this.children.link = new Link({
 			href: this.props["back_href"] as string,
 			class: "error-link",
 			name: "Назад к чатам"
 		});
-	}*/
+	}
 
 	render() {
 		return this.compile(template, this.props);

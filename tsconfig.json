@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "module": "commonjs",                                  
+    "module": "es6",
+    "moduleResolution": "nodenext",                                 
      "lib": [
       "es2016",
       "dom",
@@ -27,7 +28,10 @@
   },                      
   "exclude": ["node_modules"],
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "files": true,
+    "baseUrl": "./src",
+    "rootDir": "./src"
   },
   "include": ["src"]
 }
