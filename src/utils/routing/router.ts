@@ -1,6 +1,6 @@
-import {Route, renderPage} from "/utils/routing/route.ts";
-import {Block} from "/utils/block.ts";
-import {ErrorPage} from "/pages/error/script.ts";
+import {Route, renderPage} from "./route.ts";
+import {Block} from "./../block";
+import {ErrorPage} from "./../../pages/error/script.ts";
 
 export class Router {
 	private _routes!: Array<Route>;
@@ -72,14 +72,14 @@ export class Router {
 	}
 
 
-	/**For testing */
+	/** For testing */
 	public reset() {
 		if (!Router.__instance)
 			delete Router.__instance;
 		new Router(this._rootQuery);
 	}
 
-	public routeLength(){
+	public routeLength() {
 		return this._routes.length;
 	}
 }

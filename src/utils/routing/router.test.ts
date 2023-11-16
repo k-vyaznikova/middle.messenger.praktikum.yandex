@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import sinon from "sinon";
-import Router from "/utils/routing/router.ts";
-import {Block} from "/utils/block";
+import Router from "./router.ts";
+import {Block} from "./../block";
 
 
 describe("Testing of function use()", () => {

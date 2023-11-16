@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "module": "commonjs",
-    //"moduleResolution": "Classic",                                  
+    "module": "commonjs",                                  
      "lib": [
       "es2016",
       "dom",
@@ -10,7 +9,6 @@
      ],             
     "baseUrl": "./src",
     "rootDir": "./src",
-    //"root": ["./src"],
     "paths": { "/*": ["./*"] },  
     "allowImportingTsExtensions": true, 
     "allowJs": true,   
