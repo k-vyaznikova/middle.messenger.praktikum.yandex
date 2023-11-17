@@ -6,4 +6,4 @@ const {window} = new JSDOM("<div id='app'></div>", {
 });
 global.window = window;
 
-moduleAlias.addAlias("/utils/routing/", __dirname + "/src/utils/routing/");
+//moduleAlias.addAlias("/utils/routing/", __dirname + "/src/utils/routing/");

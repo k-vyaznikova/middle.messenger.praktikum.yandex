@@ -2,6 +2,7 @@
   "extension": [".ts"],
   "spec": " ./src/**/*.test.ts",
   "require": [
+    //"tsconfig-paths/register",
     "./mochaSetup.js"
   ],
   "node-option": [

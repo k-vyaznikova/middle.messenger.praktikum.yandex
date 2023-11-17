@@ -2,15 +2,17 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "es6",
-    "moduleResolution": "nodenext",                                 
-     "lib": [
+    "moduleResolution": "nodenext",                              
+    "lib": [
       "es2016",
       "dom",
       "DOM.Iterable"
      ],             
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "rootDir": "./src",
-    "paths": { "/*": ["./*"] },  
+    "paths": { 
+      "/*": ["./src/*"]
+    },  
     "allowImportingTsExtensions": true, 
     "allowJs": true,   
     "sourceMap": true,  
@@ -28,10 +30,18 @@
   },                      
   "exclude": ["node_modules"],
   "ts-node": {
+    "target": "es2016",
+    "module": "es6",
+    "moduleResolution": "nodenext",
     "esm": true,
     "files": true,
-    "baseUrl": "./src",
-    "rootDir": "./src"
+    "compilerOptions": {
+      "baseUrl": "./",
+      "rootDir": "./src",
+      "paths": { 
+        "/*": ["./src/*"]
+      },
+    }
   },
   "include": ["src"]
 }

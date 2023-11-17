@@ -1,7 +1,13 @@
+console.log(process.env.NODE_PATH);
+//console.log("=============");
 import {expect} from "chai";
 import sinon from "sinon";
+//import func from "/test.ts";
 import Router from "/utils/routing/router.ts";
 import {Block} from "/utils/block.ts";
+
+//console.log(func);
+
 
 
 describe("Testing of function use()", () => {
