@@ -1,7 +1,7 @@
-import {Block} from "/utils/block.ts";
-import template from "/components/input/template.hbs";
-import {checkError} from "/utils/form_utils";
-import {InputProps} from "/types/common_types.ts";
+import {Block} from "./../../utils/block.ts";
+import template from "./template.hbs";
+import {checkError} from "./../../utils/form_utils.ts";
+import {InputProps} from "./../../types/common_types.ts";
 
 
 export class Input extends Block {

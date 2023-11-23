@@ -1,7 +1,7 @@
-import {Block} from "/utils/block.ts";
-import template from "/components/profile_item/template.hbs";
-import {checkError} from "/utils/form_utils";
-import {ProfileItemProps} from "/types/common_types";
+import {Block} from "./../../utils/block.ts";
+import template from "./template.hbs";
+import {checkError} from "./../../utils/form_utils";
+import {ProfileItemProps} from "./../../types/common_types";
 
 
 export class ProfileItem extends Block {

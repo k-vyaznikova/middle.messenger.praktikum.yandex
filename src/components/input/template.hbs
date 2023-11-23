@@ -1,7 +1,7 @@
 <div class = "input-container">
-    {{#ifEq not_empty "yes"}}
+    {{#if not_empty}}
         <label for="{{id}}">{{label}}</label>
-    {{/ifEq}}    
+    {{/if}}    
     <input value = "{{value}}" name = "{{name}}" type="{{type}}" id = "{{id}}" ref = "{{ref}}" data-validate = "{{validate_type}}" data-comparison-value = "{{comparison_value}}"/>
     <span class = "error">{{error}}</span>
 </div>

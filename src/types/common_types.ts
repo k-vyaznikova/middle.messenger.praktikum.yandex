@@ -50,6 +50,7 @@ export interface InputProps{
 	related_field?: string,
 	comparison_value?: string,
 	error: string,
+	value?: string,
 	onFocusout?: ()=>void,
 	onKeyup?: ()=>void,
 	events?:{

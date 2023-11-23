@@ -8,7 +8,7 @@ export default defineConfig( {
 		outDir: resolve(__dirname, "build")
 	},
 	server: {
-		open: "/register"
+		open: "/sign-up"
 	},
 	plugins: [handlebars()]
 

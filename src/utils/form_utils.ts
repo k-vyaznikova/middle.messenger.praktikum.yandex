@@ -1,9 +1,9 @@
-import {Input} from "/components/input/script.ts";
-import {ProfileItem} from "/components/profile_item/script.ts";
-import {Form} from "/components/form/script.ts";
-import {SendMsgText} from "/components/send_msg_text/script.ts";
-import {ResultValidate} from "/types/common_types.ts";
-import router from "/utils/routing/router.ts";
+import {Input} from "./../components/input/script.ts";
+import {ProfileItem} from "./../components/profile_item/script.ts";
+import {Form} from "./../components/form/script.ts";
+import {SendMsgText} from "./../components/send_msg_text/script.ts";
+import {ResultValidate} from "./../types/common_types.ts";
+import router from "./../utils/routing/router.ts";
 
 function comparePassword(pass: string | undefined, passConfirm: string): ResultValidate {
 	let result: ResultValidate = {
@@ -139,4 +139,11 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => Promise<any>, su
 			}
 		});
 	}
+}
+
+/**
+ * For testing
+ */
+export class TestFormUtils {
+	public static checkErrorTest = checkError;
 }

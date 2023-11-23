@@ -1,7 +1,8 @@
-import {Block} from "/utils/block.ts";
-import template from "/components/link/template.hbs";
-import router, {Router} from "/utils/routing/router.ts";
+import {Block} from "./../../utils/block.ts";
+import template from "./template.hbs";
+import router, {Router} from "./../../utils/routing/router.ts";
 import {LinkProps} from "/types/common_types";
+import {getUrlParams} from "/utils/url_utils";
 
 export class Link extends Block {
 	private router: Router = router;
@@ -20,7 +21,15 @@ export class Link extends Block {
 	}
 
 	navigate() {
-		this.router.go(this.props.href as string);
+		let pathname: string = this.props.href as string;
+		let params = "";
+		if (pathname.indexOf("?") > -1) {
+			const arrayAddr: Array<string> = pathname.split("?");
+			pathname = arrayAddr[0];
+			if (arrayAddr.length > 1)
+				params = arrayAddr[1];
+		}
+		this.router.go(pathname, params);
 	}
 
 	render() {
