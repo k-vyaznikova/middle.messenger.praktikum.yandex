@@ -4,6 +4,7 @@ import {Form} from "./../components/form/script.ts";
 import {SendMsgText} from "./../components/send_msg_text/script.ts";
 import {ResultValidate} from "./../types/common_types.ts";
 import router from "./../utils/routing/router.ts";
+import {TestUtils} from "./test_utils.ts";
 
 function comparePassword(pass: string | undefined, passConfirm: string): ResultValidate {
 	let result: ResultValidate = {
@@ -93,6 +94,11 @@ export function validate(value: string, typeString: string) : ResultValidate {
 
 
 export function checkError(value: string | undefined, typeString: string, component: Input | SendMsgText | ProfileItem): boolean {
+	/*
+	* for testing
+	*/
+	TestUtils.testCheckError();
+
 	let result: ResultValidate = validate(value as string, typeString as string);
 	if (component.constructor === Input) {
 		if (result.is_ok && component?.comparison_value) {
@@ -141,9 +147,3 @@ export function checkAndSendForm<T>(form: Form, send: (d: T) => Promise<any>, su
 	}
 }
 
-/**
- * For testing
- */
-export class TestFormUtils {
-	public static checkErrorTest = checkError;
-}

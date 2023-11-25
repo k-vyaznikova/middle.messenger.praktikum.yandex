@@ -1,6 +1,6 @@
 import {Block} from "./../block.ts";
 import {ErrorPage} from "./../../pages/error/script.ts";
-import TestUtils from "./../../utils/test_utils.ts";
+import {TestUtils} from "./../../utils/test_utils.ts";
 
 export class Route {
 	private _pathname: string;
@@ -45,7 +45,7 @@ export class Route {
 	public static renderPage(query: string, block: Block) {
 		/* for testing */
 		if (block instanceof ErrorPage)
-			TestUtils.emptyFunction();
+			TestUtils.testErrorPage();
 		/* ------------- */
 
 		const root = document.querySelector(query);

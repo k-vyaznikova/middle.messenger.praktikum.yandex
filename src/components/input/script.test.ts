@@ -1,8 +1,13 @@
 import sinon from "sinon";
 import {expect, assert} from "chai";
+import {Block} from "./../../utils/block.ts";
 import {Input} from "./script.ts";
 import {InputProps} from "./../../types/common_types.ts";
-import {checkError, checkError} from "./../../utils/form_utils.ts";
+import {checkError} from "./../../utils/form_utils.ts";
+import {TestUtils} from "./../../utils/test_utils.ts";
+// import {spyTest} from "./../../utils/test_utils.ts";
+// import EventEmitter from "events";
+import CustomEvent from "custom-event";
 
 describe("Testing of HTML-structure", () => {
 	let defaultInputParams: InputProps;
@@ -67,9 +72,9 @@ describe("Testing of HTML-structure", () => {
 	});
 });
 
-describe.only("Event testing", () => {
+describe("Event testing", () => {
 	let defaultInputParams: InputProps;
-    beforeEach(() => {
+	beforeEach(() => {
 		defaultInputParams = {
 			id: "input_id",
 			label: "Поле ввода",
@@ -80,29 +85,28 @@ describe.only("Event testing", () => {
 		};
 	});
 
-	/*
+
 	it("When focus out checkError function is called", () => {
-		//const checkError = sinon.fake.replace(checkError, "TestFormUtils.checkErrorTest", sinon.fake(foo.bar));
-		// const spyFocusOut = sinon.spy("test");
-
+		const spy = sinon.spy(TestUtils, "testCheckError");
 		const inputComponent = new Input(defaultInputParams);
-		const input = inputComponent.element?.querySelector("input");
-        input?.blur();
-
-
-		const spy = sinon.fake(test);
-		wrapTest();
-	    console.log(fake.calledOnce);
-	});*/
-
-	it("Test test()", () => {
-		const spy = sinon.spy(test);
-		wrapTest();
-		assert(spy.calledOnce);
+		const input = inputComponent.element?.querySelector("input") as HTMLInputElement;
+		const event = global.document.createEvent("Event");
+		event.initEvent("focusout", true, true);
+		input.dispatchEvent(event);
+	    assert(spy.calledOnce);
+	});
+	it("On key up function works", () => {
+		const spy = sinon.spy(TestUtils, "testKeyupOnInput");
+		const inputComponent = new Input(defaultInputParams);
+		const input = inputComponent.element?.querySelector("input") as HTMLInputElement;
+		const event = global.document.createEvent("Event");
+		event.initEvent("keyup", true, true);
+		input.dispatchEvent(event);
+	    assert(spy.calledOnce);
 	});
 });
 
-describe.only("Testing getters & setters", () => {
+describe("Testing getters & setters", () => {
 	let defaultInputParams: InputProps;
 	let input: Input;
 
@@ -129,23 +133,103 @@ describe.only("Testing getters & setters", () => {
 		expect(input.value).to.eq("значение поля input");
 	});
 
-    it("Setter value should fill in INPUT tag", () => {
+	it("Setter value should fill in INPUT tag", () => {
 		input.value = "значение поля input";
 		expect(input.element?.querySelector("input")?.value).to.eq("значение поля input");
 	});
-
-
 });
 
 describe("Testing methods of parent class Block", () => {
-    it("", () => {
+	let defaultInputParams: InputProps;
+	let input: Input;
 
-    });
+	beforeEach(() => {
+		defaultInputParams = {
+			id: "input_id",
+			label: "Поле ввода",
+			name: "input_name",
+			type: "text",
+			ref: "input_name",
+			error: "",
+			validate_type: "not-empty,email"
+		};
+	});
+	afterEach(() => {
+		sinon.restore();
+	});
+	it("Testing if render() is called when we create new input", () => {
+		const spy = sinon.spy(Input.prototype, "render");
+		input = new Input(defaultInputParams);
+		assert(spy.calledOnce);
+	});
+	it("Testing if render() is called when we props are updated", () => {
+		input = new Input(defaultInputParams);
+		const spy = sinon.spy(input, "render");
+		input.setProps({"value": "Новое значение в поле ввода"});
+		assert(spy.calledOnce);
+	});
+	it("Testing if render() is NOT called when the props is an empty object", () => {
+		input = new Input(defaultInputParams);
+		const spy = sinon.spy(input, "render");
+		input.setProps({});
+		assert(!spy.called);
+	});
+
+	it("Testing if render() returns a DocumentFragment", () => {
+		const spy = sinon.spy(Input.prototype, "render");
+		input = new Input(defaultInputParams);
+		expect(spy.returnValues).to.be.instanceof(window.DocumentFragments);
+	});
+
+	it("Testing if componentDidUpdate() is called when the props are updated", () => {
+		input = new Input(defaultInputParams);
+		const spy = sinon.spy(input, "componentDidUpdate");
+		input.setProps({"value": "Новое значение в поле ввода"});
+		assert(spy.calledOnce);
+	});
+	it("Testing if componentDidUpdate() is not called when the props is an empty objectd", () => {
+		input = new Input(defaultInputParams);
+		const spy = sinon.spy(input, "componentDidUpdate");
+		input.setProps({});
+		assert(!spy.called);
+	});
+	it("Testing if props are changed when SetProps is work", () => {
+		input = new Input(defaultInputParams);
+		input.setProps({
+			value: "новое значение input",
+			label: "новое поле ввода"
+		});
+		assert(input.props.value === "новое значение input" && input.props.label === "новое поле ввода");
+	});
 });
-function wrapTest() {
-	test();
-	return true;
-}
-function test() {
-	return true;
-}
+
+describe("Testing show & hide methods", () => {
+	let defaultInputParams: InputProps;
+	let input: Input;
+
+	beforeEach(() => {
+		defaultInputParams = {
+			id: "input_id",
+			label: "Поле ввода",
+			name: "input_name",
+			type: "text",
+			ref: "input_name",
+			error: "",
+			validate_type: "not-empty,email"
+		};
+		input = new Input(defaultInputParams);
+	});
+	afterEach(() => {
+		sinon.restore();
+	});
+	it("Testting if hide function", () => {
+		input.hide();
+		expect(input.element?.style.display).to.eq("none");
+	});
+	it("Testting of hide function", () => {
+		input.hide();
+		input.show();
+		expect(input.element?.style.display).to.eq("block");
+	});
+});
+

@@ -74,6 +74,8 @@ export class Router {
 
 	back(): void {
 		this.history.back();
+		console.log("window.location.pathname");
+		console.log(window.location.pathname);
 		this._onRoute(window.location.pathname);
 	}
 
