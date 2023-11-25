@@ -152,7 +152,7 @@ describe("Testing of function go()", () => {
 });
 
 
-describe("Testing of function back()", () => {
+describe.only("Testing of function back()", () => {
 	beforeEach(() => {
 
 	});
@@ -177,7 +177,8 @@ describe("Testing of function back()", () => {
 		Router.use("/", BlockMock1).use("/test", BlockMock2).start();
 		Router.go("/test");
 		Router.go("/");
-		sinon.replace(Router, "getPathname", sinon.fake.returns("/test"));
+		const cb = "/test";
+		sinon.replace(Router, "getPathname", sinon.fake(()=> cb));
 		Router.back();
 		expect(getContentFake2.callCount).to.eq(2);
 	});
