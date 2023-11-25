@@ -152,11 +152,14 @@ describe("Testing of function go()", () => {
 });
 
 
-describe.only("Testing of function back()", () => {
+describe("Testing of function back()", () => {
+	let cb = "/";
 	beforeEach(() => {
-
+		cb = "/";
+		sinon.replace(Router, "getPathname", sinon.fake(()=> cb));
 	});
 	afterEach(() => {
+		sinon.reset();
 		sinon.restore();
 		Router.resetRouter();
 	});
@@ -174,11 +177,11 @@ describe.only("Testing of function back()", () => {
 
 
 	it("Testing if page render on history back action (existing route)", () => {
-		Router.use("/", BlockMock1).use("/test", BlockMock2).start();
+		Router.use("/", BlockMock1).use("/test", BlockMock2);
+		Router.start();
 		Router.go("/test");
 		Router.go("/");
-		const cb = "/test";
-		sinon.replace(Router, "getPathname", sinon.fake(()=> cb));
+		cb = "/test";
 		Router.back();
 		expect(getContentFake2.callCount).to.eq(2);
 	});
@@ -188,15 +191,17 @@ describe.only("Testing of function back()", () => {
 		Router.use("/", BlockMock1).start();
 		Router.go("/undefined");
 		Router.go("/");
-		sinon.replace(Router, "getPathname", sinon.fake.returns("/undefined"));
+		cb = "/undefined";
 		Router.back();
 		expect(spy.callCount).to.eq(2);
 	});
 });
 
 describe("Testing of function forward()", () => {
+	let cb = "/";
 	beforeEach(() => {
-
+		cb = "/";
+		sinon.replace(Router, "getPathname", sinon.fake(()=> cb));
 	});
 	afterEach(() => {
 		sinon.restore();
@@ -218,8 +223,6 @@ describe("Testing of function forward()", () => {
 	it("Testing if page render on history forward action (existing route)", () => {
 		Router.use("/", BlockMock1).use("/test", BlockMock2).start();
 		Router.go("/test");
-		let cb = "/";
-		sinon.replace(Router, "getPathname", sinon.fake(()=> cb));
 		Router.back();
 		cb = "/test";
 		Router.forward();

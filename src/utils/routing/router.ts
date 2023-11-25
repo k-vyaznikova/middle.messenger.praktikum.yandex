@@ -94,7 +94,7 @@ export class Router {
 			delete Router.__instance;
 		this._routes = [];
 		this._currentRoute = null;
-
+		this.history = window.history;
 		Router.__instance = this;
 	}
 
