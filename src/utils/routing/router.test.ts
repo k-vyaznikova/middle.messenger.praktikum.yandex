@@ -66,6 +66,7 @@ describe("Testing of function start()", () => {
 	});
 
 	afterEach(() => {
+		sinon.restore();
 		Router.resetRouter();
 	});
 
@@ -151,12 +152,12 @@ describe("Testing of function go()", () => {
 });
 
 
-describe.only("Testing of function back()", () => {
+describe("Testing of function back()", () => {
 	beforeEach(() => {
 
 	});
 	afterEach(() => {
-		sinon.reset();
+		sinon.restore();
 		Router.resetRouter();
 	});
 
@@ -176,26 +177,52 @@ describe.only("Testing of function back()", () => {
 		Router.use("/", BlockMock1).use("/test", BlockMock2).start();
 		Router.go("/test");
 		Router.go("/");
-		console.log(getContentFake2.callCount);
+		sinon.replace(Router, "getPathname", sinon.fake.returns("/test"));
 		Router.back();
-
-		window.location.pathname = "/test";
-		console.log(window.location.pathname);
-		//window.location.pathname = "/test";
-		//const stub = sinon.stub(window.history, "pathname");
-		//stub = "/test";
-		//console.log(wi);
 		expect(getContentFake2.callCount).to.eq(2);
 	});
 
-	/*
 	it("Testing if page render on history back action (not existing route)", () => {
 		const spy = sinon.spy(TestUtils, "testErrorPage");
 		Router.use("/", BlockMock1).start();
 		Router.go("/undefined");
 		Router.go("/");
-		//Router.back();
-		console.log(spy.callCount);
-	});*/
+		sinon.replace(Router, "getPathname", sinon.fake.returns("/undefined"));
+		Router.back();
+		expect(spy.callCount).to.eq(2);
+	});
+});
+
+describe("Testing of function forward()", () => {
+	beforeEach(() => {
+
+	});
+	afterEach(() => {
+		sinon.restore();
+		Router.resetRouter();
+	});
+
+	const getContentFake1 = sinon.fake.returns(global.document.createElement("div"));
+	const getContentFake2 = sinon.fake.returns(global.document.createElement("span"));
+
+	const BlockMock1 = class {
+		getContent = getContentFake1;
+	} as unknown as typeof Block;
+
+	const BlockMock2 = class {
+		getContent = getContentFake2;
+	} as unknown as typeof Block;
+
+
+	it("Testing if page render on history forward action (existing route)", () => {
+		Router.use("/", BlockMock1).use("/test", BlockMock2).start();
+		Router.go("/test");
+		let cb = "/";
+		sinon.replace(Router, "getPathname", sinon.fake(()=> cb));
+		Router.back();
+		cb = "/test";
+		Router.forward();
+		expect(getContentFake2.callCount).to.eq(2);
+	});
 });
 

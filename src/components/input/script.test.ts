@@ -178,7 +178,7 @@ describe("Testing methods of parent class Block", () => {
 	it("Testing if render() returns a DocumentFragment", () => {
 		const spy = sinon.spy(Input.prototype, "render");
 		input = new Input(defaultInputParams);
-		expect(spy.returnValues).to.be.instanceof(window.DocumentFragments);
+		expect(spy.returnValues[0]).to.be.instanceof(window.DocumentFragment);
 	});
 
 	it("Testing if componentDidUpdate() is called when the props are updated", () => {

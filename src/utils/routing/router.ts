@@ -42,12 +42,15 @@ export class Router {
 	public start(): void {
 		let params: Record<string, any> = {};
 		// Реагируем на изменения в адресной строке и вызываем перерисовку
-		window.onpopstate = (event) => {
-			this._onRoute((event.currentTarget as any).location.pathname);
+		window.onpopstate = (event: PopStateEvent) => {
+			let params = {};
+			if (window.location.search!="")
+				params = getUrlParams(window.location.search.substring(1));
+			this._onRoute(this.getPathname(event.currentTarget as any), params);
 		};
 		if (window.location.search!="")
 			params = getUrlParams(window.location.search.substring(1));
-		this._onRoute(window.location.pathname, params);
+		this._onRoute(this.getPathname(), params);
 	}
 
 	private _onRoute(pathname: string, params: Record<string, any> = {}): void {
@@ -74,14 +77,10 @@ export class Router {
 
 	back(): void {
 		this.history.back();
-		console.log("window.location.pathname");
-		console.log(window.location.pathname);
-		this._onRoute(window.location.pathname);
 	}
 
 	forward(): void {
 		this.history.forward();
-		this._onRoute(window.location.pathname);
 	}
 
 	getRoute(pathname: string): Route | undefined {
@@ -109,6 +108,10 @@ export class Router {
 
 	public getHistoryLength() {
 		return this.history.length;
+	}
+
+	public getPathname(w: any = window){
+		return w.location.pathname;
 	}
 }
 
