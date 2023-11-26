@@ -1,6 +1,6 @@
-import path from "path";
-import {fileURLToPath} from "url";
-import express from "express";
+const path = require("path");
+const fileURLToPath = require("url");
+const express = require("express");
 
 
 const app = express();
