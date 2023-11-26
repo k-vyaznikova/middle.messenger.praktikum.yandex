@@ -76,12 +76,12 @@ describe("Testing of HTTPTransport class", () => {
 		expect(res instanceof Promise).to.equal(true);
 	});
 
-	/*it("Testing passing parameters in POST request", () => {
+	/* it("Testing passing parameters in POST request", () => {
 		const spy = sinon.spy(JSON, "stringify");
 		instance.post("/", {id: 12, name: "Tinka"});
 		expect(spy.args[0][0].id).to.eq(12);
 		expect(spy.args[0][0].name).to.eq("Tinka");
-	});*/
+	}); */
 
 
 	/*
