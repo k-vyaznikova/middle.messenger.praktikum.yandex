@@ -2,8 +2,7 @@
   "extension": [".ts"],
   "spec": " ./src/**/*.test.ts",
   "require": [
-    //"tsconfig-paths/register",
-    "./mochaSetup.js"
+    "./mochaSetup.cjs"
   ],
   "node-option": [
     "loader=node-esm-loader",

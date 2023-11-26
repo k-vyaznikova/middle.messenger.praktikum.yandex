@@ -21,5 +21,5 @@ export function formattedDate(time: string) {
 		"ноября",
 		"декабря"
 	];
-	return date.getDay() +" "+ arrTextMonth[date.getMonth() - 1];
+	return date.getDate() +" "+ arrTextMonth[date.getMonth()];
 }
