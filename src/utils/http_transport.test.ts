@@ -1,6 +1,45 @@
-import sinon, {SinonFakeXMLHttpRequestStatic, SinonFakeXMLHttpRequest} from "sinon";
+import sinon, {SinonFakeXMLHttpRequestStatic, SinonFakeXMLHttpRequest, SinonStub} from "sinon";
 import {expect} from "chai";
 import HTTPTransport from "./http_transport.ts";
+
+describe.only("Testing params in requests", () => {
+	let instance: HTTPTransport;
+	let stubRequest: SinonStub<any>;
+	const API_URL = "https://ya-praktikum.tech/api/v2";
+	beforeEach(() => {
+		instance = new HTTPTransport("");
+		stubRequest = sinon.stub(instance, "request");
+	});
+
+	it("Check passing parametres from post to request", () => {
+		instance.post("/", {id: 12, name: "Tinka"});
+		expect(stubRequest.args[0][0]).to.eq(API_URL + "/");
+		expect(stubRequest.args[0][1].data.id).to.eq(12);
+		expect(stubRequest.args[0][1].data.name).to.eq("Tinka");
+		expect(stubRequest.args[0][1].method).to.eq("Post");
+	});
+	it("Check passing parametres from put to request", () => {
+		instance.put("/", {id: 12, name: "Tinka"});
+		expect(stubRequest.args[0][0]).to.eq(API_URL + "/");
+		expect(stubRequest.args[0][1].data.id).to.eq(12);
+		expect(stubRequest.args[0][1].data.name).to.eq("Tinka");
+		expect(stubRequest.args[0][1].method).to.eq("Put");
+	});
+	it("Check passing parametres from patch to request", () => {
+		instance.patch("/", {id: 12, name: "Tinka"});
+		expect(stubRequest.args[0][0]).to.eq(API_URL + "/");
+		expect(stubRequest.args[0][1].data.id).to.eq(12);
+		expect(stubRequest.args[0][1].data.name).to.eq("Tinka");
+		expect(stubRequest.args[0][1].method).to.eq("Patch");
+	});
+	it("Check passing parametres from delete to request", () => {
+		instance.delete("/", {id: 12, name: "Tinka"});
+		expect(stubRequest.args[0][0]).to.eq(API_URL + "/");
+		expect(stubRequest.args[0][1].data.id).to.eq(12);
+		expect(stubRequest.args[0][1].data.name).to.eq("Tinka");
+		expect(stubRequest.args[0][1].method).to.eq("Delete");
+	});
+});
 
 
 describe("Testing of HTTPTransport class", () => {
@@ -10,8 +49,9 @@ describe("Testing of HTTPTransport class", () => {
 	beforeEach(() => {
 		xhr = sinon.useFakeXMLHttpRequest();
 
-		// @ts-expect-error
+		// @ts-expect-error for testing requests
 		global.XMLHttpRequest = xhr;
+
 
 		xhr.onCreate = (req) => {
 			requests.push(req);
@@ -36,12 +76,11 @@ describe("Testing of HTTPTransport class", () => {
 		expect(res instanceof Promise).to.equal(true);
 	});
 
-	it("Method open was called", () => {
-		console.log(xhr);
-		const spy = sinon.spy(xhr.open);
-		/*
-		const res = instance.get("/");
-		expect(global.XMLHttpRequest).to.equal(true);*/
+	it("Testing passing parameters in POST request", () => {
+		const spy = sinon.spy(JSON, "stringify");
+		instance.post("/", {id: 12, name: "Tinka"});
+		expect(spy.args[0][0].id).to.eq(12);
+		expect(spy.args[0][0].name).to.eq("Tinka");
 	});
 
 
@@ -69,5 +108,5 @@ describe("Testing of HTTPTransport class", () => {
 		console.log("============");
 		console.log(requests);
 		expect(request.method).to.equal("Delete");
-	});	*/
+	});*/
 });

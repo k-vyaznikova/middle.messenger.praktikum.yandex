@@ -2,7 +2,6 @@ import {Block} from "./../../utils/block.ts";
 import template from "./template.hbs";
 import router, {Router} from "./../../utils/routing/router.ts";
 import {LinkProps} from "/types/common_types";
-import {getUrlParams} from "/utils/url_utils";
 
 export class Link extends Block {
 	private router: Router = router;

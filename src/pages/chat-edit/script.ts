@@ -2,7 +2,6 @@ import {Block} from "/utils/block.ts";
 import template from "/pages/chat-edit/chat-edit.hbs";
 import {ChatProfileEdit} from "/components/chat_profile_edit/script";
 import {Link} from "/components/link/script";
-import {getUrlParams} from "/utils/url_utils";
 import chatsController from "/controllers/chats-controller";
 import ChatsController from "/controllers/chats-controller.ts";
 

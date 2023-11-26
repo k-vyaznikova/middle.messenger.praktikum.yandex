@@ -1,13 +1,8 @@
 import sinon from "sinon";
 import {expect, assert} from "chai";
-import {Block} from "./../../utils/block.ts";
 import {Input} from "./script.ts";
 import {InputProps} from "./../../types/common_types.ts";
-import {checkError} from "./../../utils/form_utils.ts";
 import {TestUtils} from "./../../utils/test_utils.ts";
-// import {spyTest} from "./../../utils/test_utils.ts";
-// import EventEmitter from "events";
-import CustomEvent from "custom-event";
 
 describe("Testing of HTML-structure", () => {
 	let defaultInputParams: InputProps;
@@ -93,7 +88,7 @@ describe("Event testing", () => {
 		const event = global.document.createEvent("Event");
 		event.initEvent("focusout", true, true);
 		input.dispatchEvent(event);
-	    assert(spy.calledOnce);
+		assert(spy.calledOnce);
 	});
 	it("On key up function works", () => {
 		const spy = sinon.spy(TestUtils, "testKeyupOnInput");
@@ -102,7 +97,7 @@ describe("Event testing", () => {
 		const event = global.document.createEvent("Event");
 		event.initEvent("keyup", true, true);
 		input.dispatchEvent(event);
-	    assert(spy.calledOnce);
+		assert(spy.calledOnce);
 	});
 });
 

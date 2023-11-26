@@ -110,7 +110,7 @@ export class Router {
 		return this.history.length;
 	}
 
-	public getPathname(w: any = window){
+	public getPathname(w: any = window) {
 		return w.location.pathname;
 	}
 }

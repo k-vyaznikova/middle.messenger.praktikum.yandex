@@ -79,7 +79,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 				Router.start();
 				Router.go(Routes.Chat);
 			}
-				
 		} catch (e) {
 			Router.start();
 			Router.go(window.location.pathname);
