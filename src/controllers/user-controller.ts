@@ -24,7 +24,6 @@ export class UserController {
 			users = [];
 		}
 
-		console.log(users);
 		const res: Record<string, any> = {
 			users: users,
 			search_word: login

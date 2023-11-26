@@ -1,3 +1,4 @@
+import {isPlainObject} from "./store_utils.ts";
 export enum Method {
     Get = "Get",
     Post = "Post",
@@ -20,31 +21,41 @@ export default class HTTPTransport {
 	}
 
 	public get<Response>(path = "/"): Promise<Response> {
+		if ((typeof path) != "string")
+			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path);
 	}
 
 	public post<Response = void>(path: string, data?: unknown): Promise<Response> {
+		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Post,
 			data
 		});
 	}
 
-	public put<Response = void>(path: string, data: unknown): Promise<Response> {
+	public put<Response = void>(path: string, data: unknown = {}): Promise<Response> {
+		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Put,
 			data
 		});
 	}
 
-	public patch<Response = void>(path: string, data: unknown): Promise<Response> {
+	public patch<Response = void>(path: string, data: unknown = {}): Promise<Response> {
+		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Patch,
 			data
 		});
 	}
 
-	public delete<Response>(path: string, data: unknown): Promise<Response> {
+	public delete<Response>(path: string, data: unknown = {}): Promise<Response> {
+		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Delete,
 			data
@@ -59,7 +70,6 @@ export default class HTTPTransport {
 			xhr.open(method, url);
 
 			xhr.onreadystatechange = () => {
-				console.log("=====in xhr.onreadystatechange");
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					if (xhr.status < 400) {
 						resolve(xhr.response);
