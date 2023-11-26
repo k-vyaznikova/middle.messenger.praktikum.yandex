@@ -44,7 +44,7 @@ describe("Testing of function use()", () => {
 		expect(Router.routeLength()).to.eq(1);
 	});
 	it("Check length of array _routes when the path is not a string", () => {
-		Router.use({}, BlockMock1);
+		Router.use({} as any, BlockMock1);
 		expect(Router.routeLength()).to.eq(0);
 	});
 });
@@ -133,18 +133,18 @@ describe("Testing of function go()", () => {
 	it("Testing go with params", () => {
 		Router.use("/", BlockMock1).use("/test", BlockMock2);
 		const route = Router.getRoute("/test");
-		const spy = sinon.spy(route, "render");
+		const spy = sinon.spy(route, ("render" as keyof typeof route));
 		sinon.stub(window.history, "pushState");
 		Router.start();
 		Router.go("/test", "id=12&user_id=2");
-		expect(spy.args[0][0].id).to.eq("12");
-		expect(spy.args[0][0].user_id).to.eq("2");
+		expect((spy.args[0][0] as any).id).to.eq("12");
+		expect((spy.args[0][0] as any).user_id).to.eq("2");
 	});
 
 	it("Testing that the current route is being cleaned", () => {
 		Router.use("/", BlockMock1).use("/test", BlockMock2);
 		const route = Router.getRoute("/test");
-		const spy = sinon.spy(route, "leave");
+		const spy = sinon.spy(route, "leave" as keyof typeof route);
 		Router.start();
 		Router.go("/test");
 		expect(spy.calledOnce);

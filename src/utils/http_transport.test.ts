@@ -2,13 +2,13 @@ import sinon, {SinonFakeXMLHttpRequestStatic, SinonFakeXMLHttpRequest, SinonStub
 import {expect} from "chai";
 import HTTPTransport from "./http_transport.ts";
 
-describe.only("Testing params in requests", () => {
+describe("Testing params in requests", () => {
 	let instance: HTTPTransport;
 	let stubRequest: SinonStub<any>;
 	const API_URL = "https://ya-praktikum.tech/api/v2";
 	beforeEach(() => {
 		instance = new HTTPTransport("");
-		stubRequest = sinon.stub(instance, "request");
+		stubRequest = sinon.stub(instance, ("request" as keyof typeof instance));
 	});
 
 	it("Check passing parametres from post to request", () => {
