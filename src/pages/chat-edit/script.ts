@@ -2,14 +2,15 @@ import {Block} from "/utils/block.ts";
 import template from "/pages/chat-edit/chat-edit.hbs";
 import {ChatProfileEdit} from "/components/chat_profile_edit/script";
 import {Link} from "/components/link/script";
-import {getUrlParams} from "/utils/url_utils";
 import chatsController from "/controllers/chats-controller";
 import ChatsController from "/controllers/chats-controller.ts";
 
-
+interface ChatEditPageProps {
+	id: number;
+}
 export class ChatEditPage extends Block {
-	constructor() {
-		super();
+	constructor(props: ChatEditPageProps) {
+		super(props);
 	}
 
 	init() {
@@ -22,10 +23,11 @@ export class ChatEditPage extends Block {
 			}
 		});
 
-		const params: Record<string, string> = getUrlParams();
-		const id: number = params["id"] as unknown as number;
+		// const params: Record<string, string> = getUrlParams();
+		const id: number = this.props.id as number;
 
 		this.children.chatProfileEdit = new ChatProfileEdit({});
+
 		if (id > 0) {
 			ChatsController.fetchChatAndUser(id).then((response) => {
 				this.children.chatProfileEdit.setProps({

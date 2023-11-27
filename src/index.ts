@@ -69,14 +69,18 @@ window.addEventListener("DOMContentLoaded", async () => {
 			if (store.getState().user.id > 0 )
 				Router.start();
 		} catch (e: any) {
+			Router.start();
 			Router.go(Routes.Index);
 		}
 	} else {
 		try {
 			await AuthController.fetchUser();
-			if (store.getState().user.id > 0)
+			if (store.getState().user.id > 0) {
+				Router.start();
 				Router.go(Routes.Chat);
+			}
 		} catch (e) {
+			Router.start();
 			Router.go(window.location.pathname);
 		}
 	}

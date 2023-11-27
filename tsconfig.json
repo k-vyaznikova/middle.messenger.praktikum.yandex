@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2020",                                  
-     "lib": [
-      "ES6",
-      "dom"
-     ],                                      
-    "module": "commonjs",                                
-    "rootDir": ".",             
-    "baseUrl": "./src",
-    "paths": { "/*": ["./*"] },  
+    "target": "es2016",
+    "module": "es6",
+    "moduleResolution": "Node10",                              
+    "lib": [
+      "es2016",
+      "dom",
+      "DOM.Iterable"
+     ],             
+    "baseUrl": "./",
+    "rootDir": "./src",
+    "paths": { 
+      "/*": ["./src/*"]
+    },  
     "allowImportingTsExtensions": true, 
     "allowJs": true,   
     "sourceMap": true,  
@@ -26,6 +30,15 @@
   },                      
   "exclude": ["node_modules"],
   "ts-node": {
-    "esm": true
-  }
+    "target": "es2016",
+    "module": "es6",
+    "moduleResolution": "Node10",
+    "esm": true,
+    "files": true,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "rootDir": "./src"
+    }
+  },
+  "include": ["src"]
 }

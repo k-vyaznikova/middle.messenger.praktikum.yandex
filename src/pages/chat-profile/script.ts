@@ -2,13 +2,16 @@ import {Block} from "/utils/block.ts";
 import template from "/pages/chat-profile/chat-profile.hbs";
 import {Link} from "/components/link/script";
 import ChatsController from "/controllers/chats-controller";
-import {getUrlParams} from "/utils/url_utils";
 import {ChatProfile} from "/components/chat_profile/script";
 import chatsController from "/controllers/chats-controller";
 
+
+interface ChatEditPageProps {
+	id: number
+}
 export class ChatProfilePage extends Block {
-	constructor() {
-		super();
+	constructor(props: ChatEditPageProps) {
+		super(props);
 	}
 
 	async init() {
@@ -21,8 +24,7 @@ export class ChatProfilePage extends Block {
 			}
 		});
 
-		const params: Record<string, string> = getUrlParams();
-		const id: number = params["id"] as unknown as number;
+		const id: number = this.props.id as unknown as number;
 
 		this.children.chatProfile = new ChatProfile({});
 		if (id > 0) {

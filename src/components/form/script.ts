@@ -1,15 +1,15 @@
-import {Block} from "/utils/block.ts";
-import template from "/components/form/template.hbs";
-import {LinkProps} from "/types/common_types.ts";
-import {InputProps} from "/types/common_types.ts";
-import {SubmitBtnProps} from "/types/common_types.ts";
-import {Input} from "/components/input/script.ts";
-import {Link} from "/components/link/script.ts";
-import {SubmitBtn} from "/components/submit_btn/script";
-import {ErrorMsgProps} from "/types/common_types.ts";
-import {ErrorMsg} from "/components/error_msg/script";
-import {checkAndSendForm} from "/utils/form_utils.js";
-import {ResultValidate} from "/types/common_types.ts";
+import {Block} from "./../../utils/block.ts";
+import template from "./../form/template.hbs";
+import {LinkProps} from "./../../types/common_types.ts";
+import {InputProps} from "./../../types/common_types.ts";
+import {SubmitBtnProps} from "./../../types/common_types.ts";
+import {Input} from "./../input/script.ts";
+import {Link} from "./../link/script.ts";
+import {SubmitBtn} from "./../submit_btn/script";
+import {ErrorMsgProps} from "./../../types/common_types.ts";
+import {ErrorMsg} from "./../error_msg/script";
+import {checkAndSendForm} from "./../../utils/form_utils.js";
+import {ResultValidate} from "./../../types/common_types.ts";
 
 interface FormProps{
 	title: string,

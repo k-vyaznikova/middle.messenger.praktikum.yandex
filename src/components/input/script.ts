@@ -1,8 +1,8 @@
-import {Block} from "/utils/block.ts";
-import template from "/components/input/template.hbs";
-import {checkError} from "/utils/form_utils";
-import {InputProps} from "/types/common_types.ts";
-
+import {Block} from "./../../utils/block.ts";
+import template from "./template.hbs";
+import {checkError} from "./../../utils/form_utils.ts";
+import {InputProps} from "./../../types/common_types.ts";
+import {TestUtils} from "./../../utils/test_utils.ts";
 
 export class Input extends Block {
 	constructor(props: InputProps) {
@@ -18,6 +18,10 @@ export class Input extends Block {
 					);
 				},
 				keyup: () => {
+					/**
+					 * for testing
+					 */
+					TestUtils.testKeyupOnInput();
 					if (props.onKeyup) props.onKeyup();
 				}
 			}

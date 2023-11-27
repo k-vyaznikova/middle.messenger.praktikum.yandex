@@ -1,6 +1,6 @@
 import {Block} from "/utils/block.ts";
 import template from "/components/error/template.hbs";
-import {Link} from "/components/link/script";
+import {Link} from "/components/link/script.ts";
 
 interface ErrorProps{
 	code: string,

@@ -1,6 +1,10 @@
-import {Block} from "/utils/block.ts";
-import template from "/pages/error/error.hbs";
-import {Link} from "/components/link/script";
+/* console.log("========");
+console.log(process.env.NODE_PATH);
+console.log("========");*/
+
+import {Block} from "./../../utils/block.ts";
+import template from "./error.hbs";
+import {Link} from "./../../components/link/script.ts";
 
 
 export class ErrorPage extends Block {

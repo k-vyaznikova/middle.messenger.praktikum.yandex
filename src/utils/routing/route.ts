@@ -1,4 +1,7 @@
-import {Block} from "/utils/block.ts";
+import {Block} from "./../block.ts";
+import {ErrorPage} from "./../../pages/error/script.ts";
+import {TestUtils} from "./../../utils/test_utils.ts";
+
 export class Route {
 	private _pathname: string;
 	private _blockClass: typeof Block;
@@ -15,7 +18,7 @@ export class Route {
 	protected navigate(pathname: string) {
 		if (this.match(pathname)) {
 			this._pathname = pathname;
-			this.render();
+			this.render({});
 		}
 	}
 
@@ -29,23 +32,30 @@ export class Route {
 		return pathname === this._pathname;
 	}
 
-	public render() {
+	public render(params: Record<string, any>) {
 		if (!this._block) {
-			this._block = new this._blockClass();
-			renderPage(this._props.rootQuery, this._block);
+			this._block = new this._blockClass(params);
+			Route.renderPage(this._props.rootQuery, this._block);
 			return;
 		}
 
 		this._block.show();
 	}
+
+	public static renderPage(query: string, block: Block) {
+		/* for testing */
+		if (block instanceof ErrorPage)
+			TestUtils.testErrorPage();
+		/* ------------- */
+
+		const root = document.querySelector(query);
+		if (root === null) {
+			throw new Error(`root not found by selector "${query}"`);
+		}
+		root.innerHTML = "";
+		root.append(block.getContent()!);
+		return root;
+	}
 }
 
-export function renderPage(query: string, block: Block) {
-	const root = document.querySelector(query);
-	if (root === null) {
-		throw new Error(`root not found by selector "${query}"`);
-	}
-	root.innerHTML = "";
-	root.append(block.getContent()!);
-	return root;
-}
+
