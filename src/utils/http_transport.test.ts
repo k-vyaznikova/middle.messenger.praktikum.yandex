@@ -94,19 +94,19 @@ describe("Testing params in get-post-put-patch-delete function", () => {
 		assert(!stubRequest.called);
 	});
 
-	it("The post will fail if the second parameter is not an object", () => {
+	it("The post will fail if the second parameter is not an object or FormData", () => {
 		instance.post("/", 2);
 		assert(!stubRequest.called);
 	});
-	it("The put will fail if the second parameter is not an object", () => {
+	it("The put will fail if the second parameter is not an object or FormData", () => {
 		instance.put("/", 2);
 		assert(!stubRequest.called);
 	});
-	it("The patch will fail if the second parameter is not an object", () => {
+	it("The patch will fail if the second parameter is not an object or FormData", () => {
 		instance.patch("/", 2);
 		assert(!stubRequest.called);
 	});
-	it("The delete will fail if the second parameter is not an object", () => {
+	it("The delete will fail if the second parameter is not an object or FormData", () => {
 		instance.delete("/", 2);
 		assert(!stubRequest.called);
 	});
