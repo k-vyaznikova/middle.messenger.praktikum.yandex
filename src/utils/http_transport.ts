@@ -27,7 +27,7 @@ export default class HTTPTransport {
 	}
 
 	public post<Response = void>(path: string, data?: unknown): Promise<Response> {
-		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+		if ((typeof path) != "string" || (!isPlainObject(data) && !(data instanceof FormData) && data!=undefined))
 			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Post,
@@ -36,7 +36,7 @@ export default class HTTPTransport {
 	}
 
 	public put<Response = void>(path: string, data: unknown = {}): Promise<Response> {
-		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+		if ((typeof path) != "string" || (!isPlainObject(data) && !(data instanceof FormData) && data!=undefined))
 			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Put,
@@ -45,7 +45,7 @@ export default class HTTPTransport {
 	}
 
 	public patch<Response = void>(path: string, data: unknown = {}): Promise<Response> {
-		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+		if ((typeof path) != "string" || (!isPlainObject(data) && !(data instanceof FormData) && data!=undefined))
 			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Patch,
@@ -54,7 +54,7 @@ export default class HTTPTransport {
 	}
 
 	public delete<Response>(path: string, data: unknown = {}): Promise<Response> {
-		if ((typeof path) != "string" || (!isPlainObject(data) && data!=undefined))
+		if ((typeof path) != "string" || (!isPlainObject(data) && !(data instanceof FormData) && data!=undefined))
 			return new Promise(() => {});
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Delete,
