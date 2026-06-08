@@ -1,5 +1,5 @@
-import {EventBus} from "/utils/event_bus.ts";
-import {Block} from "/utils/block.ts";
+import {EventBus} from "./block/event_bus";
+import {Block} from "./block/block";
 import {set} from "/utils/store_utils.ts";
 import {User} from "/types/common_types.ts";
 

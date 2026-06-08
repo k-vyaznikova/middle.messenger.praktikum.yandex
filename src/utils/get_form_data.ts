@@ -1,4 +1,4 @@
-import {Block} from "/utils/block.ts";
+import {Block} from "./block/block";
 export function getFormData(form: Block) {
 	const formData: Record<string, string> = {};
 	Object.keys(form.refs).forEach((key) => {
