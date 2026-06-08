@@ -1,70 +1,97 @@
-import {Route, renderPage} from "/utils/routing/route.ts";
-import {Block} from "/utils/block.ts";
-import {ErrorPage} from "/pages/error/script.ts";
+import {Route, renderPage} from "./route.ts";
+import {Block} from "../block/block";
+import ErrorPage from "../../pages/error";
+import { ROOT_QUERY } from "../constants";
 
 export class Router {
+	//массив маршрутов
 	private routes!: Array<Route>;
+	//история переходов
 	private history: any = window.history;
+	//экземпляр класса Router
 	private static __instance: Router;
+	//текущий маршрут
 	private _currentRoute!: Route | null;
-	private _rootQuery!: string;
+	//корневой элемент для отрисовки страниц
+	private _rootQuery: string = "";
 
 
 	constructor(rootQuery: string) {
+		if (rootQuery === "") {
+			throw new Error("Необходим параметр rootQuery для инициализации Router");
+		}
+		//если экземпляр класса Router уже существует, то возвращаем его
 		if (Router.__instance) {
 			return Router.__instance;
 		}
-
 		this.routes = [];
 		this._currentRoute = null;
 		this._rootQuery = rootQuery;
-
 		Router.__instance = this;
 	}
 
 	public use(pathname: string, block: typeof Block): Router {
-		const route = new Route(pathname, block, {rootQuery: this._rootQuery});
+		const route = new Route(pathname, block, {});
 		this.routes.push(route);
 		return this;
 	}
 
 	public start(): void {
-		// Реагируем на изменения в адресной строке и вызываем перерисовку
+		//реагируем на изменения в адресной строке и вызываем перерисовку
 		window.onpopstate = (event) => {
-			this._onRoute((event.currentTarget as any).location.pathname);
+			let { path, params } = this._getPathAndParams((event.currentTarget as any).location.href);
+			this._onRoute(path, params);
 		};
 
-		this._onRoute(window.location.pathname);
+		try{
+			let { path, params } = this._getPathAndParams(window.location.href);
+			this._onRoute(path, params);
+		}
+		catch(e){
+			renderPage(this._rootQuery, new ErrorPage());
+		}
+
 	}
 
-	private _onRoute(pathname: string): void {
+	private _onRoute(pathname: string, params: Record<string, string> = {}): void {
 		const route = this.getRoute(pathname);
 		if (this._currentRoute) {
 			this._currentRoute?.leave();
 		}
 		this._currentRoute = route as Route;
 		if (route)
-			route.render();
+			route.render(params);
 		else {
-			renderPage(this._rootQuery, new ErrorPage());
+			renderPage(this._rootQuery, new ErrorPage() as Block);
 		}
+	}
+
+	private _getPathAndParams(pathname: string): { path: string, params: Record<string, string> } {
+		let url: URL = new URL(pathname);
+		console.log(url);
+		let params: Record<string, string> = {};
+		url.searchParams.forEach((value, key) => {
+			params[key] = value;
+		});
+		return { path: url.pathname, params: params };
 	}
 
 	go(pathname: string): void {
 		this.history.pushState({}, "", pathname);
-		if (pathname.indexOf("?") > -1)
-			pathname = pathname.substring(0, pathname.indexOf("?"));
-		this._onRoute(pathname);
+		let { path, params } = this._getPathAndParams(pathname);
+		this._onRoute(path, params);
 	}
 
 	back(): void {
 		this.history.back();
-		this._onRoute(window.location.pathname);
+		let { path, params } = this._getPathAndParams(window.location.pathname);
+		this._onRoute(path, params);
 	}
 
 	forward(): void {
 		this.history.forward();
-		this._onRoute(window.location.pathname);
+		let { path, params } = this._getPathAndParams(window.location.pathname);
+		this._onRoute(path, params);
 	}
 
 	getRoute(pathname: string): Route | undefined {
@@ -72,4 +99,4 @@ export class Router {
 	}
 }
 
-export default new Router("#app");
+export default new Router(ROOT_QUERY);
