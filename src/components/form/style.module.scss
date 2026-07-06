@@ -1,0 +1,31 @@
+@import "/styles/vars.scss";
+.form{
+    .form__error{
+        font-size: 14px;
+        color: $err-text;
+        margin-bottom: 10px;
+        background: $err-text-back;
+        padding: 20px;
+        border-radius: 0 10px 10px 0;
+        border-left: 3px solid $err-text;
+
+    }
+    .form__good_message{
+        font-size: 14px;
+        color: $base-color;
+        margin-bottom: 10px;
+        background: $success-color-light;
+        padding: 20px;
+        border-radius: 0 10px 10px 0;
+        border-left: 3px solid $success-text;
+    }
+    .form__footer{
+        gap: 30px;
+        margin-top: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        
+    }
+
+}

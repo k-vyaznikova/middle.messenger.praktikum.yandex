@@ -1,0 +1,28 @@
+@import "/styles/vars.scss";
+
+.icon {
+    width: 40px;
+    height: 40px;
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    background-size: 70% 70%;
+    background-color: transparent;
+
+
+
+
+}
+
+
+.icon.edit {
+    background: url(./img/edit.svg) center center no-repeat;
+    background-size: 60% 60%;
+
+    &:hover {
+        background: url(./img/edit-hover.svg) center center no-repeat;
+        background-size: 60% 60%;
+    }
+}

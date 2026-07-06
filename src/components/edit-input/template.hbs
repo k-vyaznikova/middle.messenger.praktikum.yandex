@@ -1,0 +1,9 @@
+<div class = "{{styles.input}}">
+    <div class = "{{styles.input__container}}">
+        <label for="{{id}}" class = "{{styles.input__label}}"><span class = "{{styles.input__label__text}}">{{label}}</span></label>
+        <input  class="{{styles.input__input}} {{#if isEditing}}{{{styles.input__input--focused}}}{{/if}}" value="{{value}}" name="{{name}}" type="{{type}}" id="{{id}}" ref="{{ref}}" data-validate="{{validate_type}}" data-comparison-value="{{comparison_value}}"{{#unless isEditing}} readonly{{/unless}}/>
+        {{{icon}}}
+    </div>
+        <span class = "{{styles.input__error}}">{{error}}</span>
+    </div>
+</div>

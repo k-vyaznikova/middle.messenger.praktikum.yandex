@@ -1,0 +1,42 @@
+@import "/styles/vars.scss";
+
+    .avatar{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid $base-color;
+        position: relative;
+        cursor: pointer;
+    
+        &_editable {
+            cursor: pointer;
+        }
+    
+        &:hover{
+            border: 2px solid $base-color-dark;
+        }
+    
+    
+        &__image,
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+        &--small{
+            width: 30px;
+            height: 30px;
+        }
+        &--medium{
+            width: 50px;
+            height: 50px;
+        }
+        &--large{
+            width: 100px;
+            height: 100px;
+        }
+    }
+

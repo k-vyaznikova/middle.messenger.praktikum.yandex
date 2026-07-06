@@ -1,8 +1,14 @@
-import {Block} from "/utils/block.ts";
+import {Block} from "../../utils/block/block";
 import template from "/components/link/template.hbs";
 import router, {Router} from "/utils/routing/router.ts";
-import {LinkProps} from "/types/common_types";
 
+
+
+interface LinkProps{
+	href: string,
+	text: string,
+	beforeNavigate?: () => void,
+}
 export class Link extends Block {
 	private router: Router = router;
 	constructor(props: LinkProps) {
@@ -11,8 +17,8 @@ export class Link extends Block {
 			events: {
 				click: (event: Event) => {
 					event.preventDefault();
-					if (this.props.func_before)
-						(this.props?.func_before as ()=>void)();
+					if (this.props.beforeNavigate)
+						(this.props?.beforeNavigate as ()=>void)();
 					this.navigate();
 				}
 			}

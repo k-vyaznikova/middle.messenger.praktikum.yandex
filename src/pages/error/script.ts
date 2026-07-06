@@ -1,6 +1,6 @@
-import {Block} from "/utils/block.ts";
-import template from "/pages/error/error.hbs";
-import {Link} from "/components/link/script";
+import Block from "/utils/block";
+import template from "./template.hbs";
+import Link from "/components/link";
 
 
 export class ErrorPage extends Block {
@@ -19,6 +19,7 @@ export class ErrorPage extends Block {
 			class: "error-link",
 			name: "Назад к чатам"
 		});
+		return true;
 	}
 
 	render() {

@@ -1,0 +1,13 @@
+
+    <div class="{{styles.avatar}} {{sizeClass}}{{#if editable}} {{styles.avatar_editable}}{{/if}}">
+        
+        <label for="fileAvatar">
+            <img src="{{src}}" alt="avatar" class="{{styles.avatar__image}}">
+        </label>
+        {{#if editable}}
+            <input type="file" id = "fileAvatar" style="display: none;" class="{{styles.avatar__file}}" accept="image/*">
+        {{/if}}        
+    </div>
+
+
+

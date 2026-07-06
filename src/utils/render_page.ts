@@ -1,12 +1,12 @@
 import {Block} from "./block/block";
-import {AuthPage} from "/pages/auth/script.ts";
+import {AuthPage} from "../pages/__auth/script";
 import {RegisterPage} from "/pages/register/script.ts";
-import {ChatPage} from "/pages/chat/script.ts";
+import {ChatPage} from "../pages/messenger/script";
 import {CommunityPage} from "/pages/community/script.ts";
 import {ChatEditPage} from "../pages/chat-edit/script";
 import {ProfilePage} from "/pages/profile/script.ts";
 import {ErrorPage} from "../pages/__error/script";
-import {PassEditPage} from "/pages/password-edit/script.ts";
+import {PassEditPage} from "../pages/change-password/script";
 import {ProfileEditPage} from "/pages/profile-edit/script.ts";
 import {MainPage} from "/pages/main/script.ts";
 

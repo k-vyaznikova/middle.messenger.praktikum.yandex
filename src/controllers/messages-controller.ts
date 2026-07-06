@@ -1,5 +1,5 @@
 import WSTransport, {WSTransportEvents} from "/utils/ws_transport.ts";
-import store from "/utils/store.ts";
+import store from "../utils/store/store";
 import UserController from "./user-controller";
 import {BASE_FILE_URL} from "/utils/constants";
 import img from "/img/noimgprofile.svg";

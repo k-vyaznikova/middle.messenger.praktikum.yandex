@@ -1,7 +1,10 @@
 import {BaseAPI} from "/api/base-api.ts";
-import {SearchData, User} from "/types/common_types.ts";
-import {ChangePassData} from "/types/common_types.ts";
+import {SearchData, User} from "../types";
 
+export interface ChangePassData{
+	oldPassword: string,
+	newPassword: string
+}
 
 export class UserAPI extends BaseAPI {
 	constructor() {

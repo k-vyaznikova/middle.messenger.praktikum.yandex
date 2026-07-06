@@ -1,0 +1,25 @@
+    <form class = "{{styles.form}}">
+        {{#if title}}
+            <h1>{{title}}</h1>
+        {{/if}}
+
+        <div class = "{{styles.form__avatar}}">
+            {{{avatar}}}
+        </div>
+
+        {{#each fields}}
+            {{{this}}}
+        {{/each}}
+        
+        <div class = "{{styles.form__footer}}">
+            {{{button}}}
+            {{{button_add}}}
+        </div>
+        {{#if links}}
+            <div class = "{{styles.form__links}}">
+                {{#each links}}
+                    <div class = "{{styles.form__link}}">{{{this}}}</div>
+                {{/each}}
+            </div>    
+        {{/if}}
+    </form>

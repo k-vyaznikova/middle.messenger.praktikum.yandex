@@ -1,50 +1,26 @@
-import {Block} from "/utils/block.ts";
-import template from "/components/search/template.hbs";
+import Block from "../../utils/block";
+import template from "./template.hbs";
+import styles from "./style.module.scss";
+import { User } from "../../types";
 
-interface SearchProps{
-	value: string,
-	left_align: string,
+export interface SearchProps{
 	placeholder: string,
-	not_focused?: string,
-	onKeyup?: () => void,
-	events?: {
-		click?: ()=>void,
-		keyup?: ()=>void
-	}
-
+	results: Block[],
 }
 
-export class Search extends Block {
+
+export default class Avatar extends Block {
 	constructor(props: SearchProps) {
-		let timerId: any;
 		super({
 			...props,
-			events: {
-				click: () => {
-					this.setProps({
-						"not_focused": ""
-					});
-					(this.getContent()?.querySelector("input[name=search]") as HTMLInputElement).focus();
-				},
-				keyup: () => {
-					clearTimeout(timerId);
-					timerId = setTimeout((props.onKeyup as ()=>void), 500);
-				}
-			}
+			styles
 		});
 	}
-
-	protected componentDidMount(): boolean {
-		const inputSearch: HTMLInputElement = this.element?.querySelector("input[name='search']") as HTMLInputElement;
-		if (inputSearch) {
-			inputSearch.focus();
-			inputSearch.selectionStart = inputSearch.selectionEnd = inputSearch.value.length;
-		}
-		return true;
+	init() {
+		this.children.results = this.props.results;
 	}
 
 	render() {
 		return this.compile(template, this.props);
 	}
 }
-

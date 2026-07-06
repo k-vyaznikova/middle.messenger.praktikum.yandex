@@ -1,5 +1,5 @@
 import {BaseAPI} from "/api/base-api.ts";
-import {User} from "/types/common_types.ts";
+import {User} from "../types";
 
 export interface SigninData{
   login: string,
@@ -12,6 +12,7 @@ export interface SignupData{
   first_name: string,
   second_name: string,
   password: string,
+  phone: string
 }
 
 export class AuthAPI extends BaseAPI {

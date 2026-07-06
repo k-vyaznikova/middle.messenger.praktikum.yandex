@@ -10,8 +10,6 @@ export class Router {
 	private history: any = window.history;
 	//экземпляр класса Router
 	private static __instance: Router;
-	//текущий маршрут
-	private _currentRoute!: Route | null;
 	//корневой элемент для отрисовки страниц
 	private _rootQuery: string = "";
 
@@ -25,7 +23,6 @@ export class Router {
 			return Router.__instance;
 		}
 		this.routes = [];
-		this._currentRoute = null;
 		this._rootQuery = rootQuery;
 		Router.__instance = this;
 	}
@@ -55,10 +52,6 @@ export class Router {
 
 	private _onRoute(pathname: string, params: Record<string, string> = {}): void {
 		const route = this.getRoute(pathname);
-		if (this._currentRoute) {
-			this._currentRoute?.leave();
-		}
-		this._currentRoute = route as Route;
 		if (route)
 			route.render(params);
 		else {
@@ -67,8 +60,7 @@ export class Router {
 	}
 
 	private _getPathAndParams(pathname: string): { path: string, params: Record<string, string> } {
-		let url: URL = new URL(pathname);
-		console.log(url);
+		let url: URL = new URL(pathname, window.location.origin);
 		let params: Record<string, string> = {};
 		url.searchParams.forEach((value, key) => {
 			params[key] = value;

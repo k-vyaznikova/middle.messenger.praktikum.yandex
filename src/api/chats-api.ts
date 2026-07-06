@@ -1,5 +1,5 @@
 import {BaseAPI} from "/api/base-api.ts";
-import {User, ChatIdAndUsers, Chat} from "/types/common_types.ts";
+import {User, ChatIdAndUsers, Chat} from "../types";
 
 
 /* export interface ChatInfo {
@@ -21,8 +21,9 @@ export class ChatsAPI extends BaseAPI {
 	}
 
 
-	async create(title: string): Promise<number> {
-		return await this.http.post("/", {title});
+	async create(title: string): Promise<Record<string, any> | number> {
+		const res: Record<string, any> = await this.http.post("/", {title});
+		return res.id? res.id : res;
 	}
 
 	delete(id: number): Promise<any> {

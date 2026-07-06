@@ -1,7 +1,8 @@
-<div class = "input-container">
-    {{#ifEq not_empty "yes"}}
-        <label for="{{id}}">{{label}}</label>
-    {{/ifEq}}    
-    <input value = "{{value}}" name = "{{name}}" type="{{type}}" id = "{{id}}" ref = "{{ref}}" data-validate = "{{validate_type}}" data-comparison-value = "{{comparison_value}}"/>
-    <span class = "error">{{error}}</span>
+<div class = "{{styles.input}}">
+    <div class = "{{styles.input__container}}">
+        <label for="{{id}}" class = "{{styles.input__label}}"><span class = "{{styles.input__label__text}}">{{label}}</span></label>
+        <input class = {{styles.input__input}} value = "{{value}}" name = "{{name}}" type="{{type}}" id = "{{id}}" ref = "{{ref}}" data-validate = "{{validate_type}}" data-comparison-value = "{{comparison_value}}" class = "{{styles.input__input}}"/>
+    </div>
+        <span class = "{{styles.input__error}}">{{error}}</span>
+    </div>
 </div>

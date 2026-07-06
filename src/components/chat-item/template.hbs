@@ -1,0 +1,33 @@
+
+        <div class = "{{styles.chat}}">
+            <div class = "{{styles.chat__left}}">
+                <div class = "{{styles.chat__avatar}}">
+                    {{#if avatar_src}}
+                        <img src = "{{avatar_src}}" alt = "avatar"/>
+                    {{else}}
+                        <div class = "{{styles.chat__avatar__default}}">
+                            {{avatar}}
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class = "{{styles.chat__right}}">
+                <div class = "{{styles.chat__header}}">
+                    <div class = "{{styles.chat__title}}">
+                        {{title}}
+                    </div>
+                    <span class = "{{styles.chat__unread_count}}">{{unread_count}}</span>
+                    
+                </div>
+            
+            
+
+                <div class = "{{styles.chat__info}}">
+                        <span class = "{{styles.chat__info-message}}">{{content}}</span>
+                        <span class = "{{styles.chat__info-time}}">{{time}}</span>
+                    
+                </div>
+            </div>
+        </div>
+
