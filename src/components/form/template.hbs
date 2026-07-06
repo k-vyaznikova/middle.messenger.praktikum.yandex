@@ -1,14 +1,25 @@
-    <form class = "form-container">
-        <h1>{{title}}</h1>
-        {{{errorMsg}}}
-        <div class = "form-body" >
-            {{#each inputs}}
-                {{{this}}}
-            {{/each}}
-            
+    <form class = "{{styles.form}}">
+        {{#if title}}
+            <h1>{{title}}</h1>
+        {{/if}}
+        {{#if error}}
+            <div class = "{{styles.form__error}}">{{error}}</div>
+        {{/if}}
+        {{#if good_message}}
+            <div class = "{{styles.form__good_message}}">{{good_message}}</div>
+        {{/if}}
+        {{#each fields}}
+            {{{this}}}
+        {{/each}}
+        <div class = "{{styles.form__footer}}">
+            {{{button}}}
+            {{{button_add}}}
         </div>
-        <div class = "form-footer">
-            {{{submitBtn}}}
-            {{{link}}}
-        </div>
+        {{#if links}}
+            <div class = "{{styles.form__links}}">
+                {{#each links}}
+                    <div class = "{{styles.form__link}}">{{{this}}}</div>
+                {{/each}}
+            </div>    
+        {{/if}}
     </form>

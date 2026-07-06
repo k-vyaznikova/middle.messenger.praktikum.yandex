@@ -1,7 +1,7 @@
 import {API, AuthAPI, SigninData, SignupData} from "/api/auth-api.ts";
 import router from "/utils/routing/router.ts";
-import store from "/utils/store.ts";
-import {ResultValidate} from "/types/common_types.ts";
+import store from "../utils/store";
+import {Result} from "../types";
 import MessagesController from "/controllers/messages-controller.ts";
 
 
@@ -11,73 +11,76 @@ export class AuthController {
 	constructor() {
 		this.api = API;
 	}
-	async signin(data: SigninData) {
-		let result: ResultValidate;
-		try {
-			await this.api.signin(data);
-			await this.fetchUser();
-			result = {
-				is_ok: true,
-				msg_text: "Пользователь был успешно зарегистирован."
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e.reason
-			};
-		}
-		return result;
+	async signin(data: SigninData): Promise<Result> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.api.signin(data);
+				let res2 = await this.fetchUser();
+				if (res2 === true) {
+					resolve(true);
+				} else {
+					reject(new Error("Ошибка авторизации.\n Не удалось получить данные пользователя. Попробуйте позже."));
+				}
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
 	}
 
-	async signup(data: SignupData) {
-		let result: ResultValidate;
-		try {
-			await this.api.signup(data);
-			await this.fetchUser();
-			result = {
-				is_ok: true,
-				msg_text: "Пользователь был успешно зарегистирован."
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e.reason
-			};
-		}
-		return result;
+	async signup(data: SignupData): Promise<Result> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.api.signup(data);
+				await this.fetchUser();
+				resolve(true);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
 	}
 
-	async signupAndSignin(data: SignupData) {
-		let result: ResultValidate = await this.signup(data);
-		if (result.is_ok)
-			result = await this.signin({
-				login: data.login,
-				password: data.password
-			});
-		return result;
+	async signupAndSignin(data: SignupData): Promise<Result> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.signup(data);
+				await this.signin({
+					login: data.login,
+					password: data.password
+				});
+				resolve(true);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
 	}
 
 
-	async fetchUser() {
-		try {
-			const user: any= await this.api.read();
-			store.set("user", user);
-		} catch (err: any) {
-			console.log(err);
-		}
+	async fetchUser(): Promise<Result> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const user: any = await this.api.read();
+				store.set("user", user);
+				resolve(true);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
 	}
 
+
+	/*
 	public getRegistrationError() {
 		return store.getState().reg_error? store.getState().reg_error : "";
-	}
+	}*/
 
-	async logout() {
+	async logout(): Promise<Result> {
 		try {
 			MessagesController.closeAll();
 			await this.api.logout();
 			router.go("/");
-		} catch (e: any) {
-			console.error(e.message);
+			return true;
+		} catch (error: unknown) {
+			return error as Error;
 		}
 	}
 }

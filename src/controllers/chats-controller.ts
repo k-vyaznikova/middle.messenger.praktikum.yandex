@@ -1,8 +1,7 @@
 import {API, ChatsAPI} from "/api/chats-api.ts";
 import {API as APIAuth} from "/api/auth-api.ts";
-import store from "/utils/store.ts";
-import {ResultValidate} from "/types/common_types.ts";
-import {User, ChatIdAndUsers} from "/types/common_types.ts";
+import store from "../utils/store/store";
+import {User, ChatIdAndUsers} from "../types";
 import MessagesController from "/controllers/messages-controller.ts";
 
 
@@ -13,22 +12,45 @@ export class ChatsController {
 		this.api = API;
 	}
 
-	async createChat(title: string): Promise<ResultValidate> {
-		let result: ResultValidate;
-		try {
-			await this.api.create(title);
-			this.fetchChats();
-			result = {
-				is_ok: true,
-				msg_text: ""
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e.reason
-			};
-		}
-		return result;
+	async createChat(title: string): Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				let res: number | Record<string, any> = await this.api.create(title);
+				this.fetchChats();
+				if(typeof res === "number") {
+					resolve(res);
+				}
+				else {
+					reject(res);
+				}
+			} catch (error: any) {
+				reject(error);
+			}
+		});
+		
+	}
+
+
+	async uploadChatAvatar(chatIdAndFile: FormData) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.api.uploadChatAvatar(chatIdAndFile);
+				await this.fetchChats();
+				resolve(true);
+			} catch (error: any) {
+				reject(error);	
+			}
+		});
+	}
+
+	async fetchChats() {
+		const chats = await this.api.read();
+		chats.map(async (chat) => {
+			const token = await this.getToken(chat.id);
+			await MessagesController.connect(chat.id, token);
+		});
+
+		store.set("chats", chats);
 	}
 
 	public async addUsersToChat(id: number, userIds: number[]) {
@@ -79,7 +101,7 @@ export class ChatsController {
 
 		return result;
 	}
-
+/*
 	createChatWithUsers(title: string, users: number[]) {
 		try {
 			const id = this.createChat(title);
@@ -93,7 +115,7 @@ export class ChatsController {
 				msg_text: "Ошибка при создании чата"
 			};
 		}
-	}
+	}*/
 
 	async deleteChat(id: number): Promise<ResultValidate> {
 		let result: ResultValidate;
@@ -115,17 +137,10 @@ export class ChatsController {
 		return result;
 	}
 
-	async fetchChats() {
-		const chats = await this.api.read();
+	
 
-		chats.map(async (chat) => {
-			const token = await this.getToken(chat.id);
-			await MessagesController.connect(chat.id, token);
-		});
 
-		store.set("chats", chats);
-	}
-
+	/*
 	async fetchChatAndUser(chatId: number): Promise<ResultValidate> {
 		try {
 			const chats: Array<any> = await this.api.read();
@@ -163,7 +178,7 @@ export class ChatsController {
 			msg_text: "Ошибка выгрузки"
 		};
 	}
-
+*/
 
 	async getUsers(id: number) {
 		let users: Array<User> = [];
@@ -187,23 +202,7 @@ export class ChatsController {
 			store.set("selectedChat", undefined);
 	}
 
-	async uploadChatAvatar(chatIdAndFile: FormData) {
-		let result: ResultValidate;
-		try {
-			await this.api.uploadChatAvatar(chatIdAndFile);
-			await this.fetchChatAndUser(chatIdAndFile.get("chatId") as unknown as number);
-			result = {
-				is_ok: true,
-				msg_text: "Аватар успешно изменен."
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e? e.reason : "Ошибка загрузки"
-			};
-		}
-		return result;
-	}
+
 }
 
 export default new ChatsController();

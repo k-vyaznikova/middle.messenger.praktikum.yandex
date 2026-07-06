@@ -1,9 +1,10 @@
 import {API, UserAPI} from "../api/user-api";
-import store from "/utils/store.ts";
-import {User} from "/types/common_types.ts";
-import {SearchData} from "/types/common_types.ts";
-import {ChangePassData, ResultValidate} from "/types/common_types.ts";
+import store from "../utils/store";
+import {User} from "../types";
+import {SearchData} from "../types";
+import { Result } from "../types";
 import AuthController from "/controllers/auth-controller";
+import { ChangePassData } from "../api/user-api";
 
 
 export class UserController {
@@ -14,23 +15,36 @@ export class UserController {
 	}
 
 	async search(login: string): Promise<any> {
-		const data: SearchData = {
-			login: login
-		};
-		let users: User[] = [];
-		try {
-			users = await this.api.search(data);
-		} catch (e) {
-			users = [];
-		}
+		return new Promise(async (resolve, reject) => {
+			try {
+				let data: SearchData = {
+					login: login
+				};
+				const users = await this.api.search(data);
+				store.set("user_list", users);
+				resolve(users);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
 
-		console.log(users);
-		const res: Record<string, any> = {
-			users: users,
-			search_word: login
-		};
-		store.set("search_results", res);
 	}
+
+	async fetchFullUserList(): Promise<User[]> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const users = this.search("");
+
+				resolve(users);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
+	}
+
+
+
+	
 
 	async getUser(id: number): Promise<User | null> {
 		try {
@@ -60,62 +74,64 @@ export class UserController {
 	}
 
 
-	async uploadAvatar(file: FormData) {
-		let result: ResultValidate;
-		try {
-			await this.api.uploadAvatar(file);
-			await AuthController.fetchUser();
-			result = {
-				is_ok: true,
-				msg_text: "Аватар успешно изменен."
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e? e.reason : "Ошибка загрузки"
-			};
-			// console.log(e.reason);
-		}
-		return result;
+	async uploadAvatar(file: FormData) :Promise<any> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.api.uploadAvatar(file);
+				await AuthController.fetchUser();
+				resolve(true);
+				
+			} catch (error: any) {
+				console.log(error);
+				reject(error as Error);
+			}
+		});
+		
 	}
 
 	getAvatar(relationalURL: string) {
 		return "https://ya-praktikum.tech/api/v2/resources/" + relationalURL;
 	}
 
-	async changePass(data: ChangePassData) {
-		let result: ResultValidate;
-		try {
-			await this.api.changePass(data);
-			result = {
-				is_ok: true,
-				msg_text: "Пароль успешно изменен."
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e.reason
-			};
-		}
-		return result;
+	async changePass(data: ChangePassData): Promise<Result> {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.api.changePass(data);
+				resolve(true);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
+		
 	}
 
 	async updateProfile(data: Record<string, string>) {
-		let result: ResultValidate;
-		try {
-			await this.api.updateProfile(data);
-			await AuthController.fetchUser();
-			result = {
-				is_ok: true,
-				msg_text: "Пароль успешно изменен."
-			};
-		} catch (e: any) {
-			result = {
-				is_ok: false,
-				msg_text: e.reason
-			};
-		}
-		return result;
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.api.updateProfile(data);
+				await AuthController.fetchUser();
+				resolve(true);
+			} catch (error: unknown) {
+				reject(error as Error);
+			}
+		});
+
+	}
+
+	async setNewDataProfile(newData: Record<string, string>) {
+		return new Promise(async (resolve, reject) => {
+			try{
+				let data = store.getState().user;
+				data = {
+					...data,
+					...newData
+				};
+				await this.updateProfile(data);
+				resolve(true);
+			} catch(error: unknown) {
+				reject(error as Error);
+			}
+		});
 	}
 }
 export default new UserController();

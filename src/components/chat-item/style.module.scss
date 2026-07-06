@@ -1,0 +1,102 @@
+@import "/styles/vars";
+.chat{
+    display: flex;
+    padding: 20px 25px;
+    border-bottom: 1px solid $white;
+    cursor: pointer;
+    flex-direction: row;
+    gap: 15px;
+    .chat__left{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        .chat__avatar{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            border-radius: 50%;
+            border: 2px solid $base-color-dark;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+
+            }
+            .chat__avatar__default{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                color: $white;
+                font-weight: 800;
+                font-size: 20px;
+                background-color: $base-color;
+                border: 2px solid $base-color-dark;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                text-transform: uppercase;
+                align-items: center;
+            }
+        }
+    }
+    .chat__right{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        .chat__header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            
+            .chat__title{
+                font-size: 16px;
+                font-weight: 600;
+            }
+            .chat__unread_count{
+                font-size: 12px;
+                font-weight: 800;
+                color: $base-color;
+                border-radius: 50%;
+                padding: 5px 10px;
+                width: 20px;
+                height: 20px;
+                display: block;
+                line-height: 20px;
+                text-align: center;
+            }
+        }
+        
+        .chat__info{
+            display: flex;
+            flex-direction: row;
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+            
+            .chat__info-time{
+                font-size: 10px;
+                font-weight: 400;
+                color: $grey;
+            }
+            .chat__info-message{
+                font-size: 14px;
+                font-weight: 400;
+                color: $grey;
+    
+            }
+        }
+    }
+
+}

@@ -13,13 +13,13 @@ export class Block {
 	//id компонента
 	public id: string;
 	//props компонента	
-	public props: Record<string, unknown> = {};
+	public props: Record<string, any> = {};
 	//refs компонента
 	public refs: Record<string, Block> = {};
 	//eventBus компонента
 	private eventBus: EventBus;
 	//элемент компонента
-	public element: HTMLElement | null = null;
+	public element: HTMLElement | undefined = undefined;
 	//children компонента
 	public children: Record<string, Block> | Record<string, Block[]>;
 
@@ -98,14 +98,15 @@ export class Block {
 			this.init();
 			this.eventBus.emit(Block.EVENTS.RENDER, true);			
 		}
-		catch{
-			console.log("Ошибка при инициализации компонента");
+		catch(error: any){
+			console.log(this.constructor.name, error);
+			console.log("Ошибка при инициализации компонента"+ "("+ error.message +")");
 			this.eventBus.emit(Block.EVENTS.RENDER, false);
 		}
 	}
 
 	protected init() {
-		return true;
+		return;
 	}
 
 	private _componentDidMount(): boolean {
@@ -136,7 +137,7 @@ export class Block {
 	//метод для вызова события монтирования компонента
 	//вызывает событие монтирования для компонента и всех его потомков
 	public dispatchComponentDidUpdate(newProps: any) {
-		this.eventBus.emit(Block.EVENTS.CDU);
+		this.eventBus.emit(Block.EVENTS.CDU, newProps);
 		Object.values(this.children).forEach((child) => {
 			if (Array.isArray(child)) {
 				child.forEach((ch) => {

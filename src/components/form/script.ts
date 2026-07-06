@@ -1,44 +1,36 @@
-import {Block} from "/utils/block.ts";
+import {Block} from "../../utils/block/block";
 import template from "/components/form/template.hbs";
-import {LinkProps} from "/types/common_types.ts";
-import {InputProps} from "/types/common_types.ts";
-import {SubmitBtnProps} from "/types/common_types.ts";
-import {Input} from "/components/input/script.ts";
-import {Link} from "/components/link/script.ts";
-import {SubmitBtn} from "/components/submit_btn/script";
-import {ErrorMsgProps} from "/types/common_types.ts";
-import {ErrorMsg} from "/components/error_msg/script";
-import {checkAndSendForm} from "/utils/form_utils.js";
-import {ResultValidate} from "/types/common_types.ts";
+import styles from "./style.module.scss";
+import Input from "/components/input";
+import type {InputProps} from "/types";
+import Button from "../button";
+import Link from "./../link";
+import Avatar from "../avatar/script";
+import { BASE_FILE_URL } from "/utils/constants";
 
 interface FormProps{
 	title: string,
-	ref: string,
-	error: ErrorMsgProps,
-	inputs: InputProps[],
-	submit_btn: SubmitBtnProps,
-	link: LinkProps,
-	send_function: (data: any) => Promise<ResultValidate>,
-	context_func: any
+	fields: unknown[],
+	error?: string,
+	good_message?: string,
+	button: Button,
+	button_add?: Button,
+	links?: Array<Link>,
+	
 }
-export class Form extends Block {
+export default class Form extends Block {
 	constructor(props: FormProps) {
-		super(props);
+		super({...props, styles});
 	}
 
 	init() {
-		this.children.inputs = ((this.props.inputs as Array<any>).map((inputProps: InputProps) => {
-			return new Input(inputProps);
-		})) as any;
-		this.children.submitBtn = new SubmitBtn({
-			...(this.props.submit_btn as SubmitBtnProps),
-			onClick: (event: Event) => {
-				event.preventDefault();
-				checkAndSendForm(this, (this.props.send_function as (arg:any)=>Promise<any>).bind(this.props.context_func), "/messenger");
-			}
+		this.children.avatar = new Avatar({
+			src: this.props.user?.avatar ? BASE_FILE_URL + this.props.user.avatar : "",
+			size: "large"
 		});
-		this.children.link = new Link(this.props.link as LinkProps);
-		this.children.errorMsg = new ErrorMsg(this.props.error as ErrorMsgProps);
+		this.children.fields = ((this.props.fields as Array<any>).map((fieldProps: InputProps) => {
+			return new Input(fieldProps);
+		})) as any;
 	}
 
 	render() {

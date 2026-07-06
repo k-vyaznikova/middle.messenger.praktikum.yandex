@@ -1,13 +1,75 @@
-import Handlebars from "handlebars";
+import AuthPage from "./pages/auth";
+import MessengerPage from "./pages/messenger";
+import RegisterPage from "./pages/register";
+import ChangePasswordPage from "./pages/change-password";
+import ProfilePage from "./pages/profile";
+import CreateChatPage from "./pages/create-chat";
+import Router from "./utils/routing/router";
+import RegisterHelper from "./layouts/register";
+import  AuthController  from "./controllers/auth-controller";
+import store from "./utils/store";
+import ChatController from "./controllers/chats-controller";
+import UserController from "./controllers/user-controller";
 
 
-import cardpage from "/layouts/cardpage/cardpage.ts";
-import leftside from "/layouts/chatpage/leftside/leftside.ts";
-import rightside from "/layouts/chatpage/rightside/rightside.ts";
-import defpage from "/layouts/defpage/defpage.ts";
-import ifEq from "/utils/ifequal.ts";
+
+const routes: Record<string, any> = {
+	auth: {
+		path: "/",
+		page: AuthPage
+	},
+	register: {
+		path: "/register/",
+		page: RegisterPage
+	},
+	messenger: {
+		path: "/messenger/",
+		page: MessengerPage
+	},
+	change_password: {
+		path: "/change-password/",
+		page: ChangePasswordPage
+	},
+	profile: {
+		path: "/profile/",
+		page: ProfilePage
+	},
+	create_chat: {
+		path: "/create-chat/",
+		page: CreateChatPage
+	}
+}
+	
 
 
+window.addEventListener("DOMContentLoaded", async () => {
+	RegisterHelper();
+	Object.values(routes).forEach((route: Record<string, any>) => {
+		Router.use(route.path, route.page);
+	})
+
+
+	//to do: add isAuth
+	try {
+		let res = await AuthController.fetchUser();
+		await ChatController.fetchChats();
+		await UserController.fetchFullUserList();
+		if(res === true && store.getState().user.id > 0){
+			Router.start();
+		}	
+			
+		else
+			Router.go(routes.auth.path);
+	} catch (e: any) {
+		Router.go(routes.auth.path);
+	}
+	/*if (isAuth) {
+		Router.go(routes.messenger.path);
+	}	else {
+		Router.go(routes.auth.path);
+	}*/
+});
+/*
 // регистрация helpers
 Handlebars.registerHelper("cardpage", cardpage);
 Handlebars.registerHelper("leftside", leftside);
@@ -32,7 +94,7 @@ import store from "/utils/store";
 
 enum Routes {
 	Index = "/",
-	Register = "/sign-up",
+	Register = "/register",
 	Profile = "/profile",
 	Chat = "/messenger",
 	ChatEdit = "/chat-edit",
@@ -81,4 +143,4 @@ window.addEventListener("DOMContentLoaded", async () => {
 		}
 	}
 });
-
+*/

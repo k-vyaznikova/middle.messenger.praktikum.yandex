@@ -30,7 +30,7 @@ export class Route {
 			this.render();
 		}
 	}
-
+*/
 
 	public leave() {
 		this._block = null;
@@ -45,6 +45,7 @@ export class Route {
 
 	public render(params: Record<string, string> = {}) {
 		if (this._blockClass) {
+			
 			this._block = new this._blockClass(params);
 			renderPage(ROOT_QUERY, this._block);
 			return;

@@ -1,0 +1,24 @@
+@import "/styles/vars.scss";
+
+.formContainer{
+    height:100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    background-color: $base-color-light;
+    .formContainer__frame{
+        margin: auto 0;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $white;
+        border: 1px solid $light-grey-border;
+        border-radius: 10px;
+        padding: 40px 30px;
+    }
+
+}

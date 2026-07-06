@@ -1,4 +1,15 @@
-<form url = "{{submit_url}}" class = "search-form">
-    <input name = "search" type="text" value="{{value}}" class = "{{#if not_focused}}empty-search{{/if}} search-input {{#if left_align}}left-align{{/if}}" {{#if placeholder}} placeholder = "{{placeholder}}"{{/if}}/>
-    <input name = "submit" type = "submit" />
-</form>  
+
+    <div class = "{{styles.search}}">  
+        <div class = "{{styles.search__header}}">     
+            <input type="text" class = "{{styles.search__input}}" placeholder = "{{placeholder}}">
+            <button class = "{{styles.search__button}}"></button>
+        </div>
+        <div class = "{{styles.search-results}}">
+            {{#each results}}
+                {{{this}}}
+            {{/each}}
+        </div>
+    </div>
+
+
+

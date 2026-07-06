@@ -1,0 +1,42 @@
+@import "/styles/vars.scss";
+.form{
+    .form__avatar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        a{
+            border: 2px solid $base-color;
+        }
+    }
+    .form__error{
+        font-size: 14px;
+        color: $err-text;
+        margin-bottom: 10px;
+        background: $err-text-back;
+        padding: 20px;
+        border-radius: 0 10px 10px 0;
+        border-left: 3px solid $err-text;
+
+    }
+    .form__good_message{
+        font-size: 14px;
+        color: $base-color;
+        margin-bottom: 10px;
+        background: $success-color-light;
+        padding: 20px;
+        border-radius: 0 10px 10px 0;
+        border-left: 3px solid $success-text;
+    }
+    .form__footer{
+        border-top: 1px solid $light-grey-border;
+        padding-top: 30px;
+        gap: 30px;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        
+    }
+
+}
